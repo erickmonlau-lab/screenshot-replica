@@ -22,7 +22,14 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Counter, Reveal } from "@/components/portfolio-motion";
+import {
+  Counter,
+  Reveal,
+  Magnetic,
+  AgentFlow,
+  ModelCycle,
+  MemoryFlow,
+} from "@/components/portfolio-motion";
 import portrait from "@/assets/erick-portrait-final.png.asset.json";
 import cv from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 import diversplas from "@/assets/diversplas.es.png.asset.json";
@@ -158,7 +165,14 @@ function Index() {
     { label: "Mi enfoque", href: "#enfoque" },
     { label: "Sobre mí", href: "#sobre-mi" },
   ];
-  const entrance = { hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0 } };
+  const entrance = {
+    hidden: { opacity: 0, y: 45 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring" as const, stiffness: 100, damping: 18 },
+    },
+  };
   return (
     <main className="portfolio">
       <section className="hero" id="inicio">
@@ -218,11 +232,12 @@ function Index() {
         >
           <motion.h1
             className="hero-name"
-            variants={entrance}
-            transition={{ type: "spring", stiffness: 100, damping: 18 }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
           >
-            <span>Erick</span>
-            <span className="surname">Rodríguez.</span>
+            <motion.span variants={entrance}>Erick</motion.span>
+            <motion.span className="surname" variants={entrance}>
+              Rodríguez.
+            </motion.span>
           </motion.h1>
         </motion.div>
         <motion.img
@@ -336,7 +351,7 @@ function Index() {
         <div className="project-grid">
           {projects.map((project, i) => (
             <Reveal key={project.name} delay={i * 0.08}>
-              <motion.div whileHover={reduced ? {} : { y: -5 }}>
+              <Magnetic className="magnetic-project">
                 <a
                   className="project block"
                   href={`https://${project.name}`}
@@ -356,26 +371,28 @@ function Index() {
                     <ArrowUpRight size={26} />
                   </div>
                 </a>
-              </motion.div>
+              </Magnetic>
             </Reveal>
           ))}
           <Reveal delay={0.2}>
             <div className="project">
-              <div className="project-cover private-cover">
-                <span className="project-status">DEMO PRIVADA · BARCELONA</span>
-                <LockKeyhole size={36} />
-                <h3>
-                  Lo próximo,
-                  <br />
-                  te lo enseño en persona.
-                </h3>
-                <p>ERP a medida + app · Dos proyectos aún sin publicar</p>
-                <Button variant="portfolio" data-style="lime" asChild>
-                  <a href={demo}>
-                    Agendar una demostración <ArrowUpRight />
-                  </a>
-                </Button>
-              </div>
+              <Magnetic className="magnetic-private" spotlight>
+                <div className="project-cover private-cover">
+                  <span className="project-status">DEMO PRIVADA · BARCELONA</span>
+                  <LockKeyhole size={36} />
+                  <h3>
+                    Lo próximo,
+                    <br />
+                    te lo enseño en persona.
+                  </h3>
+                  <p>ERP a medida + app · Dos proyectos aún sin publicar</p>
+                  <Button variant="portfolio" data-style="lime" asChild>
+                    <a href={demo}>
+                      Agendar una demostración <ArrowUpRight />
+                    </a>
+                  </Button>
+                </div>
+              </Magnetic>
               <div className="project-info">
                 <div>
                   <div className="section-label">04 / SOFTWARE A MEDIDA</div>
@@ -409,19 +426,7 @@ function Index() {
           <div className="ai-grid">
             <Reveal className="ai-card">
               <GitBranch size={27} />
-              <div className="flow">
-                <div className="flow-node">
-                  <Send size={16} /> Una tarea, un objetivo
-                </div>
-                <div className="flow-line" />
-                <div className="flow-node">
-                  <Bot size={20} /> Agente autónomo
-                </div>
-                <div className="flow-line" />
-                <div className="flow-node">
-                  <Check size={16} /> Resultado, conectado
-                </div>
-              </div>
+              <AgentFlow />
               <h3>
                 Agentes autónomos
                 <br />y n8n
@@ -433,12 +438,7 @@ function Index() {
             </Reveal>
             <Reveal className="ai-card" delay={0.1}>
               <Sparkles size={27} />
-              <div className="model-list">
-                <span>Claude + Skills</span>
-                <span>Gemini</span>
-                <span>ChatGPT</span>
-                <span>Perplexity</span>
-              </div>
+              <ModelCycle />
               <h3>
                 Cada tarea,
                 <br />
@@ -466,11 +466,7 @@ function Index() {
               </p>
             </Reveal>
             <Reveal className="ai-card" delay={0.15}>
-              <div className="brain-visual">
-                <FileText size={32} />
-                <span />
-                <BrainCircuit size={44} />
-              </div>
+              <MemoryFlow />
               <div>
                 <h3>Una IA con memoria.</h3>
                 <p>

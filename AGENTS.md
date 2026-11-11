@@ -34,3 +34,4 @@ use the editor.
 - Keep reusable reveal and counter animation logic in a focused browser-safe component module, and honor reduced-motion preferences.
 - Serve uploaded portrait, CV and captured project previews through asset pointers, keeping binaries out of the repository.
 - Define portfolio visual roles and responsive layout in the global design system, using the existing Button component for controls.
+- Keep pointer-driven magnetic motion, cursor spotlight and AI flow cycles in the shared motion module; suppress pointer and continuous effects under reduced motion and avoid magnetic movement on touch.

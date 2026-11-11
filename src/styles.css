@@ -599,10 +599,10 @@ a {
   border-radius: 4px;
   font-size: 10px;
 }
-.model-list span:first-child {
+.model-list span.model-active {
   color: var(--lime);
   border-color: var(--lime);
-  animation: model 5s infinite;
+  background: var(--soft-ink);
 }
 @keyframes model {
   50% {
@@ -627,11 +627,78 @@ a {
   justify-content: center;
   color: var(--lime);
 }
-.brain-visual span {
+.brain-visual .memory-connection {
   height: 1px;
   width: 30px;
   background: var(--orange);
-  animation: model 2s infinite;
+  position: relative;
+}
+.magnetic-project {
+  position: relative;
+}
+.magnetic-private {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.cursor-spotlight {
+  position: absolute;
+  z-index: 2;
+  top: -150px;
+  left: -150px;
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: var(--spotlight-gradient);
+}
+:root {
+  --motion-clear: color-mix(in oklch, var(--orange) 0%, transparent);
+  --motion-ring: color-mix(in oklch, var(--orange) 28%, transparent);
+  --spotlight-gradient: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--lime) 22%, transparent),
+    transparent 65%
+  );
+}
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flow-packet {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.flow-line::after {
+  display: none;
+}
+.memory-packet {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  height: 7px;
+  width: 7px;
+  border-radius: 2px;
+  background: var(--lime);
+}
+.private-cover .project-status::before {
+  background: var(--lime);
+  animation: demo-beacon 1.8s ease-in-out infinite;
+}
+@keyframes demo-beacon {
+  50% {
+    box-shadow: 0 0 0 6px var(--motion-ring);
+    opacity: 0.55;
+  }
+}
+.hero-name span {
+  will-change: transform, opacity;
 }
 .subsidy {
   background: var(--lime);
