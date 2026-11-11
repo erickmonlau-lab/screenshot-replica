@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Portfolio architecture
+- Keep the requested long-form portfolio on the index route with in-page section navigation, because the supplied brief explicitly requires smooth scrolling between sections.
+- Keep reusable reveal and counter animation logic in a focused browser-safe component module, and honor reduced-motion preferences.
+- Serve uploaded portrait, CV and captured project previews through asset pointers, keeping binaries out of the repository.
+- Define portfolio visual roles and responsive layout in the global design system, using the existing Button component for controls.
