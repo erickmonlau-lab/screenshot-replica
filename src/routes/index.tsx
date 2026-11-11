@@ -43,6 +43,7 @@ const projects = [
     description:
       "Web de extraescolares en Barcelona. Diseño, desarrollo y SEO: recién lanzada y ya en el Top 1 de Google.",
     type: "01 / WEB & SEO",
+    tone: "sky",
   },
   {
     name: "gesgrama.com",
@@ -51,6 +52,7 @@ const projects = [
     description:
       "Web corporativa a medida. Una presencia digital diseñada para el negocio, recién lanzada y posicionándose en Google.",
     type: "02 / WEB CORPORATIVA",
+    tone: "lime",
   },
   {
     name: "breadpdf.com",
@@ -59,6 +61,7 @@ const projects = [
     description:
       "Mi plataforma para trabajar con PDF. Un producto digital real, activo y con sus páginas indexadas en Google.",
     type: "03 / PRODUCTO DIGITAL",
+    tone: "orange",
   },
 ];
 const experience = [
@@ -276,29 +279,23 @@ function Index() {
               producción.
             </motion.p>
             <motion.div className="hero-actions" variants={entrance}>
-              <Magnetic className="magnetic-inline" strength={0.22}>
-                <Button variant="portfolio" data-style="ink" asChild>
-                  <a href="#proyectos">
-                    Ver Proyectos en Producción <ArrowDown />
-                  </a>
-                </Button>
-              </Magnetic>
-              <Magnetic className="magnetic-inline" strength={0.22}>
-                <Button variant="portfolio" data-style="line" asChild>
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                    Hablemos <MessageCircle />
-                  </a>
-                </Button>
-              </Magnetic>
+              <Button variant="portfolio" data-style="ink" asChild>
+                <a href="#proyectos">
+                  Ver Proyectos en Producción <ArrowDown />
+                </a>
+              </Button>
+              <Button variant="portfolio" data-style="line" asChild>
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                  Hablemos <MessageCircle />
+                </a>
+              </Button>
             </motion.div>
             <motion.div variants={entrance} className="mt-3">
-              <Magnetic className="magnetic-inline" strength={0.18}>
-                <Button variant="portfolio" data-style="line" asChild>
-                  <a href={demo}>
-                    Solicitar Demo en Persona (ERP & App) <ArrowUpRight />
-                  </a>
-                </Button>
-              </Magnetic>
+              <Button variant="portfolio" data-style="line" asChild>
+                <a href={demo}>
+                  Solicitar Demo en Persona (ERP & App) <ArrowUpRight />
+                </a>
+              </Button>
             </motion.div>
           </div>
           <motion.div className="hero-side" variants={entrance}>
@@ -309,11 +306,9 @@ function Index() {
               <br />
               <strong>Tu negocio, conectado.</strong>
             </p>
-            <Magnetic className="magnetic-arrow" strength={0.28}>
-              <a href="#proyectos" className="arrow" aria-label="Descubrir proyectos">
-                <ArrowDown size={20} />
-              </a>
-            </Magnetic>
+            <a href="#proyectos" className="arrow" aria-label="Descubrir proyectos">
+              <ArrowDown size={20} />
+            </a>
           </motion.div>
         </motion.div>
       </section>
@@ -370,14 +365,14 @@ function Index() {
         <div className="project-grid">
           {projects.map((project, i) => (
             <Reveal key={project.name} delay={i * 0.08}>
-              <Magnetic className="magnetic-project" spotlight strength={0.055}>
+              <Magnetic className="magnetic-project" strength={0.04}>
                 <a
                   className="project block"
                   href={`https://${project.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="project-cover">
+                  <div className="project-cover" data-tone={project.tone}>
                     <img src={project.image} alt={`Vista real de ${project.name}`} loading="lazy" />
                     <span className="project-status">{project.status}</span>
                   </div>
@@ -395,7 +390,7 @@ function Index() {
           ))}
           <Reveal delay={0.2}>
             <div className="project">
-              <Magnetic className="magnetic-private" spotlight strength={0.065}>
+              <Magnetic className="magnetic-private" spotlight strength={0.045}>
                 <div className="project-cover private-cover">
                   <span className="project-status">DEMO PRIVADA · BARCELONA</span>
                   <LockKeyhole size={36} />
@@ -405,13 +400,11 @@ function Index() {
                     te lo enseño en persona.
                   </h3>
                   <p>ERP a medida + app · Dos proyectos aún sin publicar</p>
-                  <Magnetic className="magnetic-inline" strength={0.22}>
-                    <Button variant="portfolio" data-style="lime" asChild>
-                      <a href={demo}>
-                        Agendar una demostración <ArrowUpRight />
-                      </a>
-                    </Button>
-                  </Magnetic>
+                  <Button variant="portfolio" data-style="lime" asChild>
+                    <a href={demo}>
+                      Agendar una demostración <ArrowUpRight />
+                    </a>
+                  </Button>
                 </div>
               </Magnetic>
               <div className="project-info">
@@ -445,60 +438,50 @@ function Index() {
             </p>
           </Reveal>
           <div className="ai-grid">
-            <Reveal className="ai-card-reveal">
-              <Magnetic className="ai-card ai-card-featured" spotlight strength={0.045}>
-                <GitBranch size={27} />
-                <AgentFlow />
-                <h3>
-                  Agentes autónomos
-                  <br />y n8n
-                </h3>
-                <p>
-                  Flujos y agentes que planifican y ejecutan tareas solos. Menos tareas repetitivas,
-                  más tiempo para lo importante.
-                </p>
-              </Magnetic>
+            <Reveal className="ai-card ai-card-featured">
+              <GitBranch size={27} />
+              <AgentFlow />
+              <h3>
+                Agentes autónomos
+                <br />y n8n
+              </h3>
+              <p>
+                Flujos y agentes que planifican y ejecutan tareas solos. Menos tareas repetitivas,
+                más tiempo para lo importante.
+              </p>
             </Reveal>
-            <Reveal className="ai-card-reveal" delay={0.1}>
-              <Magnetic className="ai-card" spotlight strength={0.055}>
-                <Sparkles size={27} />
-                <ModelCycle />
-                <h3>
-                  Cada tarea,
-                  <br />
-                  su mejor modelo.
-                </h3>
-                <p>
-                  Uso estratégico de varios modelos de IA, según lo que necesita cada proyecto.
-                </p>
-              </Magnetic>
+            <Reveal className="ai-card" delay={0.1}>
+              <Sparkles size={27} />
+              <ModelCycle />
+              <h3>
+                Cada tarea,
+                <br />
+                su mejor modelo.
+              </h3>
+              <p>Uso estratégico de varios modelos de IA, según lo que necesita cada proyecto.</p>
             </Reveal>
-            <Reveal className="ai-card-reveal" delay={0.2}>
-              <Magnetic className="ai-card" spotlight strength={0.055}>
-                <Code2 size={27} />
-                <CodeFlow />
-                <h3>
-                  Ideas que se
-                  <br />
-                  convierten en código.
-                </h3>
-                <p>
-                  Desarrollo con agentes en el IDE. Prototipos en AI Studio y Stitch. React y
-                  TypeScript para construir de verdad.
-                </p>
-              </Magnetic>
+            <Reveal className="ai-card" delay={0.2}>
+              <Code2 size={27} />
+              <CodeFlow />
+              <h3>
+                Ideas que se
+                <br />
+                convierten en código.
+              </h3>
+              <p>
+                Desarrollo con agentes en el IDE. Prototipos en AI Studio y Stitch. React y
+                TypeScript para construir de verdad.
+              </p>
             </Reveal>
-            <Reveal className="ai-card-reveal ai-card-wide" delay={0.15}>
-              <Magnetic className="ai-card ai-card-horizontal" spotlight strength={0.045}>
-                <MemoryFlow />
-                <div>
-                  <h3>Una IA con memoria.</h3>
-                  <p>
-                    Mi Second Brain en Obsidian y Markdown da contexto, memoria y reglas a la IA
-                    entre sesiones. Resultados mucho mejores, sin empezar de cero.
-                  </p>
-                </div>
-              </Magnetic>
+            <Reveal className="ai-card ai-card-horizontal" delay={0.15}>
+              <MemoryFlow />
+              <div>
+                <h3>Una IA con memoria.</h3>
+                <p>
+                  Mi Second Brain en Obsidian y Markdown da contexto, memoria y reglas a la IA entre
+                  sesiones. Resultados mucho mejores, sin empezar de cero.
+                </p>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -514,15 +497,13 @@ function Index() {
               convocatoria.
             </p>
           </div>
-          <Magnetic className="magnetic-inline" strength={0.2}>
-            <Button variant="portfolio" data-style="ink" asChild>
-              <a
-                href={`mailto:${email}?subject=Acreditaci%C3%B3n%20y%20ayudas%20a%20la%20contrataci%C3%B3n`}
-              >
-                Hablemos de las posibilidades <ArrowUpRight />
-              </a>
-            </Button>
-          </Magnetic>
+          <Button variant="portfolio" data-style="ink" asChild>
+            <a
+              href={`mailto:${email}?subject=Acreditaci%C3%B3n%20y%20ayudas%20a%20la%20contrataci%C3%B3n`}
+            >
+              Hablemos de las posibilidades <ArrowUpRight />
+            </a>
+          </Button>
         </div>
       </section>
       <section className="section wrap" id="sobre-mi">
@@ -547,18 +528,16 @@ function Index() {
               Identifico un problema del negocio, elijo la herramienta adecuada y lo resuelvo. Sea
               una web, una plataforma, un ERP o una app.
             </p>
-            <Magnetic className="magnetic-inline" strength={0.2}>
-              <Button variant="portfolio" data-style="line" asChild>
-                <a
-                  href={cv.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Erick-Rodriguez-CV.pdf"
-                >
-                  Descargar mi CV <Download />
-                </a>
-              </Button>
-            </Magnetic>
+            <Button variant="portfolio" data-style="line" asChild>
+              <a
+                href={cv.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Erick-Rodriguez-CV.pdf"
+              >
+                Descargar mi CV <Download />
+              </a>
+            </Button>
           </Reveal>
           <div>
             {experience.map((job, i) => (
@@ -599,13 +578,11 @@ function Index() {
               </a>
               <CopyButton value="+34 640 63 0459" label="teléfono" />
             </div>
-            <Magnetic className="magnetic-inline" strength={0.2}>
-              <Button variant="portfolio" data-style="ink" asChild>
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                  Escríbeme por WhatsApp <ArrowUpRight />
-                </a>
-              </Button>
-            </Magnetic>
+            <Button variant="portfolio" data-style="ink" asChild>
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                Escríbeme por WhatsApp <ArrowUpRight />
+              </a>
+            </Button>
           </div>
           <footer className="footer">
             <span>© 2026 Erick Rodríguez</span>

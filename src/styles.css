@@ -416,10 +416,15 @@ a {
   display: grid;
   place-items: center;
 }
-.project:nth-child(2) .project-cover {
+.project-cover[data-tone="sky"] {
+  background: var(--sky);
+}
+.project-cover[data-tone="lime"],
+.project-grid > *:nth-child(2) .project-cover {
   background: var(--lime);
 }
-.project:nth-child(3) .project-cover {
+.project-cover[data-tone="orange"],
+.project-grid > *:nth-child(3) .project-cover {
   background: var(--orange);
 }
 .project-cover img {
@@ -511,21 +516,9 @@ a {
   grid-template-columns: 1.3fr 1fr 1fr;
   gap: 16px;
 }
-.ai-card-reveal {
-  display: flex;
-  min-width: 0;
-}
-.ai-card-reveal:first-child {
-  grid-row: span 2;
-}
-.ai-card-reveal:last-child,
-.ai-card-wide {
-  grid-column: span 2;
-}
 .ai-card {
   position: relative;
   overflow: hidden;
-  width: 100%;
   border: 1px solid var(--dark-line);
   padding: 30px;
   border-radius: 6px;
@@ -538,25 +531,20 @@ a {
 .ai-card:hover {
   border-color: color-mix(in oklch, var(--lime) 45%, var(--dark-line));
 }
-.ai-card > * {
-  position: relative;
-  z-index: 2;
-}
-.ai-card > .cursor-spotlight {
-  z-index: 1;
-}
-.ai-card-reveal:first-child .ai-card,
+.ai-card:first-child,
 .ai-card-featured {
+  grid-row: span 2;
   background: var(--lime);
   color: var(--ink);
   border-color: color-mix(in oklch, var(--ink) 20%, transparent);
 }
-.ai-card-reveal:first-child .ai-card:hover,
+.ai-card:first-child:hover,
 .ai-card-featured:hover {
   border-color: var(--ink);
 }
-.ai-card-reveal:last-child .ai-card,
+.ai-card:last-child,
 .ai-card-horizontal {
+  grid-column: span 2;
   min-height: 210px;
   flex-direction: row;
   align-items: center;
@@ -572,7 +560,7 @@ a {
   margin: 0;
   color: var(--on-dark-muted);
 }
-.ai-card-reveal:first-child .ai-card p,
+.ai-card:first-child p,
 .ai-card-featured p {
   color: var(--ink);
 }
