@@ -1,12 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowDown,
+  ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   Check,
   Code2,
   Copy,
   Download,
+  ExternalLink,
   GitBranch,
   LockKeyhole,
   MapPin,
@@ -15,7 +26,7 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Counter,
@@ -35,35 +46,82 @@ import breadpdf from "@/assets/breadpdf.com.png.asset.json";
 const email = "hola.erickrodriguez@gmail.com";
 const whatsapp = "https://wa.me/34640630459";
 const demo = `mailto:${email}?subject=Demo%20en%20persona%20%E2%80%94%20ERP%20y%20App`;
+
 const projects = [
   {
+    id: "diversplas",
+    indexLabel: "01 / 04",
     name: "diversplas.es",
+    tagTitle: "DIVERSPLAS.ES",
+    tagLine1: "EXTRAESCOLARES · BCN",
+    tagLine2: "WEB & SEO · TOP 1 GOOGLE",
+    tagYear: "2026",
     image: diversplas.url,
     status: "TOP 1 EN GOOGLE",
     description:
       "Web de extraescolares en Barcelona. Diseño, desarrollo y SEO: recién lanzada y ya en el Top 1 de Google.",
     type: "01 / WEB & SEO",
     tone: "sky",
+    href: "https://diversplas.es",
+    ctaLabel: "Visitar diversplas.es",
+    isPrivate: false,
   },
   {
+    id: "gesgrama",
+    indexLabel: "02 / 04",
     name: "gesgrama.com",
+    tagTitle: "GESGRAMA.COM",
+    tagLine1: "GRUPO INMOBILIARIO",
+    tagLine2: "WEB CORPORATIVA A MEDIDA",
+    tagYear: "2026",
     image: gesgrama.url,
     status: "EN PRODUCCIÓN",
     description:
       "Web corporativa a medida. Una presencia digital diseñada para el negocio, recién lanzada y posicionándose en Google.",
     type: "02 / WEB CORPORATIVA",
     tone: "lime",
+    href: "https://gesgrama.com",
+    ctaLabel: "Visitar gesgrama.com",
+    isPrivate: false,
   },
   {
+    id: "breadpdf",
+    indexLabel: "03 / 04",
     name: "breadpdf.com",
+    tagTitle: "BREADPDF.COM",
+    tagLine1: "51 HERRAMIENTAS PDF",
+    tagLine2: "PRODUCTO DIGITAL PROPIO",
+    tagYear: "2026",
     image: breadpdf.url,
     status: "PRODUCTO PROPIO",
     description:
       "Mi plataforma para trabajar con PDF. Un producto digital real, activo y con sus páginas indexadas en Google.",
     type: "03 / PRODUCTO DIGITAL",
     tone: "orange",
+    href: "https://breadpdf.com",
+    ctaLabel: "Visitar breadpdf.com",
+    isPrivate: false,
+  },
+  {
+    id: "erp-app",
+    indexLabel: "04 / 04",
+    name: "ERP & App",
+    tagTitle: "ERP & APP",
+    tagLine1: "SOFTWARE A MEDIDA",
+    tagLine2: "DEMO PRIVADA · BARCELONA",
+    tagYear: "2026",
+    image: "",
+    status: "DEMO PRIVADA · BARCELONA",
+    description:
+      "Dos soluciones reales (ERP empresarial a medida + aplicación) que puedo mostrarte en una demo en vivo, en Barcelona.",
+    type: "04 / SOFTWARE A MEDIDA",
+    tone: "ink",
+    href: demo,
+    ctaLabel: "Agendar demostración",
+    isPrivate: true,
   },
 ];
+
 const experience = [
   {
     company: "Diset Control de Plagas",
@@ -158,160 +216,587 @@ function CopyButton({ value, label }: { value: string; label: string }) {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeCase, setActiveCase] = useState(0);
+  const [manualOverride, setManualOverride] = useState(false);
   const reduced = useReducedMotion();
+
+  const stageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: stageRef,
+    offset: ["start start", "end end"],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 24,
+    mass: 0.35,
+  });
+
+  // Pendulum swing for the hanging Designer/Builder ID Lanyard
+  const badgeRotateRaw = useMotionValue(0);
+  const badgeRotate = useSpring(badgeRotateRaw, { stiffness: 140, damping: 14 });
+
+  // Phase 1 -> Phase 2 scroll transforms (Studio Hero -> 3D Laptop Showcase)
+  const heroTitleY = useTransform(smoothProgress, [0, 0.32], ["0%", "-115%"]);
+  const heroTitleOpacity = useTransform(smoothProgress, [0, 0.26], [1, 0]);
+
+  const portraitY = useTransform(smoothProgress, [0, 0.36], ["0%", "28%"]);
+  const portraitScale = useTransform(smoothProgress, [0, 0.36], [1, 0.86]);
+  const portraitOpacity = useTransform(smoothProgress, [0.16, 0.36], [1, 0]);
+
+  const leftDeskX = useTransform(smoothProgress, [0, 0.3], ["0%", "-45%"]);
+  const leftDeskOpacity = useTransform(smoothProgress, [0, 0.25], [1, 0]);
+
+  const lanyardX = useTransform(smoothProgress, [0, 0.32], ["0%", "45%"]);
+  const lanyardY = useTransform(smoothProgress, [0, 0.32], ["0%", "-25%"]);
+  const lanyardOpacity = useTransform(smoothProgress, [0, 0.26], [1, 0]);
+
+  // Laptop zooms from the studio desk into center-stage
+  const laptopScale = useTransform(smoothProgress, [0.14, 0.44], [0.38, 1]);
+  const laptopY = useTransform(smoothProgress, [0.14, 0.44], [210, 12]);
+  const laptopX = useTransform(smoothProgress, [0.14, 0.44], [-180, 0]);
+  const laptopOpacity = useTransform(smoothProgress, [0.12, 0.28], [0, 1]);
+  const screenContentOpacity = useTransform(smoothProgress, [0.34, 0.46], [0, 1]);
+  const centerBrandOpacity = useTransform(smoothProgress, [0.28, 0.42], [0, 1]);
+
+  // Update active case on scroll once inside the laptop showcase range (0.45 -> 0.96)
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      if (v < 0.42) {
+        if (manualOverride) setManualOverride(false);
+        return;
+      }
+      if (manualOverride) return;
+      const normalized = Math.min(0.999, Math.max(0, (v - 0.45) / 0.5));
+      const idx = Math.floor(normalized * projects.length);
+      setActiveCase(idx);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, manualOverride]);
+
+  function selectCase(nextIndex: number) {
+    setManualOverride(true);
+    setActiveCase((nextIndex + projects.length) % projects.length);
+  }
+
+  function jumpToLaptopShowcase() {
+    if (!stageRef.current) return;
+    const rect = stageRef.current.getBoundingClientRect();
+    const absoluteTop = window.scrollY + rect.top;
+    const targetScroll = absoluteTop + stageRef.current.offsetHeight * 0.48;
+    window.scrollTo({ top: targetScroll, behavior: reduced ? "auto" : "smooth" });
+  }
+
+  const currentProject = projects[activeCase] ?? projects[0];
+
   const links = [
-    { label: "Proyectos", href: "#proyectos" },
-    { label: "Mi enfoque", href: "#enfoque" },
-    { label: "Sobre mí", href: "#sobre-mi" },
+    { label: "estudio", href: "#inicio" },
+    { label: "proyectos", href: "#proyectos" },
+    { label: "mi enfoque", href: "#enfoque" },
+    { label: "sobre mí", href: "#sobre-mi" },
   ];
-  const entrance = {
-    hidden: { opacity: 0, y: 42 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring" as const, stiffness: 105, damping: 18 },
-    },
-  };
-  const staggerTitle = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.14, delayChildren: 0.08 },
-    },
-  };
-  const staggerBottom = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.11, delayChildren: 0.32 },
-    },
-  };
 
   return (
-    <main className="portfolio">
-      <section className="hero" id="inicio">
-        <header className="nav wrap">
-          <a href="#inicio" aria-label="Erick Rodríguez, inicio" className="monogram">
-            er
-            <span>
-              ERICK
-              <br />
-              RODRÍGUEZ
-            </span>
-          </a>
-          <nav className="nav-links" aria-label="Navegación principal">
-            {links.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
+    <main
+      className="portfolio"
+      onPointerMove={(e) => {
+        if (reduced || e.pointerType === "touch") return;
+        const normX = (e.clientX / window.innerWidth - 0.5) * 2;
+        badgeRotateRaw.set(normX * -3.5);
+      }}
+    >
+      {/* SCROLL-DRIVEN STUDIO HERO + 3D MACBOOK PRO SHOWCASE (HALDOREN STYLE) */}
+      <div ref={stageRef} className="studio-scroll-track" id="inicio">
+        <div className="studio-sticky-viewport">
+          <div className="studio-Noise" aria-hidden="true" />
+          <div className="studio-glow" aria-hidden="true" />
+
+          {/* TOP FLOATING STUDIO PILL NAVIGATION */}
+          <header className="studio-nav">
+            <div className="studio-nav-group">
+              <a href="#inicio" className="studio-pill-btn">
+                estudio
               </a>
-            ))}
-          </nav>
-          <a href="#contacto" className="availability">
-            <span className="status-dot" /> Hablemos de tu próximo proyecto{" "}
-            <ArrowUpRight size={16} />
-          </a>
-          <Button
-            variant="portfolio"
-            data-style="line"
-            className="mobile-menu"
-            aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setMenuOpen(!menuOpen)}
+              <button
+                type="button"
+                onClick={jumpToLaptopShowcase}
+                className="studio-pill-btn"
+              >
+                proyectos
+              </button>
+              <a href="#enfoque" className="studio-pill-btn studio-pill-hide-mobile">
+                mi enfoque
+              </a>
+            </div>
+
+            <motion.a
+              href="#inicio"
+              className="studio-center-brand"
+              style={{ opacity: reduced ? 1 : centerBrandOpacity }}
+            >
+              ERICK RODRÍGUEZ
+            </motion.a>
+
+            <div className="studio-nav-group">
+              <a href="#sobre-mi" className="studio-pill-btn studio-pill-hide-mobile">
+                sobre mí
+              </a>
+              <a href="#contacto" className="studio-pill-btn studio-pill-cta">
+                <span className="status-dot" /> hablemos de tu proyecto
+              </a>
+              <button
+                type="button"
+                className="studio-pill-btn studio-mobile-trigger"
+                aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                {menuOpen ? <X size={16} /> : <Menu size={16} />}
+              </button>
+            </div>
+
+            {menuOpen && (
+              <nav className="studio-mobile-menu" aria-label="Navegación móvil">
+                {links.map((link) => (
+                  <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
+                    {link.label}
+                  </a>
+                ))}
+                <a href="#contacto" onClick={() => setMenuOpen(false)}>
+                  contacto
+                </a>
+              </nav>
+            )}
+          </header>
+
+          {/* PHASE 1: GIANT METALLIC STUDIO TYPOGRAPHY + HANDWRITTEN SCRIPT */}
+          <motion.div
+            className="studio-giant-title-wrap"
+            style={
+              reduced
+                ? undefined
+                : {
+                    y: heroTitleY,
+                    opacity: heroTitleOpacity,
+                  }
+            }
           >
-            {menuOpen ? <X /> : <Menu />}
-          </Button>
-          {menuOpen && (
-            <nav className="menu-panel" id="mobile-navigation" aria-label="Navegación móvil">
-              {links.map((link) => (
-                <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
-                  {link.label}
-                </a>
-              ))}
-              <a href="#contacto" onClick={() => setMenuOpen(false)}>
-                Contacto
-              </a>
-            </nav>
-          )}
-        </header>
-        <motion.div
-          className="hero-meta wrap"
-          initial={reduced ? false : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <span>Desarrollo web · Apps · Automatización con IA</span>
-          <span>Barcelona, España ↗</span>
-        </motion.div>
-        <motion.div
-          className="wrap"
-          initial={reduced ? false : "hidden"}
-          animate="visible"
-          variants={staggerTitle}
-        >
-          <motion.h1 className="hero-name" variants={staggerTitle}>
-            <motion.span variants={entrance}>Erick</motion.span>
-            <motion.span className="surname" variants={entrance}>
-              Rodríguez.
+            <h1 className="studio-giant-title" aria-label="Erick Rodríguez">
+              <span className="studio-giant-word">ERICK</span>
+            </h1>
+            <motion.span
+              className="studio-handwritten"
+              initial={reduced ? false : { opacity: 0, scale: 0.92, rotate: -7 }}
+              animate={{ opacity: 1, scale: 1, rotate: -6 }}
+              transition={{ delay: 0.35, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            >
+              web · apps · ia
             </motion.span>
-          </motion.h1>
-        </motion.div>
-        <motion.img
-          className="portrait"
-          src={portrait.url}
-          alt="Erick Rodríguez"
-          initial={reduced ? false : { opacity: 0, y: 34, scale: 0.985 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.24, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-        />
-        <motion.div
-          className="hero-bottom wrap"
-          initial={reduced ? false : "hidden"}
-          animate="visible"
-          variants={staggerBottom}
-        >
-          <div className="hero-copy">
-            <motion.h2 variants={entrance}>
-              De la idea a producción.
-              <br />
-              Sin depender de terceros.
-            </motion.h2>
-            <motion.p variants={entrance}>
-              Puedo crear la web, app o sistema que necesite tu empresa, desde la idea hasta
-              producción.
-            </motion.p>
-            <motion.div className="hero-actions" variants={entrance}>
-              <Button variant="portfolio" data-style="ink" asChild>
-                <a href="#proyectos">
-                  Ver Proyectos en Producción <ArrowDown />
-                </a>
-              </Button>
-              <Button variant="portfolio" data-style="line" asChild>
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                  Hablemos <MessageCircle />
-                </a>
-              </Button>
-            </motion.div>
-            <motion.div variants={entrance} className="mt-3">
-              <Button variant="portfolio" data-style="line" asChild>
-                <a href={demo}>
-                  Solicitar Demo en Persona (ERP & App) <ArrowUpRight />
-                </a>
-              </Button>
-            </motion.div>
-          </div>
-          <motion.div className="hero-side" variants={entrance}>
-            <p>
-              Diseño. Desarrollo.
-              <br />
-              Automatizo. Resuelvo.
-              <br />
-              <strong>Tu negocio, conectado.</strong>
-            </p>
-            <a href="#proyectos" className="arrow" aria-label="Descubrir proyectos">
-              <ArrowDown size={20} />
-            </a>
           </motion.div>
-        </motion.div>
-      </section>
+
+          {/* PHASE 1: CENTER STUDIO PORTRAIT */}
+          <motion.div
+            className="studio-portrait-stage"
+            style={
+              reduced
+                ? undefined
+                : {
+                    y: portraitY,
+                    scale: portraitScale,
+                    opacity: portraitOpacity,
+                  }
+            }
+          >
+            <img
+              className="studio-portrait-img"
+              src={portrait.url}
+              alt="Erick Rodríguez"
+            />
+          </motion.div>
+
+          {/* PHASE 1: LEFT STUDIO DESK & VALUE PROP WORKSTATION */}
+          <motion.div
+            className="studio-left-workstation"
+            style={
+              reduced
+                ? undefined
+                : {
+                    x: leftDeskX,
+                    opacity: leftDeskOpacity,
+                  }
+            }
+          >
+            <div className="studio-workstation-card">
+              <div className="studio-card-rivets" aria-hidden="true">
+                <i />
+                <i />
+                <i />
+                <i />
+              </div>
+              <div className="studio-meta-tag">
+                <span>BARCELONA, ESPAÑA ↗</span>
+                <span>+1.000 H EXP. REAL</span>
+              </div>
+              <h2>
+                De la idea a producción.
+                <br />
+                Sin depender de terceros.
+              </h2>
+              <p>
+                Puedo crear la web, app, ERP o sistema con IA que necesite tu empresa, desde el
+                diseño hasta producción.
+              </p>
+              <div className="studio-hero-actions">
+                <button
+                  type="button"
+                  onClick={jumpToLaptopShowcase}
+                  className="studio-action-primary"
+                >
+                  Ver Proyectos en Producción <ArrowDown size={15} />
+                </button>
+                <a
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="studio-action-secondary"
+                >
+                  Hablemos <MessageCircle size={15} />
+                </a>
+              </div>
+              <a href={demo} className="studio-demo-link">
+                Solicitar Demo en Persona (ERP & App) <ArrowUpRight size={14} />
+              </a>
+            </div>
+
+            {/* Studio Desk Surface Prop */}
+            <div className="studio-desk-surface" aria-hidden="true">
+              <div className="studio-desk-mug" />
+              <div className="studio-desk-folders">
+                <span />
+                <span />
+              </div>
+              <div className="studio-desk-top" />
+            </div>
+          </motion.div>
+
+          {/* PHASE 1: RIGHT HANGING LANYARD ID BADGE (DESIGNER / BUILDER CARD) */}
+          <motion.div
+            className="studio-lanyard-assembly"
+            style={
+              reduced
+                ? undefined
+                : {
+                    x: lanyardX,
+                    y: lanyardY,
+                    opacity: lanyardOpacity,
+                    rotate: badgeRotate,
+                  }
+            }
+          >
+            {/* White Woven Lanyard Strap */}
+            <div className="lanyard-strap" aria-hidden="true" />
+            {/* Metallic Silver Lobster Clasp */}
+            <svg
+              className="lanyard-clasp"
+              viewBox="0 0 64 78"
+              fill="none"
+              aria-hidden="true"
+            >
+              <rect
+                x="10"
+                y="2"
+                width="44"
+                height="18"
+                rx="8"
+                stroke="#D8E2DC"
+                strokeWidth="5"
+                fill="url(#metalGrad)"
+              />
+              <rect x="23" y="16" width="18" height="14" rx="3" fill="url(#metalGrad)" />
+              <path
+                d="M26 30 H38 L42 64 C42 70 36 74 32 74 C28 74 22 70 22 64 Z"
+                fill="url(#metalGrad)"
+                stroke="#8FA199"
+                strokeWidth="2"
+              />
+              <circle cx="32" cy="62" r="4" fill="#18392D" />
+              <defs>
+                <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#F5F8F6" />
+                  <stop offset="45%" stopColor="#B8C7C0" />
+                  <stop offset="75%" stopColor="#6E8078" />
+                  <stop offset="100%" stopColor="#DFEAE4" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            {/* Translucent PVC Badge Holder Sleeve */}
+            <div className="lanyard-pvc-sleeve">
+              <div className="lanyard-punch-holes" aria-hidden="true">
+                <span />
+                <i />
+                <span />
+              </div>
+
+              <div className="lanyard-id-card">
+                <div className="id-card-header">
+                  <div>
+                    <strong>BUILDER</strong>
+                    <strong>CARD</strong>
+                  </div>
+                  <span className="id-card-year">2026</span>
+                </div>
+                <div className="id-card-role">WEB · APPS // AUTOMATIZACIÓN IA</div>
+                <div className="id-card-photo-box">
+                  <img src={portrait.url} alt="Retrato en credencial de Erick Rodríguez" />
+                </div>
+                <dl className="id-card-ledger">
+                  <div>
+                    <dt>NAME</dt>
+                    <dd>ERICK RODRÍGUEZ</dd>
+                  </div>
+                  <div>
+                    <dt>FOCUS</dt>
+                    <dd>WEB, APPS, ERP & IA</dd>
+                  </div>
+                  <div>
+                    <dt>LOGRO</dt>
+                    <dd>TOP 1 GOOGLE · DIVERSPLAS</dd>
+                  </div>
+                  <div>
+                    <dt>AYUDA</dt>
+                    <dd>375H AGENTE CAMBIO TEC.</dd>
+                  </div>
+                  <div>
+                    <dt>EMAIL</dt>
+                    <dd>HOLA.ERICKRODRIGUEZ@GMAIL.COM</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* PHASE 2: 3D MACBOOK PRO CASE STUDY SHOWCASE (HALDOREN LAPTOP ZOOM) */}
+          <motion.div
+            className="studio-laptop-stage"
+            style={
+              reduced
+                ? { opacity: 1, scale: 1, x: 0, y: 0 }
+                : {
+                    scale: laptopScale,
+                    y: laptopY,
+                    x: laptopX,
+                    opacity: laptopOpacity,
+                  }
+            }
+          >
+            {/* Left Floating Case Description (// project.name) */}
+            <motion.aside
+              className="laptop-side-caption"
+              style={{ opacity: reduced ? 1 : screenContentOpacity }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentProject.id}
+                  initial={reduced ? false : { opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <div className="laptop-caption-slug">// {currentProject.name}</div>
+                  <p className="laptop-caption-desc">— {currentProject.description}</p>
+                  <div className="laptop-caption-index">{currentProject.indexLabel}</div>
+                </motion.div>
+              </AnimatePresence>
+            </motion.aside>
+
+            {/* The MacBook Pro Hardware Frame */}
+            <div className="macbook-unit">
+              {/* Top-Right Pinned 4-Rivet Paper Spec Card (HALDOREN Signature Tag) */}
+              <motion.div
+                className="pinned-spec-card"
+                style={{ opacity: reduced ? 1 : screenContentOpacity }}
+              >
+                <span className="rivet rivet-tl" />
+                <span className="rivet rivet-tr" />
+                <span className="rivet rivet-bl" />
+                <span className="rivet rivet-br" />
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentProject.id}
+                    initial={reduced ? false : { opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22 }}
+                  >
+                    <div className="pinned-spec-title">{currentProject.tagTitle}</div>
+                    <div className="pinned-spec-row">
+                      <span>{currentProject.tagLine1}</span>
+                    </div>
+                    <div className="pinned-spec-row">
+                      <span>{currentProject.tagLine2}</span>
+                    </div>
+                    <div className="pinned-spec-row">
+                      <span>{currentProject.tagYear}</span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+
+              {/* MacBook Screen Lid & Bezel */}
+              <div className="macbook-lid">
+                <div className="macbook-camera-dot" aria-hidden="true" />
+                <div className="macbook-screen-glare" aria-hidden="true" />
+
+                <motion.div
+                  className="macbook-viewport"
+                  style={{ opacity: reduced ? 1 : screenContentOpacity }}
+                >
+                  {/* Browser Bar inside the MacBook */}
+                  <div className="macbook-browser-bar">
+                    <div className="macbook-traffic-lights" aria-hidden="true">
+                      <span />
+                      <span />
+                      <span />
+                    </div>
+                    <div className="macbook-url-pill">
+                      <span className="macbook-url-status">{currentProject.status}</span>
+                      <span className="macbook-url-text">
+                        {currentProject.isPrivate
+                          ? "demo://barcelona/erp-y-app-a-medida"
+                          : `https://${currentProject.name}`}
+                      </span>
+                    </div>
+                    <div className="macbook-case-tabs" role="tablist" aria-label="Proyectos">
+                      {projects.map((p, idx) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          role="tab"
+                          aria-selected={activeCase === idx}
+                          className={`macbook-case-tab ${activeCase === idx ? "active" : ""}`}
+                          onClick={() => selectCase(idx)}
+                        >
+                          0{idx + 1}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Active Case Study Display */}
+                  <div className="macbook-canvas">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentProject.id}
+                        className="macbook-slide"
+                        initial={reduced ? false : { opacity: 0, scale: 0.985 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 1.01 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        {!currentProject.isPrivate ? (
+                          <div className="macbook-screenshot-wrap">
+                            <img
+                              src={currentProject.image}
+                              alt={`Vista real de ${currentProject.name}`}
+                              className="macbook-screenshot-img"
+                            />
+                            <div className="macbook-slide-footer">
+                              <div>
+                                <span className="macbook-slide-kicker">{currentProject.type}</span>
+                                <strong>{currentProject.name}</strong>
+                              </div>
+                              <a
+                                href={currentProject.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="macbook-visit-btn"
+                              >
+                                {currentProject.ctaLabel} <ExternalLink size={14} />
+                              </a>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="macbook-private-demo">
+                            <span className="project-status">DEMO PRIVADA · BARCELONA</span>
+                            <LockKeyhole size={42} />
+                            <h3>
+                              Lo próximo,
+                              <br />
+                              te lo enseño en persona.
+                            </h3>
+                            <p>
+                              ERP empresarial a medida + aplicación móvil/web · Dos proyectos
+                              completos listos para demostración en vivo en Barcelona.
+                            </p>
+                            <a href={demo} className="macbook-visit-btn macbook-visit-lime">
+                              Agendar una demostración <ArrowUpRight size={16} />
+                            </a>
+                          </div>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Brushed Aluminum MacBook Base */}
+              <div className="macbook-base" aria-hidden="true">
+                <div className="macbook-notch" />
+              </div>
+            </div>
+
+            {/* Left / Right Circular Case Navigation Controls */}
+            <motion.div
+              className="laptop-case-nav laptop-case-prev"
+              style={{ opacity: reduced ? 1 : screenContentOpacity }}
+            >
+              <button
+                type="button"
+                onClick={() => selectCase(activeCase - 1)}
+                className="case-circle-btn"
+                aria-label="Proyecto anterior"
+              >
+                <ArrowLeft size={18} />
+              </button>
+              <span>
+                anterior
+                <br />
+                proyecto
+              </span>
+            </motion.div>
+
+            <motion.div
+              className="laptop-case-nav laptop-case-next"
+              style={{ opacity: reduced ? 1 : screenContentOpacity }}
+            >
+              <button
+                type="button"
+                onClick={() => selectCase(activeCase + 1)}
+                className="case-circle-btn case-circle-btn-solid"
+                aria-label="Siguiente proyecto"
+              >
+                <ArrowRight size={18} />
+              </button>
+              <span>
+                siguiente
+                <br />
+                proyecto
+              </span>
+            </motion.div>
+          </motion.div>
+
+          {/* Bottom Scroll Indicator */}
+          <motion.div
+            className="studio-scroll-hint"
+            style={{ opacity: reduced ? 0 : heroTitleOpacity }}
+          >
+            <span>DESLIZA PARA ABRIR EL PORTÁTIL DE PROYECTOS</span>
+            <ArrowDown size={14} />
+          </motion.div>
+        </div>
+      </div>
+
       <div className="skill-strip">
         <span>DESARROLLO WEB & APPS</span>
         <i>✳</i>
@@ -321,6 +806,7 @@ function Index() {
         <i>✳</i>
         <span>DE LA IDEA A PRODUCCIÓN</span>
       </div>
+
       <section className="wrap stats" aria-label="Experiencia y resultados">
         <div className="stat">
           <strong>
@@ -347,6 +833,7 @@ function Index() {
           </p>
         </div>
       </section>
+
       <section className="section wrap" id="proyectos">
         <Reveal className="section-top">
           <div>
@@ -363,12 +850,12 @@ function Index() {
           </p>
         </Reveal>
         <div className="project-grid">
-          {projects.map((project, i) => (
+          {projects.slice(0, 3).map((project, i) => (
             <Reveal key={project.name} delay={i * 0.08}>
-              <Magnetic className="magnetic-project" strength={0.04}>
+              <Magnetic className="magnetic-project" strength={0.035}>
                 <a
                   className="project block"
-                  href={`https://${project.name}`}
+                  href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -390,7 +877,7 @@ function Index() {
           ))}
           <Reveal delay={0.2}>
             <div className="project">
-              <Magnetic className="magnetic-private" spotlight strength={0.045}>
+              <Magnetic className="magnetic-private" spotlight strength={0.04}>
                 <div className="project-cover private-cover">
                   <span className="project-status">DEMO PRIVADA · BARCELONA</span>
                   <LockKeyhole size={36} />
@@ -421,6 +908,7 @@ function Index() {
           </Reveal>
         </div>
       </section>
+
       <section className="section dark-section" id="enfoque">
         <div className="wrap">
           <Reveal className="section-top">
@@ -486,6 +974,7 @@ function Index() {
           </div>
         </div>
       </section>
+
       <section className="subsidy">
         <div className="wrap">
           <div>
@@ -506,6 +995,7 @@ function Index() {
           </Button>
         </div>
       </section>
+
       <section className="section wrap" id="sobre-mi">
         <div className="about-grid">
           <Reveal className="about-copy">
@@ -555,6 +1045,7 @@ function Index() {
           </div>
         </div>
       </section>
+
       <section className="contact" id="contacto">
         <div className="wrap">
           <Reveal>
