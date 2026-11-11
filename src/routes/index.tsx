@@ -2,21 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowDown,
-  ArrowRight,
   ArrowUpRight,
-  Bot,
-  BrainCircuit,
   Check,
   Code2,
   Copy,
   Download,
-  FileText,
   GitBranch,
   LockKeyhole,
   MapPin,
   Menu,
   MessageCircle,
-  Send,
   Sparkles,
   X,
 } from "lucide-react";
@@ -28,6 +23,7 @@ import {
   Magnetic,
   AgentFlow,
   ModelCycle,
+  CodeFlow,
   MemoryFlow,
 } from "@/components/portfolio-motion";
 import portrait from "@/assets/erick-portrait-final.png.asset.json";
@@ -166,13 +162,26 @@ function Index() {
     { label: "Sobre mí", href: "#sobre-mi" },
   ];
   const entrance = {
-    hidden: { opacity: 0, y: 45 },
+    hidden: { opacity: 0, y: 42 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring" as const, stiffness: 100, damping: 18 },
+      transition: { type: "spring" as const, stiffness: 105, damping: 18 },
     },
   };
+  const staggerTitle = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.14, delayChildren: 0.08 },
+    },
+  };
+  const staggerBottom = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.11, delayChildren: 0.32 },
+    },
+  };
+
   return (
     <main className="portfolio">
       <section className="hero" id="inicio">
@@ -192,10 +201,10 @@ function Index() {
               </a>
             ))}
           </nav>
-          <div className="availability">
+          <a href="#contacto" className="availability">
             <span className="status-dot" /> Hablemos de tu próximo proyecto{" "}
             <ArrowUpRight size={16} />
-          </div>
+          </a>
           <Button
             variant="portfolio"
             data-style="line"
@@ -220,20 +229,22 @@ function Index() {
             </nav>
           )}
         </header>
-        <div className="hero-meta wrap">
+        <motion.div
+          className="hero-meta wrap"
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span>Desarrollo web · Apps · Automatización con IA</span>
           <span>Barcelona, España ↗</span>
-        </div>
+        </motion.div>
         <motion.div
           className="wrap"
           initial={reduced ? false : "hidden"}
           animate="visible"
-          transition={{ staggerChildren: 0.12 }}
+          variants={staggerTitle}
         >
-          <motion.h1
-            className="hero-name"
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-          >
+          <motion.h1 className="hero-name" variants={staggerTitle}>
             <motion.span variants={entrance}>Erick</motion.span>
             <motion.span className="surname" variants={entrance}>
               Rodríguez.
@@ -244,15 +255,15 @@ function Index() {
           className="portrait"
           src={portrait.url}
           alt="Erick Rodríguez"
-          initial={reduced ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          initial={reduced ? false : { opacity: 0, y: 34, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.24, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         />
         <motion.div
           className="hero-bottom wrap"
           initial={reduced ? false : "hidden"}
           animate="visible"
-          transition={{ staggerChildren: 0.12, delayChildren: 0.35 }}
+          variants={staggerBottom}
         >
           <div className="hero-copy">
             <motion.h2 variants={entrance}>
@@ -265,26 +276,32 @@ function Index() {
               producción.
             </motion.p>
             <motion.div className="hero-actions" variants={entrance}>
-              <Button variant="portfolio" data-style="ink" asChild>
-                <a href="#proyectos">
-                  Ver Proyectos en Producción <ArrowDown />
-                </a>
-              </Button>
-              <Button variant="portfolio" data-style="line" asChild>
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                  Hablemos <MessageCircle />
-                </a>
-              </Button>
+              <Magnetic className="magnetic-inline" strength={0.22}>
+                <Button variant="portfolio" data-style="ink" asChild>
+                  <a href="#proyectos">
+                    Ver Proyectos en Producción <ArrowDown />
+                  </a>
+                </Button>
+              </Magnetic>
+              <Magnetic className="magnetic-inline" strength={0.22}>
+                <Button variant="portfolio" data-style="line" asChild>
+                  <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                    Hablemos <MessageCircle />
+                  </a>
+                </Button>
+              </Magnetic>
             </motion.div>
             <motion.div variants={entrance} className="mt-3">
-              <Button variant="portfolio" data-style="line" asChild>
-                <a href={demo}>
-                  Solicitar Demo en Persona (ERP & App) <ArrowUpRight />
-                </a>
-              </Button>
+              <Magnetic className="magnetic-inline" strength={0.18}>
+                <Button variant="portfolio" data-style="line" asChild>
+                  <a href={demo}>
+                    Solicitar Demo en Persona (ERP & App) <ArrowUpRight />
+                  </a>
+                </Button>
+              </Magnetic>
             </motion.div>
           </div>
-          <div className="hero-side">
+          <motion.div className="hero-side" variants={entrance}>
             <p>
               Diseño. Desarrollo.
               <br />
@@ -292,10 +309,12 @@ function Index() {
               <br />
               <strong>Tu negocio, conectado.</strong>
             </p>
-            <a href="#proyectos" className="arrow" aria-label="Descubrir proyectos">
-              <ArrowDown size={20} />
-            </a>
-          </div>
+            <Magnetic className="magnetic-arrow" strength={0.28}>
+              <a href="#proyectos" className="arrow" aria-label="Descubrir proyectos">
+                <ArrowDown size={20} />
+              </a>
+            </Magnetic>
+          </motion.div>
         </motion.div>
       </section>
       <div className="skill-strip">
@@ -351,7 +370,7 @@ function Index() {
         <div className="project-grid">
           {projects.map((project, i) => (
             <Reveal key={project.name} delay={i * 0.08}>
-              <Magnetic className="magnetic-project">
+              <Magnetic className="magnetic-project" spotlight strength={0.055}>
                 <a
                   className="project block"
                   href={`https://${project.name}`}
@@ -376,7 +395,7 @@ function Index() {
           ))}
           <Reveal delay={0.2}>
             <div className="project">
-              <Magnetic className="magnetic-private" spotlight>
+              <Magnetic className="magnetic-private" spotlight strength={0.065}>
                 <div className="project-cover private-cover">
                   <span className="project-status">DEMO PRIVADA · BARCELONA</span>
                   <LockKeyhole size={36} />
@@ -386,11 +405,13 @@ function Index() {
                     te lo enseño en persona.
                   </h3>
                   <p>ERP a medida + app · Dos proyectos aún sin publicar</p>
-                  <Button variant="portfolio" data-style="lime" asChild>
-                    <a href={demo}>
-                      Agendar una demostración <ArrowUpRight />
-                    </a>
-                  </Button>
+                  <Magnetic className="magnetic-inline" strength={0.22}>
+                    <Button variant="portfolio" data-style="lime" asChild>
+                      <a href={demo}>
+                        Agendar una demostración <ArrowUpRight />
+                      </a>
+                    </Button>
+                  </Magnetic>
                 </div>
               </Magnetic>
               <div className="project-info">
@@ -424,56 +445,60 @@ function Index() {
             </p>
           </Reveal>
           <div className="ai-grid">
-            <Reveal className="ai-card">
-              <GitBranch size={27} />
-              <AgentFlow />
-              <h3>
-                Agentes autónomos
-                <br />y n8n
-              </h3>
-              <p>
-                Flujos y agentes que planifican y ejecutan tareas solos. Menos tareas repetitivas,
-                más tiempo para lo importante.
-              </p>
-            </Reveal>
-            <Reveal className="ai-card" delay={0.1}>
-              <Sparkles size={27} />
-              <ModelCycle />
-              <h3>
-                Cada tarea,
-                <br />
-                su mejor modelo.
-              </h3>
-              <p>Uso estratégico de varios modelos de IA, según lo que necesita cada proyecto.</p>
-            </Reveal>
-            <Reveal className="ai-card" delay={0.2}>
-              <Code2 size={27} />
-              <div className="code-preview">
-                <em>const</em> idea = tuNegocio;
-                <br />
-                <em>await</em> crear(idea);
-                <br />
-                // listo para producción
-              </div>
-              <h3>
-                Ideas que se
-                <br />
-                convierten en código.
-              </h3>
-              <p>
-                Desarrollo con agentes en el IDE. Prototipos en AI Studio y Stitch. React y
-                TypeScript para construir de verdad.
-              </p>
-            </Reveal>
-            <Reveal className="ai-card" delay={0.15}>
-              <MemoryFlow />
-              <div>
-                <h3>Una IA con memoria.</h3>
+            <Reveal className="ai-card-reveal">
+              <Magnetic className="ai-card ai-card-featured" spotlight strength={0.045}>
+                <GitBranch size={27} />
+                <AgentFlow />
+                <h3>
+                  Agentes autónomos
+                  <br />y n8n
+                </h3>
                 <p>
-                  Mi Second Brain en Obsidian y Markdown da contexto, memoria y reglas a la IA entre
-                  sesiones. Resultados mucho mejores, sin empezar de cero.
+                  Flujos y agentes que planifican y ejecutan tareas solos. Menos tareas repetitivas,
+                  más tiempo para lo importante.
                 </p>
-              </div>
+              </Magnetic>
+            </Reveal>
+            <Reveal className="ai-card-reveal" delay={0.1}>
+              <Magnetic className="ai-card" spotlight strength={0.055}>
+                <Sparkles size={27} />
+                <ModelCycle />
+                <h3>
+                  Cada tarea,
+                  <br />
+                  su mejor modelo.
+                </h3>
+                <p>
+                  Uso estratégico de varios modelos de IA, según lo que necesita cada proyecto.
+                </p>
+              </Magnetic>
+            </Reveal>
+            <Reveal className="ai-card-reveal" delay={0.2}>
+              <Magnetic className="ai-card" spotlight strength={0.055}>
+                <Code2 size={27} />
+                <CodeFlow />
+                <h3>
+                  Ideas que se
+                  <br />
+                  convierten en código.
+                </h3>
+                <p>
+                  Desarrollo con agentes en el IDE. Prototipos en AI Studio y Stitch. React y
+                  TypeScript para construir de verdad.
+                </p>
+              </Magnetic>
+            </Reveal>
+            <Reveal className="ai-card-reveal ai-card-wide" delay={0.15}>
+              <Magnetic className="ai-card ai-card-horizontal" spotlight strength={0.045}>
+                <MemoryFlow />
+                <div>
+                  <h3>Una IA con memoria.</h3>
+                  <p>
+                    Mi Second Brain en Obsidian y Markdown da contexto, memoria y reglas a la IA
+                    entre sesiones. Resultados mucho mejores, sin empezar de cero.
+                  </p>
+                </div>
+              </Magnetic>
             </Reveal>
           </div>
         </div>
@@ -489,13 +514,15 @@ function Index() {
               convocatoria.
             </p>
           </div>
-          <Button variant="portfolio" data-style="ink" asChild>
-            <a
-              href={`mailto:${email}?subject=Acreditaci%C3%B3n%20y%20ayudas%20a%20la%20contrataci%C3%B3n`}
-            >
-              Hablemos de las posibilidades <ArrowUpRight />
-            </a>
-          </Button>
+          <Magnetic className="magnetic-inline" strength={0.2}>
+            <Button variant="portfolio" data-style="ink" asChild>
+              <a
+                href={`mailto:${email}?subject=Acreditaci%C3%B3n%20y%20ayudas%20a%20la%20contrataci%C3%B3n`}
+              >
+                Hablemos de las posibilidades <ArrowUpRight />
+              </a>
+            </Button>
+          </Magnetic>
         </div>
       </section>
       <section className="section wrap" id="sobre-mi">
@@ -520,16 +547,18 @@ function Index() {
               Identifico un problema del negocio, elijo la herramienta adecuada y lo resuelvo. Sea
               una web, una plataforma, un ERP o una app.
             </p>
-            <Button variant="portfolio" data-style="line" asChild>
-              <a
-                href={cv.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Erick-Rodriguez-CV.pdf"
-              >
-                Descargar mi CV <Download />
-              </a>
-            </Button>
+            <Magnetic className="magnetic-inline" strength={0.2}>
+              <Button variant="portfolio" data-style="line" asChild>
+                <a
+                  href={cv.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Erick-Rodriguez-CV.pdf"
+                >
+                  Descargar mi CV <Download />
+                </a>
+              </Button>
+            </Magnetic>
           </Reveal>
           <div>
             {experience.map((job, i) => (
@@ -570,11 +599,13 @@ function Index() {
               </a>
               <CopyButton value="+34 640 63 0459" label="teléfono" />
             </div>
-            <Button variant="portfolio" data-style="ink" asChild>
-              <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                Escríbeme por WhatsApp <ArrowUpRight />
-              </a>
-            </Button>
+            <Magnetic className="magnetic-inline" strength={0.2}>
+              <Button variant="portfolio" data-style="ink" asChild>
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer">
+                  Escríbeme por WhatsApp <ArrowUpRight />
+                </a>
+              </Button>
+            </Magnetic>
           </div>
           <footer className="footer">
             <span>© 2026 Erick Rodríguez</span>
