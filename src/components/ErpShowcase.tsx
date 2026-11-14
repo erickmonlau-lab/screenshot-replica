@@ -53,24 +53,24 @@ export function ErpShowcase() {
   const [view, setView] = useState<"panels" | "flows">("panels");
 
   return (
-    <div className="relative flex min-h-[395px] w-full flex-col justify-between bg-[#09090B] p-4 text-white sm:p-5">
+    <div className="relative flex min-h-[250px] w-full flex-col justify-between bg-[#16161D] p-3 text-white sm:p-3.5 2xl:min-h-[340px] 2xl:p-5">
       {/* Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#232530] pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303240] pb-2.5">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white">
             <ShieldCheck size={12} /> Confidencial · Modo oscuro
           </span>
-          <span className="hidden text-xs font-medium text-zinc-400 sm:inline">
+          <span className="hidden text-xs font-medium text-zinc-300 sm:inline">
             Esquema ERP &amp; App privada sin publicar
           </span>
         </div>
 
-        <div className="flex items-center gap-1 rounded-full border border-[#2C2F3D] bg-[#16171E] p-0.5 text-xs font-semibold">
+        <div className="flex items-center gap-1 rounded-full border border-[#383B4B] bg-[#21222C] p-0.5 text-xs font-semibold">
           <button
             type="button"
             onClick={() => setView("panels")}
             className={`rounded-full px-3 py-1 transition-colors ${
-              view === "panels" ? "bg-white text-[#09090B]" : "text-zinc-400 hover:text-white"
+              view === "panels" ? "bg-white text-[#09090B]" : "text-zinc-300 hover:text-white"
             }`}
           >
             Paneles &amp; Stock
@@ -79,7 +79,7 @@ export function ErpShowcase() {
             type="button"
             onClick={() => setView("flows")}
             className={`rounded-full px-3 py-1 transition-colors ${
-              view === "flows" ? "bg-white text-[#09090B]" : "text-zinc-400 hover:text-white"
+              view === "flows" ? "bg-white text-[#09090B]" : "text-zinc-300 hover:text-white"
             }`}
           >
             Flujos n8n
@@ -88,24 +88,21 @@ export function ErpShowcase() {
       </div>
 
       {/* Main Dark Wireframe Workspace */}
-      <div className="my-3 flex flex-1 flex-col justify-between gap-3">
+      <div className="my-2.5 flex flex-1 flex-col justify-between gap-2.5">
         {/* 4 Dark Telemetry Panels */}
-        <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
           {kpis.map((item) => {
             const Icon = item.icon;
             return (
-              <div
-                key={item.label}
-                className="rounded-lg border border-[#262936] bg-[#131317] p-2.5"
-              >
-                <div className="flex items-center justify-between text-[11px] font-medium text-zinc-400">
+              <div key={item.label} className="rounded-lg border border-[#323544] bg-[#21222C] p-2">
+                <div className="flex items-center justify-between text-[10.5px] font-medium text-zinc-300">
                   <span className="truncate">{item.label}</span>
-                  <Icon size={13} className="shrink-0 text-[#60A5FA]" />
+                  <Icon size={12} className="shrink-0 text-[#60A5FA]" />
                 </div>
-                <div className="mt-1 font-display text-sm font-bold tracking-tight text-white">
+                <div className="mt-0.5 font-display text-[13px] font-bold tracking-tight text-white">
                   {item.value}
                 </div>
-                <div className="mt-0.5 truncate text-[10px] text-zinc-500">{item.note}</div>
+                <div className="truncate text-[10px] text-zinc-400">{item.note}</div>
               </div>
             );
           })}
@@ -113,8 +110,8 @@ export function ErpShowcase() {
 
         {view === "panels" ? (
           /* Stock & Operations Wireframe Table */
-          <div className="flex-1 rounded-xl border border-dashed border-[#2C2F3D] bg-[#111115] p-3">
-            <div className="mb-2 flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+          <div className="flex-1 rounded-xl border border-dashed border-[#3B3F52] bg-[#1C1E27] p-2.5">
+            <div className="mb-1.5 flex items-center justify-between text-[10.5px] font-semibold uppercase tracking-wider text-zinc-300">
               <span>Tabla de stock &amp; almacén</span>
               <span className="inline-flex items-center gap-1 text-[#60A5FA]">
                 <Lock size={10} /> Demo completa presencial
@@ -124,23 +121,23 @@ export function ErpShowcase() {
               {stockRows.map((row) => (
                 <div
                   key={row.sku}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-[#232530] bg-[#09090B] px-3 py-2 text-xs"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-[#303240] bg-[#111218] px-3 py-1.5 text-xs"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
                     <span className="font-mono text-[10px] font-bold text-[#60A5FA]">
                       {row.sku}
                     </span>
-                    <span className="truncate font-medium text-zinc-100">{row.item}</span>
+                    <span className="truncate font-medium text-white">{row.item}</span>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <span className="hidden font-mono text-[11px] text-zinc-400 sm:inline">
+                    <span className="hidden font-mono text-[11px] text-zinc-300 sm:inline">
                       {row.stock}
                     </span>
                     <span
                       className={`rounded px-2 py-0.5 text-[10px] font-bold ${
                         row.state === "Alerta n8n"
                           ? "bg-[#0044FF] text-white"
-                          : "bg-[#222430] text-zinc-200"
+                          : "bg-[#2A2D3B] text-white"
                       }`}
                     >
                       {row.state}
@@ -152,21 +149,21 @@ export function ErpShowcase() {
           </div>
         ) : (
           /* Dark Automation Pipeline View */
-          <div className="grid flex-1 grid-cols-1 gap-2.5 sm:grid-cols-3">
+          <div className="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-3">
             {flowNodes.map((node) => (
               <div
                 key={node.step}
-                className="flex flex-col justify-between rounded-xl border border-[#262936] bg-[#131317] p-3.5"
+                className="flex flex-col justify-between rounded-xl border border-[#323544] bg-[#21222C] p-3"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-bold text-[#60A5FA]">
                     NODO {node.step}
                   </span>
-                  <GitBranch size={14} className="text-zinc-500" />
+                  <GitBranch size={14} className="text-zinc-400" />
                 </div>
-                <div className="mt-3">
+                <div className="mt-2">
                   <div className="font-display text-sm font-bold text-white">{node.title}</div>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-400">{node.detail}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-300">{node.detail}</p>
                 </div>
               </div>
             ))}
@@ -175,13 +172,13 @@ export function ErpShowcase() {
       </div>
 
       {/* Direct In-Person Scheduling Footer */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#232530] pt-3">
-        <span className="text-xs font-medium text-zinc-400">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#303240] pt-2.5">
+        <span className="text-xs font-medium text-zinc-300">
           Dos proyectos reales en producción para ver cara a cara
         </span>
         <a
           href="#contacto"
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-2 text-xs font-bold text-white shadow-xs transition-colors hover:bg-white hover:text-[#09090B]"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-white hover:text-[#09090B]"
         >
           <span>Agendar demo presencial</span>
           <ArrowRight size={13} />

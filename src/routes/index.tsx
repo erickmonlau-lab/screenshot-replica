@@ -31,7 +31,6 @@ import {
   AgentFlow,
   CodeFlow,
   Counter,
-  ExperienceTimeline,
   Magnetic,
   MaskedText,
   MemoryFlow,
@@ -39,7 +38,6 @@ import {
   Reveal,
   ScrollProgressRail,
   TiltStage,
-  TimelineDot,
   VelocityMarqueeRow,
 } from "@/components/portfolio-motion";
 
@@ -334,12 +332,12 @@ function Index() {
             2. HAIRLINE VELOCITY MARQUEE
             ===================================================================== */}
         <div
-          className="relative z-20 overflow-hidden border-y border-[#232530] bg-[#0B0C11] py-3.5 leading-none"
+          className="relative z-20 overflow-hidden border-y border-[#303240] bg-[#16161D] py-3 leading-none"
           aria-hidden="true"
         >
           <VelocityMarqueeRow
             baseVelocity={-2.0}
-            className="font-display text-[11px] font-bold leading-none tracking-[0.16em] text-zinc-400 sm:text-xs"
+            className="font-display text-[11px] font-bold leading-none tracking-[0.16em] text-zinc-200 sm:text-xs"
           >
             {marqueeText}
           </VelocityMarqueeRow>
@@ -350,27 +348,27 @@ function Index() {
             ===================================================================== */}
         <section
           id="metricas"
-          className="scroll-mt-24 bg-[#050507] py-20 sm:py-24"
+          className="scroll-mt-[62px] bg-[#09090B] py-14 lg:py-20"
           aria-label="Resultados clave"
         >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div className="mx-auto max-w-[1380px] px-5 sm:px-8">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
               {/* Stat Card 1 */}
-              <Reveal className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8">
+              <Reveal className="flex flex-col justify-between rounded-3xl border border-[#303240] bg-[#16161D] p-6 sm:p-7">
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <Clock size={22} strokeWidth={2.2} />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
+                    <Clock size={20} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-100">
                     Experiencia real
                   </span>
                 </div>
-                <div className="mt-7">
-                  <strong className="font-display block text-5xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-6xl">
+                <div className="mt-5">
+                  <strong className="font-display block text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
                     <Counter to={1000} prefix="+" />{" "}
-                    <span className="text-3xl font-bold text-[#60A5FA]">h</span>
+                    <span className="text-2xl font-bold text-[#60A5FA]">h</span>
                   </strong>
-                  <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
                     De experiencia acumulada entre prácticas en empresa, producto propio y
                     desarrollo web en producción.
                   </p>
@@ -380,24 +378,24 @@ function Index() {
               {/* Stat Card 2 */}
               <Reveal
                 delay={0.08}
-                className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8"
+                className="flex flex-col justify-between rounded-3xl border border-[#303240] bg-[#16161D] p-6 sm:p-7"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <TrendingUp size={22} strokeWidth={2.2} />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
+                    <TrendingUp size={20} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-100">
                     SEO en vivo
                   </span>
                 </div>
-                <div className="mt-7">
-                  <strong className="font-display inline-flex items-baseline gap-2 text-5xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-6xl">
+                <div className="mt-5">
+                  <strong className="font-display inline-flex items-baseline gap-2 text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
                     <span>Top</span>
                     <span className="text-[#60A5FA]">
                       <Counter to={1} />
                     </span>
                   </strong>
-                  <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
                     En Google en búsquedas de extraescolares en Barcelona con{" "}
                     <strong className="font-semibold text-white">diversplas.es</strong>, web
                     desarrollada por mí y recién lanzada.
@@ -408,22 +406,22 @@ function Index() {
               {/* Stat Card 3 */}
               <Reveal
                 delay={0.16}
-                className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8"
+                className="flex flex-col justify-between rounded-3xl border border-[#303240] bg-[#16161D] p-6 sm:p-7"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <Award size={22} strokeWidth={2.2} />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
+                    <Award size={20} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-100">
                     Subvención empresa
                   </span>
                 </div>
-                <div className="mt-7">
-                  <strong className="font-display block text-5xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-6xl">
+                <div className="mt-5">
+                  <strong className="font-display block text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
                     <Counter to={375} />{" "}
-                    <span className="text-3xl font-bold text-[#60A5FA]">h</span>
+                    <span className="text-2xl font-bold text-[#60A5FA]">h</span>
                   </strong>
-                  <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-base">
+                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
                     De acreditación oficial como Agente del Cambio Tecnológico: la empresa que me
                     contrate accede a subvenciones salariales directas.
                   </p>
@@ -434,35 +432,35 @@ function Index() {
         </section>
 
         {/* =====================================================================
-            4. PROYECTOS (#proyectos) — CONTRASTE EDITORIAL CLARO + VENTANA MACOS
+            4. PROYECTOS (#proyectos) — 1-SCREEN PC FIT + VENTANA MACOS SÓLIDA
             ===================================================================== */}
         <section
           id="proyectos"
-          className="light-studio-grid scroll-mt-24 bg-[#FAFAFA] py-24 text-[#0A0F1D] sm:py-28 lg:py-32"
+          className="light-studio-grid scroll-mt-[62px] bg-[#F2F4F8] py-8 text-[#0A0F1D] lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
         >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal className="mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+            <Reveal className="mb-4 flex flex-col justify-between gap-2 lg:flex-row lg:items-end 2xl:mb-7">
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#0044FF] 2xl:px-3.5 2xl:py-1 2xl:text-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0044FF]" aria-hidden="true" />
                   Proyectos seleccionados
                 </span>
                 <MaskedText delay={0.05}>
-                  <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-[#0A0F1D] sm:text-5xl lg:text-6xl">
-                    Webs en producción. <br />
+                  <h2 className="mt-1.5 font-display text-2xl font-extrabold leading-[1.04] tracking-[-0.035em] text-[#0A0F1D] sm:text-3xl lg:text-[36px] 2xl:text-[46px]">
+                    Webs en producción.{" "}
                     <span className="text-[#0044FF]">Y dos proyectos en directo.</span>
                   </h2>
                 </MaskedText>
               </div>
-              <p className="max-w-md text-base font-medium leading-relaxed text-zinc-600">
+              <p className="max-w-md text-xs font-medium leading-snug text-zinc-700 2xl:text-sm 2xl:leading-relaxed">
                 Selecciona cada proyecto para previsualizar el resultado en el visor macOS o
                 explorar el esquema en modo oscuro de la demo presencial.
               </p>
             </Reveal>
 
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
               {/* Left Interactive Index Stack */}
-              <div className="flex flex-col gap-3.5 lg:col-span-5">
+              <div className="flex flex-col justify-between gap-2 lg:col-span-5 2xl:gap-3">
                 {projectCases.map((project) => {
                   const isActive = project.id === selectedProject.id;
                   return (
@@ -471,45 +469,45 @@ function Index() {
                       type="button"
                       onClick={() => setActiveProjectId(project.id)}
                       onFocus={() => setActiveProjectId(project.id)}
-                      className={`group relative flex w-full flex-col gap-3 rounded-3xl border p-6 text-left transition-all ${
+                      className={`group relative flex w-full flex-col gap-1 rounded-xl border p-2.5 text-left transition-all sm:p-3 2xl:gap-1.5 2xl:rounded-2xl 2xl:p-4 ${
                         isActive
-                          ? "border-[#0044FF] bg-white shadow-[0_18px_42px_-14px_#CBD5FF] ring-2 ring-[#DBE4FF]"
-                          : "border-[#E4E6EE] bg-white hover:border-[#C7CCD9]"
+                          ? "border-[#0044FF] bg-white shadow-[0_12px_28px_-10px_#C7D4FF] ring-2 ring-[#DBE4FF]"
+                          : "border-[#D4D7E2] bg-white hover:border-[#9CA3B8]"
                       }`}
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
                           <span
-                            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-display text-xs font-extrabold transition-colors ${
-                              isActive ? "bg-[#0044FF] text-white" : "bg-zinc-100 text-zinc-700"
+                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-display text-[11px] font-extrabold transition-colors 2xl:h-7 2xl:w-7 2xl:text-xs ${
+                              isActive ? "bg-[#0044FF] text-white" : "bg-zinc-200 text-[#0A0F1D]"
                             }`}
                           >
                             {project.index}
                           </span>
-                          <span className="font-display text-xl font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-2xl">
+                          <span className="font-display text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-base 2xl:text-lg">
                             {project.name}
                           </span>
                         </div>
                         <span
-                          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold transition-colors ${
+                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10.5px] font-bold transition-colors 2xl:text-xs ${
                             isActive
                               ? "bg-[#0044FF] text-white"
-                              : "border border-zinc-200 bg-zinc-50 text-zinc-700"
+                              : "border border-[#D4D7E2] bg-[#F2F4F8] text-[#0A0F1D]"
                           }`}
                         >
                           {project.status}
                         </span>
                       </div>
 
-                      <p className="text-sm font-medium leading-relaxed text-zinc-600 sm:text-base">
+                      <p className="text-xs font-medium leading-snug text-zinc-700 2xl:text-[13.5px]">
                         {project.outcome}
                       </p>
 
-                      <div className="flex flex-wrap gap-1.5 pt-0.5">
+                      <div className="flex flex-wrap gap-1 2xl:gap-1.5">
                         {project.stack.map((tag) => (
                           <span
                             key={tag}
-                            className="rounded-full bg-zinc-100 px-3 py-1 text-[11px] font-semibold text-zinc-700"
+                            className="rounded-full border border-[#E2E4EC] bg-[#F2F4F8] px-2 py-0.5 text-[10px] font-semibold text-[#0A0F1D] 2xl:px-2.5 2xl:text-[11px]"
                           >
                             {tag}
                           </span>
@@ -521,17 +519,17 @@ function Index() {
               </div>
 
               {/* Right macOS Dark Bezel Browser Stage */}
-              <div className="lg:sticky lg:top-24 lg:col-span-7 lg:self-start">
-                <TiltStage>
-                  <div className="overflow-hidden rounded-[28px] border border-[#262834] bg-[#0A0B0F] p-3.5 text-white shadow-[0_28px_60px_-15px_#0A0F1D] sm:p-4">
+              <div className="lg:col-span-7">
+                <TiltStage className="h-full">
+                  <div className="flex h-full flex-col justify-between overflow-hidden rounded-[20px] border border-[#303240] bg-[#16161D] p-2.5 text-white shadow-[0_24px_48px_-14px_#0A0F1D] sm:p-3 2xl:rounded-[26px] 2xl:p-4">
                     {/* macOS Chrome Bar */}
-                    <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#262834] bg-[#14161F] px-4 py-2.5">
+                    <div className="mb-2 flex items-center justify-between gap-3 rounded-xl border border-[#303240] bg-[#21222C] px-3 py-1.5 2xl:mb-3 2xl:px-4 2xl:py-2">
                       <div className="flex items-center gap-1.5" aria-hidden="true">
                         <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
                         <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
                         <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
                       </div>
-                      <span className="truncate rounded-full border border-[#2A2D3C] bg-[#08090D] px-4 py-1 text-xs font-medium text-zinc-300">
+                      <span className="truncate rounded-full border border-[#383B4B] bg-[#16161D] px-3 py-0.5 text-[11px] font-medium text-zinc-100 2xl:px-4 2xl:text-xs">
                         {selectedProject.domain}
                       </span>
                       <a
@@ -539,20 +537,20 @@ function Index() {
                         {...(selectedProject.isPrivate
                           ? {}
                           : { target: "_blank", rel: "noopener noreferrer" })}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#0044FF] px-3.5 py-1 text-xs font-bold text-white transition-colors hover:bg-white hover:text-[#050507]"
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#0044FF] px-3 py-1 text-[11px] font-bold text-white transition-colors hover:bg-white hover:text-[#09090B] 2xl:px-3.5 2xl:text-xs"
                       >
                         <span>{selectedProject.ctaLabel}</span>
-                        <ExternalLink size={12} />
+                        <ExternalLink size={11} />
                       </a>
                     </div>
 
                     {/* Preview Viewport */}
-                    <div className="overflow-hidden rounded-2xl border border-[#262834] bg-[#050507]">
+                    <div className="flex-1 overflow-hidden rounded-xl border border-[#303240] bg-[#09090B]">
                       <motion.div
                         key={selectedProject.id}
-                        initial={{ opacity: 0.2, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                        initial={{ y: 5 }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       >
                         {selectedProject.isPrivate ? (
                           <ErpShowcase />
@@ -561,12 +559,12 @@ function Index() {
                             href={selectedProject.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group block overflow-hidden bg-zinc-900"
+                            className="group block overflow-hidden bg-[#16161D]"
                           >
                             <img
                               src={selectedProject.image}
                               alt={`Captura real de ${selectedProject.name}`}
-                              className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                              className="h-[205px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02] sm:h-[235px] 2xl:h-[360px]"
                             />
                           </a>
                         )}
@@ -574,19 +572,19 @@ function Index() {
                     </div>
 
                     {/* Bottom Project Summary & Pill CTA */}
-                    <div className="mt-3.5 flex flex-col justify-between gap-4 rounded-2xl border border-[#262834] bg-[#14161F] p-5 sm:flex-row sm:items-center sm:p-6">
+                    <div className="mt-2 flex flex-col justify-between gap-2.5 rounded-xl border border-[#303240] bg-[#21222C] p-3 sm:flex-row sm:items-center sm:p-3.5 2xl:mt-3 2xl:p-4">
                       <div>
-                        <div className="mb-2 flex flex-wrap gap-2">
+                        <div className="mb-1 flex flex-wrap gap-1 2xl:mb-1.5 2xl:gap-1.5">
                           {selectedProject.stack.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full border border-[#2E3142] bg-[#1D202C] px-3 py-1 text-xs font-semibold text-zinc-200"
+                              className="rounded-full border border-[#383B4B] bg-[#16161D] px-2 py-0.5 text-[10.5px] font-semibold text-white 2xl:px-2.5 2xl:text-[11px]"
                             >
                               {tag}
                             </span>
                           ))}
                         </div>
-                        <p className="max-w-xl text-sm leading-relaxed text-zinc-300">
+                        <p className="max-w-xl text-xs leading-snug text-zinc-200 2xl:text-sm">
                           {selectedProject.description}
                         </p>
                       </div>
@@ -596,10 +594,10 @@ function Index() {
                           {...(selectedProject.isPrivate
                             ? {}
                             : { target: "_blank", rel: "noopener noreferrer" })}
-                          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#050507] transition-all hover:bg-[#0044FF] hover:text-white"
+                          className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#09090B] transition-all hover:bg-[#0044FF] hover:text-white 2xl:px-5 2xl:py-2.5 2xl:text-xs"
                         >
                           <span>{selectedProject.ctaLabel}</span>
-                          <ArrowUpRight size={15} />
+                          <ArrowUpRight size={13} />
                         </a>
                       </Magnetic>
                     </div>
@@ -611,36 +609,36 @@ function Index() {
         </section>
 
         {/* =====================================================================
-            5. TRABAJO CON IA (#ia) — DARK STUDIO NARRATIVE FLOW (ORDERALO V5)
+            5. TRABAJO CON IA (#ia) — 1-SCREEN PC FIT + FLUJO SÓLIDO
             ===================================================================== */}
         <section
           id="ia"
-          className="dark-studio-grid relative scroll-mt-24 bg-[#050507] py-24 text-white sm:py-28 lg:py-32"
+          className="dark-studio-grid relative scroll-mt-[62px] bg-[#09090B] py-6 text-white lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
         >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <Reveal className="mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+            <Reveal className="mb-3 flex flex-col justify-between gap-2 lg:flex-row lg:items-end 2xl:mb-6">
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#2A2D3C] bg-[#14161F] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#60A5FA]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#383B4B] bg-[#16161D] px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#60A5FA] 2xl:px-3.5 2xl:py-1 2xl:text-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                   Trabajo con IA
                 </span>
                 <MaskedText delay={0.05}>
-                  <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
-                    Desarrollo e IA integrados <br />
+                  <h2 className="mt-1.5 font-display text-2xl font-extrabold leading-[1.04] tracking-[-0.035em] text-white sm:text-3xl lg:text-[36px] 2xl:text-[46px]">
+                    Desarrollo e IA integrados{" "}
                     <span className="text-[#60A5FA]">en todo el ciclo de producto.</span>
                   </h2>
                 </MaskedText>
               </div>
-              <p className="max-w-md text-base leading-relaxed text-zinc-400">
+              <p className="max-w-md text-xs leading-snug text-zinc-300 2xl:text-sm 2xl:leading-relaxed">
                 Haz scroll o selecciona cada bloque para ver en directo el enrutador de modelos, el
                 flujo de agentes n8n, la generación en AI Studio / Stitch y el Second Brain en
                 Obsidian.
               </p>
             </Reveal>
 
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
-              {/* Left Scroll-Observed Dark Glass Cards */}
-              <div className="flex flex-col gap-4 lg:col-span-6">
+            <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
+              {/* Left 2x2 Solid Phase Grid */}
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:col-span-6 2xl:gap-3.5">
                 {aiPhases.map((phase) => {
                   const active = phase.id === selectedAiPhase.id;
                   return (
@@ -653,72 +651,74 @@ function Index() {
                       type="button"
                       onClick={() => setActiveAiPhase(phase.id)}
                       onMouseEnter={() => setActiveAiPhase(phase.id)}
-                      className={`relative flex w-full flex-col gap-3 rounded-3xl border p-6 text-left transition-all sm:p-7 ${
+                      className={`relative flex w-full flex-col justify-between gap-1.5 rounded-xl border p-3 text-left transition-all sm:p-3.5 2xl:gap-2 2xl:rounded-2xl 2xl:p-5 ${
                         active
-                          ? "border-[#3B82F6] bg-[#0B2259]"
-                          : "border-[#232530] bg-[#0D0E14] hover:border-[#3A3E52] hover:bg-[#12141C]"
+                          ? "border-[#3B82F6] bg-[#0B256B]"
+                          : "border-[#303240] bg-[#16161D] hover:border-[#4B5066] hover:bg-[#21222C]"
                       }`}
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="flex items-center gap-2.5">
+                      <div>
+                        <div className="flex items-center justify-between gap-2">
                           <span
-                            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-display text-xs font-extrabold ${
-                              active ? "bg-[#0044FF] text-white" : "bg-[#1C1F2B] text-zinc-200"
+                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-display text-[11px] font-extrabold 2xl:h-7 2xl:w-7 2xl:text-xs ${
+                              active ? "bg-[#0044FF] text-white" : "bg-[#21222C] text-white"
                             }`}
                           >
                             {phase.num}
                           </span>
-                          <span className="text-xs font-bold uppercase tracking-wider text-[#60A5FA]">
+                          <span className="truncate text-[10px] font-bold uppercase tracking-wider text-[#60A5FA] 2xl:text-[11px]">
                             {phase.kicker}
                           </span>
                         </div>
-                        <div className="flex flex-wrap gap-1.5">
-                          {phase.tags.map((t) => (
-                            <span
-                              key={t}
-                              className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                                active
-                                  ? "border border-[#3B82F6] bg-[#0044FF] text-white"
-                                  : "border border-[#2A2D3C] bg-[#181A24] text-zinc-200"
-                              }`}
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
+                        <h3 className="mt-1.5 font-display text-[15px] font-bold tracking-[-0.02em] text-white 2xl:mt-2 2xl:text-lg">
+                          {phase.title}
+                        </h3>
+                        <p className="mt-0.5 text-xs leading-snug text-zinc-300 2xl:mt-1 2xl:text-[13.5px] 2xl:leading-relaxed">
+                          {phase.description}
+                        </p>
                       </div>
-                      <h3 className="font-display text-xl font-bold tracking-[-0.02em] text-white sm:text-2xl">
-                        {phase.title}
-                      </h3>
-                      <p className="text-base leading-relaxed text-zinc-400">{phase.description}</p>
+                      <div className="flex flex-wrap gap-1 pt-0.5 2xl:gap-1.5">
+                        {phase.tags.map((t) => (
+                          <span
+                            key={t}
+                            className={`rounded-full px-2 py-0.5 text-[10px] font-semibold 2xl:px-2.5 2xl:text-[11px] ${
+                              active
+                                ? "border border-[#3B82F6] bg-[#0044FF] text-white"
+                                : "border border-[#383B4B] bg-[#21222C] text-zinc-100"
+                            }`}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Right Sticky Live System */}
-              <div className="lg:sticky lg:top-24 lg:col-span-6 lg:self-start">
-                <div className="macos-window-frame rounded-3xl p-6 text-white sm:p-8">
-                  <div className="mb-5 flex items-center justify-between border-b border-[#232530] pb-4">
+              {/* Right Solid Live System */}
+              <div className="lg:col-span-6">
+                <div className="macos-window-frame flex h-full flex-col justify-between rounded-[20px] p-3.5 text-white sm:p-4 2xl:rounded-[26px] 2xl:p-6">
+                  <div className="mb-2.5 flex items-center justify-between border-b border-[#303240] pb-2.5 2xl:mb-4 2xl:pb-3.5">
                     <div>
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#60A5FA]">
+                      <span className="text-[10.5px] font-bold uppercase tracking-wider text-[#60A5FA] 2xl:text-xs">
                         Sistema en vivo · Fase {selectedAiPhase.num}
                       </span>
-                      <h4 className="mt-1 font-display text-xl font-extrabold tracking-[-0.015em] text-white">
+                      <h4 className="mt-0.5 font-display text-base font-extrabold tracking-[-0.015em] text-white 2xl:text-xl">
                         {selectedAiPhase.title}
                       </h4>
                     </div>
-                    <span className="h-3 w-3 rounded-full bg-[#3B82F6]" aria-hidden="true" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                   </div>
 
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="flex min-h-[260px] items-center"
+                      initial={{ y: 5 }}
+                      animate={{ y: 0 }}
+                      exit={{ y: -5 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex min-h-[175px] flex-1 items-center 2xl:min-h-[255px]"
                     >
                       {selectedAiPhase.id === "automation" && <AgentFlow />}
                       {selectedAiPhase.id === "models" && <ModelCycle />}
@@ -727,9 +727,9 @@ function Index() {
                     </motion.div>
                   </AnimatePresence>
 
-                  <div className="mt-5 flex items-center justify-between border-t border-[#232530] pt-4 text-xs font-medium text-zinc-400">
+                  <div className="mt-2.5 flex items-center justify-between border-t border-[#303240] pt-2.5 text-[11px] font-medium text-zinc-300 2xl:mt-4 2xl:pt-3.5 2xl:text-xs">
                     <span>Sincronizado con scroll o selección directa</span>
-                    <span className="rounded-full border border-[#2E5BFF] bg-[#0B2259] px-3 py-1 font-mono text-xs font-bold text-[#93C5FD]">
+                    <span className="rounded-full border border-[#3B82F6] bg-[#0B256B] px-2.5 py-0.5 font-mono text-[10.5px] font-bold text-white 2xl:px-3 2xl:text-xs">
                       FASE {selectedAiPhase.num} / 04
                     </span>
                   </div>
@@ -738,19 +738,19 @@ function Index() {
             </div>
 
             {/* 375 Hours Official Accreditation Subsidy Strip — Solid Electric Cobalt */}
-            <Reveal delay={0.12}>
+            <Reveal delay={0.08}>
               <div
                 id="acreditacion-375h"
-                className="relative z-10 mt-16 flex scroll-mt-24 flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-[#2E5BFF] bg-[#0044FF] p-8 text-white sm:mt-20 sm:p-10 lg:flex-row lg:items-center lg:p-12"
+                className="relative z-10 mt-3 flex scroll-mt-[62px] flex-col justify-between gap-3 overflow-hidden rounded-2xl border border-[#3B82F6] bg-[#0044FF] px-5 py-3 text-white sm:px-6 lg:flex-row lg:items-center 2xl:mt-6 2xl:px-8 2xl:py-5"
               >
                 <div>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#60A5FA] bg-[#0033CC] px-3.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#60A5FA] bg-[#0033CC] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white 2xl:px-3 2xl:text-[11px]">
                     Subvenciones salariales directas para empresa
                   </span>
-                  <h3 className="mt-3 font-display text-2xl font-extrabold tracking-[-0.025em] sm:text-3xl lg:text-4xl">
+                  <h3 className="mt-1 font-display text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl 2xl:mt-1.5 2xl:text-2xl">
                     Acreditación oficial de 375 h como Agente del Cambio Tecnológico
                   </h3>
-                  <p className="mt-3 max-w-2xl text-base leading-relaxed text-blue-100">
+                  <p className="mt-0.5 max-w-3xl text-xs leading-snug text-blue-50 2xl:mt-1 2xl:text-sm">
                     Cuento con 375 horas de acreditación oficial. Gracias a esta acreditación, la
                     empresa que me contrate accede directamente a subvenciones salariales para
                     impulsar su digitalización y automatización con IA.
@@ -759,10 +759,10 @@ function Index() {
                 <Magnetic className="shrink-0" strength={0.12}>
                   <a
                     href="#contacto"
-                    className="inline-flex min-h-[54px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-extrabold uppercase tracking-wider text-[#050507] shadow-lg transition-all hover:bg-[#050507] hover:text-white"
+                    className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-wider text-[#09090B] shadow-lg transition-all hover:bg-[#09090B] hover:text-white 2xl:min-h-[48px] 2xl:px-6 2xl:py-3"
                   >
                     <span>Consultar contratación</span>
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight size={14} />
                   </a>
                 </Magnetic>
               </div>
@@ -771,238 +771,253 @@ function Index() {
         </section>
 
         {/* =====================================================================
-            6. TRAYECTORIA / PERFIL (#trayectoria) — CONTRASTE EDITORIAL CLARO + ZERO OVERLAP
+            6. TRAYECTORIA / PERFIL (#trayectoria) — 3-COL BENTO 1-SCREEN PC FIT
             ===================================================================== */}
         <section
           id="trayectoria"
-          className="light-studio-grid relative z-10 scroll-mt-24 bg-[#FAFAFA] py-24 text-[#0A0F1D] sm:py-28 lg:py-32"
+          className="light-studio-grid relative z-10 scroll-mt-[62px] bg-[#F2F4F8] py-6 text-[#0A0F1D] lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
         >
-          <div className="mx-auto max-w-7xl px-5 sm:px-8">
-            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12">
-              {/* Left Sticky Profile Card (SAFE lg:sticky lg:top-24 lg:self-start — NO OVERLAP) */}
-              <div className="lg:sticky lg:top-24 lg:col-span-5 lg:self-start">
-                <Reveal>
-                  <div className="overflow-hidden rounded-3xl border border-[#E4E6EE] bg-white p-7 shadow-[0_18px_40px_-15px_#E0E4F0] sm:p-8">
-                    <div className="flex items-center gap-4 border-b border-[#E4E6EE] pb-6">
+          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+            <Reveal className="mb-3 flex flex-col justify-between gap-2 lg:flex-row lg:items-end 2xl:mb-6">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-3 py-0.5 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#0044FF] 2xl:px-3.5 2xl:py-1 2xl:text-xs">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0044FF]" aria-hidden="true" />
+                  Trayectoria real
+                </span>
+                <MaskedText delay={0.05}>
+                  <h2 className="mt-1 font-display text-2xl font-extrabold leading-[1.04] tracking-[-0.035em] text-[#0A0F1D] sm:text-3xl lg:text-[34px] 2xl:text-[46px]">
+                    Experiencia en empresa,{" "}
+                    <span className="text-[#0044FF]">gestión y automatización.</span>
+                  </h2>
+                </MaskedText>
+              </div>
+              <p className="max-w-md text-xs font-medium leading-snug text-zinc-700 2xl:text-sm 2xl:leading-relaxed">
+                Perfil híbrido en desarrollo, marketing y administración con más de 1.000 horas
+                prácticas y titulación oficial en Barcelona.
+              </p>
+            </Reveal>
+
+            {/* 3-Column Bento Grid: Profile | Experience | Education & Value */}
+            <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-12 2xl:gap-5">
+              {/* Col 1: Profile + Stack + CV PDF */}
+              <div className="lg:col-span-4">
+                <div className="flex h-full flex-col justify-between rounded-2xl border border-[#D4D7E2] bg-white p-3.5 2xl:rounded-3xl 2xl:p-5">
+                  <div>
+                    <div className="flex items-center gap-3 border-b border-[#E2E4EC] pb-2.5 2xl:pb-4">
                       <img
                         src="/erick-portrait-studio.png"
                         alt="Erick Rodríguez"
                         loading="lazy"
-                        className="h-20 w-20 shrink-0 rounded-2xl bg-[#0044FF] object-cover object-top shadow-md"
+                        className="h-11 w-11 shrink-0 rounded-xl bg-[#0044FF] object-cover object-top 2xl:h-16 2xl:w-16 2xl:rounded-2xl"
                       />
                       <div>
-                        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F7FF] px-3 py-1 text-xs font-bold text-[#0044FF]">
-                          <span className="h-2 w-2 rounded-full bg-[#0044FF]" aria-hidden="true" />
+                        <div className="inline-flex items-center gap-1.5 rounded-full bg-[#EEF3FF] px-2.5 py-0.5 text-[10px] font-bold text-[#0044FF] 2xl:text-xs">
+                          <span
+                            className="h-1.5 w-1.5 rounded-full bg-[#0044FF]"
+                            aria-hidden="true"
+                          />
                           <span>La Sagrera, Barcelona</span>
                         </div>
-                        <h3 className="mt-2 font-display text-2xl font-extrabold tracking-[-0.03em] text-[#0A0F1D] sm:text-3xl">
+                        <h3 className="mt-0.5 font-display text-base font-extrabold tracking-[-0.03em] text-[#0A0F1D] 2xl:mt-1 2xl:text-2xl">
                           Erick Rodríguez
                         </h3>
-                        <p className="text-sm font-semibold text-zinc-600">
+                        <p className="text-[11px] font-semibold text-zinc-700 2xl:text-xs">
                           Web, Automatización IA &amp; Negocio
                         </p>
                       </div>
                     </div>
 
-                    <p className="mt-5 text-base leading-relaxed text-zinc-600">
+                    <p className="mt-2 text-xs leading-snug text-zinc-700 2xl:mt-4 2xl:text-sm 2xl:leading-relaxed">
                       Combino desarrollo web e IA con base en marketing digital y gestión
                       administrativa: construyo la solución completa y la llevo a producción.
                     </p>
 
-                    <div className="mt-5 flex flex-col gap-2.5">
-                      <div className="flex items-center gap-2.5 rounded-2xl bg-[#F4F7FF] px-4 py-3 text-xs font-bold text-[#0A0F1D]">
-                        <Sparkles size={15} className="shrink-0 text-[#0044FF]" />
+                    <div className="mt-2 flex flex-col gap-1 2xl:mt-4 2xl:gap-2">
+                      <div className="flex items-center gap-2 rounded-xl border border-[#DDE4F8] bg-[#EEF3FF] px-3 py-1.5 text-[11px] font-bold text-[#0A0F1D] 2xl:px-3.5 2xl:py-2.5 2xl:text-xs">
+                        <Sparkles size={13} className="shrink-0 text-[#0044FF]" />
                         <span>Acreditación Agente del Cambio (375 h)</span>
                       </div>
-                      <div className="flex items-center gap-2.5 rounded-2xl bg-[#F4F7FF] px-4 py-3 text-xs font-bold text-[#0A0F1D]">
-                        <Briefcase size={15} className="shrink-0 text-[#0044FF]" />
+                      <div className="flex items-center gap-2 rounded-xl border border-[#DDE4F8] bg-[#EEF3FF] px-3 py-1.5 text-[11px] font-bold text-[#0A0F1D] 2xl:px-3.5 2xl:py-2.5 2xl:text-xs">
+                        <Briefcase size={13} className="shrink-0 text-[#0044FF]" />
                         <span>Español y Catalán nativos · Inglés B2</span>
                       </div>
                     </div>
 
-                    <div className="mt-6">
-                      <span className="block text-xs font-bold uppercase tracking-wider text-zinc-500">
+                    <div className="mt-2.5 2xl:mt-4">
+                      <span className="block text-[10px] font-bold uppercase tracking-wider text-zinc-600 2xl:text-[11px]">
                         Stack técnico y herramientas
                       </span>
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="mt-1 flex flex-wrap gap-1 2xl:mt-2 2xl:gap-1.5">
                         {coreStackPills.map((tool) => (
                           <span
                             key={tool}
-                            className="rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1.5 text-xs font-bold text-[#0A0F1D]"
+                            className="rounded-full border border-[#D4D7E2] bg-[#F2F4F8] px-2 py-0.5 text-[10px] font-bold text-[#0A0F1D] 2xl:px-3 2xl:py-1 2xl:text-[11px]"
                           >
                             {tool}
                           </span>
                         ))}
                       </div>
                     </div>
-
-                    <a
-                      href={cvPdf.url}
-                      download="Erick-Rodriguez-CV.pdf"
-                      className="mt-7 inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[#0A0F1D] px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-all hover:bg-[#0044FF]"
-                    >
-                      <span>Descargar CV en PDF</span>
-                      <Download size={16} />
-                    </a>
                   </div>
-                </Reveal>
+
+                  <a
+                    href={cvPdf.url}
+                    download="Erick-Rodriguez-CV.pdf"
+                    className="mt-2.5 inline-flex min-h-[38px] w-full items-center justify-center gap-2 rounded-full bg-[#0A0F1D] px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-[#0044FF] 2xl:mt-5 2xl:min-h-[46px] 2xl:text-xs"
+                  >
+                    <span>Descargar CV en PDF</span>
+                    <Download size={14} />
+                  </a>
+                </div>
               </div>
 
-              {/* Right Column: Real Experience & Official Education Timeline */}
-              <div className="lg:col-span-7">
-                <Reveal>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#0044FF]" aria-hidden="true" />
-                    Trayectoria real
-                  </span>
-                  <MaskedText delay={0.05}>
-                    <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-[#0A0F1D] sm:text-5xl">
-                      Experiencia en empresa, <br />
-                      <span className="text-[#0044FF]">gestión y automatización.</span>
-                    </h2>
-                  </MaskedText>
-                </Reveal>
-
-                <ExperienceTimeline>
-                  {experience.map((item) => (
-                    <Reveal key={`${item.place}-${item.period}`}>
-                      <article className="relative rounded-3xl border border-[#E4E6EE] bg-white p-6 shadow-[0_12px_28px_-12px_#E2E6F2] sm:p-7">
-                        <TimelineDot topClass="top-7" />
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <span className="rounded-full bg-[#F4F7FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0044FF]">
-                            {item.period}
-                          </span>
-                          <span className="text-sm font-bold text-[#0044FF]">{item.place}</span>
-                        </div>
-                        <h3 className="mt-3 flex items-center gap-3 font-display text-xl font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-2xl">
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                            <Briefcase size={18} />
-                          </span>
-                          <span>{item.role}</span>
-                        </h3>
-                        <ul className="mt-4 list-disc space-y-2 pl-5 text-base leading-relaxed text-zinc-600">
-                          {item.points.map((point) => (
-                            <li key={point}>{point}</li>
-                          ))}
-                        </ul>
-                      </article>
-                    </Reveal>
-                  ))}
-
-                  {education.map((item) => (
-                    <Reveal key={item.title}>
-                      <article className="relative rounded-3xl border border-[#E4E6EE] bg-white p-6 shadow-[0_12px_28px_-12px_#E2E6F2] sm:p-7">
-                        <TimelineDot topClass="top-7" />
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <span className="rounded-full bg-[#F4F7FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0044FF]">
-                            {item.period}
-                          </span>
-                          <span className="text-sm font-bold text-[#0A0F1D]">{item.place}</span>
-                        </div>
-                        <h3 className="mt-3 flex items-center gap-3 font-display text-xl font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-2xl">
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                            <GraduationCap size={18} />
-                          </span>
-                          <span>{item.title}</span>
-                        </h3>
-                        <p className="mt-3 text-base leading-relaxed text-zinc-600">
-                          {item.summary}
-                        </p>
-                      </article>
-                    </Reveal>
-                  ))}
-
-                  <Reveal>
-                    <article className="relative rounded-3xl border-2 border-[#C7D4FF] bg-white p-6 shadow-[0_16px_34px_-12px_#D6E0FF] sm:p-7">
-                      <TimelineDot topClass="top-7" />
-                      <span className="inline-flex rounded-full bg-[#0044FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
-                        Valor diferencial
-                      </span>
-                      <h3 className="mt-3 flex items-center gap-3 font-display text-xl font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-2xl">
-                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                          <Wrench size={18} />
+              {/* Col 2: Real Experience (3 Cards) */}
+              <div className="flex flex-col justify-between gap-2 lg:col-span-4 2xl:gap-3">
+                {experience.map((item) => (
+                  <article
+                    key={`${item.place}-${item.period}`}
+                    className="flex flex-1 flex-col justify-between rounded-2xl border border-[#D4D7E2] bg-white p-2.5 sm:p-3 2xl:p-4"
+                  >
+                    <div>
+                      <div className="flex flex-wrap items-center justify-between gap-1">
+                        <span className="rounded-full bg-[#EEF3FF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0044FF] 2xl:px-2.5 2xl:text-[11px]">
+                          {item.period}
                         </span>
-                        <span>Un solo perfil para llevarlo a producción</span>
-                      </h3>
-                      <div className="mt-2 text-sm font-bold text-[#0044FF]">
-                        Gestión Administrativa · Marketing Digital · Desarrollo Web · IA &amp; n8n
+                        <span className="text-[11px] font-bold text-[#0044FF] 2xl:text-xs">
+                          {item.place}
+                        </span>
                       </div>
-                      <ul className="mt-3 list-disc space-y-2 pl-5 text-base leading-relaxed text-zinc-600">
-                        <li>
-                          Construyo la solución completa (web, plataforma, ERP o app) y la llevo a
-                          producción sin depender de terceros.
-                        </li>
-                        <li>
-                          Acreditación oficial Agente del Cambio Tecnológico (375 h) con acceso a
-                          subvenciones salariales directas al incorporarme a plantilla.
-                        </li>
+                      <h3 className="mt-1 flex items-center gap-2 font-display text-[13px] font-extrabold tracking-[-0.02em] text-[#0A0F1D] 2xl:mt-2 2xl:text-base">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#0044FF] text-white 2xl:h-7 2xl:w-7 2xl:rounded-lg">
+                          <Briefcase size={13} />
+                        </span>
+                        <span>{item.role}</span>
+                      </h3>
+                      <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[11px] leading-snug text-zinc-700 2xl:mt-2 2xl:space-y-1 2xl:text-[12.5px]">
+                        {item.points.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
                       </ul>
-                    </article>
-                  </Reveal>
-                </ExperienceTimeline>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {/* Col 3: Official Education + Differential Value */}
+              <div className="flex flex-col justify-between gap-2 lg:col-span-4 2xl:gap-3">
+                {education.map((item) => (
+                  <article
+                    key={item.title}
+                    className="rounded-2xl border border-[#D4D7E2] bg-white p-2.5 sm:p-3 2xl:p-4"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-1">
+                      <span className="rounded-full bg-[#EEF3FF] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0044FF] 2xl:px-2.5 2xl:text-[11px]">
+                        {item.period}
+                      </span>
+                      <span className="text-[10.5px] font-bold text-[#0A0F1D] 2xl:text-xs">
+                        {item.place}
+                      </span>
+                    </div>
+                    <h3 className="mt-1 flex items-center gap-2 font-display text-[13px] font-extrabold tracking-[-0.02em] text-[#0A0F1D] 2xl:mt-1.5 2xl:text-base">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#0044FF] text-white 2xl:h-7 2xl:w-7 2xl:rounded-lg">
+                        <GraduationCap size={13} />
+                      </span>
+                      <span>{item.title}</span>
+                    </h3>
+                    <p className="mt-0.5 text-[11px] leading-snug text-zinc-700 2xl:mt-1.5 2xl:text-[12.5px]">
+                      {item.summary}
+                    </p>
+                  </article>
+                ))}
+
+                <article className="rounded-2xl border-2 border-[#0044FF] bg-white p-2.5 sm:p-3 2xl:p-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex rounded-full bg-[#0044FF] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white 2xl:text-[11px]">
+                      Valor diferencial
+                    </span>
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#0044FF] text-white 2xl:h-7 2xl:w-7 2xl:rounded-lg">
+                      <Wrench size={13} />
+                    </span>
+                  </div>
+                  <h3 className="mt-1 font-display text-[13px] font-extrabold tracking-[-0.02em] text-[#0A0F1D] 2xl:mt-1.5 2xl:text-base">
+                    Un solo perfil para llevarlo a producción
+                  </h3>
+                  <div className="mt-0.5 text-[10.5px] font-bold text-[#0044FF] 2xl:text-xs">
+                    Administración · Marketing · Desarrollo Web · IA &amp; n8n
+                  </div>
+                  <ul className="mt-0.5 list-disc space-y-0.5 pl-4 text-[11px] leading-snug text-zinc-700 2xl:mt-1.5 2xl:space-y-1 2xl:text-[12.5px]">
+                    <li>
+                      Construyo la solución completa (web, plataforma, ERP o app) sin depender de
+                      terceros.
+                    </li>
+                    <li>
+                      375 h de acreditación oficial con acceso a subvenciones salariales directas.
+                    </li>
+                  </ul>
+                </article>
               </div>
             </div>
           </div>
         </section>
 
         {/* =====================================================================
-            7. CONTACTO Y CIERRE (#contacto) — VENTANA OSCURA PERRY WANG × ORDERALO
+            7. CONTACTO Y CIERRE (#contacto) — VENTANA OSCURA SÓLIDA 1-SCREEN PC FIT
             ===================================================================== */}
         <section
           id="contacto"
-          className="dark-studio-grid scroll-mt-24 bg-[#050507] py-20 text-white sm:py-28 lg:py-32"
+          className="dark-studio-grid scroll-mt-[62px] bg-[#09090B] py-10 text-white lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-14"
         >
-          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
             <Reveal>
-              <div className="macos-window-frame relative overflow-hidden rounded-[32px] px-6 py-14 text-center sm:px-14 sm:py-20">
+              <div className="macos-window-frame relative overflow-hidden rounded-[26px] border border-[#303240] bg-[#16161D] px-6 py-9 text-center sm:px-12 sm:py-11 2xl:rounded-[32px] 2xl:px-16 2xl:py-16">
                 <div className="relative z-10 flex flex-col items-center">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#2C2F3E] bg-[#161822] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-zinc-200">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#383B4B] bg-[#21222C] px-4 py-1 text-xs font-bold uppercase tracking-[0.12em] text-zinc-100">
                     <span className="h-2 w-2 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                     Contacto directo en Barcelona
                   </span>
 
                   <MaskedText delay={0.05}>
-                    <h2 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+                    <h2 className="mx-auto mt-4 max-w-4xl font-display text-3xl font-bold leading-[1.04] tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl">
                       ¿Hablamos de tu equipo o vemos{" "}
                       <span className="text-[#60A5FA]">una demo en directo?</span>
                     </h2>
                   </MaskedText>
 
-                  <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg">
+                  <p className="mx-auto mt-3.5 max-w-2xl text-sm leading-relaxed text-zinc-300 sm:text-base">
                     Escríbeme por WhatsApp, correo o llámame directamente. Estoy en La Sagrera,
                     Barcelona, listo para enseñarte mis proyectos y el ERP en vivo.
                   </p>
 
                   {/* Primary Pill CTA + Secondary CV Pill CTA */}
-                  <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+                  <div className="mt-7 flex flex-wrap items-center justify-center gap-3.5">
                     <Magnetic strength={0.14}>
                       <a
                         href={whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-[58px] items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-extrabold uppercase tracking-[0.06em] text-[#050507] transition-all hover:scale-[1.02] hover:bg-[#0044FF] hover:text-white sm:text-base"
+                        className="inline-flex min-h-[48px] items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3 text-sm font-extrabold uppercase tracking-[0.06em] text-[#09090B] transition-all hover:scale-[1.02] hover:bg-[#0044FF] hover:text-white"
                       >
-                        <MessageCircle size={20} strokeWidth={2.3} />
+                        <MessageCircle size={18} strokeWidth={2.3} />
                         <span>Escribir por WhatsApp ahora</span>
-                        <ArrowUpRight size={18} strokeWidth={2.4} />
+                        <ArrowUpRight size={16} strokeWidth={2.4} />
                       </a>
                     </Magnetic>
 
                     <a
                       href={cvPdf.url}
                       download="Erick-Rodriguez-CV.pdf"
-                      className="inline-flex min-h-[58px] items-center justify-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] px-7 py-4 text-sm font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-[#050507]"
+                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-[#383B4B] bg-[#21222C] px-6 py-3 text-sm font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-[#09090B]"
                     >
                       <span>Descargar CV en PDF</span>
-                      <Download size={17} />
+                      <Download size={16} />
                     </a>
                   </div>
 
                   {/* Solid Direct Copyable Contact Pills */}
-                  <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-                    <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] py-2 pl-4 pr-2 text-white">
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                    <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-[#383B4B] bg-[#21222C] py-1.5 pl-4 pr-2 text-white">
                       <a
-                        className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 hover:text-white"
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-100 hover:text-white"
                         href={`mailto:${email}`}
                       >
                         <Mail size={15} className="shrink-0 text-[#60A5FA]" />
@@ -1011,9 +1026,9 @@ function Index() {
                       <CopyButton value={email} label="correo" />
                     </div>
 
-                    <div className="inline-flex items-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] py-2 pl-4 pr-2 text-white">
+                    <div className="inline-flex items-center gap-2.5 rounded-full border border-[#383B4B] bg-[#21222C] py-1.5 pl-4 pr-2 text-white">
                       <a
-                        className="text-sm font-semibold text-zinc-200 hover:text-white tabular-nums"
+                        className="text-sm font-semibold text-zinc-100 hover:text-white tabular-nums"
                         href={whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -1024,15 +1039,15 @@ function Index() {
                     </div>
                   </div>
 
-                  <footer className="mt-16 flex w-full flex-wrap items-center justify-between gap-4 border-t border-[#232530] pt-8 text-sm font-medium text-zinc-400">
+                  <footer className="mt-8 flex w-full flex-wrap items-center justify-between gap-4 border-t border-[#303240] pt-5 text-sm font-medium text-zinc-300">
                     <span>© 2026 Erick Rodríguez</span>
-                    <span className="inline-flex items-center gap-1.5 text-zinc-200">
+                    <span className="inline-flex items-center gap-1.5 text-white">
                       <MapPin size={15} className="text-[#60A5FA]" />
                       <span>La Sagrera, Barcelona</span>
                     </span>
                     <a
                       href="#inicio"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[#2C2F3E] bg-[#161822] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#0044FF]"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[#383B4B] bg-[#21222C] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#0044FF]"
                     >
                       <span>Volver arriba ↑</span>
                     </a>

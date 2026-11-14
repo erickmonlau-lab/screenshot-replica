@@ -131,24 +131,20 @@
   font-family: var(--font-display);
 }
 
-/* Dark & Light Studio Grids — Pure Solid Line Colors */
+/* Solid Canvas Textures (Zero Transparent Overlay) */
 .dark-studio-grid {
-  background-image:
-    linear-gradient(#12141c 1px, transparent 1px),
-    linear-gradient(90deg, #12141c 1px, transparent 1px);
-  background-size: 72px 72px;
+  background-color: #09090b;
 }
 
 .light-studio-grid {
-  background-image: radial-gradient(#dfe3ee 1.3px, #fafafa 1.3px);
-  background-size: 28px 28px;
+  background-color: #f2f4f8;
 }
 
-/* Solid macOS Window Frame (High Contrast, Zero Transparency) */
+/* Solid macOS Window Frame (High Contrast Graphite on Solid Dark Canvas) */
 .macos-window-frame {
-  background-color: #0d0e13;
-  border: 1px solid #262834;
-  box-shadow: 0 28px 64px -16px #000000;
+  background-color: #16161d;
+  border: 1px solid #303240;
+  box-shadow: 0 24px 52px -14px #000000;
 }
 
 /* Magnetic hover spotlight */

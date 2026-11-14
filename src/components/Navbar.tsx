@@ -24,7 +24,7 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
     const target = document.getElementById(id);
     if (target) {
       e.preventDefault();
-      const navOffset = 92;
+      const navOffset = 62;
       const top = target.getBoundingClientRect().top + window.scrollY - navOffset;
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       window.history.replaceState(null, "", href);
@@ -32,25 +32,25 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
   }
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-3.5 sm:px-8 sm:pt-5">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-[#2A2D3B] bg-[#09090B] px-4 py-2 sm:px-8">
       <div className="mx-auto flex max-w-[1380px] items-center justify-between gap-4">
-        {/* Left Identity — Solid Dark Card */}
+        {/* Left Identity — Solid Graphite Card */}
         <a
           href="#inicio"
           onClick={(e) => handleNavClick(e, "#inicio")}
-          className="pointer-events-auto flex flex-col rounded-2xl border border-[#262834] bg-[#0D0E13] px-4 py-2 transition-colors hover:border-[#3F4356]"
+          className="flex flex-col rounded-2xl border border-[#303240] bg-[#16161D] px-3.5 py-1 transition-colors hover:border-[#4B4F66]"
         >
-          <span className="whitespace-nowrap text-[14px] font-bold tracking-[-0.02em] text-white">
+          <span className="whitespace-nowrap text-[13px] font-bold tracking-[-0.02em] text-white">
             Erick Rodríguez
           </span>
-          <span className="whitespace-nowrap text-[11.5px] font-medium text-zinc-400">
+          <span className="whitespace-nowrap text-[10.5px] font-medium text-zinc-300">
             Web &amp; Automatización IA
           </span>
         </a>
 
-        {/* Center Segmented Solid Pill with Solid Top Indicator */}
+        {/* Center Segmented Solid Pill */}
         <div
-          className="pointer-events-auto hidden items-center gap-1 rounded-full border border-[#2A2C38] bg-[#111218] p-1.5 shadow-[0_14px_34px_-10px_#000000] lg:flex"
+          className="hidden items-center gap-1 rounded-full border border-[#303240] bg-[#16161D] p-1 lg:flex"
           role="tablist"
           aria-label="Modo de vista y navegación"
         >
@@ -113,11 +113,11 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
         </div>
 
         {/* Right Solid Actions + Mobile Hamburger */}
-        <div className="pointer-events-auto flex items-center gap-2 rounded-full border border-[#262834] bg-[#0D0E13] px-2.5 py-1.5">
+        <div className="flex items-center gap-2 rounded-full border border-[#303240] bg-[#16161D] px-2 py-1">
           <a
             href={cvPdf.url}
             download="Erick-Rodriguez-CV.pdf"
-            className="hidden items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-semibold text-zinc-300 transition-colors hover:bg-[#1C1E28] hover:text-white sm:inline-flex"
+            className="hidden items-center gap-1 whitespace-nowrap rounded-full px-3 py-1 text-[12.5px] font-semibold text-zinc-200 transition-colors hover:bg-[#21222C] hover:text-white sm:inline-flex"
           >
             <span>CV (PDF)</span>
             <ArrowUpRight size={13} strokeWidth={2.2} />
@@ -126,7 +126,7 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
           <a
             href="#contacto"
             onClick={(e) => handleNavClick(e, "#contacto")}
-            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#0044FF] px-4 py-1.5 text-[13px] font-bold text-white transition-all hover:bg-white hover:text-[#050507]"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#0044FF] px-4 py-1 text-[12.5px] font-bold text-white transition-all hover:bg-white hover:text-[#050507]"
           >
             <span>Hablemos</span>
             <ArrowUpRight size={13} strokeWidth={2.4} />
@@ -135,7 +135,7 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
           <button
             type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#2C2F3E] bg-[#181A22] text-white transition-colors hover:bg-[#252836] lg:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#303240] bg-[#21222C] text-white transition-colors hover:bg-[#2E3142] lg:hidden"
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuOpen}
           >
@@ -148,12 +148,12 @@ export function Navbar({ mode, onChangeMode }: NavbarProps) {
       <AnimatePresence>
         {menuOpen && (
           <motion.nav
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ y: -6 }}
+            animate={{ y: 0 }}
+            exit={{ y: -6 }}
+            transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}
             aria-label="Menú móvil"
-            className="pointer-events-auto mx-auto mt-2.5 flex max-w-[1380px] flex-col gap-1.5 rounded-3xl border border-[#2A2C38] bg-[#0D0E13] p-4 text-white shadow-2xl lg:hidden"
+            className="mx-auto mt-2.5 flex max-w-[1380px] flex-col gap-1.5 rounded-3xl border border-[#303240] bg-[#16161D] p-4 text-white shadow-2xl lg:hidden"
           >
             <div className="mb-1 flex gap-1.5 rounded-full border border-[#2A2C38] bg-[#161820] p-1">
               {(

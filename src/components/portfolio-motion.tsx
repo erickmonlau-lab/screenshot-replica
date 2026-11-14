@@ -56,10 +56,10 @@ export function MaskedText({
   return (
     <div className={className}>
       <motion.div
-        initial={{ y: 12, opacity: 0.92 }}
-        whileInView={{ y: 0, opacity: 1 }}
+        initial={{ y: 8 }}
+        whileInView={{ y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
-        transition={{ duration: 0.42, delay, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.35, delay, ease: [0.22, 1, 0.36, 1] }}
       >
         {children}
       </motion.div>
@@ -644,10 +644,10 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0.92, y: 14 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ y: 10 }}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, amount: 0.08 }}
-      transition={{ duration: 0.42, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.36, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
