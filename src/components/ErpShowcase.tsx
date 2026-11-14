@@ -55,7 +55,7 @@ export function ErpShowcase() {
   return (
     <div className="relative flex min-h-[395px] w-full flex-col justify-between bg-[#09090B] p-4 text-white sm:p-5">
       {/* Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#232530] pb-3">
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
             <ShieldCheck size={12} /> Confidencial · Modo oscuro
@@ -65,7 +65,7 @@ export function ErpShowcase() {
           </span>
         </div>
 
-        <div className="flex items-center gap-1 rounded-full border border-white/15 bg-white/[0.05] p-0.5 text-xs font-semibold">
+        <div className="flex items-center gap-1 rounded-full border border-[#2C2F3D] bg-[#16171E] p-0.5 text-xs font-semibold">
           <button
             type="button"
             onClick={() => setView("panels")}
@@ -96,7 +96,7 @@ export function ErpShowcase() {
             return (
               <div
                 key={item.label}
-                className="rounded-lg border border-white/12 bg-[#131317] p-2.5"
+                className="rounded-lg border border-[#262936] bg-[#131317] p-2.5"
               >
                 <div className="flex items-center justify-between text-[11px] font-medium text-zinc-400">
                   <span className="truncate">{item.label}</span>
@@ -113,7 +113,7 @@ export function ErpShowcase() {
 
         {view === "panels" ? (
           /* Stock & Operations Wireframe Table */
-          <div className="flex-1 rounded-xl border border-dashed border-white/15 bg-[#111115] p-3">
+          <div className="flex-1 rounded-xl border border-dashed border-[#2C2F3D] bg-[#111115] p-3">
             <div className="mb-2 flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
               <span>Tabla de stock &amp; almacén</span>
               <span className="inline-flex items-center gap-1 text-[#60A5FA]">
@@ -124,7 +124,7 @@ export function ErpShowcase() {
               {stockRows.map((row) => (
                 <div
                   key={row.sku}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-[#09090B] px-3 py-2 text-xs"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-[#232530] bg-[#09090B] px-3 py-2 text-xs"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
                     <span className="font-mono text-[10px] font-bold text-[#60A5FA]">
@@ -140,7 +140,7 @@ export function ErpShowcase() {
                       className={`rounded px-2 py-0.5 text-[10px] font-bold ${
                         row.state === "Alerta n8n"
                           ? "bg-[#0044FF] text-white"
-                          : "bg-white/10 text-zinc-200"
+                          : "bg-[#222430] text-zinc-200"
                       }`}
                     >
                       {row.state}
@@ -156,7 +156,7 @@ export function ErpShowcase() {
             {flowNodes.map((node) => (
               <div
                 key={node.step}
-                className="flex flex-col justify-between rounded-xl border border-white/12 bg-[#131317] p-3.5"
+                className="flex flex-col justify-between rounded-xl border border-[#262936] bg-[#131317] p-3.5"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs font-bold text-[#60A5FA]">
@@ -175,7 +175,7 @@ export function ErpShowcase() {
       </div>
 
       {/* Direct In-Person Scheduling Footer */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#232530] pt-3">
         <span className="text-xs font-medium text-zinc-400">
           Dos proyectos reales en producción para ver cara a cara
         </span>

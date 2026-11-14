@@ -8,9 +8,16 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, Cambria, "Times New Roman", serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", system-ui,
+    sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui,
+    sans-serif;
+  --font-serif:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui,
+    sans-serif;
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -56,7 +63,7 @@
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.12);
+  --border: #262834;
   --input: #0c0c10;
   --ring: #3b82f6;
 
@@ -69,11 +76,7 @@
   --cobalt: #0044ff;
   --cobalt-bright: #3b82f6;
   --violet-accent: #6d28d9;
-  --spotlight-gradient: radial-gradient(
-    circle,
-    rgba(59, 130, 246, 0.16),
-    transparent 65%
-  );
+  --spotlight-gradient: #14192b;
 }
 
 @layer base {
@@ -93,6 +96,10 @@
     background-color: var(--surface-obsidian);
     color: var(--ink);
     font-family: var(--font-sans);
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
     margin: 0;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
@@ -104,6 +111,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
+    letter-spacing: -0.025em;
   }
 
   button,
@@ -123,45 +131,24 @@
   font-family: var(--font-display);
 }
 
-.font-editorial-serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-/* Perry Wang dark studio bloom */
-.hero-headline-glow {
-  text-shadow:
-    0 0 38px rgba(255, 255, 255, 0.22),
-    0 0 72px rgba(59, 130, 246, 0.18);
-}
-
-/* Orderalo v5 Dark Grid + Radial Stage Backdrop */
+/* Dark & Light Studio Grids — Pure Solid Line Colors */
 .dark-studio-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    linear-gradient(#12141c 1px, transparent 1px),
+    linear-gradient(90deg, #12141c 1px, transparent 1px);
   background-size: 72px 72px;
 }
 
 .light-studio-grid {
-  background-image: radial-gradient(rgba(10, 15, 29, 0.08) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(#dfe3ee 1.3px, #fafafa 1.3px);
   background-size: 28px 28px;
 }
 
-/* Specular window bezel glow (Perry Wang macOS glass window frame) */
+/* Solid macOS Window Frame (High Contrast, Zero Transparency) */
 .macos-window-frame {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.075) 0%,
-    rgba(16, 17, 22, 0.92) 14%,
-    rgba(9, 10, 14, 0.98) 100%
-  );
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.14),
-    0 35px 90px -20px rgba(0, 0, 0, 0.95),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  background-color: #0d0e13;
+  border: 1px solid #262834;
+  box-shadow: 0 28px 64px -16px #000000;
 }
 
 /* Magnetic hover spotlight */

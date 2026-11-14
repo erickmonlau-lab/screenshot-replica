@@ -253,7 +253,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-bold transition-all active:scale-95 ${
         copied
           ? "bg-[#0044FF] text-white"
-          : "bg-white/10 text-zinc-200 hover:bg-[#0044FF] hover:text-white"
+          : "bg-[#222430] text-zinc-200 hover:bg-[#0044FF] hover:text-white"
       }`}
     >
       {copied ? (
@@ -334,7 +334,7 @@ function Index() {
             2. HAIRLINE VELOCITY MARQUEE
             ===================================================================== */}
         <div
-          className="relative z-20 overflow-hidden border-y border-white/[0.08] bg-[#08080C] py-3.5 leading-none"
+          className="relative z-20 overflow-hidden border-y border-[#232530] bg-[#0B0C11] py-3.5 leading-none"
           aria-hidden="true"
         >
           <VelocityMarqueeRow
@@ -346,7 +346,7 @@ function Index() {
         </div>
 
         {/* =====================================================================
-            3. DARK GLASS STAT-CARDS (#metricas) — ORDERALO / PERRY WANG CRAFT
+            3. SOLID DARK STAT-CARDS (#metricas)
             ===================================================================== */}
         <section
           id="metricas"
@@ -356,12 +356,12 @@ function Index() {
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
               {/* Stat Card 1 */}
-              <Reveal className="flex flex-col justify-between rounded-3xl border border-white/[0.1] bg-gradient-to-b from-white/[0.05] to-white/[0.015] p-7 backdrop-blur-xl sm:p-8">
+              <Reveal className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8">
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#3B82F6]/30 bg-[#0044FF]/20 text-[#60A5FA]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
                     <Clock size={22} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
                     Experiencia real
                   </span>
                 </div>
@@ -380,20 +380,20 @@ function Index() {
               {/* Stat Card 2 */}
               <Reveal
                 delay={0.08}
-                className="flex flex-col justify-between rounded-3xl border border-white/[0.1] bg-gradient-to-b from-white/[0.05] to-white/[0.015] p-7 backdrop-blur-xl sm:p-8"
+                className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#3B82F6]/30 bg-[#0044FF]/20 text-[#60A5FA]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
                     <TrendingUp size={22} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
                     SEO en vivo
                   </span>
                 </div>
                 <div className="mt-7">
                   <strong className="font-display inline-flex items-baseline gap-2 text-5xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-6xl">
                     <span>Top</span>
-                    <span className="font-editorial-serif text-[1.15em] font-normal text-[#60A5FA]">
+                    <span className="text-[#60A5FA]">
                       <Counter to={1} />
                     </span>
                   </strong>
@@ -408,13 +408,13 @@ function Index() {
               {/* Stat Card 3 */}
               <Reveal
                 delay={0.16}
-                className="flex flex-col justify-between rounded-3xl border border-white/[0.1] bg-gradient-to-b from-white/[0.05] to-white/[0.015] p-7 backdrop-blur-xl sm:p-8"
+                className="flex flex-col justify-between rounded-3xl border border-[#262834] bg-[#0D0E14] p-7 sm:p-8"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#3B82F6]/30 bg-[#0044FF]/20 text-[#60A5FA]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#2E5BFF] bg-[#0044FF] text-white">
                     <Award size={22} strokeWidth={2.2} />
                   </div>
-                  <span className="rounded-full border border-white/10 bg-white/[0.05] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
+                  <span className="rounded-full border border-[#2A2D3B] bg-[#161822] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wider text-zinc-300">
                     Subvención empresa
                   </span>
                 </div>
@@ -443,16 +443,14 @@ function Index() {
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal className="mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#0044FF]/20 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0044FF]" aria-hidden="true" />
                   Proyectos seleccionados
                 </span>
                 <MaskedText delay={0.05}>
                   <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-[#0A0F1D] sm:text-5xl lg:text-6xl">
                     Webs en producción. <br />
-                    <span className="font-editorial-serif text-[1.12em] font-normal text-[#0044FF]">
-                      Y dos proyectos en directo.
-                    </span>
+                    <span className="text-[#0044FF]">Y dos proyectos en directo.</span>
                   </h2>
                 </MaskedText>
               </div>
@@ -475,8 +473,8 @@ function Index() {
                       onFocus={() => setActiveProjectId(project.id)}
                       className={`group relative flex w-full flex-col gap-3 rounded-3xl border p-6 text-left transition-all ${
                         isActive
-                          ? "border-[#0044FF]/40 bg-white shadow-[0_20px_48px_-14px_rgba(0,68,255,0.16)] ring-2 ring-[#0044FF]/12"
-                          : "border-zinc-200/90 bg-white/75 hover:border-zinc-300 hover:bg-white"
+                          ? "border-[#0044FF] bg-white shadow-[0_18px_42px_-14px_#CBD5FF] ring-2 ring-[#DBE4FF]"
+                          : "border-[#E4E6EE] bg-white hover:border-[#C7CCD9]"
                       }`}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -522,18 +520,18 @@ function Index() {
                 })}
               </div>
 
-              {/* Right macOS Dark Bezel Browser Stage (Perry Wang × Orderalo Stage) */}
+              {/* Right macOS Dark Bezel Browser Stage */}
               <div className="lg:sticky lg:top-24 lg:col-span-7 lg:self-start">
                 <TiltStage>
-                  <div className="overflow-hidden rounded-[28px] border border-zinc-800/80 bg-[#0A0A0E] p-3.5 text-white shadow-[0_28px_70px_-15px_rgba(10,15,29,0.28)] sm:p-4">
+                  <div className="overflow-hidden rounded-[28px] border border-[#262834] bg-[#0A0B0F] p-3.5 text-white shadow-[0_28px_60px_-15px_#0A0F1D] sm:p-4">
                     {/* macOS Chrome Bar */}
-                    <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-2.5">
+                    <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#262834] bg-[#14161F] px-4 py-2.5">
                       <div className="flex items-center gap-1.5" aria-hidden="true">
                         <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
                         <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
                         <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
                       </div>
-                      <span className="truncate rounded-full border border-white/10 bg-black/50 px-4 py-1 text-xs font-medium text-zinc-300">
+                      <span className="truncate rounded-full border border-[#2A2D3C] bg-[#08090D] px-4 py-1 text-xs font-medium text-zinc-300">
                         {selectedProject.domain}
                       </span>
                       <a
@@ -549,7 +547,7 @@ function Index() {
                     </div>
 
                     {/* Preview Viewport */}
-                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#050507]">
+                    <div className="overflow-hidden rounded-2xl border border-[#262834] bg-[#050507]">
                       <motion.div
                         key={selectedProject.id}
                         initial={{ opacity: 0.2, y: 6 }}
@@ -576,13 +574,13 @@ function Index() {
                     </div>
 
                     {/* Bottom Project Summary & Pill CTA */}
-                    <div className="mt-3.5 flex flex-col justify-between gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 sm:flex-row sm:items-center sm:p-6">
+                    <div className="mt-3.5 flex flex-col justify-between gap-4 rounded-2xl border border-[#262834] bg-[#14161F] p-5 sm:flex-row sm:items-center sm:p-6">
                       <div>
                         <div className="mb-2 flex flex-wrap gap-2">
                           {selectedProject.stack.map((tag) => (
                             <span
                               key={tag}
-                              className="rounded-full border border-white/12 bg-white/[0.06] px-3 py-1 text-xs font-semibold text-zinc-200"
+                              className="rounded-full border border-[#2E3142] bg-[#1D202C] px-3 py-1 text-xs font-semibold text-zinc-200"
                             >
                               {tag}
                             </span>
@@ -622,16 +620,14 @@ function Index() {
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <Reveal className="mb-14 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#60A5FA]">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#2A2D3C] bg-[#14161F] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#60A5FA]">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                   Trabajo con IA
                 </span>
                 <MaskedText delay={0.05}>
                   <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
                     Desarrollo e IA integrados <br />
-                    <span className="font-editorial-serif text-[1.12em] font-normal text-[#60A5FA]">
-                      en todo el ciclo de producto.
-                    </span>
+                    <span className="text-[#60A5FA]">en todo el ciclo de producto.</span>
                   </h2>
                 </MaskedText>
               </div>
@@ -659,15 +655,15 @@ function Index() {
                       onMouseEnter={() => setActiveAiPhase(phase.id)}
                       className={`relative flex w-full flex-col gap-3 rounded-3xl border p-6 text-left transition-all sm:p-7 ${
                         active
-                          ? "border-[#3B82F6]/60 bg-[#0044FF]/[0.14] shadow-[0_20px_50px_-15px_rgba(0,68,255,0.35)]"
-                          : "border-white/10 bg-white/[0.025] hover:border-white/25 hover:bg-white/[0.045]"
+                          ? "border-[#3B82F6] bg-[#0B2259]"
+                          : "border-[#232530] bg-[#0D0E14] hover:border-[#3A3E52] hover:bg-[#12141C]"
                       }`}
                     >
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5">
                           <span
                             className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-display text-xs font-extrabold ${
-                              active ? "bg-[#0044FF] text-white" : "bg-white/10 text-zinc-300"
+                              active ? "bg-[#0044FF] text-white" : "bg-[#1C1F2B] text-zinc-200"
                             }`}
                           >
                             {phase.num}
@@ -682,8 +678,8 @@ function Index() {
                               key={t}
                               className={`rounded-full px-3 py-1 text-xs font-semibold ${
                                 active
-                                  ? "border border-[#3B82F6]/30 bg-[#0044FF]/30 text-white"
-                                  : "bg-white/[0.06] text-zinc-300"
+                                  ? "border border-[#3B82F6] bg-[#0044FF] text-white"
+                                  : "border border-[#2A2D3C] bg-[#181A24] text-zinc-200"
                               }`}
                             >
                               {t}
@@ -700,10 +696,10 @@ function Index() {
                 })}
               </div>
 
-              {/* Right Sticky Live System (SAFE lg:top-24 lg:self-start — NO OVERLAP) */}
+              {/* Right Sticky Live System */}
               <div className="lg:sticky lg:top-24 lg:col-span-6 lg:self-start">
                 <div className="macos-window-frame rounded-3xl p-6 text-white sm:p-8">
-                  <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
+                  <div className="mb-5 flex items-center justify-between border-b border-[#232530] pb-4">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-wider text-[#60A5FA]">
                         Sistema en vivo · Fase {selectedAiPhase.num}
@@ -712,10 +708,7 @@ function Index() {
                         {selectedAiPhase.title}
                       </h4>
                     </div>
-                    <span
-                      className="h-3 w-3 rounded-full bg-[#3B82F6] shadow-[0_0_12px_#3B82F6]"
-                      aria-hidden="true"
-                    />
+                    <span className="h-3 w-3 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                   </div>
 
                   <AnimatePresence mode="wait">
@@ -734,9 +727,9 @@ function Index() {
                     </motion.div>
                   </AnimatePresence>
 
-                  <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4 text-xs font-medium text-zinc-400">
+                  <div className="mt-5 flex items-center justify-between border-t border-[#232530] pt-4 text-xs font-medium text-zinc-400">
                     <span>Sincronizado con scroll o selección directa</span>
-                    <span className="rounded-full bg-[#0044FF]/25 px-3 py-1 font-mono text-xs font-bold text-[#60A5FA]">
+                    <span className="rounded-full border border-[#2E5BFF] bg-[#0B2259] px-3 py-1 font-mono text-xs font-bold text-[#93C5FD]">
                       FASE {selectedAiPhase.num} / 04
                     </span>
                   </div>
@@ -744,14 +737,14 @@ function Index() {
               </div>
             </div>
 
-            {/* 375 Hours Official Accreditation Subsidy Strip */}
+            {/* 375 Hours Official Accreditation Subsidy Strip — Solid Electric Cobalt */}
             <Reveal delay={0.12}>
               <div
                 id="acreditacion-375h"
-                className="relative z-10 mt-16 flex scroll-mt-24 flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-br from-[#0044FF] via-[#0036D6] to-[#1E1B4B] p-8 text-white shadow-[0_28px_70px_-15px_rgba(0,68,255,0.45)] sm:mt-20 sm:p-10 lg:flex-row lg:items-center lg:p-12"
+                className="relative z-10 mt-16 flex scroll-mt-24 flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-[#2E5BFF] bg-[#0044FF] p-8 text-white sm:mt-20 sm:p-10 lg:flex-row lg:items-center lg:p-12"
               >
                 <div>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#60A5FA] bg-[#0033CC] px-3.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-white">
                     Subvenciones salariales directas para empresa
                   </span>
                   <h3 className="mt-3 font-display text-2xl font-extrabold tracking-[-0.025em] sm:text-3xl lg:text-4xl">
@@ -789,8 +782,8 @@ function Index() {
               {/* Left Sticky Profile Card (SAFE lg:sticky lg:top-24 lg:self-start — NO OVERLAP) */}
               <div className="lg:sticky lg:top-24 lg:col-span-5 lg:self-start">
                 <Reveal>
-                  <div className="overflow-hidden rounded-3xl border border-zinc-200/90 bg-white p-7 shadow-[0_20px_50px_-15px_rgba(10,15,29,0.08)] sm:p-8">
-                    <div className="flex items-center gap-4 border-b border-zinc-200/80 pb-6">
+                  <div className="overflow-hidden rounded-3xl border border-[#E4E6EE] bg-white p-7 shadow-[0_18px_40px_-15px_#E0E4F0] sm:p-8">
+                    <div className="flex items-center gap-4 border-b border-[#E4E6EE] pb-6">
                       <img
                         src="/erick-portrait-studio.png"
                         alt="Erick Rodríguez"
@@ -858,16 +851,14 @@ function Index() {
               {/* Right Column: Real Experience & Official Education Timeline */}
               <div className="lg:col-span-7">
                 <Reveal>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#0044FF]/20 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#C7D4FF] bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[#0044FF] shadow-xs">
                     <span className="h-1.5 w-1.5 rounded-full bg-[#0044FF]" aria-hidden="true" />
                     Trayectoria real
                   </span>
                   <MaskedText delay={0.05}>
                     <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.03] tracking-[-0.035em] text-[#0A0F1D] sm:text-5xl">
                       Experiencia en empresa, <br />
-                      <span className="font-editorial-serif text-[1.12em] font-normal text-[#0044FF]">
-                        gestión y automatización.
-                      </span>
+                      <span className="text-[#0044FF]">gestión y automatización.</span>
                     </h2>
                   </MaskedText>
                 </Reveal>
@@ -875,7 +866,7 @@ function Index() {
                 <ExperienceTimeline>
                   {experience.map((item) => (
                     <Reveal key={`${item.place}-${item.period}`}>
-                      <article className="relative rounded-3xl border border-zinc-200/90 bg-white p-6 shadow-[0_12px_32px_-12px_rgba(10,15,29,0.06)] sm:p-7">
+                      <article className="relative rounded-3xl border border-[#E4E6EE] bg-white p-6 shadow-[0_12px_28px_-12px_#E2E6F2] sm:p-7">
                         <TimelineDot topClass="top-7" />
                         <div className="flex flex-wrap items-center justify-between gap-2">
                           <span className="rounded-full bg-[#F4F7FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0044FF]">
@@ -900,7 +891,7 @@ function Index() {
 
                   {education.map((item) => (
                     <Reveal key={item.title}>
-                      <article className="relative rounded-3xl border border-zinc-200/90 bg-white p-6 shadow-[0_12px_32px_-12px_rgba(10,15,29,0.06)] sm:p-7">
+                      <article className="relative rounded-3xl border border-[#E4E6EE] bg-white p-6 shadow-[0_12px_28px_-12px_#E2E6F2] sm:p-7">
                         <TimelineDot topClass="top-7" />
                         <div className="flex flex-wrap items-center justify-between gap-2">
                           <span className="rounded-full bg-[#F4F7FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#0044FF]">
@@ -922,7 +913,7 @@ function Index() {
                   ))}
 
                   <Reveal>
-                    <article className="relative rounded-3xl border-2 border-[#0044FF]/25 bg-white p-6 shadow-[0_16px_38px_-12px_rgba(0,68,255,0.12)] sm:p-7">
+                    <article className="relative rounded-3xl border-2 border-[#C7D4FF] bg-white p-6 shadow-[0_16px_34px_-12px_#D6E0FF] sm:p-7">
                       <TimelineDot topClass="top-7" />
                       <span className="inline-flex rounded-full bg-[#0044FF] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
                         Valor diferencial
@@ -964,23 +955,16 @@ function Index() {
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <Reveal>
               <div className="macos-window-frame relative overflow-hidden rounded-[32px] px-6 py-14 text-center sm:px-14 sm:py-20">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -top-32 left-1/2 h-[380px] w-[620px] -translate-x-1/2 rounded-full bg-[#0044FF]/25 blur-3xl"
-                />
-
                 <div className="relative z-10 flex flex-col items-center">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-zinc-200">
+                  <span className="inline-flex items-center gap-2 rounded-full border border-[#2C2F3E] bg-[#161822] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-zinc-200">
                     <span className="h-2 w-2 rounded-full bg-[#3B82F6]" aria-hidden="true" />
                     Contacto directo en Barcelona
                   </span>
 
                   <MaskedText delay={0.05}>
-                    <h2 className="hero-headline-glow mx-auto mt-6 max-w-4xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+                    <h2 className="mx-auto mt-6 max-w-4xl font-display text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
                       ¿Hablamos de tu equipo o vemos{" "}
-                      <span className="font-editorial-serif text-[1.15em] font-normal text-[#60A5FA]">
-                        una demo en directo?
-                      </span>
+                      <span className="text-[#60A5FA]">una demo en directo?</span>
                     </h2>
                   </MaskedText>
 
@@ -996,7 +980,7 @@ function Index() {
                         href={whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-[58px] items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-extrabold uppercase tracking-[0.06em] text-[#050507] shadow-[0_14px_38px_-6px_rgba(255,255,255,0.45)] transition-all hover:scale-[1.02] hover:bg-[#0044FF] hover:text-white sm:text-base"
+                        className="inline-flex min-h-[58px] items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-sm font-extrabold uppercase tracking-[0.06em] text-[#050507] transition-all hover:scale-[1.02] hover:bg-[#0044FF] hover:text-white sm:text-base"
                       >
                         <MessageCircle size={20} strokeWidth={2.3} />
                         <span>Escribir por WhatsApp ahora</span>
@@ -1007,16 +991,16 @@ function Index() {
                     <a
                       href={cvPdf.url}
                       download="Erick-Rodriguez-CV.pdf"
-                      className="inline-flex min-h-[58px] items-center justify-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] px-7 py-4 text-sm font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-[#050507]"
+                      className="inline-flex min-h-[58px] items-center justify-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] px-7 py-4 text-sm font-bold uppercase tracking-[0.06em] text-white transition-all hover:bg-white hover:text-[#050507]"
                     >
                       <span>Descargar CV en PDF</span>
                       <Download size={17} />
                     </a>
                   </div>
 
-                  {/* Dark Glass Direct Copyable Contact Pills */}
+                  {/* Solid Direct Copyable Contact Pills */}
                   <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
-                    <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-2 pl-4 pr-2 text-white">
+                    <div className="inline-flex max-w-full items-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] py-2 pl-4 pr-2 text-white">
                       <a
                         className="inline-flex items-center gap-2 text-sm font-semibold text-zinc-200 hover:text-white"
                         href={`mailto:${email}`}
@@ -1027,7 +1011,7 @@ function Index() {
                       <CopyButton value={email} label="correo" />
                     </div>
 
-                    <div className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.06] py-2 pl-4 pr-2 text-white">
+                    <div className="inline-flex items-center gap-2.5 rounded-full border border-[#2C2F3E] bg-[#161822] py-2 pl-4 pr-2 text-white">
                       <a
                         className="text-sm font-semibold text-zinc-200 hover:text-white tabular-nums"
                         href={whatsapp}
@@ -1040,7 +1024,7 @@ function Index() {
                     </div>
                   </div>
 
-                  <footer className="mt-16 flex w-full flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm font-medium text-zinc-400">
+                  <footer className="mt-16 flex w-full flex-wrap items-center justify-between gap-4 border-t border-[#232530] pt-8 text-sm font-medium text-zinc-400">
                     <span>© 2026 Erick Rodríguez</span>
                     <span className="inline-flex items-center gap-1.5 text-zinc-200">
                       <MapPin size={15} className="text-[#60A5FA]" />
@@ -1048,7 +1032,7 @@ function Index() {
                     </span>
                     <a
                       href="#inicio"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.06] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#0044FF]"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[#2C2F3E] bg-[#161822] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#0044FF]"
                     >
                       <span>Volver arriba ↑</span>
                     </a>

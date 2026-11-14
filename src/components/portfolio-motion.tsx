@@ -237,7 +237,7 @@ export function AgentFlow() {
         aria-hidden="true"
         className="pointer-events-none absolute bottom-6 left-7 top-6 z-0 h-[calc(100%-3rem)] w-3"
       >
-        <line x1="6" y1="0" x2="6" y2="200" stroke="rgba(255,255,255,0.14)" strokeWidth="2" />
+        <line x1="6" y1="0" x2="6" y2="200" stroke="#262834" strokeWidth="2" />
         <motion.line
           x1="6"
           y1="0"
@@ -268,15 +268,15 @@ export function AgentFlow() {
             transition={{ type: "spring", stiffness: 240, damping: 22 }}
             className={`relative z-10 flex items-center gap-3.5 rounded-xl border px-4 py-3.5 transition-colors ${
               isCurrent
-                ? "border-[#60A5FA] bg-[#0044FF]/30 text-white shadow-[0_8px_22px_-8px_rgba(0,68,255,0.55)]"
-                : "border-white/12 bg-white/[0.04] text-zinc-300"
+                ? "border-[#3B82F6] bg-[#0B256B] text-white"
+                : "border-[#262834] bg-[#14161F] text-zinc-200"
             }`}
           >
             <div
               className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg border ${
                 isCurrent
                   ? "border-[#60A5FA] bg-[#0044FF] text-white"
-                  : "border-white/15 bg-[#09090B] text-zinc-400"
+                  : "border-[#2E3140] bg-[#09090B] text-zinc-400"
               }`}
             >
               <Icon size={16} />
@@ -333,7 +333,7 @@ export function ModelCycle() {
   return (
     <div ref={ref} className="flex w-full flex-col gap-3.5" data-active={active}>
       {/* Query Prompt Box */}
-      <div className="rounded-xl border border-white/12 bg-[#09090B] px-4 py-3">
+      <div className="rounded-xl border border-[#262834] bg-[#09090B] px-4 py-3">
         <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#60A5FA]">
           Consulta entrante
         </span>
@@ -361,8 +361,8 @@ export function ModelCycle() {
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
               className={`flex items-center gap-2.5 rounded-xl border px-3.5 py-3 text-left text-xs font-bold transition-colors ${
                 isSelected
-                  ? "border-[#60A5FA] bg-[#0044FF] text-white shadow-[0_8px_20px_-8px_rgba(0,68,255,0.6)]"
-                  : "border-white/12 bg-white/[0.04] text-zinc-400 hover:text-white"
+                  ? "border-[#60A5FA] bg-[#0044FF] text-white"
+                  : "border-[#262834] bg-[#14161F] text-zinc-300 hover:text-white"
               }`}
             >
               <span
@@ -378,7 +378,7 @@ export function ModelCycle() {
       </div>
 
       {/* Active Routing Explanation */}
-      <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3.5 py-2.5 text-xs text-zinc-300">
+      <div className="flex items-center gap-2 rounded-lg border border-[#262834] bg-[#14161F] px-3.5 py-2.5 text-xs text-zinc-300">
         <Sparkles size={14} className="shrink-0 text-[#60A5FA]" />
         <span>{current.reason}</span>
       </div>
@@ -407,7 +407,7 @@ export function CodeFlow() {
         <span className="font-mono text-[11px] font-semibold text-zinc-400">
           IDE Agéntico · AI Studio &amp; Stitch
         </span>
-        <div className="flex items-center gap-1 rounded-full border border-white/12 bg-[#09090B] p-0.5">
+        <div className="flex items-center gap-1 rounded-full border border-[#262834] bg-[#09090B] p-0.5">
           <button
             type="button"
             onClick={() => setPhase("code")}
@@ -432,13 +432,9 @@ export function CodeFlow() {
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {/* Left: React/TS Code Block */}
         <motion.div
-          animate={
-            reduce
-              ? {}
-              : { opacity: phase === "code" ? 1 : 0.68, scale: phase === "code" ? 1 : 0.98 }
-          }
+          animate={reduce ? {} : { scale: phase === "code" ? 1 : 0.98 }}
           transition={{ duration: 0.25 }}
-          className="rounded-xl border border-white/15 bg-[#09090B] p-3.5 font-mono text-[11px] leading-relaxed text-zinc-300"
+          className="rounded-xl border border-[#2C2F3D] bg-[#09090B] p-3.5 font-mono text-[11px] leading-relaxed text-zinc-200"
         >
           <div className="mb-1.5 flex items-center gap-1.5 text-[10px] font-bold text-[#60A5FA]">
             <FileCode2 size={12} /> OrderCard.tsx
@@ -461,7 +457,7 @@ export function CodeFlow() {
               ? {}
               : {
                   scale: phase === "ui" ? 1.03 : 0.98,
-                  borderColor: phase === "ui" ? "#60A5FA" : "rgba(255,255,255,0.14)",
+                  borderColor: phase === "ui" ? "#60A5FA" : "#2C2F3D",
                 }
           }
           transition={{ type: "spring", stiffness: 220, damping: 20 }}
@@ -520,7 +516,7 @@ export function MemoryFlow() {
         aria-hidden="true"
         className="h-7 w-full"
       >
-        <line x1="40" y1="17" x2="320" y2="17" stroke="rgba(255,255,255,0.16)" strokeWidth="2" />
+        <line x1="40" y1="17" x2="320" y2="17" stroke="#262834" strokeWidth="2" />
         <motion.line
           x1="40"
           y1="17"
@@ -556,8 +552,8 @@ export function MemoryFlow() {
               transition={{ type: "spring", stiffness: 220, damping: 18 }}
               className={`flex flex-col gap-1.5 rounded-xl border p-3.5 transition-colors ${
                 isCurrent
-                  ? "border-[#60A5FA] bg-[#0044FF]/30 text-white"
-                  : "border-white/12 bg-white/[0.04] text-zinc-300"
+                  ? "border-[#3B82F6] bg-[#0B256B] text-white"
+                  : "border-[#262834] bg-[#14161F] text-zinc-200"
               }`}
             >
               <Icon size={16} className={isCurrent ? "text-[#60A5FA]" : "text-zinc-400"} />
