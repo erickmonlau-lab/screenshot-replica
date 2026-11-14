@@ -53,7 +53,7 @@ export function ErpShowcase() {
   const [view, setView] = useState<"panels" | "flows">("panels");
 
   return (
-    <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden bg-[#09090B] p-4 text-white sm:p-6">
+    <div className="relative flex min-h-[395px] w-full flex-col justify-between bg-[#09090B] p-4 text-white sm:p-5">
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
         <div className="flex items-center gap-2">

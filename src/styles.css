@@ -10,6 +10,7 @@
 @theme inline {
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, Cambria, "Times New Roman", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -39,37 +40,38 @@
 
 :root {
   --radius: 1rem;
-  --background: #ffffff;
-  --foreground: #0a0f1d;
-  --card: #ffffff;
-  --card-foreground: #0a0f1d;
-  --popover: #ffffff;
-  --popover-foreground: #0a0f1d;
-  --primary: #0044ff;
+  --background: #050507;
+  --foreground: #f4f4f5;
+  --card: #0c0c10;
+  --card-foreground: #f4f4f5;
+  --popover: #0c0c10;
+  --popover-foreground: #f4f4f5;
+  --primary: #3b82f6;
   --primary-foreground: #ffffff;
-  --secondary: #f4f7ff;
-  --secondary-foreground: #0a0f1d;
-  --muted: #f4f7ff;
-  --muted-foreground: #475569;
-  --accent: #0044ff;
+  --secondary: #121218;
+  --secondary-foreground: #f4f4f5;
+  --muted: #18181f;
+  --muted-foreground: #a1a1aa;
+  --accent: #3b82f6;
   --accent-foreground: #ffffff;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #0a0f1d;
-  --ring: #0044ff;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: #0c0c10;
+  --ring: #3b82f6;
 
-  --surface-obsidian: #0a0f1d;
-  --surface-carbon: #111827;
-  --surface-paper: #ffffff;
-  --surface-tint: #f4f7ff;
+  --surface-obsidian: #050507;
+  --surface-carbon: #0d0d12;
+  --surface-paper: #fafafa;
+  --surface-tint: #f4f6fb;
   --ink: #0a0f1d;
-  --ink-muted: #475569;
+  --ink-muted: #52525b;
   --cobalt: #0044ff;
   --cobalt-bright: #3b82f6;
+  --violet-accent: #6d28d9;
   --spotlight-gradient: radial-gradient(
     circle,
-    rgba(0, 68, 255, 0.14),
+    rgba(59, 130, 246, 0.16),
     transparent 65%
   );
 }
@@ -82,12 +84,13 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+    scroll-padding-top: 6.5rem;
     overflow-x: clip;
+    background-color: var(--surface-obsidian);
   }
 
   body {
-    background-color: var(--surface-paper);
+    background-color: var(--surface-obsidian);
     color: var(--ink);
     font-family: var(--font-sans);
     margin: 0;
@@ -120,41 +123,45 @@
   font-family: var(--font-display);
 }
 
-@keyframes sheen-sweep {
-  0% {
-    transform: translateX(-140%) skewX(-18deg);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.45;
-  }
-  80% {
-    opacity: 0.45;
-  }
-  100% {
-    transform: translateX(240%) skewX(-18deg);
-    opacity: 0;
-  }
+.font-editorial-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
-.hero-sheen-sweep {
-  animation: sheen-sweep 1.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* Perry Wang dark studio bloom */
+.hero-headline-glow {
+  text-shadow:
+    0 0 38px rgba(255, 255, 255, 0.22),
+    0 0 72px rgba(59, 130, 246, 0.18);
 }
 
-/* Studio Hero Cobalt Card Stage (#0044FF) */
-.hero-cobalt-stage {
-  background: radial-gradient(
-    circle at 50% 35%,
-    #2563eb 0%,
-    #0044ff 52%,
-    #002bb8 100%
-  );
+/* Orderalo v5 Dark Grid + Radial Stage Backdrop */
+.dark-studio-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
 }
 
-/* Subtle architectural dot/grid background for Hero & Light Sections */
-.studio-grid-light {
-  background-image: radial-gradient(rgba(0, 68, 255, 0.1) 1.25px, transparent 1.25px);
+.light-studio-grid {
+  background-image: radial-gradient(rgba(10, 15, 29, 0.08) 1.2px, transparent 1.2px);
   background-size: 28px 28px;
+}
+
+/* Specular window bezel glow (Perry Wang macOS glass window frame) */
+.macos-window-frame {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.075) 0%,
+    rgba(16, 17, 22, 0.92) 14%,
+    rgba(9, 10, 14, 0.98) 100%
+  );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 35px 90px -20px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
 /* Magnetic hover spotlight */
@@ -172,10 +179,4 @@
   border-radius: 9999px;
   background: var(--spotlight-gradient);
   z-index: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .code-cursor {
-    animation: none;
-  }
 }

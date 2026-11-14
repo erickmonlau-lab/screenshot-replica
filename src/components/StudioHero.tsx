@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  CheckCircle2,
-  ExternalLink,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
-import { ScribbleUnderline } from "./DrawnMarks";
-import { Magnetic } from "./portfolio-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, CheckCircle2, Download, Plus, Sparkles } from "lucide-react";
+import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 
 export interface HeroProjectPreview {
   id: string;
@@ -47,282 +39,251 @@ function useBarcelonaTime() {
   return time;
 }
 
-export function StudioHero({
-  mode,
-  activeCaseId,
-  projects,
-  onChangeMode,
-  onSelectProject,
-  onJumpToProjects,
-}: StudioHeroProps) {
-  const prefersReducedMotion = useReducedMotion();
+export function StudioHero({ mode, onChangeMode, onJumpToProjects }: StudioHeroProps) {
   const barcelonaTime = useBarcelonaTime();
-
-  const activeProject = (projects.find((p) => p.id === activeCaseId) ?? projects[0])!;
 
   return (
     <section
       id="inicio"
-      className="studio-grid-light relative scroll-mt-28 overflow-hidden bg-white pb-14 pt-28 sm:pb-20 sm:pt-32 lg:pb-24 lg:pt-36"
+      className="relative isolate flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#050507] px-4 pb-12 pt-28 text-white sm:px-8 sm:pt-32"
     >
-      {/* Subtle Ambient Cobalt Glow */}
+      {/* Orderalo v5 radial studio ambient glow + architectural 72px grid */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 right-0 h-[420px] w-[420px] rounded-full bg-[#0044FF]/[0.07] blur-3xl"
+        className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(ellipse_65%_50%_at_50%_42%,rgba(0,68,255,0.22),rgba(109,40,217,0.1)_40%,rgba(5,5,7,0)_74%)]"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 left-0 h-[340px] w-[340px] rounded-full bg-[#0044FF]/[0.05] blur-3xl"
+        className="dark-studio-grid pointer-events-none absolute inset-0 -z-10 opacity-45 [mask-image:radial-gradient(ellipse_at_50%_45%,black,transparent_78%)]"
       />
 
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
-          {/* LEFT COLUMN: Dominant Oversized Typography + Single Cobalt Accent + Pill CTAs */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 1, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-start lg:col-span-7"
-          >
-            {/* Category Pill Badge */}
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#0044FF]/20 bg-[#F4F7FF] px-4 py-2 text-xs font-extrabold uppercase tracking-[0.1em] text-[#0044FF]">
-              <span className="h-2 w-2 rounded-full bg-[#0044FF]" aria-hidden="true" />
-              <span>Desarrollador Web &amp; Automatización IA · Barcelona</span>
+      {/* Centerpiece macOS Glass Window Stage (Perry Wang Inspiration + Orderalo Specular Bezel) */}
+      <motion.div
+        initial={{ opacity: 0, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="relative mx-auto w-full max-w-[1060px]"
+      >
+        {/* Soft Halo Behind Window */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -inset-x-6 -top-6 h-40 rounded-full bg-gradient-to-r from-[#0044FF]/25 via-white/10 to-[#6D28D9]/25 blur-3xl"
+        />
+
+        <div className="macos-window-frame relative overflow-hidden rounded-[26px] backdrop-blur-2xl sm:rounded-[32px]">
+          {/* Subtle Top Specular Edge */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none h-px w-full bg-gradient-to-r from-transparent via-white/35 to-transparent"
+          />
+
+          {/* macOS Window Title Bar */}
+          <div className="flex items-center justify-between border-b border-white/[0.08] bg-white/[0.03] px-5 py-3.5 sm:px-7">
+            {/* Traffic Light Dots */}
+            <div className="flex items-center gap-2" aria-hidden="true">
+              <span className="h-3 w-3 rounded-full bg-[#FF5F56] shadow-[0_0_8px_rgba(255,95,86,0.5)]" />
+              <span className="h-3 w-3 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_rgba(255,189,46,0.4)]" />
+              <span className="h-3 w-3 rounded-full bg-[#27C93F] shadow-[0_0_8px_rgba(39,201,63,0.4)]" />
             </div>
 
-            {/* Dominant Oversized Headline */}
-            <h1 className="mt-6 font-display text-[clamp(2.35rem,5.3vw,4.4rem)] font-black leading-[1.03] tracking-[-0.04em] text-[#0A0F1D]">
-              Webs, plataformas y ERPs{" "}
-              <span className="relative inline-block text-[#0044FF]">
-                con IA a producción.
-                <ScribbleUnderline className="pointer-events-none absolute -bottom-2 left-0 h-3.5 w-full text-[#0044FF]" />
-              </span>
-            </h1>
+            {/* Subtle Window Context Pill */}
+            <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3.5 py-1 text-[11.5px] font-medium tracking-wide text-zinc-400 sm:inline-flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
+              <span>La Sagrera, Barcelona · {barcelonaTime} CET</span>
+            </div>
 
-            {/* Clear Real CV Positioning Subtitle */}
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#475569] sm:text-lg">
-              Desarrollador web y especialista en{" "}
-              <strong className="font-bold text-[#0A0F1D]">
-                automatización de procesos con IA
-              </strong>
-              , con base en <strong className="font-bold text-[#0A0F1D]">marketing digital</strong>{" "}
-              y <strong className="font-bold text-[#0A0F1D]">gestión administrativa</strong>.
-              Construyo la solución completa y la llevo a producción sin depender de terceros.
-            </p>
+            {/* Quick Mode / Reset Button (+ Icon like Perry Wang Window) */}
+            <button
+              type="button"
+              onClick={() => onChangeMode(mode === "studio" ? "preview" : "studio")}
+              aria-label={mode === "studio" ? "Ver ficha Sobre mí" : "Volver a Trabajo"}
+              title={mode === "studio" ? "Ver ficha Sobre mí" : "Volver a Trabajo"}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-[11.5px] font-semibold text-zinc-300 transition-colors hover:bg-white/[0.12] hover:text-white"
+            >
+              <span>{mode === "studio" ? "Sobre mí" : "Trabajo"}</span>
+              <Plus
+                size={13}
+                className={`transition-transform duration-300 ${
+                  mode === "preview" ? "rotate-45 text-[#60A5FA]" : ""
+                }`}
+              />
+            </button>
+          </div>
 
-            {/* Pill CTA Row */}
-            <div className="mt-8 flex w-full flex-wrap items-center gap-3.5 sm:w-auto">
-              <Magnetic strength={0.12}>
-                <button
-                  type="button"
-                  onClick={() => onJumpToProjects()}
-                  className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full bg-[#0044FF] px-7 py-3.5 text-sm font-extrabold uppercase tracking-[0.06em] text-white shadow-[0_14px_32px_-6px_rgba(0,68,255,0.48)] transition-all hover:bg-[#0A0F1D] active:scale-[0.99]"
+          {/* Window Content Body */}
+          <div className="relative flex min-h-[470px] flex-col justify-between px-6 py-10 sm:min-h-[540px] sm:px-14 sm:py-14 lg:px-20 lg:py-16">
+            {/* Inner Atmospheric Dark Spotlight */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(255,255,255,0.06),transparent_62%)]"
+            />
+
+            <AnimatePresence mode="wait">
+              {mode === "studio" ? (
+                <motion.div
+                  key="window-work"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative z-10 flex flex-1 flex-col justify-between"
                 >
-                  <span>Ver proyectos en producción</span>
-                  <ArrowDown size={16} strokeWidth={2.5} />
-                </button>
-              </Magnetic>
-
-              <button
-                type="button"
-                onClick={() => onJumpToProjects("private-erp")}
-                className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-2 border-[#0A0F1D]/15 bg-white px-6 py-3.5 text-sm font-extrabold text-[#0A0F1D] transition-all hover:border-[#0044FF] hover:text-[#0044FF]"
-              >
-                <span>Ver demo ERP presencial</span>
-                <ArrowUpRight size={16} strokeWidth={2.4} />
-              </button>
-            </div>
-
-            {/* Real Credentials & Direct Contact Pills */}
-            <div className="mt-8 flex flex-wrap items-center gap-2.5 border-t border-slate-200/90 pt-6 text-xs font-bold text-[#475569]">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F7FF] px-3.5 py-1.5 text-[#0A0F1D]">
-                <CheckCircle2 size={14} className="text-[#0044FF]" />
-                <span>Top 1 Google · diversplas.es</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F7FF] px-3.5 py-1.5 text-[#0A0F1D]">
-                <Sparkles size={14} className="text-[#0044FF]" />
-                <span>Agente del Cambio Oficial (375 h)</span>
-              </span>
-              <a
-                href="mailto:hola.erickmartinezz@gmail.com"
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F7FF] px-3.5 py-1.5 text-[#0044FF] transition-colors hover:bg-[#0044FF] hover:text-white"
-              >
-                <span>hola.erickmartinezz@gmail.com</span>
-              </a>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F7FF] px-3.5 py-1.5 text-[#0A0F1D] tabular-nums">
-                <MapPin size={13} className="text-[#0044FF]" />
-                <span>+34 640 63 0459 · {barcelonaTime} CET</span>
-              </span>
-            </div>
-          </motion.div>
-
-          {/* RIGHT COLUMN: Framed Cobalt Studio Portrait & Quick Project Switcher Card */}
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 1, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5"
-          >
-            <div className="hero-cobalt-stage relative overflow-hidden rounded-3xl border border-[#0044FF]/30 p-5 text-white shadow-[0_24px_60px_-15px_rgba(0,68,255,0.38)] sm:p-6">
-              {/* Top Pill Header inside Card */}
-              <div className="relative z-20 flex items-center justify-between gap-2">
-                <div
-                  className="inline-flex shrink-0 items-center rounded-full border border-white/20 bg-[#0A0F1D]/40 p-1 backdrop-blur-md"
-                  role="tablist"
-                  aria-label="Modo de vista del Hero"
-                >
-                  {(
-                    [
-                      { id: "studio", label: "Retrato" },
-                      { id: "preview", label: "Vista rápida" },
-                    ] as const
-                  ).map((tab) => {
-                    const active = mode === tab.id;
-                    return (
-                      <button
-                        key={tab.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={active}
-                        onClick={() => onChangeMode(tab.id)}
-                        className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-extrabold transition-colors sm:px-3.5 ${
-                          active
-                            ? "bg-white text-[#0A0F1D] shadow-xs"
-                            : "text-white/85 hover:text-white"
-                        }`}
-                      >
-                        {tab.label}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <span className="whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-2.5 py-1 text-[11px] font-bold tracking-wide text-white sm:px-3">
-                  La Sagrera · BCN
-                </span>
-              </div>
-
-              <AnimatePresence mode="wait">
-                {mode === "studio" ? (
-                  <motion.div
-                    key="hero-portrait-card"
-                    initial={false}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="relative mt-5 flex flex-col items-center pt-2"
-                  >
-                    {/* Subtle Oversized Display Backdrop Wordmark */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none select-none font-display text-[4.4rem] font-black uppercase leading-[0.82] tracking-[-0.05em] text-white/25 sm:text-[5.4rem]"
-                    >
-                      ERICK
+                  {/* Top Pill Status + Display Typography */}
+                  <div className="my-auto py-4">
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3.5 py-1.5 text-xs font-semibold text-zinc-200">
+                      <span className="h-2 w-2 rounded-full bg-[#3B82F6] shadow-[0_0_10px_#3B82F6]" />
+                      <span>
+                        Agente del Cambio Tecnológico (375 h) · Disponible para incorporación
+                      </span>
                     </div>
 
-                    {/* Studio Portrait */}
-                    <div className="relative z-10 -mt-5 flex w-[230px] flex-col items-center sm:w-[260px]">
+                    <h1 className="hero-headline-glow max-w-4xl font-display text-[clamp(2.5rem,5.9vw,4.9rem)] font-medium leading-[1.02] tracking-[-0.04em] text-white">
+                      Webs, ERPs &amp; <br className="hidden sm:block" />
+                      sistemas{" "}
+                      <span className="font-editorial-serif bg-gradient-to-b from-white via-white to-zinc-400 bg-clip-text text-[1.12em] font-normal text-transparent">
+                        inteligentes.
+                      </span>
+                    </h1>
+                  </div>
+
+                  {/* Perry Wang Signature Bottom-Right Asymmetric Attribution + Clean Pill CTAs */}
+                  <div className="mt-8 flex flex-col justify-between gap-8 border-t border-white/[0.08] pt-7 md:flex-row md:items-end">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => onJumpToProjects()}
+                        className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[#050507] shadow-[0_12px_30px_-8px_rgba(255,255,255,0.45)] transition-all hover:bg-[#3B82F6] hover:text-white"
+                      >
+                        <span>Ver proyectos en producción</span>
+                        <ArrowDown size={15} strokeWidth={2.4} />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => onJumpToProjects("private-erp")}
+                        className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-5 py-3 text-sm font-semibold text-white transition-all hover:border-white/35 hover:bg-white/[0.12]"
+                      >
+                        <span>Ver demo ERP presencial</span>
+                        <ArrowUpRight size={15} strokeWidth={2.2} />
+                      </button>
+                    </div>
+
+                    <div className="max-w-sm text-left md:text-right">
+                      <p className="text-[15px] font-semibold leading-snug text-white">
+                        Desarrollador web &amp; especialista en automatización con IA.
+                      </p>
+                      <p className="mt-1 text-[13.5px] leading-relaxed text-zinc-400">
+                        Top 1 Google en <span className="text-zinc-200">diversplas.es</span> · Base
+                        en marketing y gestión administrativa.
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="window-about"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative z-10 grid flex-1 grid-cols-1 items-center gap-8 md:grid-cols-12"
+                >
+                  <div className="flex flex-col items-center md:col-span-5">
+                    <div className="relative w-52 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-[#0044FF]/70 via-[#002bb8]/80 to-[#0A0A10] p-4 pb-0 shadow-2xl sm:w-60">
                       <img
                         src="/erick-portrait-studio.png"
                         alt="Erick Rodríguez — Desarrollador web y especialista en automatización con IA"
-                        className="block h-auto w-full object-contain object-bottom drop-shadow-[0_18px_36px_rgba(0,0,0,0.4)]"
+                        className="block h-auto w-full object-contain object-bottom drop-shadow-[0_14px_28px_rgba(0,0,0,0.55)]"
                       />
                     </div>
+                  </div>
 
-                    {/* Bottom Floating Pill Summary Strip */}
-                    <div className="relative z-20 -mx-5 -mb-5 mt-2 flex w-[calc(100%+2.5rem)] items-center justify-between gap-3 border-t border-white/15 bg-[#0A0F1D]/90 px-5 py-4 backdrop-blur-md sm:-mx-6 sm:-mb-6 sm:w-[calc(100%+3rem)] sm:px-6">
-                      <div>
-                        <div className="font-display text-sm font-extrabold text-white">
-                          Erick Rodríguez
-                        </div>
-                        <div className="text-xs font-medium text-blue-200">
-                          Web · Automatización IA · Negocio
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => onChangeMode("preview")}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-3.5 py-2 text-xs font-extrabold text-white transition-colors hover:bg-white hover:text-[#0A0F1D]"
-                      >
-                        <span>Ver demos</span>
-                        <ArrowUpRight size={13} />
-                      </button>
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="hero-preview-card"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.25 }}
-                    className="mt-5 flex flex-col gap-3"
-                  >
-                    <div className="flex flex-wrap gap-1.5">
-                      {projects.map((p) => (
-                        <button
-                          key={p.id}
-                          type="button"
-                          onClick={() => onSelectProject(p.id)}
-                          className={`rounded-full px-3 py-1 text-xs font-extrabold transition-colors ${
-                            p.id === activeProject.id
-                              ? "bg-white text-[#0044FF]"
-                              : "bg-white/15 text-white hover:bg-white/25"
-                          }`}
-                        >
-                          {p.index} · {p.name}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="overflow-hidden rounded-2xl border border-white/20 bg-[#0A0F1D] shadow-lg">
-                      {activeProject.isPrivate ? (
-                        <div className="flex aspect-[16/10] flex-col items-center justify-center p-5 text-center text-white">
-                          <span className="rounded-full bg-[#0044FF] px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white">
-                            Demo presencial
-                          </span>
-                          <h3 className="mt-3 font-display text-lg font-extrabold">
-                            ERP &amp; App sin publicar para mostrar en vivo
-                          </h3>
-                          <button
-                            type="button"
-                            onClick={() => onJumpToProjects("private-erp")}
-                            className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-extrabold text-[#0A0F1D]"
-                          >
-                            <span>Ver esquema interactivo</span>
-                            <ArrowDown size={13} />
-                          </button>
-                        </div>
-                      ) : (
-                        <img
-                          src={activeProject.image}
-                          alt={`Vista previa de ${activeProject.name}`}
-                          className="aspect-[16/10] w-full object-cover object-top"
-                        />
-                      )}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-1 text-xs font-bold text-white">
-                      <span>
-                        {activeProject.name} · {activeProject.status}
+                  <div className="flex flex-col items-start md:col-span-7">
+                    <span className="rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1 text-xs font-semibold text-[#60A5FA]">
+                      Perfil profesional · La Sagrera, Barcelona
+                    </span>
+                    <h2 className="mt-4 font-display text-3xl font-bold tracking-[-0.03em] text-white sm:text-4xl">
+                      De la idea a{" "}
+                      <span className="font-editorial-serif text-[1.12em] font-normal text-zinc-300">
+                        producción real.
                       </span>
+                    </h2>
+                    <p className="mt-3 text-base leading-relaxed text-zinc-300">
+                      Construyo la solución completa (web, plataforma, ERP o flujo autónomo con IA y
+                      n8n) y la llevo a producción sin depender de terceros, uniendo técnica y
+                      visión de negocio.
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.06] px-3.5 py-1.5 text-zinc-200">
+                        <CheckCircle2 size={13} className="text-[#60A5FA]" />
+                        <span>CFGS Marketing + CFGM Gestión Adm. (Monlau)</span>
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-white/12 bg-white/[0.06] px-3.5 py-1.5 text-zinc-200">
+                        <Sparkles size={13} className="text-[#60A5FA]" />
+                        <span>375 h Acreditación Agente del Cambio</span>
+                      </span>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap items-center gap-3">
                       <a
-                        href={activeProject.href}
-                        {...(activeProject.isPrivate
-                          ? {}
-                          : { target: "_blank", rel: "noopener noreferrer" })}
-                        className="inline-flex items-center gap-1 rounded-full bg-white px-3.5 py-1.5 text-xs font-extrabold text-[#0A0F1D]"
+                        href={cvPdf.url}
+                        download="Erick-Rodriguez-CV.pdf"
+                        className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-[#050507] transition-colors hover:bg-[#3B82F6] hover:text-white"
                       >
-                        <span>Abrir</span>
-                        <ExternalLink size={12} />
+                        <Download size={14} />
+                        <span>Descargar CV en PDF</span>
+                      </a>
+                      <a
+                        href="mailto:hola.erickmartinezz@gmail.com"
+                        className="rounded-full border border-white/15 bg-white/[0.06] px-4 py-2.5 text-xs font-semibold text-zinc-200 hover:bg-white/[0.12]"
+                      >
+                        hola.erickmartinezz@gmail.com
                       </a>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Bottom Centered Scroll Down Indicator (Perry Wang Window Detail) */}
+            <div className="mt-4 flex justify-center pt-2">
+              <button
+                type="button"
+                onClick={() => onJumpToProjects()}
+                aria-label="Bajar a proyectos"
+                className="group inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 transition-all hover:border-white/30 hover:text-white"
+              >
+                <ArrowDown
+                  size={15}
+                  className="transition-transform duration-300 group-hover:translate-y-0.5"
+                />
+              </button>
             </div>
-          </motion.div>
+          </div>
         </div>
+      </motion.div>
+
+      {/* Bottom Whisper-Clean Credential Strip */}
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium text-zinc-400">
+        <span>+1.000 h experiencia real</span>
+        <span aria-hidden="true" className="hidden text-zinc-700 lg:inline">
+          •
+        </span>
+        <span>Top 1 Google · diversplas.es</span>
+        <span aria-hidden="true" className="hidden text-zinc-700 lg:inline">
+          •
+        </span>
+        <a
+          href="mailto:hola.erickmartinezz@gmail.com"
+          className="text-zinc-300 transition-colors hover:text-white"
+        >
+          hola.erickmartinezz@gmail.com
+        </a>
+        <span aria-hidden="true" className="hidden text-zinc-700 lg:inline">
+          •
+        </span>
+        <span className="tabular-nums">+34 640 63 0459</span>
       </div>
     </section>
   );
