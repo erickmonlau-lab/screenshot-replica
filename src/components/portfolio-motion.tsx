@@ -4,12 +4,12 @@ import {
   useAnimationFrame,
   useInView,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
   useVelocity,
 } from "framer-motion";
+import { useReducedMotion } from "./motion-pref";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   Bot,

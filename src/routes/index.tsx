@@ -2,19 +2,27 @@ import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  ArrowDown,
   ArrowUpRight,
-  Award,
+  Bot,
+  BrainCircuit,
   Briefcase,
   Check,
-  Clock,
+  Code2,
   Copy,
+  Cpu,
   Download,
+  FolderGit2,
+  Globe,
   GraduationCap,
+  Layers,
   Mail,
   MapPin,
   MessageCircle,
+  Palette,
+  ShoppingBag,
   Sparkles,
-  TrendingUp,
+  Workflow,
   Wrench,
 } from "lucide-react";
 
@@ -61,8 +69,8 @@ const projectCases: ProjectCase[] = [
     id: "diversplas",
     index: "01",
     name: "diversplas.es",
-    domain: "https://diversplas.es",
-    type: "Web corporativa + SEO",
+    domain: "diversplas.es",
+    type: "Web a medida",
     status: "Top 1 en Google",
     outcome: "Top 1 en Google en búsquedas de extraescolares en Barcelona",
     stack: ["Web a medida", "SEO Técnico", "Recién lanzada"],
@@ -76,25 +84,25 @@ const projectCases: ProjectCase[] = [
     id: "gesgrama",
     index: "02",
     name: "gesgrama.com",
-    domain: "https://gesgrama.com",
-    type: "Web a medida",
+    domain: "gesgrama.com",
+    type: "Arquitectura Web",
     status: "Posicionándose",
     outcome: "Web a medida para empresa, recién lanzada y posicionándose en Google",
     stack: ["Arquitectura Web", "SEO On-Page", "En producción"],
     href: "https://gesgrama.com",
     image: gesgrama.url,
     description:
-      "Web a medida para empresa, recién lanzada y posicionándose en Google con estructura orientada a captación directa de clientes.",
+      "Web a medida para empresa, recién lanzada a producción y posicionándose en Google para captación orgánica de clientes.",
     ctaLabel: "Visitar web",
   },
   {
     id: "breadpdf",
     index: "03",
     name: "breadpdf.com",
-    domain: "https://breadpdf.com",
-    type: "Plataforma propia",
+    domain: "breadpdf.com",
+    type: "React & TypeScript",
     status: "Indexada en Google",
-    outcome: "Plataforma propia para trabajar con PDF, ya indexada en Google con múltiples páginas",
+    outcome: "Plataforma propia para trabajar con PDF ya indexada en Google con múltiples páginas",
     stack: ["React & TypeScript", "SEO Programático", "Producto propio"],
     href: "https://breadpdf.com",
     image: breadpdf.url,
@@ -116,6 +124,70 @@ const projectCases: ProjectCase[] = [
       "Dos proyectos completos sin publicar por confidencialidad (ERP interno y app operativa) listos para enseñarte en directo en una reunión.",
     ctaLabel: "Agendar demo presencial",
     isPrivate: true,
+  },
+];
+
+const technicalTools = [
+  { name: "React", label: "React", category: "Frontend", color: "#61DAFB", icon: Code2 },
+  { name: "TypeScript", label: "TS", category: "Lenguaje", color: "#3178C6" },
+  { name: "Next / Vite", label: "Vite", category: "Framework", color: "#646CFF" },
+  { name: "Tailwind", label: "Tailwind", category: "Estilos", color: "#38BDF8", icon: Sparkles },
+  { name: "n8n", label: "n8n", category: "Workflows", color: "#FF6D5A", icon: Workflow },
+  { name: "Agentes IA", label: "Agentes", category: "IA", color: "#3B82F6", icon: Bot },
+  { name: "Claude Skills", label: "Claude", category: "LLM", color: "#D97706", icon: BrainCircuit },
+  { name: "Gemini", label: "Gemini", category: "LLM", color: "#8B5CF6", icon: Sparkles },
+  { name: "ChatGPT", label: "ChatGPT", category: "LLM", color: "#10A37F", icon: Bot },
+  { name: "Obsidian", label: "Obsidian", category: "Second Brain", color: "#7C3AED" },
+  {
+    name: "Shopify",
+    label: "Shopify",
+    category: "E-Commerce",
+    color: "#96BF48",
+    icon: ShoppingBag,
+  },
+  { name: "WordPress", label: "WordPress", category: "CMS", color: "#21759B", icon: Globe },
+  { name: "Figma", label: "Figma", category: "UI/UX", color: "#F24E1E", icon: Layers },
+  { name: "Canva", label: "Canva", category: "Visual", color: "#00C4CC", icon: Palette },
+  { name: "APIs / Hooks", label: "APIs", category: "Integración", color: "#3B82F6", icon: Cpu },
+  { name: "GitHub", label: "GitHub", category: "Git", color: "#A855F7", icon: FolderGit2 },
+];
+
+const capabilities = [
+  {
+    num: "01",
+    tag: "DESARROLLO WEB & SISTEMAS",
+    icon: Code2,
+    title: "Plataformas Web y ERPs a Medida",
+    description:
+      "Construcción y despliegue de plataformas web de alto rendimiento, portales corporativos y sistemas ERP internos para empresas con código tipado, SEO técnico y arquitecturas modernas.",
+    skills: [
+      "React & TypeScript",
+      "Next.js & Vite",
+      "ERP Operativo Interno",
+      "APIs & Webhooks",
+      "Bases de Datos & SQL",
+      "SEO Técnico (Top 1)",
+      "Core Web Vitals",
+      "Despliegue Producción",
+    ],
+  },
+  {
+    num: "02",
+    tag: "AUTOMATIZACIÓN IA & NEGOCIO",
+    icon: Workflow,
+    title: "Flujos Autónomos con n8n e IA",
+    description:
+      "Automatización de procesos operativos, conexión entre herramientas (CRMs, formularios, WhatsApp), enrutamiento inteligente de modelos LLM y gestión de contexto empresarial.",
+    skills: [
+      "Flujos n8n Autónomos",
+      "Agentes de IA Conectados",
+      "Claude con Skills Propios",
+      "Second Brain en Obsidian",
+      "Shopify & WordPress",
+      "Atención WhatsApp Business",
+      "Acreditación Oficial 375 h",
+      "Subvenciones Salariales",
+    ],
   },
 ];
 
@@ -218,14 +290,18 @@ const education = [
 const coreStackPills = [
   "React",
   "TypeScript",
-  "n8n",
-  "SEO",
+  "Next.js / Vite",
+  "Tailwind CSS",
+  "n8n Workflows",
+  "Agentes IA",
+  "Claude Skills",
+  "Gemini",
+  "ChatGPT",
+  "Obsidian",
   "Shopify",
   "WordPress",
   "Figma",
   "Canva",
-  "Obsidian",
-  "Markdown",
 ];
 
 function CopyButton({ value, label }: { value: string; label: string }) {
@@ -249,8 +325,8 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       aria-label={`Copiar ${label}`}
       className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-bold transition-all active:scale-95 ${
         copied
-          ? "bg-[#0044FF] text-white"
-          : "bg-[#222430] text-zinc-200 hover:bg-[#0044FF] hover:text-white"
+          ? "bg-[#10B981] text-white"
+          : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
       }`}
     >
       {copied ? (
@@ -259,42 +335,26 @@ function CopyButton({ value, label }: { value: string; label: string }) {
           <span>Copiado</span>
         </>
       ) : (
-        <Copy size={13} />
+        <>
+          <Copy size={13} />
+          <span>Copiar</span>
+        </>
       )}
     </button>
   );
 }
 
 const marqueeText =
-  "DESARROLLO WEB & ERPS A MEDIDA  •  TOP 1 GOOGLE EXTRAESCOLARES BARCELONA  •  AUTOMATIZACIÓN CON IA & N8N  •  AGENTE DEL CAMBIO TECNOLÓGICO (375 H)  •  BARCELONA  •  ";
+  "ERICK RODRÍGUEZ · DESARROLLADOR WEB & AUTOMATIZACIÓN IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · TOP 1 GOOGLE DIVERSPLAS.ES · 375 H AGENTE DEL CAMBIO · ";
 
 function Index() {
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
-  const [activeProjectId, setActiveProjectId] = useState<string>(projectCases[0]!.id);
-  const [activeAiPhase, setActiveAiPhase] = useState<string>(aiPhases[0].id);
-  const aiStepRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const [activeProjectId, setActiveProjectId] = useState<string>("diversplas");
+  const [activeAiPhase, setActiveAiPhase] = useState<string>("automation");
+  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [showLiveSystem, setShowLiveSystem] = useState<boolean>(true);
 
-  const selectedAiPhase = aiPhases.find((p) => p.id === activeAiPhase) ?? aiPhases[0];
-
-  /* IntersectionObserver syncing the 4 left AI blocks with the right "Sistema en Vivo" card */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute("data-phase-id");
-            if (id) setActiveAiPhase(id);
-          }
-        }
-      },
-      { rootMargin: "-30% 0px -40% 0px", threshold: 0.25 },
-    );
-
-    Object.values(aiStepRefs.current).forEach((el) => {
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
+  const selectedAiPhase = aiPhases.find((p) => p.id === activeAiPhase) ?? aiPhases[0]!;
 
   function handleJumpToProjects(caseId?: string) {
     if (caseId) setActiveProjectId(caseId);
@@ -305,8 +365,7 @@ function Index() {
     }
   }
 
-  const sectionBase =
-    "t-bg-page t-ink t-line scroll-mt-[62px] border-t lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center";
+  const sectionBase = "t-bg-page t-ink t-line scroll-mt-[62px] border-t py-8 sm:py-12 2xl:py-16";
 
   return (
     <div className="t-bg-page t-ink min-h-screen">
@@ -329,111 +388,33 @@ function Index() {
           aria-hidden="true"
         >
           <VelocityMarqueeRow
-            baseVelocity={-2.0}
+            baseVelocity={-2.2}
             className="font-display text-[11px] leading-none font-bold tracking-[0.16em] sm:text-xs"
           >
             {marqueeText}
           </VelocityMarqueeRow>
         </div>
 
-        {/* METRICAS */}
-        <section
-          id="metricas"
-          className="t-bg-page t-ink scroll-mt-[62px] py-14 lg:py-20"
-          aria-label="Resultados clave"
-        >
-          <div className="mx-auto max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-8">
-              <SectionHeading
-                eyebrow="Impacto y garantía"
-                title="Producción real,"
-                accentTitle="resultados medibles."
-                description="Experiencia comprobada en empresa, webs propias posicionadas en Google y acreditación oficial bonificada."
-              />
-            </Reveal>
-
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {[
-                {
-                  n: "01",
-                  icon: Clock,
-                  tag: "Experiencia real",
-                  value: (
-                    <>
-                      <Counter to={1000} prefix="+" /> <span className="t-accent text-2xl">h</span>
-                    </>
-                  ),
-                  text: "De experiencia acumulada entre prácticas en empresa, producto propio y desarrollo web en producción.",
-                },
-                {
-                  n: "02",
-                  icon: TrendingUp,
-                  tag: "SEO en vivo",
-                  value: (
-                    <>
-                      Top{" "}
-                      <span className="t-accent">
-                        <Counter to={1} />
-                      </span>
-                    </>
-                  ),
-                  text: "En Google en búsquedas de extraescolares en Barcelona con diversplas.es, web desarrollada por mí y recién lanzada.",
-                },
-                {
-                  n: "03",
-                  icon: Award,
-                  tag: "Subvención empresa",
-                  value: (
-                    <>
-                      <Counter to={375} /> <span className="t-accent text-2xl">h</span>
-                    </>
-                  ),
-                  text: "De acreditación oficial como Agente del Cambio Tecnológico: la empresa que me contrate accede a subvenciones salariales directas.",
-                },
-              ].map((stat, i) => {
-                const Icon = stat.icon;
-                return (
-                  <Reveal
-                    key={stat.n}
-                    delay={i * 0.08}
-                    className="t-line t-bg-card relative flex flex-col justify-between overflow-hidden rounded-2xl border p-6 sm:p-7"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="t-muted font-display pointer-events-none absolute top-3 right-5 text-5xl font-black tracking-tighter"
-                    >
-                      {stat.n}
-                    </span>
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                        <Icon size={20} strokeWidth={2.2} />
-                      </div>
-                      <span className="t-line t-bg-card2 t-ink rounded-full border px-3 py-1 text-[10.5px] font-bold tracking-[0.12em] uppercase">
-                        {stat.tag}
-                      </span>
-                    </div>
-                    <div className="t-line mt-6 border-t pt-5">
-                      <strong className="t-ink font-display block text-4xl font-extrabold tracking-[-0.04em] tabular-nums sm:text-5xl">
-                        {stat.value}
-                      </strong>
-                      <p className="t-muted mt-2.5 text-sm leading-relaxed">{stat.text}</p>
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* PROYECTOS — coverflow gallery */}
-        <section id="proyectos" className={`${sectionBase} py-5 2xl:py-12`}>
+        {/* PROYECTOS — 3D Coverflow Gallery */}
+        <section id="proyectos" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
                 eyebrow="Proyectos seleccionados"
-                title="Webs en producción."
-                accentTitle="Y dos sistemas en directo."
-                description="Una colección de webs reales, plataformas propias y proyectos confidenciales que enseño en directo."
+                title="Galería de Proyectos."
+                accentTitle="Producción y Directo."
+                description="Webs reales con métricas de tráfico, plataformas SaaS propias y desarrollos empresariales listos para mostrar en persona."
+                rightSlot={
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="t-ink font-mono inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase hover:text-[#0044FF]"
+                  >
+                    <span>Ver más proyectos</span>
+                    <ArrowUpRight size={13} />
+                  </a>
+                }
               />
             </Reveal>
             <ProjectCarousel
@@ -445,107 +426,183 @@ function Index() {
           </div>
         </section>
 
-        {/* TRABAJO CON IA */}
-        <section id="ia" className={`${sectionBase} py-5 2xl:py-12`}>
+        {/* CAPACIDADES & TRABAJO CON IA — What I Can Do */}
+        <section id="ia" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-4 2xl:mb-6">
+            <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
-                eyebrow="Trabajo con IA · Capacidades"
-                title="Desarrollo e IA integrados"
-                accentTitle="en el ciclo de producto."
-                description="Haz scroll o selecciona cada bloque para ver el enrutador de modelos, flujos n8n, generación en AI Studio / Stitch y memoria en Obsidian."
+                eyebrow="Capacidades técnicas"
+                title="Lo Que Puedo Hacer"
+                accentTitle=""
+                description="Combino desarrollo web de vanguardia, automatización con IA y mentalidad operativa para crear sistemas fiables, eficientes y orientados al negocio."
               />
             </Reveal>
 
-            <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:col-span-6 2xl:gap-3.5">
-                {aiPhases.map((phase) => {
-                  const active = phase.id === selectedAiPhase.id;
+            {/* Split Grid: Tools Dock on Left, Numbered Capabilities on Right */}
+            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
+              {/* Left Column: Tool Dock Grid (4x4) */}
+              <div className="lg:col-span-5">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="font-mono text-[10.5px] font-bold tracking-[0.2em] text-[#0044FF] uppercase">
+                    Stack &amp; Herramientas Activas
+                  </span>
+                  <span className="t-muted font-mono text-[10.5px]">16 tecnologías</span>
+                </div>
+
+                <div className="grid grid-cols-4 gap-2.5 sm:gap-3">
+                  {technicalTools.map((t) => {
+                    const Icon = t.icon;
+                    const isSelected = selectedTool === t.name;
+                    return (
+                      <button
+                        key={t.name}
+                        type="button"
+                        onClick={() => setSelectedTool(isSelected ? null : t.name)}
+                        className={`t-line t-bg-card flex flex-col items-center justify-center rounded-2xl border p-2.5 text-center transition-all sm:p-3 ${
+                          isSelected
+                            ? "border-[#0044FF] ring-2 ring-[#0044FF]/30 scale-105"
+                            : "hover:border-[#0044FF] hover:scale-105"
+                        }`}
+                        title={`${t.name} · ${t.category}`}
+                      >
+                        <div
+                          className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#09090B] text-white shadow-sm sm:h-10 sm:w-10"
+                          style={{ borderBottom: `2px solid ${t.color}` }}
+                        >
+                          {Icon ? (
+                            <Icon size={18} style={{ color: t.color }} />
+                          ) : (
+                            <span
+                              className="font-mono text-xs font-black"
+                              style={{ color: t.color }}
+                            >
+                              {t.label}
+                            </span>
+                          )}
+                        </div>
+                        <span className="t-ink font-display mt-1.5 block truncate text-[11px] font-bold">
+                          {t.name}
+                        </span>
+                        <span className="t-muted block text-[9.5px]">{t.category}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <p className="t-muted mt-3.5 text-xs leading-relaxed">
+                  Herramientas que utilizo a diario en producción: desde frameworks modernos y
+                  modelos de lenguaje hasta pipelines de datos y plataformas de automatización.
+                </p>
+              </div>
+
+              {/* Right Column: Numbered Capability Cards 01 & 02 */}
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-7">
+                {capabilities.map((cap) => {
+                  const CapIcon = cap.icon;
                   return (
-                    <button
-                      key={phase.id}
-                      ref={(el) => {
-                        aiStepRefs.current[phase.id] = el;
-                      }}
-                      data-phase-id={phase.id}
-                      type="button"
-                      onClick={() => setActiveAiPhase(phase.id)}
-                      onMouseEnter={() => setActiveAiPhase(phase.id)}
-                      className={`relative flex w-full flex-col justify-between gap-1.5 rounded-2xl border-2 p-3.5 text-left transition-colors 2xl:gap-2 2xl:p-5 ${
-                        active
-                          ? "border-[#0044FF] bg-[#0044FF] text-white"
-                          : "t-line t-bg-card t-ink hover:border-[#0044FF]"
-                      }`}
+                    <div
+                      key={cap.num}
+                      className="t-line t-bg-card flex flex-col justify-between rounded-3xl border p-5 sm:p-6 shadow-sm"
                     >
                       <div>
-                        <div className="flex items-center justify-between gap-2">
-                          <span
-                            className={`font-display flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[11px] font-extrabold 2xl:h-7 2xl:w-7 2xl:text-xs ${
-                              active ? "bg-white text-[#0044FF]" : "t-bg-ink t-on-ink"
-                            }`}
-                          >
-                            {phase.num}
+                        <div className="flex items-start justify-between">
+                          <span className="t-ink font-display text-4xl font-black tracking-tighter 2xl:text-5xl">
+                            {cap.num}
                           </span>
-                          <span
-                            className={`truncate font-mono text-[10px] font-bold tracking-wider uppercase 2xl:text-[11px] ${
-                              active ? "text-blue-100" : "t-muted"
-                            }`}
-                          >
-                            {phase.kicker}
+                          <span className="t-muted text-right font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
+                            {cap.tag}
                           </span>
                         </div>
-                        <h3 className="font-display mt-1.5 text-[15px] font-bold tracking-[-0.02em] 2xl:mt-2 2xl:text-lg">
-                          {phase.title}
-                        </h3>
-                        <p
-                          className={`mt-0.5 text-xs leading-snug 2xl:mt-1 2xl:text-[13.5px] 2xl:leading-relaxed ${
-                            active ? "text-blue-50" : "t-muted"
-                          }`}
-                        >
-                          {phase.description}
+
+                        <div className="mt-4 flex items-center gap-3">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
+                            <CapIcon size={18} strokeWidth={2.3} />
+                          </div>
+                          <h3 className="t-ink font-display text-base font-extrabold tracking-tight sm:text-lg">
+                            {cap.title}
+                          </h3>
+                        </div>
+
+                        <p className="t-muted mt-3 text-xs leading-relaxed sm:text-[13px]">
+                          {cap.description}
                         </p>
                       </div>
-                      <div className="flex flex-wrap gap-1 pt-0.5 2xl:gap-1.5">
-                        {phase.tags.map((t) => (
-                          <span
-                            key={t}
-                            className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold 2xl:px-2.5 2xl:text-[11px] ${
-                              active
-                                ? "border-white bg-white text-[#0044FF]"
-                                : "t-line t-bg-card2 t-ink"
-                            }`}
-                          >
-                            {t}
-                          </span>
-                        ))}
+
+                      <div className="mt-5 border-t border-current/10 pt-4">
+                        <span className="t-muted mb-2 block font-mono text-[9.5px] font-bold tracking-widest uppercase">
+                          Capacidades clave
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {cap.skills.map((skill) => (
+                            <span
+                              key={skill}
+                              className="t-line t-bg-card2 t-ink rounded-lg border px-2 py-0.5 text-[10.5px] font-bold"
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
                       </div>
-                    </button>
+                    </div>
                   );
                 })}
               </div>
+            </div>
 
-              <div className="lg:col-span-6">
-                <div className="macos-window-frame flex h-full flex-col justify-between rounded-[20px] p-3.5 text-white sm:p-4 2xl:rounded-[26px] 2xl:p-6">
-                  <div className="mb-2.5 flex items-center justify-between border-b border-[#303240] pb-2.5 2xl:mb-4 2xl:pb-3.5">
-                    <div>
-                      <span className="text-[10.5px] font-bold tracking-wider text-[#60A5FA] uppercase 2xl:text-xs">
-                        Sistema en vivo · Fase {selectedAiPhase.num}
-                      </span>
-                      <h4 className="font-display mt-0.5 text-base font-extrabold tracking-[-0.015em] text-white 2xl:text-xl">
-                        {selectedAiPhase.title}
-                      </h4>
-                    </div>
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
+            {/* Live Interactive Systems Demonstration */}
+            <div className="mt-8 border-t border-current/10 pt-7">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <span className="font-mono text-[10.5px] font-bold tracking-[0.2em] text-[#0044FF] uppercase">
+                    Demostración interactiva en directo
+                  </span>
+                  <h4 className="t-ink font-display text-lg font-extrabold tracking-tight">
+                    Sistemas IA y Automatización Operativa
+                  </h4>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {aiPhases.map((phase) => {
+                    const active = phase.id === selectedAiPhase.id;
+                    return (
+                      <button
+                        key={phase.id}
+                        type="button"
+                        onClick={() => setActiveAiPhase(phase.id)}
+                        className={`rounded-full px-3 py-1 font-mono text-[10.5px] font-bold tracking-wider uppercase transition-colors ${
+                          active
+                            ? "bg-[#0044FF] text-white"
+                            : "t-line t-bg-card t-ink border hover:border-[#0044FF]"
+                        }`}
+                      >
+                        {phase.num} · {phase.kicker}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="macos-window-frame overflow-hidden rounded-[22px] p-4 text-white sm:p-5">
+                <div className="mb-3 flex items-center justify-between border-b border-[#303240] pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-[#10B981] animate-pulse" />
+                    <span className="font-mono text-[11px] font-bold tracking-wider text-[#60A5FA] uppercase">
+                      FASE {selectedAiPhase.num} / 04 · {selectedAiPhase.title}
+                    </span>
                   </div>
+                  <span className="hidden text-xs text-zinc-400 sm:inline">
+                    Simulación activa en tiempo real
+                  </span>
+                </div>
 
+                <div className="min-h-[190px]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}
-                      initial={{ y: 5 }}
-                      animate={{ y: 0 }}
-                      exit={{ y: -5 }}
-                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      className="flex min-h-[175px] flex-1 items-center 2xl:min-h-[255px]"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex min-h-[180px] items-center"
                     >
                       {selectedAiPhase.id === "automation" && <AgentFlow />}
                       {selectedAiPhase.id === "models" && <ModelCycle />}
@@ -553,226 +610,209 @@ function Index() {
                       {selectedAiPhase.id === "memory" && <MemoryFlow />}
                     </motion.div>
                   </AnimatePresence>
-
-                  <div className="mt-2.5 flex items-center justify-between border-t border-[#303240] pt-2.5 text-[11px] font-medium text-zinc-300 2xl:mt-4 2xl:pt-3.5 2xl:text-xs">
-                    <span>Sincronizado con scroll o selección directa</span>
-                    <span className="rounded-full border border-[#3B82F6] bg-[#0B256B] px-2.5 py-0.5 font-mono text-[10.5px] font-bold text-white 2xl:px-3 2xl:text-xs">
-                      FASE {selectedAiPhase.num} / 04
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <Reveal delay={0.08}>
-              <div
-                id="acreditacion-375h"
-                className="relative z-10 mt-3 flex scroll-mt-[62px] flex-col justify-between gap-3 overflow-hidden rounded-2xl bg-[#0044FF] px-5 py-3 text-white sm:px-6 lg:flex-row lg:items-center 2xl:mt-6 2xl:px-8 2xl:py-5"
-              >
-                <div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[#0044FF] uppercase 2xl:px-3 2xl:text-[11px]">
-                    Subvenciones salariales directas para empresa
-                  </span>
-                  <h3 className="font-display mt-1 text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl 2xl:mt-1.5 2xl:text-2xl">
-                    Acreditación oficial de 375 h como Agente del Cambio Tecnológico
-                  </h3>
-                  <p className="mt-0.5 max-w-3xl text-xs leading-snug text-blue-50 2xl:mt-1 2xl:text-sm">
-                    Cuento con 375 horas de acreditación oficial. Gracias a esta acreditación, la
-                    empresa que me contrate accede directamente a subvenciones salariales para
-                    impulsar su digitalización y automatización con IA.
-                  </p>
-                </div>
-                <Magnetic className="shrink-0" strength={0.12}>
-                  <a
-                    href="#contacto"
-                    className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-extrabold tracking-wider text-[#09090B] uppercase transition-colors hover:bg-[#09090B] hover:text-white 2xl:min-h-[48px] 2xl:px-6 2xl:py-3"
-                  >
-                    <span>Consultar contratación</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                </Magnetic>
+            {/* 375h Acreditación Banner */}
+            <div
+              id="acreditacion-375h"
+              className="mt-6 flex flex-col justify-between gap-4 rounded-2xl bg-[#0044FF] p-5 text-white sm:p-6 lg:flex-row lg:items-center"
+            >
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[#0044FF] uppercase">
+                  Subvenciones salariales directas para empresa
+                </span>
+                <h3 className="font-display mt-1.5 text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl">
+                  Acreditación oficial de 375 h como Agente del Cambio Tecnológico
+                </h3>
+                <p className="mt-1 max-w-3xl text-xs leading-relaxed text-blue-50">
+                  Cuento con 375 horas de acreditación oficial por la Generalitat. La empresa que me
+                  contrate accede directamente a subvenciones salariales bonificadas para
+                  digitalización y proyectos de inteligencia artificial.
+                </p>
               </div>
-            </Reveal>
+              <Magnetic strength={0.12} className="shrink-0">
+                <a
+                  href="#contacto"
+                  className="inline-flex min-h-[42px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-extrabold tracking-wider text-[#09090B] uppercase transition-colors hover:bg-[#09090B] hover:text-white"
+                >
+                  <span>Consultar contratación</span>
+                  <ArrowUpRight size={14} />
+                </a>
+              </Magnetic>
+            </div>
           </div>
         </section>
 
-        {/* TRAYECTORIA */}
-        <section id="trayectoria" className={`${sectionBase} py-7 2xl:py-12`}>
+        {/* TRAYECTORIA — Sobre Mí / About Me */}
+        <section id="trayectoria" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-4 2xl:mb-6">
+            <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
-                eyebrow="Trayectoria y perfil"
-                title="Perfil híbrido."
-                accentTitle="Código, negocio y ejecución."
-                description="Desarrollo web, automatización IA, marketing digital y gestión administrativa con más de 1.000 h reales en Barcelona."
+                eyebrow="Sobre mí · Trayectoria"
+                title="Problem Solver."
+                accentTitle="Perfil híbrido."
+                description="Código, negocio y ejecución: desarrollo web, automatización IA, marketing digital y gestión con más de 1.000 h reales en Barcelona."
               />
             </Reveal>
 
-            <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
-              <div className="lg:col-span-5">
-                <div className="t-bg-card flex h-full flex-col justify-between gap-3 rounded-2xl border-2 border-current p-4 shadow-[6px_6px_0px_currentColor] 2xl:gap-4 2xl:rounded-3xl 2xl:p-5">
-                  <div className="relative overflow-hidden rounded-xl bg-[#09090B] p-3.5 text-white 2xl:p-4">
-                    <div className="flex items-center gap-3.5">
-                      <div className="relative shrink-0">
-                        <img
-                          src="/erick-portrait-studio.png"
-                          alt="Erick Rodríguez"
-                          loading="lazy"
-                          className="h-16 w-16 rounded-xl bg-[#0044FF] object-cover object-top 2xl:h-20 2xl:w-20"
-                        />
-                        <span className="absolute -right-1.5 -bottom-1.5 rounded-md bg-[#0044FF] px-1.5 py-0.5 text-[9px] font-extrabold tracking-wider text-white uppercase">
-                          BCN
-                        </span>
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <span className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.14em] text-[#60A5FA] uppercase">
-                          <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
-                          <span>La Sagrera · Barcelona</span>
-                        </span>
-                        <h3 className="font-display mt-0.5 text-lg font-extrabold tracking-[-0.03em] text-white 2xl:text-2xl">
-                          Erick Rodríguez
-                        </h3>
-                        <p className="text-xs font-medium text-zinc-300">
-                          Web, Automatización IA &amp; Negocio
-                        </p>
-                      </div>
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
+              {/* Profile Card / Bio Column */}
+              <Reveal className="lg:col-span-5">
+                <div className="flex items-center gap-4">
+                  <img
+                    src="/erick-portrait-studio.png"
+                    alt="Erick Rodríguez"
+                    loading="lazy"
+                    className="t-line h-20 w-20 shrink-0 rounded-full border-2 bg-[#0044FF] object-cover object-top sm:h-24 sm:w-24"
+                  />
+                  <div>
+                    <h3 className="t-ink font-display flex items-center gap-2 text-xl font-extrabold tracking-[-0.03em] sm:text-2xl">
+                      Erick Rodríguez
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#0044FF] text-white">
+                        <Check size={12} strokeWidth={3} />
+                      </span>
+                    </h3>
+                    <p className="t-muted text-xs font-medium">
+                      Web, Automatización IA &amp; Negocio · La Sagrera, Barcelona
+                    </p>
+                  </div>
+                </div>
+
+                <div className="t-line mt-5 grid grid-cols-3 gap-3 border-y py-4">
+                  {[
+                    ["+1.000 h", "Experiencia"],
+                    ["375 h", "Acreditación"],
+                    ["Top 1", "Google SEO"],
+                  ].map(([v, l]) => (
+                    <div key={l}>
+                      <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.2em] uppercase">
+                        {l}
+                      </span>
+                      <span className="t-ink font-display mt-1 block text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">
+                        {v}
+                      </span>
                     </div>
-                    <div className="mt-3 grid grid-cols-3 gap-2 border-t border-[#232635] pt-2.5 text-center 2xl:mt-4 2xl:pt-3">
-                      {[
-                        ["+1.000 h", "Experiencia"],
-                        ["375 h", "Subvención"],
-                        ["Top 1", "Google SEO"],
-                      ].map(([v, l]) => (
-                        <div key={l} className="rounded-lg bg-[#14161F] px-2 py-1.5">
-                          <span className="font-display block text-sm font-extrabold text-white 2xl:text-base">
-                            {v}
-                          </span>
-                          <span className="block text-[9.5px] font-semibold tracking-wider text-zinc-400 uppercase">
-                            {l}
-                          </span>
+                  ))}
+                </div>
+
+                <p className="t-muted mt-4 text-xs leading-relaxed sm:text-sm">
+                  Combino desarrollo web e IA con base sólida en marketing digital y gestión
+                  administrativa: construyo la solución completa y la llevo a producción sin
+                  depender de intermediarios. Español y catalán nativos, inglés B2.
+                </p>
+
+                <div className="mt-4">
+                  <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.2em] uppercase">
+                    Actualmente
+                  </span>
+                  <div className="mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-3">
+                    {[
+                      [Wrench, "Construyendo", "Webs y ERPs a medida"],
+                      [Sparkles, "Explorando", "Agentes IA y n8n"],
+                      [GraduationCap, "Aprendiendo", "Second Brain en Obsidian"],
+                    ].map(([Icon, k, v]) => {
+                      const I = Icon as typeof Wrench;
+                      return (
+                        <div key={k as string} className="flex items-start gap-1.5">
+                          <I size={14} className="mt-0.5 shrink-0 text-[#0044FF]" />
+                          <div>
+                            <span className="t-ink block text-[11px] font-bold">{k as string}</span>
+                            <span className="t-muted block text-[11px] leading-snug">
+                              {v as string}
+                            </span>
+                          </div>
                         </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-1">
+                  {coreStackPills.map((tool) => (
+                    <span
+                      key={tool}
+                      className="t-line t-bg-card t-ink rounded-md border px-2 py-0.5 text-[10px] font-bold"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+
+                <a
+                  href={cvPdf.url}
+                  download="Erick-Rodriguez-CV.pdf"
+                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 font-mono text-xs font-bold tracking-[0.16em] uppercase hover:text-[#0044FF]"
+                >
+                  <span>Descargar CV completo en PDF</span>
+                  <Download size={13} />
+                </a>
+              </Reveal>
+
+              {/* 2-Column Ledger: 01 Experiencia & 02 Formación */}
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-7">
+                {[
+                  {
+                    label: "01 · Experiencia",
+                    icon: Briefcase,
+                    rows: experience.map((e) => ({
+                      key: `${e.place}-${e.period}`,
+                      title: e.role,
+                      org: e.place,
+                      date: e.period,
+                      body: e.points,
+                    })),
+                  },
+                  {
+                    label: "02 · Formación oficial",
+                    icon: GraduationCap,
+                    rows: education.map((e) => ({
+                      key: e.title,
+                      title: e.title,
+                      org: e.place,
+                      date: e.period,
+                      body: [e.summary],
+                    })),
+                  },
+                ].map((col, ci) => (
+                  <div key={col.label}>
+                    <span className="font-mono text-[11px] font-bold tracking-[0.18em] text-[#0044FF] uppercase">
+                      {col.label}
+                    </span>
+                    <div className="mt-2.5 flex flex-col">
+                      {col.rows.map((row, ri) => (
+                        <Reveal
+                          key={row.key}
+                          delay={ci * 0.05 + ri * 0.08}
+                          className="t-line border-t py-3.5"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <h4 className="t-ink font-display text-[13px] leading-tight font-extrabold tracking-[-0.02em] sm:text-[14px]">
+                              {row.title}
+                            </h4>
+                            <span className="t-muted shrink-0 font-mono text-[10px] font-bold tracking-wider uppercase">
+                              {row.date}
+                            </span>
+                          </div>
+                          <p className="t-accent mt-0.5 text-[11px] font-bold">{row.org}</p>
+                          <ul className="t-muted mt-1.5 list-disc space-y-0.5 pl-4 text-[11px] leading-snug">
+                            {row.body.map((b) => (
+                              <li key={b}>{b}</li>
+                            ))}
+                          </ul>
+                        </Reveal>
                       ))}
                     </div>
                   </div>
-
-                  <div>
-                    <p className="t-muted text-xs leading-relaxed 2xl:text-[13.5px]">
-                      Combino desarrollo web e IA con base en marketing digital y gestión: construyo
-                      la solución completa y la llevo a producción sin depender de terceros.
-                    </p>
-                    <div className="mt-2.5 grid grid-cols-2 gap-1.5 2xl:mt-3.5">
-                      <div className="t-line t-bg-card2 t-ink flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold">
-                        <Sparkles size={12} className="shrink-0 text-[#0044FF]" />
-                        <span>Agente Cambio 375 h</span>
-                      </div>
-                      <div className="t-line t-bg-card2 t-ink flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold">
-                        <Wrench size={12} className="shrink-0 text-[#0044FF]" />
-                        <span>ES / CA nativos · B2 EN</span>
-                      </div>
-                    </div>
-                    <div className="mt-2.5 2xl:mt-3.5">
-                      <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.2em] uppercase">
-                        Stack principal
-                      </span>
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {coreStackPills.map((tool) => (
-                          <span
-                            key={tool}
-                            className="t-line t-bg-card2 t-ink rounded-md border px-2 py-0.5 text-[10px] font-bold 2xl:px-2.5 2xl:text-[11px]"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <a
-                    href={cvPdf.url}
-                    download="Erick-Rodriguez-CV.pdf"
-                    className="t-bg-ink t-on-ink inline-flex min-h-[40px] w-full items-center justify-center gap-2 rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] uppercase transition-transform hover:scale-[1.02] 2xl:min-h-[46px]"
-                  >
-                    <span>Descargar CV en PDF</span>
-                    <Download size={14} />
-                  </a>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-7 2xl:gap-4">
-                <div className="flex flex-col justify-between gap-2 2xl:gap-3">
-                  <div className="flex items-center justify-between px-0.5">
-                    <span className="font-mono text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
-                      01 · Experiencia
-                    </span>
-                    <span className="t-muted text-[11px] font-bold">+1.000 h</span>
-                  </div>
-                  {experience.map((item) => (
-                    <article
-                      key={`${item.place}-${item.period}`}
-                      className="t-line t-bg-card flex flex-1 flex-col justify-between rounded-xl border p-3 2xl:rounded-2xl 2xl:p-4"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-1.5">
-                          <span className="rounded-full bg-[#0044FF] px-2 py-0.5 text-[10px] font-bold text-white">
-                            {item.period}
-                          </span>
-                          <span className="t-muted text-[10.5px] font-bold">{item.place}</span>
-                        </div>
-                        <h3 className="t-ink font-display mt-1.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[-0.02em] 2xl:text-[15px]">
-                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#0044FF] text-white">
-                            <Briefcase size={11} />
-                          </span>
-                          <span>{item.role}</span>
-                        </h3>
-                        <ul className="t-muted mt-1 list-disc space-y-0.5 pl-4 text-[11px] leading-snug 2xl:mt-1.5 2xl:text-xs">
-                          {item.points.map((point) => (
-                            <li key={point}>{point}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="flex flex-col justify-between gap-2 2xl:gap-3">
-                  <div className="flex items-center justify-between px-0.5">
-                    <span className="font-mono text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
-                      02 · Formación oficial
-                    </span>
-                    <span className="t-muted text-[11px] font-bold">Barcelona</span>
-                  </div>
-                  {education.map((item) => (
-                    <article
-                      key={item.title}
-                      className="t-line t-bg-card flex flex-1 flex-col justify-between rounded-xl border p-3 2xl:rounded-2xl 2xl:p-4"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-1.5">
-                          <span className="rounded-full bg-[#0044FF] px-2 py-0.5 text-[10px] font-bold text-white">
-                            {item.period}
-                          </span>
-                          <span className="t-muted text-[10.5px] font-bold">{item.place}</span>
-                        </div>
-                        <h3 className="t-ink font-display mt-1.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[-0.02em] 2xl:text-[15px]">
-                          <span className="t-bg-ink t-on-ink flex h-5 w-5 shrink-0 items-center justify-center rounded-md">
-                            <GraduationCap size={11} />
-                          </span>
-                          <span>{item.title}</span>
-                        </h3>
-                        <p className="t-muted mt-1 text-[11px] leading-snug 2xl:text-xs">
-                          {item.summary}
-                        </p>
-                      </div>
-                    </article>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
         {/* CONTACTO */}
-        <section id="contacto" className={`${sectionBase} py-10 2xl:py-16`}>
+        <section id="contacto" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
               <Reveal className="lg:col-span-6">
@@ -877,13 +917,16 @@ function Index() {
                 </Magnetic>
               </Reveal>
             </div>
-
-            <footer className="t-line t-muted mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-5 text-xs font-medium">
-              <span>© 2026 Erick Rodríguez · Portfolio</span>
-              <span>Desarrollo Web · ERPs a Medida · Automatización IA</span>
-            </footer>
           </div>
         </section>
+
+        {/* Footer en contraste sólido oscuro */}
+        <footer className="section-dark t-line t-muted border-t py-6 text-xs font-medium">
+          <div className="mx-auto flex max-w-[1380px] flex-wrap items-center justify-between gap-4 px-5 sm:px-8">
+            <span>© 2026 Erick Rodríguez · Portfolio</span>
+            <span>Desarrollo Web · ERPs a Medida · Automatización IA</span>
+          </div>
+        </footer>
       </main>
     </div>
   );

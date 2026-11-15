@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useReducedMotion } from "./motion-pref";
 
 interface SectionHeadingProps {
   eyebrow: string;
@@ -40,14 +41,14 @@ export function SectionHeading({
     return () => window.clearInterval(id);
   }, [inView, full, reduce]);
 
-  const renderPart = (text: string, start: number, accent: boolean) => {
+  const renderPart = (text: string, start: number, accent: boolean, isLast = false) => {
     const typed = Math.max(0, Math.min(text.length, count - start));
-    const hasCursor = count >= start && count <= start + text.length;
+    const hasCursor = isLast ? count >= start : count >= start && count < start + text.length;
     return (
       <span className={accent ? "t-accent" : undefined} aria-hidden="true">
         {text.slice(0, typed)}
         {hasCursor ? (
-          <span className="animate-cursor-blink mx-px inline-block h-[0.78em] w-[3px] translate-y-[0.06em] bg-[#0044FF] align-baseline" />
+          <span className="animate-cursor-blink mx-px inline-block h-[0.78em] w-[3.5px] translate-y-[0.06em] bg-[#0044FF] align-baseline" />
         ) : null}
         <span className="invisible">{text.slice(typed)}</span>
       </span>
@@ -67,11 +68,11 @@ export function SectionHeading({
           aria-label={full}
           className="t-ink font-display text-[28px] leading-[1.04] font-extrabold tracking-[-0.035em] sm:text-4xl lg:text-[38px] 2xl:text-[52px]"
         >
-          {renderPart(title, 0, false)}
+          {renderPart(title, 0, false, !accentTitle)}
           {accentTitle ? (
             <>
               <span aria-hidden="true"> </span>
-              {renderPart(accentTitle, title.length + 1, true)}
+              {renderPart(accentTitle, title.length + 1, true, true)}
             </>
           ) : null}
         </h2>

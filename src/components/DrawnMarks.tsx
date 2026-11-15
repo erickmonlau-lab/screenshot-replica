@@ -11,9 +11,7 @@ const strokeProps = {
   strokeLinejoin: "round" as const,
 };
 
-export function ScribbleUnderline({
-  className = "w-full h-3.5 text-[#F59E0B]",
-}: DrawnProps) {
+export function ScribbleUnderline({ className = "w-full h-3.5 text-[#F59E0B]" }: DrawnProps) {
   return (
     <svg
       viewBox="0 0 300 20"
@@ -34,9 +32,7 @@ export function ScribbleUnderline({
   );
 }
 
-export function HandDrawnArrow({
-  className = "w-16 h-11 text-[#F59E0B]",
-}: DrawnProps) {
+export function HandDrawnArrow({ className = "w-16 h-11 text-[#F59E0B]" }: DrawnProps) {
   return (
     <svg viewBox="0 0 120 80" className={className} aria-hidden="true">
       <motion.path
@@ -65,12 +61,7 @@ export function HandDrawnCircle({
   className = "pointer-events-none absolute -inset-x-5 -inset-y-3 h-[calc(100%+24px)] w-[calc(100%+40px)] overflow-visible text-[#F59E0B]",
 }: DrawnProps) {
   return (
-    <svg
-      viewBox="0 0 260 110"
-      preserveAspectRatio="none"
-      className={className}
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 260 110" preserveAspectRatio="none" className={className} aria-hidden="true">
       <motion.path
         {...strokeProps}
         initial={{ pathLength: 0, opacity: 0 }}
@@ -84,9 +75,7 @@ export function HandDrawnCircle({
   );
 }
 
-export function SignatureSpark({
-  className = "w-7 h-7 text-[#F59E0B]",
-}: DrawnProps) {
+export function SignatureSpark({ className = "w-7 h-7 text-[#F59E0B]" }: DrawnProps) {
   return (
     <svg viewBox="0 0 36 36" className={className} aria-hidden="true">
       <motion.path

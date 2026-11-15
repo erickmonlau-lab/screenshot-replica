@@ -202,13 +202,6 @@
   animation: cursor-blink 1.05s steps(1, end) infinite;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-hero-marquee,
-  .animate-cursor-blink {
-    animation: none;
-  }
-}
-
 /* Solid macOS Window Frame (High Contrast Graphite on Solid Dark Canvas) */
 .macos-window-frame {
   background-color: #16161d;
@@ -256,6 +249,52 @@ html.dark {
   --t-muted: #9aa0b2;
   --t-line: #262a38;
   --t-accent: #5b97ff;
+}
+
+/* Alternating section themes (solid colors, zero washed transparency) */
+.section-dark {
+  --t-page: #09090b;
+  --t-hero: #09090b;
+  --t-card: #12141c;
+  --t-card2: #1a1d28;
+  --t-ink: #ffffff;
+  --t-on-ink: #09090b;
+  --t-muted: #9aa0b2;
+  --t-line: #262a38;
+  --t-accent: #3b82f6;
+  background-color: #09090b !important;
+  color: #ffffff !important;
+  border-color: #262a38 !important;
+}
+
+.section-light {
+  --t-page: #ffffff;
+  --t-hero: #f2f4f8;
+  --t-card: #f8f9fc;
+  --t-card2: #edf0f6;
+  --t-ink: #09090b;
+  --t-on-ink: #ffffff;
+  --t-muted: #525866;
+  --t-line: #d8dbe2;
+  --t-accent: #0044ff;
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  border-color: #d8dbe2 !important;
+}
+
+html.dark .section-light {
+  --t-page: #12141c;
+  --t-hero: #12141c;
+  --t-card: #181b26;
+  --t-card2: #222636;
+  --t-ink: #ffffff;
+  --t-on-ink: #09090b;
+  --t-muted: #9aa0b2;
+  --t-line: #2b3042;
+  --t-accent: #5b97ff;
+  background-color: #12141c !important;
+  color: #ffffff !important;
+  border-color: #2b3042 !important;
 }
 
 html,

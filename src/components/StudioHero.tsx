@@ -3,12 +3,12 @@ import {
   motion,
   useAnimationFrame,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
   useVelocity,
 } from "framer-motion";
+import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export interface HeroProjectPreview {
@@ -39,7 +39,7 @@ function wrap(min: number, max: number, v: number) {
 }
 
 /** Outlined marquee that accelerates (and reverses) with scroll velocity. */
-function ScrollMarquee({ speed = -1.4 }: { speed?: number }) {
+function ScrollMarquee({ speed = -3.2 }: { speed?: number }) {
   const reduce = useReducedMotion();
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
@@ -47,26 +47,32 @@ function ScrollMarquee({ speed = -1.4 }: { speed?: number }) {
   const smooth = useSpring(velocity, { damping: 50, stiffness: 300 });
   const boost = useTransform(smooth, [0, 1000], [0, 5], { clamp: false });
   const dir = useRef(1);
-  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
+  const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
   useAnimationFrame((_, delta) => {
     if (reduce) return;
-    let move = dir.current * speed * (delta / 1000);
+    const dt = delta / 1000;
     const b = boost.get();
-    if (b < -0.05) dir.current = -1;
-    else if (b > 0.05) dir.current = 1;
-    move += dir.current * move * Math.abs(b);
-    baseX.set(baseX.get() + move);
+    if (b < -0.08) dir.current = -1;
+    else if (b > 0.08) dir.current = 1;
+    const velocityMultiplier = 1 + Math.min(6, Math.abs(b));
+    const step = dir.current * speed * dt * velocityMultiplier;
+    baseX.set(baseX.get() + step);
   });
 
   const text = (
-    <span className="hero-outline-light font-display pr-8 text-[34vh] leading-none font-black tracking-[-0.03em] uppercase">
+    <span className="hero-outline-light font-display pr-12 text-[26vh] leading-none font-black tracking-[-0.03em] uppercase select-none sm:text-[34vh]">
       {outlineLine}
     </span>
   );
 
   return (
-    <motion.div style={{ x }} className="flex w-max items-center whitespace-nowrap">
+    <motion.div
+      style={{ x }}
+      className="flex w-max items-center whitespace-nowrap will-change-transform"
+    >
+      {text}
+      {text}
       {text}
       {text}
     </motion.div>

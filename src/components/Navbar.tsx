@@ -73,7 +73,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
         // storage unavailable
       }
     };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = false;
     const doc = document as Document & {
       startViewTransition?: (cb: () => void) => { ready: Promise<void> };
     };

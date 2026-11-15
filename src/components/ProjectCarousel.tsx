@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "./motion-pref";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 
 export interface CarouselSlide {
