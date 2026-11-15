@@ -12,6 +12,8 @@ export interface CarouselSlide {
   href: string;
   isPrivate?: boolean;
   description: string;
+  outcome?: string;
+  type?: string;
   stack: string[];
   ctaLabel: string;
 }
@@ -134,56 +136,85 @@ export function ProjectCarousel({
         </button>
       </div>
 
-      <div className="mx-auto mt-4 max-w-2xl text-center 2xl:mt-6">
+      <div className="mt-10 lg:mt-14">
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}
-            initial={{ y: 8 }}
-            animate={{ y: 0 }}
-            exit={{ y: -8 }}
-            transition={{ duration: 0.2 }}
+            initial={reduce ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="t-line grid gap-8 border-t-2 border-current pt-8 lg:grid-cols-12 lg:gap-12 lg:pt-10"
           >
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="t-muted font-mono text-xs font-bold tracking-[0.2em] sm:text-[13px]">
-                {current.index} / {String(n).padStart(2, "0")}
-              </span>
-              <span className="rounded-full bg-[#0044FF] px-3.5 py-1 text-xs font-bold text-white sm:text-[13px]">
-                {current.status}
-              </span>
-            </div>
-            <h3 className="t-ink font-display mt-2 text-xl font-extrabold tracking-[-0.03em] sm:text-2xl 2xl:text-3xl">
-              {current.name}
-            </h3>
-            <p className="t-muted mx-auto mt-2 max-w-xl text-sm leading-relaxed sm:text-base">
-              {current.description}
-            </p>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-              {current.stack.map((tag) => (
-                <span
-                  key={tag}
-                  className="t-line t-bg-card t-ink rounded-full border px-3 py-1 text-xs font-semibold sm:text-[13px]"
-                >
-                  {tag}
+            <div className="lg:col-span-7">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="t-muted text-sm font-semibold tracking-[0.16em] tabular-nums">
+                  {current.index} / {String(n).padStart(2, "0")}
                 </span>
-              ))}
+                <span className="rounded-full bg-[#0044FF] px-3.5 py-1 text-[13px] font-semibold text-white">
+                  {current.status}
+                </span>
+              </div>
+              <h3 className="t-ink font-display mt-4 text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[0.98] font-bold tracking-[-0.045em]">
+                {current.name}
+              </h3>
+              <p className="t-ink mt-5 max-w-[30ch] text-xl leading-snug font-semibold tracking-[-0.02em] sm:text-2xl lg:text-[28px]">
+                {current.outcome ?? current.description}
+              </p>
             </div>
-            <a
-              href={current.href}
-              {...(current.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-              className="t-bg-ink t-on-ink mt-4 inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-xs font-bold transition-transform hover:scale-[1.03] sm:text-sm"
-            >
-              <span>{current.ctaLabel}</span>
-              <ArrowUpRight size={14} />
-            </a>
+
+            <div className="lg:col-span-5">
+              <p className="t-muted text-base leading-snug font-medium sm:text-lg">
+                {current.description}
+              </p>
+              <dl className="mt-6 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+                {current.type ? (
+                  <div>
+                    <dt className="t-muted text-xs font-semibold tracking-[0.14em] uppercase">
+                      Tipo
+                    </dt>
+                    <dd className="t-ink font-display mt-1 text-lg font-semibold tracking-[-0.02em]">
+                      {current.type}
+                    </dd>
+                  </div>
+                ) : null}
+                <div>
+                  <dt className="t-muted text-xs font-semibold tracking-[0.14em] uppercase">
+                    Estado
+                  </dt>
+                  <dd className="t-ink font-display mt-1 text-lg font-semibold tracking-[-0.02em]">
+                    {current.status}
+                  </dd>
+                </div>
+              </dl>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {current.stack.map((tag) => (
+                  <li
+                    key={tag}
+                    className="t-line t-bg-card t-ink rounded-full border px-3.5 py-1.5 text-[13px] font-semibold"
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={current.href}
+                {...(current.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                className="t-bg-ink t-on-ink mt-7 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
+              >
+                <span>{current.ctaLabel}</span>
+                <ArrowUpRight size={16} strokeWidth={2.4} />
+              </a>
+            </div>
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-3 flex items-center justify-center gap-1.5" aria-hidden="true">
+        <div className="mt-8 flex items-center gap-1.5" aria-hidden="true">
           {slides.map((s) => (
             <span
               key={s.id}
               className={`h-1.5 rounded-full transition-all ${
-                s.id === current.id ? "t-bg-ink w-6" : "t-bg-card2 w-1.5"
+                s.id === current.id ? "t-bg-ink w-8" : "t-bg-card2 w-1.5"
               }`}
             />
           ))}
