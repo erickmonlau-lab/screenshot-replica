@@ -1012,10 +1012,12 @@ function Index() {
                   </p>
                 </div>
 
-                <h2 className="font-display text-4xl font-black leading-[0.94] tracking-[-0.04em] text-white uppercase sm:text-5xl lg:text-[54px] 2xl:text-[68px]">
-                  TRABAJEMOS
+                <h2 className="font-display text-[44px] font-black leading-[0.92] tracking-[-0.04em] text-white uppercase sm:text-6xl lg:text-[64px] 2xl:text-[88px]">
+                  HABLEMOS
                   <br />
-                  <span className="text-[#3B82F6]">JUNTOS.</span>
+                  DE TU
+                  <br />
+                  <span className="text-[#3B82F6]">PROYECTO.</span>
                   <span
                     className="animate-cursor-blink ml-2 inline-block h-[0.75em] w-[4px] bg-[#0044FF] align-baseline"
                     aria-hidden="true"
