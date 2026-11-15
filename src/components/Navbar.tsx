@@ -10,12 +10,13 @@ interface NavbarProps {
 const navItems = [
   { id: "hero", label: "Inicio" },
   { id: "proyectos", label: "Proyectos" },
-  { id: "ia", label: "Trabajo con IA" },
+  { id: "servicios", label: "Servicios" },
+  { id: "ia", label: "Stack e IA" },
   { id: "trayectoria", label: "Trayectoria" },
   { id: "contacto", label: "Contacto" },
 ] as const;
 
-const observedIds = ["hero", "metricas", "proyectos", "ia", "trayectoria", "contacto"];
+const observedIds = ["hero", "metricas", "proyectos", "servicios", "ia", "trayectoria", "contacto"];
 
 export function Navbar({ onChangeMode }: NavbarProps) {
   const [activeId, setActiveId] = useState<string>("hero");
@@ -117,7 +118,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-2.5 z-50 px-3 sm:px-6">
-      <div className="t-line t-bg-card t-ink pointer-events-auto mx-auto flex h-[46px] max-w-[1100px] items-center justify-between gap-3 rounded-full border pr-1.5 pl-2">
+      <div className="t-line t-bg-card t-ink pointer-events-auto mx-auto flex h-[46px] max-w-[1240px] items-center justify-between gap-3 rounded-full border pr-1.5 pl-2">
         <button
           type="button"
           onClick={() => scrollToSection("hero")}
@@ -132,13 +133,13 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           </span>
         </button>
 
-        <nav aria-label="Navegación principal" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Navegación principal" className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => scrollToSection(item.id)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.08em] whitespace-nowrap uppercase transition-colors sm:text-[13px] ${tab(item.id)}`}
+              className={`rounded-full px-3 py-1.5 text-xs font-bold tracking-[0.06em] whitespace-nowrap uppercase transition-colors sm:text-[13px] ${tab(item.id)}`}
             >
               {item.label}
             </button>
@@ -175,7 +176,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             onClick={() => setMobileOpen((p) => !p)}
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={mobileOpen}
-            className={`inline-flex h-8 w-8 items-center justify-center rounded-full lg:hidden ${ghost}`}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full xl:hidden ${ghost}`}
           >
             {mobileOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
@@ -183,7 +184,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
       </div>
 
       {mobileOpen ? (
-        <div className="t-line t-bg-card t-ink pointer-events-auto mx-auto mt-2 max-w-[1100px] rounded-3xl border p-2 lg:hidden">
+        <div className="t-line t-bg-card t-ink pointer-events-auto mx-auto mt-2 max-w-[1240px] rounded-3xl border p-2 xl:hidden">
           <div className="flex flex-col gap-1">
             {navItems.map((item) => (
               <button
