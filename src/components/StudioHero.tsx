@@ -61,7 +61,7 @@ function ScrollMarquee({ speed = -3.2 }: { speed?: number }) {
   });
 
   const text = (
-    <span className="hero-outline-light font-display pr-12 text-[26vh] leading-none font-black tracking-[-0.03em] uppercase select-none sm:text-[34vh]">
+    <span className="hero-outline-light font-display pr-12 text-[18vh] leading-none font-black tracking-[-0.03em] uppercase select-none sm:text-[34vh]">
       {outlineLine}
     </span>
   );
@@ -83,11 +83,11 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   return (
     <section
       id="hero"
-      className="t-bg-hero t-ink relative h-[100dvh] min-h-[560px] overflow-hidden"
+      className="t-bg-hero t-ink relative h-[clamp(640px,100svh,1000px)] overflow-hidden"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[50%] z-0 -translate-y-[56%] overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 top-[24%] z-0 -translate-y-1/2 overflow-hidden sm:top-[50%] sm:-translate-y-[56%]"
       >
         <ScrollMarquee />
       </div>
