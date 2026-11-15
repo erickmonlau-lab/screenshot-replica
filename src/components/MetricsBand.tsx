@@ -44,7 +44,7 @@ function Counter({ metric }: { metric: Metric }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
-  const fmt = new Intl.NumberFormat("es-ES", { useGrouping: "always" });
+  const fmt = { format: (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".") };
 
   useEffect(() => {
     const node = ref.current;
