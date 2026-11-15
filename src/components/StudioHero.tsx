@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, CheckCircle2, Download, Plus, Sparkles } from "lucide-react";
-import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
+import { ArrowDown, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-react";
 
 export interface HeroProjectPreview {
   id: string;
@@ -39,218 +37,123 @@ function useBarcelonaTime() {
   return time;
 }
 
-export function StudioHero({ mode, onChangeMode, onJumpToProjects }: StudioHeroProps) {
-  const barcelonaTime = useBarcelonaTime();
+export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
+  const bcnTime = useBarcelonaTime();
 
   return (
-    <section
-      id="inicio"
-      className="dark-studio-grid relative isolate flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden bg-[#09090B] px-4 pb-5 pt-16 text-white sm:px-8 sm:pt-20"
-    >
-      {/* Centerpiece macOS Solid Window Stage */}
-      <motion.div
-        initial={{ y: 10 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto w-full max-w-[1140px]"
-      >
-        <div className="macos-window-frame relative overflow-hidden rounded-[24px] sm:rounded-[28px]">
-          {/* macOS Window Title Bar */}
-          <div className="flex items-center justify-between border-b border-[#303240] bg-[#21222C] px-5 py-3 sm:px-7">
-            {/* Traffic Light Dots */}
-            <div className="flex items-center gap-2" aria-hidden="true">
-              <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
-              <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
-              <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
-            </div>
-
-            {/* Solid Window Context Pill */}
-            <div className="hidden items-center gap-2 rounded-full border border-[#383B4B] bg-[#16161D] px-3.5 py-1 text-[11.5px] font-medium tracking-wide text-zinc-200 sm:inline-flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]" aria-hidden="true" />
-              <span>La Sagrera, Barcelona · {barcelonaTime} CET</span>
-            </div>
-
-            {/* Quick Mode Switch Button */}
-            <button
-              type="button"
-              onClick={() => onChangeMode(mode === "studio" ? "preview" : "studio")}
-              aria-label={mode === "studio" ? "Ver ficha Sobre mí" : "Volver a Trabajo"}
-              title={mode === "studio" ? "Ver ficha Sobre mí" : "Volver a Trabajo"}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#383B4B] bg-[#2A2C38] px-3 py-1 text-[11.5px] font-semibold text-white transition-colors hover:bg-[#36394A]"
-            >
-              <span>{mode === "studio" ? "Sobre mí" : "Trabajo"}</span>
-              <Plus
-                size={13}
-                className={`transition-transform duration-300 ${
-                  mode === "preview" ? "rotate-45 text-[#60A5FA]" : ""
-                }`}
-              />
-            </button>
+    <section id="hero" className="dark-topo-surface relative overflow-hidden pt-[62px] text-white">
+      <div className="relative mx-auto flex min-h-[calc(100svh-62px)] max-w-[1440px] flex-col justify-between lg:h-[calc(100dvh-62px)] lg:min-h-[600px] lg:max-h-[950px]">
+        {/* Top Registration Corners */}
+        <div className="relative z-20 flex items-center justify-between gap-2 px-4 pt-4 sm:px-6 lg:px-8 lg:pt-5">
+          <div className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#2B2F3E] bg-[#11131B] px-3 py-1.5 whitespace-nowrap">
+            <span className="h-2 w-2 shrink-0 rounded-full bg-[#10B981]" />
+            <span className="text-[10px] font-bold tracking-[0.14em] text-zinc-200 uppercase sm:text-[11px]">
+              Disponible · BCN
+              <span className="hidden sm:inline"> &amp; Remoto</span>
+            </span>
           </div>
 
-          {/* Window Content Body */}
-          <div className="relative flex min-h-[390px] flex-col justify-between bg-[#16161D] px-6 py-7 sm:min-h-[430px] sm:px-12 sm:py-9 lg:px-16 lg:py-10 2xl:min-h-[500px] 2xl:px-20 2xl:py-14">
-            {mode === "studio" ? (
-              <motion.div
-                key="window-work"
-                initial={{ y: 6 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 flex flex-1 flex-col justify-between"
-              >
-                {/* Top Pill Status + Display Typography */}
-                <div className="my-auto py-2">
-                  <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#343747] bg-[#21222C] px-3.5 py-1.5 text-xs font-semibold text-zinc-100">
-                    <span className="h-2 w-2 rounded-full bg-[#3B82F6]" />
-                    <span>
-                      Agente del Cambio Tecnológico (375 h) · Disponible para incorporación
-                    </span>
-                  </div>
+          <div className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#2B2F3E] bg-[#11131B] px-3 py-1.5 font-mono text-[10px] font-bold tracking-[0.12em] text-zinc-300 uppercase whitespace-nowrap sm:text-[11px]">
+            <span className="hidden text-[#3B82F6] sm:inline">BCN · 41.4°N</span>
+            <span className="hidden text-zinc-600 sm:inline">|</span>
+            <span>{bcnTime} CET</span>
+          </div>
+        </div>
 
-                  <h1 className="max-w-4xl font-display text-[clamp(2.35rem,5.4vw,4.35rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white">
-                    Webs, ERPs &amp; <br className="hidden sm:block" />
-                    sistemas{" "}
-                    <span className="font-semibold tracking-[-0.04em] text-[#60A5FA]">
-                      inteligentes.
-                    </span>
-                  </h1>
+        {/* Center Stage: Giant Outlined Typographic Marquee + Portrait */}
+        <div className="relative flex flex-1 items-end justify-center pt-6 lg:pt-0">
+          {/* Outlined Kinetic Display Typography Behind Portrait */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-[32%] right-0 left-0 z-0 -translate-y-1/2 overflow-hidden sm:top-[36%] lg:top-[38%]"
+          >
+            <div className="animate-hero-marquee font-display flex items-center whitespace-nowrap">
+              <span className="hero-outline-text pr-10 text-[19vw] font-black leading-[0.88] tracking-[-0.04em] uppercase sm:text-[15vw] lg:text-[12.5vw] 2xl:text-[11.5vw]">
+                ERICK RODRÍGUEZ · WEB, ERPS &amp; IA ·
+              </span>
+              <span className="hero-outline-text pr-10 text-[19vw] font-black leading-[0.88] tracking-[-0.04em] uppercase sm:text-[15vw] lg:text-[12.5vw] 2xl:text-[11.5vw]">
+                ERICK RODRÍGUEZ · WEB, ERPS &amp; IA ·
+              </span>
+            </div>
+          </div>
+
+          {/* Studio Cutout Portrait Anchored Flush Bottom */}
+          <div className="relative z-10 flex w-full items-end justify-center px-4">
+            <img
+              src="/erick-portrait-studio.png"
+              alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
+              className="pointer-events-none h-[290px] w-auto select-none object-contain object-bottom sm:h-[380px] lg:h-[455px] 2xl:h-[620px]"
+            />
+          </div>
+        </div>
+
+        {/* Editorial Lower Anchor Strip (Side Cards on Desktop, Stacked Solid Block on Mobile) */}
+        <div className="relative z-20 border-t border-[#202330] bg-[#0B0C10] px-4 py-4 sm:px-6 lg:pointer-events-none lg:absolute lg:right-0 lg:bottom-6 lg:left-0 lg:border-t-0 lg:bg-transparent lg:px-8 lg:py-0">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            {/* Bottom-Left Statement Card */}
+            <div className="pointer-events-auto rounded-2xl border border-[#2B2F3F] bg-[#101219] p-4 lg:max-w-[360px] lg:p-5 2xl:max-w-[430px] 2xl:p-6">
+              <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#283354] bg-[#131B33] px-2.5 py-0.5 text-[10px] font-bold tracking-[0.14em] text-[#60A5FA] uppercase">
+                <Sparkles size={11} />
+                <span>Agente del Cambio · 375 h</span>
+              </div>
+
+              <h1 className="font-display text-xl font-bold leading-[1.08] tracking-[-0.03em] text-white sm:text-2xl 2xl:text-[32px]">
+                Webs, ERPs e IA en <span className="text-[#3B82F6]">producción</span>
+                <span
+                  className="animate-cursor-blink ml-1 inline-block h-[0.82em] w-[3px] translate-y-[0.06em] bg-[#0044FF]"
+                  aria-hidden="true"
+                />
+              </h1>
+
+              <p className="mt-1.5 text-xs leading-relaxed text-zinc-300 sm:text-[13px] 2xl:text-sm">
+                Desarrollador full-stack con base en marketing digital y gestión. Construyo el
+                producto completo sin depender de terceros.
+              </p>
+
+              <div className="mt-3.5 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => onJumpToProjects()}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#1A58FF] active:scale-[0.98]"
+                >
+                  <span>Ver proyectos</span>
+                  <ArrowDown size={13} strokeWidth={2.5} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onJumpToProjects("erp-privado")}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-[#303549] bg-[#171A24] px-4 py-2 text-xs font-bold text-zinc-100 transition-colors hover:border-[#49516E] hover:bg-[#1E2230]"
+                >
+                  <span>Demo ERP</span>
+                  <ArrowUpRight size={13} strokeWidth={2.2} />
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom-Right Proof & Vertical Scroll Anchor (Desktop) */}
+            <div className="pointer-events-auto hidden flex-col items-end gap-2.5 lg:flex">
+              <div className="rounded-2xl border border-[#2B2F3F] bg-[#101219] px-4 py-3 text-right 2xl:px-5 2xl:py-4">
+                <div className="flex items-center justify-end gap-2 text-xs font-bold text-white 2xl:text-sm">
+                  <CheckCircle2 size={14} className="text-[#10B981]" />
+                  <span>diversplas.es · Top 1 en Google</span>
                 </div>
+                <p className="mt-1 text-[11px] font-medium text-zinc-400 2xl:text-xs">
+                  +1.000 h reales · Subvención directa empresa (375 h)
+                </p>
+              </div>
 
-                {/* Clean Pill CTAs + Attribution */}
-                <div className="mt-5 flex flex-col justify-between gap-5 border-t border-[#303240] pt-5 md:flex-row md:items-end">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <button
-                      type="button"
-                      onClick={() => onJumpToProjects()}
-                      className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#09090B] transition-all hover:bg-[#0044FF] hover:text-white"
-                    >
-                      <span>Ver proyectos en producción</span>
-                      <ArrowDown size={15} strokeWidth={2.4} />
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => onJumpToProjects("private-erp")}
-                      className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-[#383B4B] bg-[#21222C] px-5 py-2.5 text-sm font-semibold text-white transition-all hover:border-[#4F546A] hover:bg-[#2C2F3D]"
-                    >
-                      <span>Ver demo ERP presencial</span>
-                      <ArrowUpRight size={15} strokeWidth={2.2} />
-                    </button>
-                  </div>
-
-                  <div className="max-w-sm text-left md:text-right">
-                    <p className="text-[14.5px] font-semibold leading-snug text-white">
-                      Desarrollador web &amp; especialista en automatización con IA.
-                    </p>
-                    <p className="mt-1 text-[13px] leading-relaxed text-zinc-300">
-                      Top 1 Google en <span className="text-white">diversplas.es</span> · Base en
-                      marketing y gestión administrativa.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="window-about"
-                initial={{ y: 6 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 grid flex-1 grid-cols-1 items-center gap-6 md:grid-cols-12"
-              >
-                <div className="flex flex-col items-center md:col-span-5">
-                  <div className="relative aspect-[4/5] w-44 overflow-hidden rounded-3xl border-2 border-[#2E5BFF] bg-[#0044FF] shadow-2xl sm:w-52">
-                    <img
-                      src="/erick-portrait-studio.png"
-                      alt="Erick Rodríguez — Desarrollador web y especialista en automatización con IA"
-                      loading="eager"
-                      decoding="sync"
-                      className="block h-full w-full object-cover object-top"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start md:col-span-7">
-                  <span className="rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1 text-xs font-semibold text-[#60A5FA]">
-                    Perfil profesional · La Sagrera, Barcelona
-                  </span>
-                  <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.03em] text-white sm:text-4xl">
-                    De la idea a <span className="text-[#60A5FA]">producción real.</span>
-                  </h2>
-                  <p className="mt-2.5 text-[15px] leading-relaxed text-zinc-200">
-                    Construyo la solución completa (web, plataforma, ERP o flujo autónomo con IA y
-                    n8n) y la llevo a producción sin depender de terceros, uniendo técnica y visión
-                    de negocio.
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1.5 text-zinc-100">
-                      <CheckCircle2 size={13} className="text-[#60A5FA]" />
-                      <span>CFGS Marketing + CFGM Gestión Adm. (Monlau)</span>
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#383B4B] bg-[#21222C] px-3.5 py-1.5 text-zinc-100">
-                      <Sparkles size={13} className="text-[#60A5FA]" />
-                      <span>375 h Acreditación Agente del Cambio</span>
-                    </span>
-                  </div>
-
-                  <div className="mt-5 flex flex-wrap items-center gap-3">
-                    <a
-                      href={cvPdf.url}
-                      download="Erick-Rodriguez-CV.pdf"
-                      className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-[#09090B] transition-colors hover:bg-[#0044FF] hover:text-white"
-                    >
-                      <Download size={14} />
-                      <span>Descargar CV en PDF</span>
-                    </a>
-                    <a
-                      href="mailto:hola.erickmartinezz@gmail.com"
-                      className="rounded-full border border-[#383B4B] bg-[#21222C] px-4 py-2.5 text-xs font-semibold text-zinc-100 hover:bg-[#2C2F3D]"
-                    >
-                      hola.erickmartinezz@gmail.com
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Bottom Centered Scroll Down Indicator */}
-            <div className="mt-3 flex justify-center pt-1">
               <button
                 type="button"
                 onClick={() => onJumpToProjects()}
-                aria-label="Bajar a proyectos"
-                className="group inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#383B4B] bg-[#21222C] text-zinc-200 transition-all hover:border-[#4F546A] hover:text-white"
+                className="inline-flex items-center gap-2 rounded-full border border-[#2B2F3F] bg-[#101219] px-4 py-2 text-[11px] font-bold tracking-[0.14em] text-zinc-200 uppercase transition-colors hover:border-[#0044FF] hover:text-white"
               >
-                <ArrowDown
-                  size={14}
-                  className="transition-transform duration-300 group-hover:translate-y-0.5"
-                />
+                <span>Explorar trabajo</span>
+                <ArrowDown size={13} className="text-[#3B82F6]" />
               </button>
             </div>
           </div>
         </div>
-      </motion.div>
-
-      {/* Bottom Whisper-Clean Credential Strip */}
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-xs font-medium text-zinc-300">
-        <span>+1.000 h experiencia real</span>
-        <span aria-hidden="true" className="hidden text-zinc-600 lg:inline">
-          •
-        </span>
-        <span>Top 1 Google · diversplas.es</span>
-        <span aria-hidden="true" className="hidden text-zinc-600 lg:inline">
-          •
-        </span>
-        <a
-          href="mailto:hola.erickmartinezz@gmail.com"
-          className="text-white transition-colors hover:text-[#60A5FA]"
-        >
-          hola.erickmartinezz@gmail.com
-        </a>
-        <span aria-hidden="true" className="hidden text-zinc-600 lg:inline">
-          •
-        </span>
-        <span className="tabular-nums">+34 640 63 0459</span>
       </div>
     </section>
   );
