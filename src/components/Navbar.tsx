@@ -124,7 +124,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <span className="font-display flex h-8 w-8 items-center justify-center rounded-full bg-[#0044FF] text-xs font-extrabold text-white">
             ER
           </span>
-          <span className="font-display text-xs font-bold tracking-[0.14em] uppercase sm:text-sm">
+          <span className="font-display hidden text-xs font-bold tracking-[0.14em] uppercase min-[460px]:inline sm:text-sm">
             Erick Rodríguez
           </span>
         </button>
@@ -162,7 +162,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <button
             type="button"
             onClick={() => scrollToSection("contacto")}
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-2 text-xs font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0033CC] sm:text-[13px]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-3 py-2 text-xs sm:px-4 font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0033CC] sm:text-[13px]"
           >
             <span>Hablemos</span>
             <ArrowUpRight size={14} strokeWidth={2.5} />
