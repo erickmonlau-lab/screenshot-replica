@@ -33,7 +33,7 @@ import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 
 import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
-import { SectionHeading } from "@/components/SectionHeading";
+import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
@@ -314,7 +314,6 @@ function Index() {
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
   const [activeProjectId, setActiveProjectId] = useState<string>("diversplas");
   const [activeAiPhase, setActiveAiPhase] = useState<string>("automation");
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
   const [showLiveSystem, setShowLiveSystem] = useState<boolean>(true);
 
   const selectedAiPhase = aiPhases.find((p) => p.id === activeAiPhase) ?? aiPhases[0]!;
@@ -374,7 +373,7 @@ function Index() {
                     href="https://github.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="t-ink font-mono inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase hover:text-[#0044FF] sm:text-sm"
+                    className="t-ink inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase hover:text-[#0044FF] sm:text-sm"
                   >
                     <span>Ver más proyectos</span>
                     <ArrowUpRight size={14} />
@@ -405,69 +404,50 @@ function Index() {
               />
             </Reveal>
 
-            {/* Split Grid: Tools Dock on Left, Numbered Capabilities on Right */}
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
-              {/* Left Column: Tool Dock Grid (4x4) */}
-              <div className="lg:col-span-12">
-                <div className="mb-3.5 flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#0044FF] uppercase sm:text-[13px]">
-                    Stack &amp; Herramientas Activas
-                  </span>
-                  <span className="t-muted font-mono text-xs sm:text-[13px]">16 tecnologías</span>
-                </div>
-
-                <div className="grid grid-cols-4 gap-2.5 sm:gap-3 lg:grid-cols-8">
-                  {technicalTools.map((t) => {
+            {/* Stack en marquee: dos filas en sentido contrario */}
+            <div
+              className="-mx-5 mt-2 flex flex-col gap-4 overflow-hidden sm:-mx-8"
+              role="list"
+              aria-label="Stack y herramientas"
+            >
+              {[technicalTools.slice(0, 8), technicalTools.slice(8)].map((row, ri) => (
+                <VelocityMarqueeRow key={ri} baseVelocity={ri === 0 ? -1.4 : 1.4}>
+                  {row.map((t) => {
                     const Icon = t.icon;
-                    const isSelected = selectedTool === t.name;
                     return (
-                      <button
+                      <span
                         key={t.name}
-                        type="button"
-                        onClick={() => setSelectedTool(isSelected ? null : t.name)}
-                        className={`t-line t-bg-card flex flex-col items-center justify-center rounded-2xl border p-2.5 text-center transition-all sm:p-3 ${
-                          isSelected
-                            ? "border-[#0044FF] ring-2 ring-[#0044FF]/30 scale-105"
-                            : "hover:border-[#0044FF] hover:scale-105"
-                        }`}
-                        title={`${t.name} · ${t.category}`}
+                        role="listitem"
+                        className="t-line t-bg-card mr-4 inline-flex items-center gap-3 rounded-full border py-2.5 pr-6 pl-2.5"
                       >
-                        <div
-                          className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#09090B] text-white shadow-sm sm:h-10 sm:w-10"
+                        <span
+                          className="flex h-11 w-11 items-center justify-center rounded-full bg-[#09090B] text-white"
                           style={{ borderBottom: `2px solid ${t.color}` }}
                         >
                           {Icon ? (
-                            <Icon size={18} style={{ color: t.color }} />
+                            <Icon size={20} style={{ color: t.color }} />
                           ) : (
-                            <span
-                              className="font-mono text-xs font-black"
-                              style={{ color: t.color }}
-                            >
-                              {t.label}
+                            <span className="text-xs font-bold" style={{ color: t.color }}>
+                              {t.label.slice(0, 3)}
                             </span>
                           )}
-                        </div>
-                        <span className="t-ink font-display mt-1.5 block truncate text-xs font-bold sm:text-[13px]">
-                          {t.name}
                         </span>
-                        <span className="t-muted block w-full truncate text-xs">{t.category}</span>
-                      </button>
+                        <span className="font-display text-lg font-semibold tracking-[-0.02em] sm:text-xl">
+                          {t.name}
+                          <span className="t-muted ml-2 text-sm font-medium">{t.category}</span>
+                        </span>
+                      </span>
                     );
                   })}
-                </div>
-
-                <p className="t-muted mt-3.5 text-sm leading-relaxed sm:text-[15px]">
-                  Herramientas que utilizo a diario en producción: desde frameworks modernos y
-                  modelos de lenguaje hasta pipelines de datos y plataformas de automatización.
-                </p>
-              </div>
+                </VelocityMarqueeRow>
+              ))}
             </div>
 
             {/* Live Interactive Systems Demonstration */}
             <div className="mt-8 border-t border-current/10 pt-7">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#0044FF] uppercase sm:text-[13px]">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#0044FF] uppercase sm:text-[13px]">
                     Demostración interactiva en directo
                   </span>
                   <h4 className="t-ink font-display text-lg font-extrabold tracking-tight sm:text-xl">
@@ -482,7 +462,7 @@ function Index() {
                         key={phase.id}
                         type="button"
                         onClick={() => setActiveAiPhase(phase.id)}
-                        className={`rounded-full px-3.5 py-1.5 font-mono text-xs font-bold tracking-wider uppercase transition-colors sm:text-[13px] ${
+                        className={`rounded-full px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors sm:text-[13px] ${
                           active
                             ? "bg-[#0044FF] text-white"
                             : "t-line t-bg-card t-ink border hover:border-[#0044FF]"
@@ -499,7 +479,7 @@ function Index() {
                 <div className="mb-3 flex items-center justify-between border-b border-[#303240] pb-3">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-[#10B981] animate-pulse" />
-                    <span className="font-mono text-xs font-bold tracking-wider text-[#60A5FA] uppercase sm:text-sm">
+                    <span className="text-xs font-bold tracking-wider text-[#60A5FA] uppercase sm:text-sm">
                       FASE {selectedAiPhase.num} / 04 · {selectedAiPhase.title}
                     </span>
                   </div>
@@ -594,31 +574,16 @@ function Index() {
                   </div>
                 </div>
 
-                <div className="t-line mt-5 grid grid-cols-3 gap-3 border-y py-4">
-                  {[
-                    ["+1.000 h", "Experiencia"],
-                    ["375 h", "Acreditación"],
-                    ["Top 1", "Google SEO"],
-                  ].map(([v, l]) => (
-                    <div key={l}>
-                      <span className="t-muted block font-mono text-xs font-bold tracking-[0.2em] uppercase sm:text-[13px]">
-                        {l}
-                      </span>
-                      <span className="t-ink font-display mt-1 block text-2xl font-extrabold tracking-[-0.03em] sm:text-3xl">
-                        {v}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                <div className="t-line mt-5 border-t" />
 
-                <p className="t-muted mt-4 text-sm leading-relaxed sm:text-base">
+                <p className="t-muted mt-5 text-base leading-snug font-medium sm:text-lg">
                   Combino desarrollo web e IA con base sólida en marketing digital y gestión
                   administrativa: construyo la solución completa y la llevo a producción sin
                   depender de intermediarios. Español y catalán nativos, inglés B2.
                 </p>
 
                 <div className="mt-4">
-                  <span className="t-muted block font-mono text-xs font-bold tracking-[0.2em] uppercase sm:text-[13px]">
+                  <span className="t-muted block text-xs font-bold tracking-[0.2em] uppercase sm:text-[13px]">
                     Actualmente
                   </span>
                   <div className="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
@@ -659,7 +624,7 @@ function Index() {
                 <a
                   href={cvPdf.url}
                   download="Erick-Rodriguez-CV.pdf"
-                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 font-mono text-xs font-bold tracking-[0.16em] uppercase hover:text-[#0044FF] sm:text-sm"
+                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 text-xs font-bold tracking-[0.16em] uppercase hover:text-[#0044FF] sm:text-sm"
                 >
                   <span>Descargar CV completo en PDF</span>
                   <Download size={14} />
@@ -693,7 +658,7 @@ function Index() {
                   },
                 ].map((col, ci) => (
                   <div key={col.label}>
-                    <span className="font-mono text-xs font-bold tracking-[0.18em] text-[#0044FF] uppercase sm:text-sm">
+                    <span className="text-xs font-bold tracking-[0.18em] text-[#0044FF] uppercase sm:text-sm">
                       {col.label}
                     </span>
                     <div className="mt-2.5 flex flex-col">
@@ -704,15 +669,15 @@ function Index() {
                           className="t-line border-t py-3.5"
                         >
                           <div className="flex items-start justify-between gap-3">
-                            <h4 className="t-ink font-display text-sm leading-tight font-extrabold tracking-[-0.02em] sm:text-base">
+                            <h4 className="t-ink font-display text-base leading-tight font-bold tracking-[-0.02em] sm:text-lg">
                               {row.title}
                             </h4>
-                            <span className="t-muted shrink-0 font-mono text-xs font-bold tracking-wider uppercase sm:text-[13px]">
+                            <span className="t-muted shrink-0 text-xs font-bold tracking-wider uppercase sm:text-[13px]">
                               {row.date}
                             </span>
                           </div>
                           <p className="t-accent mt-0.5 text-xs font-bold sm:text-sm">{row.org}</p>
-                          <ul className="t-muted mt-1.5 list-disc space-y-1 pl-4 text-xs leading-relaxed sm:text-sm">
+                          <ul className="t-muted mt-1.5 list-disc space-y-1 pl-4 text-sm leading-relaxed sm:text-[15px]">
                             {row.body.map((b) => (
                               <li key={b}>{b}</li>
                             ))}
@@ -730,109 +695,80 @@ function Index() {
         {/* CONTACTO */}
         <section id="contacto" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
-              <Reveal className="lg:col-span-6">
-                <p className="t-muted mb-3 font-mono text-xs font-bold tracking-[0.26em] uppercase sm:text-sm">
-                  Hablemos · Disponible en Barcelona
+            <p className="mb-5 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]">
+              Contacto · Disponible en Barcelona
+            </p>
+            <BigHeading
+              className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em]"
+              lines={[
+                { text: "Hablemos" },
+                { text: "de tu proyecto.", accent: true },
+              ]}
+            />
+            <Reveal delay={0.1} className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-7">
+                <p className="t-muted max-w-[40ch] text-lg leading-snug font-medium sm:text-xl lg:text-2xl">
+                  Cuéntame qué necesitas, o te enseño en persona la demo del ERP y los sistemas en
+                  producción.
                 </p>
-                <h2 className="t-ink font-display text-[44px] leading-[0.92] font-black tracking-[-0.04em] uppercase sm:text-6xl lg:text-[68px] 2xl:text-[88px]">
-                  HABLEMOS
-                  <br />
-                  DE TU
-                  <br />
-                  <span className="t-accent">PROYECTO.</span>
-                  <span
-                    className="animate-cursor-blink ml-2 inline-block h-[0.75em] w-[4px] bg-[#0044FF] align-baseline"
-                    aria-hidden="true"
-                  />
-                </h2>
-                <p className="t-muted mt-4 max-w-lg text-sm leading-relaxed sm:text-base">
-                  Busco aportar mi perfil híbrido de desarrollo web, IA y negocio — o enseñarte en
-                  persona la demo del ERP y los sistemas en producción.
-                </p>
-                <div className="mt-6 flex flex-wrap items-center gap-3">
+                <div className="mt-7 flex flex-wrap items-center gap-3">
+                  <Magnetic strength={0.1}>
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+                    >
+                      <MessageCircle size={18} strokeWidth={2.3} />
+                      <span>Escribir por WhatsApp</span>
+                      <ArrowUpRight size={16} strokeWidth={2.5} />
+                    </a>
+                  </Magnetic>
                   <a
                     href={cvPdf.url}
                     download="Erick-Rodriguez-CV.pdf"
-                    className="t-bg-ink t-on-ink inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold tracking-[0.12em] uppercase transition-transform hover:scale-[1.03] sm:text-sm"
+                    className="t-ink inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-2 border-current px-7 py-3.5 text-base font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
                   >
-                    <span>Descargar CV (PDF)</span>
-                    <Download size={14} />
+                    <span>Descargar CV</span>
+                    <Download size={16} />
                   </a>
                 </div>
-              </Reveal>
+              </div>
 
-              <Reveal delay={0.08} className="flex flex-col gap-3 lg:col-span-6">
-                <div className="t-line t-bg-card flex items-center justify-between gap-3 rounded-2xl border p-4 sm:p-5">
-                  <div className="flex min-w-0 items-center gap-3.5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                      <Mail size={18} />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="t-muted block font-mono text-xs font-bold tracking-[0.16em] uppercase sm:text-[13px]">
-                        01 · Email directo
-                      </span>
-                      <a
-                        href={`mailto:${email}`}
-                        className="t-ink font-display mt-0.5 block truncate text-sm font-bold sm:text-base"
-                      >
+              <dl className="lg:col-span-5">
+                {[
+                  { icon: Mail, k: "Email", node: (
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <a href={`mailto:${email}`} className="font-display truncate text-lg font-semibold tracking-[-0.02em] hover:text-[#0044FF] sm:text-xl">
                         {email}
                       </a>
+                      <CopyButton value={email} label="correo" />
                     </div>
-                  </div>
-                  <CopyButton value={email} label="correo" />
-                </div>
-
-                <div className="t-line t-bg-card flex items-center justify-between gap-3 rounded-2xl border p-4 sm:p-5">
-                  <div className="flex min-w-0 items-center gap-3.5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                      <MessageCircle size={18} />
-                    </div>
-                    <div className="min-w-0">
-                      <span className="t-muted block font-mono text-xs font-bold tracking-[0.16em] uppercase sm:text-[13px]">
-                        02 · WhatsApp &amp; Teléfono
-                      </span>
-                      <a
-                        href={whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="t-ink font-display mt-0.5 block text-sm font-bold tabular-nums sm:text-base"
-                      >
+                  ) },
+                  { icon: MessageCircle, k: "WhatsApp y teléfono", node: (
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="font-display text-lg font-semibold tracking-[-0.02em] tabular-nums hover:text-[#0044FF] sm:text-xl">
                         {phoneDisplay}
                       </a>
+                      <CopyButton value={phoneDisplay} label="teléfono" />
                     </div>
-                  </div>
-                  <CopyButton value={phoneDisplay} label="teléfono" />
-                </div>
-
-                <div className="t-line t-bg-card flex items-center gap-3.5 rounded-2xl border p-4 sm:p-5">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                    <MapPin size={18} />
-                  </div>
-                  <div>
-                    <span className="t-muted block font-mono text-xs font-bold tracking-[0.16em] uppercase sm:text-[13px]">
-                      03 · Ubicación y modalidad
+                  ) },
+                  { icon: MapPin, k: "Ubicación", node: (
+                    <span className="font-display text-lg font-semibold tracking-[-0.02em] sm:text-xl">
+                      La Sagrera, Barcelona · Presencial o remoto
                     </span>
-                    <span className="t-ink font-display mt-0.5 block text-sm font-bold sm:text-base">
-                      La Sagrera, Barcelona · Presencial o Remoto
-                    </span>
+                  ) },
+                ].map(({ icon: I, k, node }) => (
+                  <div key={k} className="t-line border-t py-4 first:border-t-2">
+                    <dt className="t-muted mb-1.5 flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase">
+                      <I size={14} className="text-[#0044FF]" />
+                      {k}
+                    </dt>
+                    <dd>{node}</dd>
                   </div>
-                </div>
-
-                <Magnetic strength={0.1} className="mt-1">
-                  <a
-                    href={whatsapp}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="t-ink font-display flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-full border-2 border-current px-6 py-3.5 text-xs font-extrabold tracking-[0.14em] uppercase transition-colors hover:border-[#0044FF] hover:bg-[#0044FF] hover:text-white sm:text-sm"
-                  >
-                    <MessageCircle size={18} strokeWidth={2.3} />
-                    <span>Escribir por WhatsApp ahora</span>
-                    <ArrowUpRight size={16} strokeWidth={2.5} />
-                  </a>
-                </Magnetic>
-              </Reveal>
-            </div>
+                ))}
+              </dl>
+            </Reveal>
           </div>
         </section>
 
