@@ -37,6 +37,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
+import { ServicesSection } from "@/components/ServicesSection";
 import {
   AgentFlow,
   CodeFlow,
@@ -151,45 +152,6 @@ const technicalTools = [
   { name: "Canva", label: "Canva", category: "Visual", color: "#00C4CC", icon: Palette },
   { name: "APIs / Hooks", label: "APIs", category: "Integración", color: "#3B82F6", icon: Cpu },
   { name: "GitHub", label: "GitHub", category: "Git", color: "#A855F7", icon: FolderGit2 },
-];
-
-const capabilities = [
-  {
-    num: "01",
-    tag: "DESARROLLO WEB & SISTEMAS",
-    icon: Code2,
-    title: "Plataformas Web y ERPs a Medida",
-    description:
-      "Construcción y despliegue de plataformas web de alto rendimiento, portales corporativos y sistemas ERP internos para empresas con código tipado, SEO técnico y arquitecturas modernas.",
-    skills: [
-      "React & TypeScript",
-      "Next.js & Vite",
-      "ERP Operativo Interno",
-      "APIs & Webhooks",
-      "Bases de Datos & SQL",
-      "SEO Técnico (Top 1)",
-      "Core Web Vitals",
-      "Despliegue Producción",
-    ],
-  },
-  {
-    num: "02",
-    tag: "AUTOMATIZACIÓN IA & NEGOCIO",
-    icon: Workflow,
-    title: "Flujos Autónomos con n8n e IA",
-    description:
-      "Automatización de procesos operativos, conexión entre herramientas (CRMs, formularios, WhatsApp), enrutamiento inteligente de modelos LLM y gestión de contexto empresarial.",
-    skills: [
-      "Flujos n8n Autónomos",
-      "Agentes de IA Conectados",
-      "Claude con Skills Propios",
-      "Second Brain en Obsidian",
-      "Shopify & WordPress",
-      "Atención WhatsApp Business",
-      "Acreditación Oficial 375 h",
-      "Subvenciones Salariales",
-    ],
-  },
 ];
 
 const aiPhases = [
@@ -429,14 +391,16 @@ function Index() {
           </div>
         </section>
 
-        {/* CAPACIDADES & TRABAJO CON IA — What I Can Do */}
+        <ServicesSection />
+
+        {/* STACK + IA EN ACCIÓN */}
         <section id="ia" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
-                eyebrow="Capacidades técnicas"
-                title="Lo Que Puedo Hacer"
-                accentTitle=""
+                eyebrow="Stack e inteligencia artificial"
+                title="Herramientas reales,"
+                accentTitle="IA en acción."
                 description="Combino desarrollo web de vanguardia, automatización con IA y mentalidad operativa para crear sistemas fiables, eficientes y orientados al negocio."
               />
             </Reveal>
@@ -444,7 +408,7 @@ function Index() {
             {/* Split Grid: Tools Dock on Left, Numbered Capabilities on Right */}
             <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
               {/* Left Column: Tool Dock Grid (4x4) */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-12">
                 <div className="mb-3.5 flex items-center justify-between">
                   <span className="font-mono text-xs font-bold tracking-[0.2em] text-[#0044FF] uppercase sm:text-[13px]">
                     Stack &amp; Herramientas Activas
@@ -452,7 +416,7 @@ function Index() {
                   <span className="t-muted font-mono text-xs sm:text-[13px]">16 tecnologías</span>
                 </div>
 
-                <div className="grid grid-cols-4 gap-2.5 sm:gap-3">
+                <div className="grid grid-cols-4 gap-2.5 sm:gap-3 lg:grid-cols-8">
                   {technicalTools.map((t) => {
                     const Icon = t.icon;
                     const isSelected = selectedTool === t.name;
@@ -496,59 +460,6 @@ function Index() {
                   Herramientas que utilizo a diario en producción: desde frameworks modernos y
                   modelos de lenguaje hasta pipelines de datos y plataformas de automatización.
                 </p>
-              </div>
-
-              {/* Right Column: Numbered Capability Cards 01 & 02 */}
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:col-span-7">
-                {capabilities.map((cap) => {
-                  const CapIcon = cap.icon;
-                  return (
-                    <div
-                      key={cap.num}
-                      className="t-line t-bg-card flex flex-col justify-between rounded-3xl border p-5 sm:p-6 shadow-sm"
-                    >
-                      <div>
-                        <div className="flex items-start justify-between">
-                          <span className="t-ink font-display text-4xl font-black tracking-tighter 2xl:text-5xl">
-                            {cap.num}
-                          </span>
-                          <span className="t-muted text-right font-mono text-xs font-bold tracking-[0.14em] uppercase sm:text-[13px]">
-                            {cap.tag}
-                          </span>
-                        </div>
-
-                        <div className="mt-4 flex items-center gap-3">
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
-                            <CapIcon size={18} strokeWidth={2.3} />
-                          </div>
-                          <h3 className="t-ink font-display text-base font-extrabold tracking-tight sm:text-lg">
-                            {cap.title}
-                          </h3>
-                        </div>
-
-                        <p className="t-muted mt-3 text-sm leading-relaxed sm:text-[15px]">
-                          {cap.description}
-                        </p>
-                      </div>
-
-                      <div className="mt-5 border-t border-current/10 pt-4">
-                        <span className="t-muted mb-2.5 block font-mono text-xs font-bold tracking-widest uppercase sm:text-[13px]">
-                          Capacidades clave
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {cap.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="t-line t-bg-card2 t-ink rounded-lg border px-2.5 py-1 text-xs font-semibold sm:text-[13px]"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
               </div>
             </div>
 
