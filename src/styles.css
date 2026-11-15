@@ -232,3 +232,98 @@
   background: var(--spotlight-gradient);
   z-index: 0;
 }
+
+/* ===== Theme tokens (light default, html.dark) ===== */
+:root {
+  --t-page: #f2f4f8;
+  --t-hero: #e3e5e9;
+  --t-card: #ffffff;
+  --t-card2: #eceff4;
+  --t-ink: #0b0c10;
+  --t-on-ink: #ffffff;
+  --t-muted: #4b5160;
+  --t-line: #cdd1d8;
+  --t-accent: #0044ff;
+}
+
+html.dark {
+  --t-page: #0a0b0f;
+  --t-hero: #0a0b0f;
+  --t-card: #12141c;
+  --t-card2: #1a1d28;
+  --t-ink: #ffffff;
+  --t-on-ink: #0b0c10;
+  --t-muted: #9aa0b2;
+  --t-line: #262a38;
+  --t-accent: #5b97ff;
+}
+
+html,
+body {
+  background-color: var(--t-page);
+  color: var(--t-ink);
+}
+
+.t-bg-page {
+  background-color: var(--t-page);
+}
+.t-bg-hero {
+  background-color: var(--t-hero);
+}
+.t-bg-card {
+  background-color: var(--t-card);
+}
+.t-bg-card2 {
+  background-color: var(--t-card2);
+}
+.t-bg-ink {
+  background-color: var(--t-ink);
+}
+.t-ink {
+  color: var(--t-ink);
+}
+.t-on-ink {
+  color: var(--t-on-ink);
+}
+.t-muted {
+  color: var(--t-muted);
+}
+.t-accent {
+  color: var(--t-accent);
+}
+.t-line {
+  border-color: var(--t-line);
+}
+
+.hero-outline-light {
+  color: var(--t-hero);
+  -webkit-text-stroke: 4px var(--t-ink);
+  paint-order: stroke fill;
+  user-select: none;
+}
+
+/* Circular theme reveal (View Transitions) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+}
+
+.hover\:t-bg-card2:hover {
+  background-color: var(--t-card2);
+}
+.hover\:t-ink:hover {
+  color: var(--t-ink);
+}
+.hover\:t-bg-ink:hover {
+  background-color: var(--t-ink);
+}
+.hover\:t-on-ink:hover {
+  color: var(--t-on-ink);
+}

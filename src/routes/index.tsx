@@ -9,7 +9,6 @@ import {
   Clock,
   Copy,
   Download,
-  ExternalLink,
   GraduationCap,
   Mail,
   MapPin,
@@ -27,6 +26,7 @@ import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import {
   AgentFlow,
@@ -37,7 +37,6 @@ import {
   ModelCycle,
   Reveal,
   ScrollProgressRail,
-  TiltStage,
   VelocityMarqueeRow,
 } from "@/components/portfolio-motion";
 
@@ -275,7 +274,6 @@ function Index() {
   const [activeAiPhase, setActiveAiPhase] = useState<string>(aiPhases[0].id);
   const aiStepRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  const selectedProject = (projectCases.find((p) => p.id === activeProjectId) ?? projectCases[0])!;
   const selectedAiPhase = aiPhases.find((p) => p.id === activeAiPhase) ?? aiPhases[0];
 
   /* IntersectionObserver syncing the 4 left AI blocks with the right "Sistema en Vivo" card */
@@ -299,26 +297,23 @@ function Index() {
   }, []);
 
   function handleJumpToProjects(caseId?: string) {
-    if (caseId) {
-      setActiveProjectId(caseId);
-    }
+    if (caseId) setActiveProjectId(caseId);
     const section = document.getElementById("proyectos");
     if (section) {
-      const navOffset = 62;
-      const top = section.getBoundingClientRect().top + window.scrollY - navOffset;
+      const top = section.getBoundingClientRect().top + window.scrollY - 62;
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     }
   }
 
+  const sectionBase =
+    "t-bg-page t-ink t-line scroll-mt-[62px] border-t lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center";
+
   return (
-    <div className="min-h-screen bg-[#050507] text-white">
+    <div className="t-bg-page t-ink min-h-screen">
       <ScrollProgressRail />
       <Navbar mode={heroMode} onChangeMode={setHeroMode} />
 
       <main>
-        {/* =====================================================================
-            1. DARK STUDIO HERO (PERRY WANG MACOS WINDOW × ORDERALO V5 STAGE)
-            ===================================================================== */}
         <StudioHero
           mode={heroMode}
           activeCaseId={activeProjectId}
@@ -328,33 +323,28 @@ function Index() {
           onJumpToProjects={handleJumpToProjects}
         />
 
-        {/* =====================================================================
-            2. HAIRLINE VELOCITY MARQUEE
-            ===================================================================== */}
+        {/* Marquee band */}
         <div
-          className="relative z-20 overflow-hidden border-y border-[#303240] bg-[#16161D] py-3 leading-none"
+          className="t-bg-ink t-on-ink relative z-20 overflow-hidden py-3 leading-none"
           aria-hidden="true"
         >
           <VelocityMarqueeRow
             baseVelocity={-2.0}
-            className="font-display text-[11px] font-bold leading-none tracking-[0.16em] text-zinc-200 sm:text-xs"
+            className="font-display text-[11px] leading-none font-bold tracking-[0.16em] sm:text-xs"
           >
             {marqueeText}
           </VelocityMarqueeRow>
         </div>
 
-        {/* =====================================================================
-            3. SOLID DARK STAT-CARDS (#metricas) — NUMBERED EDITORIAL STATEMENTS
-            ===================================================================== */}
+        {/* METRICAS */}
         <section
           id="metricas"
-          className="dark-topo-surface scroll-mt-[62px] border-b border-[#202330] py-12 lg:py-16"
+          className="t-bg-page t-ink scroll-mt-[62px] py-14 lg:py-20"
           aria-label="Resultados clave"
         >
           <div className="mx-auto max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-8">
               <SectionHeading
-                surface="dark"
                 eyebrow="Impacto y garantía"
                 title="Producción real,"
                 accentTitle="resultados medibles."
@@ -363,291 +353,103 @@ function Index() {
             </Reveal>
 
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {/* Stat Card 01 */}
-              <Reveal className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#282B3A] bg-[#12131A] p-6 sm:p-7">
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-3 right-5 font-display text-5xl font-black tracking-tighter text-[#1E212E]"
-                >
-                  01
-                </span>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <Clock size={20} strokeWidth={2.2} />
-                  </div>
-                  <span className="rounded-full border border-[#303447] bg-[#191B25] px-3 py-1 text-[10.5px] font-bold tracking-[0.12em] text-zinc-200 uppercase">
-                    Experiencia real
-                  </span>
-                </div>
-                <div className="mt-6 border-t border-[#232635] pt-5">
-                  <strong className="font-display block text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
-                    <Counter to={1000} prefix="+" />{" "}
-                    <span className="text-2xl font-bold text-[#3B82F6]">h</span>
-                  </strong>
-                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
-                    De experiencia acumulada entre prácticas en empresa, producto propio y
-                    desarrollo web en producción.
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* Stat Card 02 */}
-              <Reveal
-                delay={0.08}
-                className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#282B3A] bg-[#12131A] p-6 sm:p-7"
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-3 right-5 font-display text-5xl font-black tracking-tighter text-[#1E212E]"
-                >
-                  02
-                </span>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <TrendingUp size={20} strokeWidth={2.2} />
-                  </div>
-                  <span className="rounded-full border border-[#303447] bg-[#191B25] px-3 py-1 text-[10.5px] font-bold tracking-[0.12em] text-zinc-200 uppercase">
-                    SEO en vivo
-                  </span>
-                </div>
-                <div className="mt-6 border-t border-[#232635] pt-5">
-                  <strong className="font-display inline-flex items-baseline gap-2 text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
-                    <span>Top</span>
-                    <span className="text-[#3B82F6]">
-                      <Counter to={1} />
+              {[
+                {
+                  n: "01",
+                  icon: Clock,
+                  tag: "Experiencia real",
+                  value: (
+                    <>
+                      <Counter to={1000} prefix="+" /> <span className="t-accent text-2xl">h</span>
+                    </>
+                  ),
+                  text: "De experiencia acumulada entre prácticas en empresa, producto propio y desarrollo web en producción.",
+                },
+                {
+                  n: "02",
+                  icon: TrendingUp,
+                  tag: "SEO en vivo",
+                  value: (
+                    <>
+                      Top{" "}
+                      <span className="t-accent">
+                        <Counter to={1} />
+                      </span>
+                    </>
+                  ),
+                  text: "En Google en búsquedas de extraescolares en Barcelona con diversplas.es, web desarrollada por mí y recién lanzada.",
+                },
+                {
+                  n: "03",
+                  icon: Award,
+                  tag: "Subvención empresa",
+                  value: (
+                    <>
+                      <Counter to={375} /> <span className="t-accent text-2xl">h</span>
+                    </>
+                  ),
+                  text: "De acreditación oficial como Agente del Cambio Tecnológico: la empresa que me contrate accede a subvenciones salariales directas.",
+                },
+              ].map((stat, i) => {
+                const Icon = stat.icon;
+                return (
+                  <Reveal
+                    key={stat.n}
+                    delay={i * 0.08}
+                    className="t-line t-bg-card relative flex flex-col justify-between overflow-hidden rounded-2xl border p-6 sm:p-7"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="t-muted font-display pointer-events-none absolute top-3 right-5 text-5xl font-black tracking-tighter"
+                    >
+                      {stat.n}
                     </span>
-                  </strong>
-                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
-                    En Google en búsquedas de extraescolares en Barcelona con{" "}
-                    <strong className="font-semibold text-white">diversplas.es</strong>, web
-                    desarrollada por mí y recién lanzada.
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* Stat Card 03 */}
-              <Reveal
-                delay={0.16}
-                className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#282B3A] bg-[#12131A] p-6 sm:p-7"
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute top-3 right-5 font-display text-5xl font-black tracking-tighter text-[#1E212E]"
-                >
-                  03
-                </span>
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2E5BFF] bg-[#0044FF] text-white">
-                    <Award size={20} strokeWidth={2.2} />
-                  </div>
-                  <span className="rounded-full border border-[#303447] bg-[#191B25] px-3 py-1 text-[10.5px] font-bold tracking-[0.12em] text-zinc-200 uppercase">
-                    Subvención empresa
-                  </span>
-                </div>
-                <div className="mt-6 border-t border-[#232635] pt-5">
-                  <strong className="font-display block text-4xl font-extrabold tracking-[-0.04em] text-white tabular-nums sm:text-5xl">
-                    <Counter to={375} />{" "}
-                    <span className="text-2xl font-bold text-[#3B82F6]">h</span>
-                  </strong>
-                  <p className="mt-2.5 text-sm leading-relaxed text-zinc-300">
-                    De acreditación oficial como Agente del Cambio Tecnológico: la empresa que me
-                    contrate accede a subvenciones salariales directas.
-                  </p>
-                </div>
-              </Reveal>
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
+                        <Icon size={20} strokeWidth={2.2} />
+                      </div>
+                      <span className="t-line t-bg-card2 t-ink rounded-full border px-3 py-1 text-[10.5px] font-bold tracking-[0.12em] uppercase">
+                        {stat.tag}
+                      </span>
+                    </div>
+                    <div className="t-line mt-6 border-t pt-5">
+                      <strong className="t-ink font-display block text-4xl font-extrabold tracking-[-0.04em] tabular-nums sm:text-5xl">
+                        {stat.value}
+                      </strong>
+                      <p className="t-muted mt-2.5 text-sm leading-relaxed">{stat.text}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* =====================================================================
-            4. PROYECTOS (#proyectos) — 1-SCREEN PC FIT + VENTANA MACOS SÓLIDA
-            ===================================================================== */}
-        <section
-          id="proyectos"
-          className="light-studio-grid scroll-mt-[62px] bg-[#F2F4F8] py-8 text-[#0A0F1D] lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
-        >
+        {/* PROYECTOS — coverflow gallery */}
+        <section id="proyectos" className={`${sectionBase} py-5 2xl:py-12`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-4 2xl:mb-6">
+            <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
-                surface="light"
                 eyebrow="Proyectos seleccionados"
                 title="Webs en producción."
                 accentTitle="Y dos sistemas en directo."
-                description="Selecciona cada proyecto para previsualizar el resultado en el visor macOS o explorar la demo presencial."
-                rightSlot={
-                  <button
-                    type="button"
-                    onClick={() => setActiveProjectId("erp-privado")}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[#CBD5E1] bg-white px-4 py-2 text-xs font-bold text-[#09090B] transition-colors hover:border-[#0044FF] hover:text-[#0044FF]"
-                  >
-                    <span>Explorar Demo ERP</span>
-                    <ArrowUpRight size={13} />
-                  </button>
-                }
+                description="Una colección de webs reales, plataformas propias y proyectos confidenciales que enseño en directo."
               />
             </Reveal>
-
-            <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
-              {/* Left Interactive Index Stack */}
-              <div className="flex flex-col justify-between gap-2 lg:col-span-5 2xl:gap-3">
-                {projectCases.map((project) => {
-                  const isActive = project.id === selectedProject.id;
-                  return (
-                    <button
-                      key={project.id}
-                      type="button"
-                      onClick={() => setActiveProjectId(project.id)}
-                      onFocus={() => setActiveProjectId(project.id)}
-                      className={`group relative flex w-full flex-col gap-1 rounded-xl border p-2.5 text-left transition-all sm:p-3 2xl:gap-1.5 2xl:rounded-2xl 2xl:p-4 ${
-                        isActive
-                          ? "border-[#0044FF] bg-white shadow-[0_12px_28px_-10px_#C7D4FF] ring-2 ring-[#DBE4FF]"
-                          : "border-[#D4D7E2] bg-white hover:border-[#9CA3B8]"
-                      }`}
-                    >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-display text-[11px] font-extrabold transition-colors 2xl:h-7 2xl:w-7 2xl:text-xs ${
-                              isActive ? "bg-[#0044FF] text-white" : "bg-zinc-200 text-[#0A0F1D]"
-                            }`}
-                          >
-                            {project.index}
-                          </span>
-                          <span className="font-display text-[15px] font-extrabold tracking-[-0.02em] text-[#0A0F1D] sm:text-base 2xl:text-lg">
-                            {project.name}
-                          </span>
-                        </div>
-                        <span
-                          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10.5px] font-bold transition-colors 2xl:text-xs ${
-                            isActive
-                              ? "bg-[#0044FF] text-white"
-                              : "border border-[#D4D7E2] bg-[#F2F4F8] text-[#0A0F1D]"
-                          }`}
-                        >
-                          {project.status}
-                        </span>
-                      </div>
-
-                      <p className="text-xs font-medium leading-snug text-zinc-700 2xl:text-[13.5px]">
-                        {project.outcome}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 2xl:gap-1.5">
-                        {project.stack.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full border border-[#E2E4EC] bg-[#F2F4F8] px-2 py-0.5 text-[10px] font-semibold text-[#0A0F1D] 2xl:px-2.5 2xl:text-[11px]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Right macOS Dark Bezel Browser Stage */}
-              <div className="lg:col-span-7">
-                <TiltStage className="h-full">
-                  <div className="flex h-full flex-col justify-between overflow-hidden rounded-[20px] border border-[#303240] bg-[#16161D] p-2.5 text-white shadow-[0_24px_48px_-14px_#0A0F1D] sm:p-3 2xl:rounded-[26px] 2xl:p-4">
-                    {/* macOS Chrome Bar */}
-                    <div className="mb-2 flex items-center justify-between gap-3 rounded-xl border border-[#303240] bg-[#21222C] px-3 py-1.5 2xl:mb-3 2xl:px-4 2xl:py-2">
-                      <div className="flex items-center gap-1.5" aria-hidden="true">
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F56]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#FFBD2E]" />
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#27C93F]" />
-                      </div>
-                      <span className="truncate rounded-full border border-[#383B4B] bg-[#16161D] px-3 py-0.5 text-[11px] font-medium text-zinc-100 2xl:px-4 2xl:text-xs">
-                        {selectedProject.domain}
-                      </span>
-                      <a
-                        href={selectedProject.href}
-                        {...(selectedProject.isPrivate
-                          ? {}
-                          : { target: "_blank", rel: "noopener noreferrer" })}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#0044FF] px-3 py-1 text-[11px] font-bold text-white transition-colors hover:bg-white hover:text-[#09090B] 2xl:px-3.5 2xl:text-xs"
-                      >
-                        <span>{selectedProject.ctaLabel}</span>
-                        <ExternalLink size={11} />
-                      </a>
-                    </div>
-
-                    {/* Preview Viewport */}
-                    <div className="flex-1 overflow-hidden rounded-xl border border-[#303240] bg-[#09090B]">
-                      <motion.div
-                        key={selectedProject.id}
-                        initial={{ y: 5 }}
-                        animate={{ y: 0 }}
-                        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      >
-                        {selectedProject.isPrivate ? (
-                          <ErpShowcase />
-                        ) : (
-                          <a
-                            href={selectedProject.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group block overflow-hidden bg-[#16161D]"
-                          >
-                            <img
-                              src={selectedProject.image}
-                              alt={`Captura real de ${selectedProject.name}`}
-                              className="h-[205px] w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02] sm:h-[235px] 2xl:h-[360px]"
-                            />
-                          </a>
-                        )}
-                      </motion.div>
-                    </div>
-
-                    {/* Bottom Project Summary & Pill CTA */}
-                    <div className="mt-2 flex flex-col justify-between gap-2.5 rounded-xl border border-[#303240] bg-[#21222C] p-3 sm:flex-row sm:items-center sm:p-3.5 2xl:mt-3 2xl:p-4">
-                      <div>
-                        <div className="mb-1 flex flex-wrap gap-1 2xl:mb-1.5 2xl:gap-1.5">
-                          {selectedProject.stack.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-full border border-[#383B4B] bg-[#16161D] px-2 py-0.5 text-[10.5px] font-semibold text-white 2xl:px-2.5 2xl:text-[11px]"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <p className="max-w-xl text-xs leading-snug text-zinc-200 2xl:text-sm">
-                          {selectedProject.description}
-                        </p>
-                      </div>
-                      <Magnetic className="shrink-0" strength={0.12}>
-                        <a
-                          href={selectedProject.href}
-                          {...(selectedProject.isPrivate
-                            ? {}
-                            : { target: "_blank", rel: "noopener noreferrer" })}
-                          className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#09090B] transition-all hover:bg-[#0044FF] hover:text-white 2xl:px-5 2xl:py-2.5 2xl:text-xs"
-                        >
-                          <span>{selectedProject.ctaLabel}</span>
-                          <ArrowUpRight size={13} />
-                        </a>
-                      </Magnetic>
-                    </div>
-                  </div>
-                </TiltStage>
-              </div>
-            </div>
+            <ProjectCarousel
+              slides={projectCases}
+              activeId={activeProjectId}
+              onChange={setActiveProjectId}
+              privateSlide={<ErpShowcase />}
+            />
           </div>
         </section>
 
-        {/* =====================================================================
-            5. TRABAJO CON IA (#ia) — 1-SCREEN PC FIT + FLUJO SÓLIDO
-            ===================================================================== */}
-        <section
-          id="ia"
-          className="dark-topo-surface relative scroll-mt-[62px] py-6 text-white lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
-        >
+        {/* TRABAJO CON IA */}
+        <section id="ia" className={`${sectionBase} py-5 2xl:py-12`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-3.5 2xl:mb-6">
+            <Reveal className="mb-4 2xl:mb-6">
               <SectionHeading
-                surface="dark"
                 eyebrow="Trabajo con IA · Capacidades"
                 title="Desarrollo e IA integrados"
                 accentTitle="en el ciclo de producto."
@@ -656,7 +458,6 @@ function Index() {
             </Reveal>
 
             <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
-              {/* Left 2x2 Solid Phase Grid */}
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:col-span-6 2xl:gap-3.5">
                 {aiPhases.map((phase) => {
                   const active = phase.id === selectedAiPhase.id;
@@ -670,29 +471,37 @@ function Index() {
                       type="button"
                       onClick={() => setActiveAiPhase(phase.id)}
                       onMouseEnter={() => setActiveAiPhase(phase.id)}
-                      className={`relative flex w-full flex-col justify-between gap-1.5 rounded-xl border p-3 text-left transition-all sm:p-3.5 2xl:gap-2 2xl:rounded-2xl 2xl:p-5 ${
+                      className={`relative flex w-full flex-col justify-between gap-1.5 rounded-2xl border-2 p-3.5 text-left transition-colors 2xl:gap-2 2xl:p-5 ${
                         active
-                          ? "border-[#3B82F6] bg-[#0B256B]"
-                          : "border-[#303240] bg-[#16161D] hover:border-[#4B5066] hover:bg-[#21222C]"
+                          ? "border-[#0044FF] bg-[#0044FF] text-white"
+                          : "t-line t-bg-card t-ink hover:border-[#0044FF]"
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-2">
                           <span
-                            className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md font-display text-[11px] font-extrabold 2xl:h-7 2xl:w-7 2xl:text-xs ${
-                              active ? "bg-[#0044FF] text-white" : "bg-[#21222C] text-white"
+                            className={`font-display flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-[11px] font-extrabold 2xl:h-7 2xl:w-7 2xl:text-xs ${
+                              active ? "bg-white text-[#0044FF]" : "t-bg-ink t-on-ink"
                             }`}
                           >
                             {phase.num}
                           </span>
-                          <span className="truncate text-[10px] font-bold uppercase tracking-wider text-[#60A5FA] 2xl:text-[11px]">
+                          <span
+                            className={`truncate font-mono text-[10px] font-bold tracking-wider uppercase 2xl:text-[11px] ${
+                              active ? "text-blue-100" : "t-muted"
+                            }`}
+                          >
                             {phase.kicker}
                           </span>
                         </div>
-                        <h3 className="mt-1.5 font-display text-[15px] font-bold tracking-[-0.02em] text-white 2xl:mt-2 2xl:text-lg">
+                        <h3 className="font-display mt-1.5 text-[15px] font-bold tracking-[-0.02em] 2xl:mt-2 2xl:text-lg">
                           {phase.title}
                         </h3>
-                        <p className="mt-0.5 text-xs leading-snug text-zinc-300 2xl:mt-1 2xl:text-[13.5px] 2xl:leading-relaxed">
+                        <p
+                          className={`mt-0.5 text-xs leading-snug 2xl:mt-1 2xl:text-[13.5px] 2xl:leading-relaxed ${
+                            active ? "text-blue-50" : "t-muted"
+                          }`}
+                        >
                           {phase.description}
                         </p>
                       </div>
@@ -700,10 +509,10 @@ function Index() {
                         {phase.tags.map((t) => (
                           <span
                             key={t}
-                            className={`rounded-full px-2 py-0.5 text-[10px] font-semibold 2xl:px-2.5 2xl:text-[11px] ${
+                            className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold 2xl:px-2.5 2xl:text-[11px] ${
                               active
-                                ? "border border-[#3B82F6] bg-[#0044FF] text-white"
-                                : "border border-[#383B4B] bg-[#21222C] text-zinc-100"
+                                ? "border-white bg-white text-[#0044FF]"
+                                : "t-line t-bg-card2 t-ink"
                             }`}
                           >
                             {t}
@@ -715,15 +524,14 @@ function Index() {
                 })}
               </div>
 
-              {/* Right Solid Live System */}
               <div className="lg:col-span-6">
                 <div className="macos-window-frame flex h-full flex-col justify-between rounded-[20px] p-3.5 text-white sm:p-4 2xl:rounded-[26px] 2xl:p-6">
                   <div className="mb-2.5 flex items-center justify-between border-b border-[#303240] pb-2.5 2xl:mb-4 2xl:pb-3.5">
                     <div>
-                      <span className="text-[10.5px] font-bold uppercase tracking-wider text-[#60A5FA] 2xl:text-xs">
+                      <span className="text-[10.5px] font-bold tracking-wider text-[#60A5FA] uppercase 2xl:text-xs">
                         Sistema en vivo · Fase {selectedAiPhase.num}
                       </span>
-                      <h4 className="mt-0.5 font-display text-base font-extrabold tracking-[-0.015em] text-white 2xl:text-xl">
+                      <h4 className="font-display mt-0.5 text-base font-extrabold tracking-[-0.015em] text-white 2xl:text-xl">
                         {selectedAiPhase.title}
                       </h4>
                     </div>
@@ -756,17 +564,16 @@ function Index() {
               </div>
             </div>
 
-            {/* 375 Hours Official Accreditation Subsidy Strip — Solid Electric Cobalt */}
             <Reveal delay={0.08}>
               <div
                 id="acreditacion-375h"
-                className="relative z-10 mt-3 flex scroll-mt-[62px] flex-col justify-between gap-3 overflow-hidden rounded-2xl border border-[#3B82F6] bg-[#0044FF] px-5 py-3 text-white sm:px-6 lg:flex-row lg:items-center 2xl:mt-6 2xl:px-8 2xl:py-5"
+                className="relative z-10 mt-3 flex scroll-mt-[62px] flex-col justify-between gap-3 overflow-hidden rounded-2xl bg-[#0044FF] px-5 py-3 text-white sm:px-6 lg:flex-row lg:items-center 2xl:mt-6 2xl:px-8 2xl:py-5"
               >
                 <div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#60A5FA] bg-[#0033CC] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white 2xl:px-3 2xl:text-[11px]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-0.5 text-[10px] font-bold tracking-[0.12em] text-[#0044FF] uppercase 2xl:px-3 2xl:text-[11px]">
                     Subvenciones salariales directas para empresa
                   </span>
-                  <h3 className="mt-1 font-display text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl 2xl:mt-1.5 2xl:text-2xl">
+                  <h3 className="font-display mt-1 text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl 2xl:mt-1.5 2xl:text-2xl">
                     Acreditación oficial de 375 h como Agente del Cambio Tecnológico
                   </h3>
                   <p className="mt-0.5 max-w-3xl text-xs leading-snug text-blue-50 2xl:mt-1 2xl:text-sm">
@@ -778,7 +585,7 @@ function Index() {
                 <Magnetic className="shrink-0" strength={0.12}>
                   <a
                     href="#contacto"
-                    className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-wider text-[#09090B] shadow-lg transition-all hover:bg-[#09090B] hover:text-white 2xl:min-h-[48px] 2xl:px-6 2xl:py-3"
+                    className="inline-flex min-h-[40px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2 text-xs font-extrabold tracking-wider text-[#09090B] uppercase transition-colors hover:bg-[#09090B] hover:text-white 2xl:min-h-[48px] 2xl:px-6 2xl:py-3"
                   >
                     <span>Consultar contratación</span>
                     <ArrowUpRight size={14} />
@@ -789,17 +596,11 @@ function Index() {
           </div>
         </section>
 
-        {/* =====================================================================
-            6. TRAYECTORIA / PERFIL (#trayectoria) — ARCHITECTURAL SPLIT 1-SCREEN PC FIT
-            ===================================================================== */}
-        <section
-          id="trayectoria"
-          className="light-studio-grid relative z-10 scroll-mt-[62px] bg-[#F2F4F8] py-7 text-[#0A0F1D] lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-12"
-        >
+        {/* TRAYECTORIA */}
+        <section id="trayectoria" className={`${sectionBase} py-7 2xl:py-12`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-4 2xl:mb-6">
               <SectionHeading
-                surface="light"
                 eyebrow="Trayectoria y perfil"
                 title="Perfil híbrido."
                 accentTitle="Código, negocio y ejecución."
@@ -808,20 +609,18 @@ function Index() {
             </Reveal>
 
             <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 2xl:gap-6">
-              {/* Left Column: Framed Editorial Portrait + Hard-Bordered Statement Card */}
               <div className="lg:col-span-5">
-                <div className="flex h-full flex-col justify-between gap-3 rounded-2xl border-2 border-[#09090B] bg-white p-4 shadow-[6px_6px_0px_#09090B] 2xl:gap-4 2xl:rounded-3xl 2xl:p-5">
-                  {/* Framed Dark Studio Header Card */}
-                  <div className="relative overflow-hidden rounded-xl border border-[#252836] bg-[#09090B] p-3.5 text-white 2xl:p-4">
+                <div className="t-bg-card flex h-full flex-col justify-between gap-3 rounded-2xl border-2 border-current p-4 shadow-[6px_6px_0px_currentColor] 2xl:gap-4 2xl:rounded-3xl 2xl:p-5">
+                  <div className="relative overflow-hidden rounded-xl bg-[#09090B] p-3.5 text-white 2xl:p-4">
                     <div className="flex items-center gap-3.5">
                       <div className="relative shrink-0">
                         <img
                           src="/erick-portrait-studio.png"
                           alt="Erick Rodríguez"
                           loading="lazy"
-                          className="h-16 w-16 rounded-xl border border-[#2E5BFF] bg-[#0044FF] object-cover object-top 2xl:h-20 2xl:w-20"
+                          className="h-16 w-16 rounded-xl bg-[#0044FF] object-cover object-top 2xl:h-20 2xl:w-20"
                         />
-                        <span className="absolute -right-1.5 -bottom-1.5 rounded-md border border-[#2E5BFF] bg-[#0044FF] px-1.5 py-0.5 text-[9px] font-extrabold tracking-wider text-white uppercase">
+                        <span className="absolute -right-1.5 -bottom-1.5 rounded-md bg-[#0044FF] px-1.5 py-0.5 text-[9px] font-extrabold tracking-wider text-white uppercase">
                           BCN
                         </span>
                       </div>
@@ -830,7 +629,7 @@ function Index() {
                           <span className="h-1.5 w-1.5 rounded-full bg-[#10B981]" />
                           <span>La Sagrera · Barcelona</span>
                         </span>
-                        <h3 className="mt-0.5 font-display text-lg font-extrabold tracking-[-0.03em] text-white 2xl:text-2xl">
+                        <h3 className="font-display mt-0.5 text-lg font-extrabold tracking-[-0.03em] text-white 2xl:text-2xl">
                           Erick Rodríguez
                         </h3>
                         <p className="text-xs font-medium text-zinc-300">
@@ -838,63 +637,48 @@ function Index() {
                         </p>
                       </div>
                     </div>
-
-                    {/* Inline Telemetry Metrics Row */}
                     <div className="mt-3 grid grid-cols-3 gap-2 border-t border-[#232635] pt-2.5 text-center 2xl:mt-4 2xl:pt-3">
-                      <div className="rounded-lg bg-[#14161F] px-2 py-1.5">
-                        <span className="block font-display text-sm font-extrabold text-white 2xl:text-base">
-                          +1.000 h
-                        </span>
-                        <span className="block text-[9.5px] font-semibold tracking-wider text-zinc-400 uppercase">
-                          Experiencia
-                        </span>
-                      </div>
-                      <div className="rounded-lg bg-[#14161F] px-2 py-1.5">
-                        <span className="block font-display text-sm font-extrabold text-[#60A5FA] 2xl:text-base">
-                          375 h
-                        </span>
-                        <span className="block text-[9.5px] font-semibold tracking-wider text-zinc-400 uppercase">
-                          Subvención
-                        </span>
-                      </div>
-                      <div className="rounded-lg bg-[#14161F] px-2 py-1.5">
-                        <span className="block font-display text-sm font-extrabold text-white 2xl:text-base">
-                          Top 1
-                        </span>
-                        <span className="block text-[9.5px] font-semibold tracking-wider text-zinc-400 uppercase">
-                          Google SEO
-                        </span>
-                      </div>
+                      {[
+                        ["+1.000 h", "Experiencia"],
+                        ["375 h", "Subvención"],
+                        ["Top 1", "Google SEO"],
+                      ].map(([v, l]) => (
+                        <div key={l} className="rounded-lg bg-[#14161F] px-2 py-1.5">
+                          <span className="font-display block text-sm font-extrabold text-white 2xl:text-base">
+                            {v}
+                          </span>
+                          <span className="block text-[9.5px] font-semibold tracking-wider text-zinc-400 uppercase">
+                            {l}
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Bio & Capabilities */}
                   <div>
-                    <p className="text-xs leading-relaxed text-zinc-700 2xl:text-[13.5px]">
+                    <p className="t-muted text-xs leading-relaxed 2xl:text-[13.5px]">
                       Combino desarrollo web e IA con base en marketing digital y gestión: construyo
                       la solución completa y la llevo a producción sin depender de terceros.
                     </p>
-
                     <div className="mt-2.5 grid grid-cols-2 gap-1.5 2xl:mt-3.5">
-                      <div className="flex items-center gap-1.5 rounded-lg border border-[#D4D7E2] bg-[#F2F4F8] px-2.5 py-1.5 text-[11px] font-bold text-[#09090B]">
+                      <div className="t-line t-bg-card2 t-ink flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold">
                         <Sparkles size={12} className="shrink-0 text-[#0044FF]" />
                         <span>Agente Cambio 375 h</span>
                       </div>
-                      <div className="flex items-center gap-1.5 rounded-lg border border-[#D4D7E2] bg-[#F2F4F8] px-2.5 py-1.5 text-[11px] font-bold text-[#09090B]">
+                      <div className="t-line t-bg-card2 t-ink flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11px] font-bold">
                         <Wrench size={12} className="shrink-0 text-[#0044FF]" />
                         <span>ES / CA nativos · B2 EN</span>
                       </div>
                     </div>
-
                     <div className="mt-2.5 2xl:mt-3.5">
-                      <span className="block text-[10px] font-bold tracking-[0.14em] text-zinc-600 uppercase">
+                      <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.2em] uppercase">
                         Stack principal
                       </span>
                       <div className="mt-1 flex flex-wrap gap-1">
                         {coreStackPills.map((tool) => (
                           <span
                             key={tool}
-                            className="rounded-md border border-[#CBD5E1] bg-[#F8FAFC] px-2 py-0.5 text-[10px] font-bold text-[#09090B] 2xl:px-2.5 2xl:text-[11px]"
+                            className="t-line t-bg-card2 t-ink rounded-md border px-2 py-0.5 text-[10px] font-bold 2xl:px-2.5 2xl:text-[11px]"
                           >
                             {tool}
                           </span>
@@ -906,7 +690,7 @@ function Index() {
                   <a
                     href={cvPdf.url}
                     download="Erick-Rodriguez-CV.pdf"
-                    className="inline-flex min-h-[40px] w-full items-center justify-center gap-2 rounded-full bg-[#09090B] px-4 py-2 text-xs font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#0044FF] 2xl:min-h-[46px]"
+                    className="t-bg-ink t-on-ink inline-flex min-h-[40px] w-full items-center justify-center gap-2 rounded-full px-4 py-2 text-xs font-bold tracking-[0.12em] uppercase transition-transform hover:scale-[1.02] 2xl:min-h-[46px]"
                   >
                     <span>Descargar CV en PDF</span>
                     <Download size={14} />
@@ -914,37 +698,33 @@ function Index() {
                 </div>
               </div>
 
-              {/* Right Column: Experience + Education Split Ledger */}
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:col-span-7 2xl:gap-4">
-                {/* Sub-col 1: Experience */}
                 <div className="flex flex-col justify-between gap-2 2xl:gap-3">
                   <div className="flex items-center justify-between px-0.5">
-                    <span className="text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
+                    <span className="font-mono text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
                       01 · Experiencia
                     </span>
-                    <span className="text-[11px] font-bold text-zinc-600">+1.000 h</span>
+                    <span className="t-muted text-[11px] font-bold">+1.000 h</span>
                   </div>
                   {experience.map((item) => (
                     <article
                       key={`${item.place}-${item.period}`}
-                      className="flex flex-1 flex-col justify-between rounded-xl border border-[#CBD5E1] bg-white p-3 2xl:rounded-2xl 2xl:p-4"
+                      className="t-line t-bg-card flex flex-1 flex-col justify-between rounded-xl border p-3 2xl:rounded-2xl 2xl:p-4"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-1.5">
-                          <span className="rounded-full bg-[#EEF3FF] px-2 py-0.5 text-[10px] font-bold text-[#0044FF]">
+                          <span className="rounded-full bg-[#0044FF] px-2 py-0.5 text-[10px] font-bold text-white">
                             {item.period}
                           </span>
-                          <span className="text-[10.5px] font-bold text-zinc-700">
-                            {item.place}
-                          </span>
+                          <span className="t-muted text-[10.5px] font-bold">{item.place}</span>
                         </div>
-                        <h3 className="mt-1.5 flex items-center gap-2 font-display text-[13px] font-extrabold tracking-[-0.02em] text-[#09090B] 2xl:text-[15px]">
+                        <h3 className="t-ink font-display mt-1.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[-0.02em] 2xl:text-[15px]">
                           <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#0044FF] text-white">
                             <Briefcase size={11} />
                           </span>
                           <span>{item.role}</span>
                         </h3>
-                        <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[11px] leading-snug text-zinc-700 2xl:mt-1.5 2xl:text-xs">
+                        <ul className="t-muted mt-1 list-disc space-y-0.5 pl-4 text-[11px] leading-snug 2xl:mt-1.5 2xl:text-xs">
                           {item.points.map((point) => (
                             <li key={point}>{point}</li>
                           ))}
@@ -954,35 +734,32 @@ function Index() {
                   ))}
                 </div>
 
-                {/* Sub-col 2: Education & Value */}
                 <div className="flex flex-col justify-between gap-2 2xl:gap-3">
                   <div className="flex items-center justify-between px-0.5">
-                    <span className="text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
+                    <span className="font-mono text-[11px] font-bold tracking-[0.16em] text-[#0044FF] uppercase">
                       02 · Formación oficial
                     </span>
-                    <span className="text-[11px] font-bold text-zinc-600">Barcelona</span>
+                    <span className="t-muted text-[11px] font-bold">Barcelona</span>
                   </div>
                   {education.map((item) => (
                     <article
                       key={item.title}
-                      className="flex flex-1 flex-col justify-between rounded-xl border border-[#CBD5E1] bg-white p-3 2xl:rounded-2xl 2xl:p-4"
+                      className="t-line t-bg-card flex flex-1 flex-col justify-between rounded-xl border p-3 2xl:rounded-2xl 2xl:p-4"
                     >
                       <div>
                         <div className="flex items-center justify-between gap-1.5">
-                          <span className="rounded-full bg-[#EEF3FF] px-2 py-0.5 text-[10px] font-bold text-[#0044FF]">
+                          <span className="rounded-full bg-[#0044FF] px-2 py-0.5 text-[10px] font-bold text-white">
                             {item.period}
                           </span>
-                          <span className="text-[10.5px] font-bold text-zinc-700">
-                            {item.place}
-                          </span>
+                          <span className="t-muted text-[10.5px] font-bold">{item.place}</span>
                         </div>
-                        <h3 className="mt-1.5 flex items-center gap-2 font-display text-[13px] font-extrabold tracking-[-0.02em] text-[#09090B] 2xl:text-[15px]">
-                          <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#09090B] text-white">
+                        <h3 className="t-ink font-display mt-1.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[-0.02em] 2xl:text-[15px]">
+                          <span className="t-bg-ink t-on-ink flex h-5 w-5 shrink-0 items-center justify-center rounded-md">
                             <GraduationCap size={11} />
                           </span>
                           <span>{item.title}</span>
                         </h3>
-                        <p className="mt-1 text-[11px] leading-snug text-zinc-700 2xl:text-xs">
+                        <p className="t-muted mt-1 text-[11px] leading-snug 2xl:text-xs">
                           {item.summary}
                         </p>
                       </div>
@@ -994,75 +771,54 @@ function Index() {
           </div>
         </section>
 
-        {/* =====================================================================
-            7. CONTACTO Y CIERRE (#contacto) — MONUMENTAL STATEMENT SPLIT
-            ===================================================================== */}
-        <section
-          id="contacto"
-          className="dark-topo-surface scroll-mt-[62px] border-t border-[#202330] py-10 text-white lg:flex lg:min-h-[calc(100dvh-62px)] lg:flex-col lg:justify-center 2xl:py-16"
-        >
+        {/* CONTACTO */}
+        <section id="contacto" className={`${sectionBase} py-10 2xl:py-16`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
-              {/* Left Monumental Statement */}
               <Reveal className="lg:col-span-6">
-                <div className="mb-3 flex items-center gap-2.5">
-                  <span className="h-2 w-2 rounded-full bg-[#10B981]" aria-hidden="true" />
-                  <p className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 uppercase">
-                    Hablemos · Disponible en Barcelona
-                  </p>
-                </div>
-
-                <h2 className="font-display text-[44px] font-black leading-[0.92] tracking-[-0.04em] text-white uppercase sm:text-6xl lg:text-[64px] 2xl:text-[88px]">
+                <p className="t-muted mb-3 font-mono text-[10.5px] font-bold tracking-[0.28em] uppercase">
+                  Hablemos · Disponible en Barcelona
+                </p>
+                <h2 className="t-ink font-display text-[44px] leading-[0.92] font-black tracking-[-0.04em] uppercase sm:text-6xl lg:text-[64px] 2xl:text-[88px]">
                   HABLEMOS
                   <br />
                   DE TU
                   <br />
-                  <span className="text-[#3B82F6]">PROYECTO.</span>
+                  <span className="t-accent">PROYECTO.</span>
                   <span
                     className="animate-cursor-blink ml-2 inline-block h-[0.75em] w-[4px] bg-[#0044FF] align-baseline"
                     aria-hidden="true"
                   />
                 </h2>
-
-                <p className="mt-4 max-w-lg text-sm leading-relaxed text-zinc-300 2xl:text-base">
+                <p className="t-muted mt-4 max-w-lg text-sm leading-relaxed 2xl:text-base">
                   Busco aportar mi perfil híbrido de desarrollo web, IA y negocio — o enseñarte en
                   persona la demo del ERP y los sistemas en producción.
                 </p>
-
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <a
                     href={cvPdf.url}
                     download="Erick-Rodriguez-CV.pdf"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border border-[#303447] bg-[#14161F] px-6 py-2.5 text-xs font-bold tracking-[0.12em] text-white uppercase transition-colors hover:border-[#0044FF] hover:bg-[#1B1E2B]"
+                    className="t-bg-ink t-on-ink inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold tracking-[0.12em] uppercase transition-transform hover:scale-[1.03]"
                   >
                     <span>Descargar CV (PDF)</span>
                     <Download size={14} />
                   </a>
-
-                  <a
-                    href="#hero"
-                    className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-full border border-[#272A38] bg-[#0E1017] px-5 py-2.5 text-xs font-bold tracking-[0.12em] text-zinc-300 uppercase transition-colors hover:text-white"
-                  >
-                    <span>Volver arriba ↑</span>
-                  </a>
                 </div>
               </Reveal>
 
-              {/* Right Numbered Action Cards 01 / 02 / 03 */}
               <Reveal delay={0.08} className="flex flex-col gap-3 lg:col-span-6">
-                {/* 01 EMAIL */}
-                <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#282B3A] bg-[#12131A] p-4 transition-colors hover:border-[#3A4058] sm:p-5">
+                <div className="t-line t-bg-card flex items-center justify-between gap-3 rounded-2xl border p-4 sm:p-5">
                   <div className="flex min-w-0 items-center gap-3.5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2D3245] bg-[#1A1D28] text-[#60A5FA]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
                       <Mail size={18} />
                     </div>
                     <div className="min-w-0">
-                      <span className="block text-[10px] font-bold tracking-[0.16em] text-zinc-400 uppercase">
+                      <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
                         01 · Email directo
                       </span>
                       <a
                         href={`mailto:${email}`}
-                        className="mt-0.5 block truncate font-display text-sm font-bold text-white hover:text-[#60A5FA] sm:text-base"
+                        className="t-ink font-display mt-0.5 block truncate text-sm font-bold sm:text-base"
                       >
                         {email}
                       </a>
@@ -1071,21 +827,20 @@ function Index() {
                   <CopyButton value={email} label="correo" />
                 </div>
 
-                {/* 02 WHATSAPP / TELÉFONO */}
-                <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#282B3A] bg-[#12131A] p-4 transition-colors hover:border-[#3A4058] sm:p-5">
+                <div className="t-line t-bg-card flex items-center justify-between gap-3 rounded-2xl border p-4 sm:p-5">
                   <div className="flex min-w-0 items-center gap-3.5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2D3245] bg-[#1A1D28] text-[#10B981]">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
                       <MessageCircle size={18} />
                     </div>
                     <div className="min-w-0">
-                      <span className="block text-[10px] font-bold tracking-[0.16em] text-zinc-400 uppercase">
+                      <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
                         02 · WhatsApp &amp; Teléfono
                       </span>
                       <a
                         href={whatsapp}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-0.5 block font-display text-sm font-bold tabular-nums text-white hover:text-[#60A5FA] sm:text-base"
+                        className="t-ink font-display mt-0.5 block text-sm font-bold tabular-nums sm:text-base"
                       >
                         {phoneDisplay}
                       </a>
@@ -1094,33 +849,26 @@ function Index() {
                   <CopyButton value={phoneDisplay} label="teléfono" />
                 </div>
 
-                {/* 03 UBICACIÓN */}
-                <div className="flex items-center justify-between gap-3 rounded-2xl border border-[#282B3A] bg-[#12131A] p-4 sm:p-5">
-                  <div className="flex items-center gap-3.5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[#2D3245] bg-[#1A1D28] text-zinc-200">
-                      <MapPin size={18} />
-                    </div>
-                    <div>
-                      <span className="block text-[10px] font-bold tracking-[0.16em] text-zinc-400 uppercase">
-                        03 · Ubicación y modalidad
-                      </span>
-                      <span className="mt-0.5 block font-display text-sm font-bold text-white sm:text-base">
-                        La Sagrera, Barcelona · Presencial o Remoto
-                      </span>
-                    </div>
+                <div className="t-line t-bg-card flex items-center gap-3.5 rounded-2xl border p-4 sm:p-5">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0044FF] text-white">
+                    <MapPin size={18} />
                   </div>
-                  <span className="hidden rounded-full border border-[#2D3245] bg-[#1A1D28] px-3 py-1 text-[10px] font-bold tracking-wider text-zinc-300 uppercase sm:inline-flex">
-                    375 h Acred.
-                  </span>
+                  <div>
+                    <span className="t-muted block font-mono text-[10px] font-bold tracking-[0.16em] uppercase">
+                      03 · Ubicación y modalidad
+                    </span>
+                    <span className="t-ink font-display mt-0.5 block text-sm font-bold sm:text-base">
+                      La Sagrera, Barcelona · Presencial o Remoto
+                    </span>
+                  </div>
                 </div>
 
-                {/* Big Pill Action CTA */}
                 <Magnetic strength={0.1} className="mt-1">
                   <a
                     href={whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-full bg-white px-6 py-3.5 font-display text-xs font-extrabold tracking-[0.14em] text-[#09090B] uppercase transition-all hover:bg-[#0044FF] hover:text-white sm:text-sm"
+                    className="t-ink font-display flex min-h-[54px] w-full items-center justify-center gap-2.5 rounded-full border-2 border-current px-6 py-3.5 text-xs font-extrabold tracking-[0.14em] uppercase transition-colors hover:border-[#0044FF] hover:bg-[#0044FF] hover:text-white sm:text-sm"
                   >
                     <MessageCircle size={18} strokeWidth={2.3} />
                     <span>Escribir por WhatsApp ahora</span>
@@ -1130,7 +878,7 @@ function Index() {
               </Reveal>
             </div>
 
-            <footer className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-[#202330] pt-5 text-xs font-medium text-zinc-400">
+            <footer className="t-line t-muted mt-8 flex flex-wrap items-center justify-between gap-4 border-t pt-5 text-xs font-medium">
               <span>© 2026 Erick Rodríguez · Portfolio</span>
               <span>Desarrollo Web · ERPs a Medida · Automatización IA</span>
             </footer>
