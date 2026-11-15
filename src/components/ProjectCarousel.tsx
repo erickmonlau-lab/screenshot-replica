@@ -75,7 +75,7 @@ export function ProjectCarousel({
               className="absolute top-0 left-1/2 h-full w-[min(540px,74vw)] -ml-[min(270px,37vw)]"
               initial={false}
               animate={{
-                x: `${off * 56}%`,
+                x: `${off * 66}%`,
                 rotateY: Math.max(-48, Math.min(48, off * -34)),
                 scale: 1 - abs * 0.14,
                 filter: `brightness(${abs === 0 ? 1 : 0.55})`,
