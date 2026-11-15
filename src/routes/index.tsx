@@ -483,7 +483,7 @@ function Index() {
                         <span className="t-ink font-display mt-1.5 block truncate text-xs font-bold sm:text-[13px]">
                           {t.name}
                         </span>
-                        <span className="t-muted block text-[11px] sm:text-xs">{t.category}</span>
+                        <span className="t-muted block w-full truncate text-xs">{t.category}</span>
                       </button>
                     );
                   })}
