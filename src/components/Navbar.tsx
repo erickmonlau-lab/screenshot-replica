@@ -121,21 +121,21 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           className="flex shrink-0 items-center gap-2.5"
           aria-label="Ir al inicio"
         >
-          <span className="font-display flex h-8 w-8 items-center justify-center rounded-full bg-[#0044FF] text-[11px] font-extrabold text-white">
+          <span className="font-display flex h-8 w-8 items-center justify-center rounded-full bg-[#0044FF] text-xs font-extrabold text-white">
             ER
           </span>
-          <span className="font-display text-xs font-bold tracking-[0.14em] uppercase">
+          <span className="font-display text-xs font-bold tracking-[0.14em] uppercase sm:text-sm">
             Erick Rodríguez
           </span>
         </button>
 
-        <nav aria-label="Navegación principal" className="hidden items-center gap-0.5 lg:flex">
+        <nav aria-label="Navegación principal" className="hidden items-center gap-1 lg:flex">
           {navItems.map((item) => (
             <button
               key={item.id}
               type="button"
               onClick={() => scrollToSection(item.id)}
-              className={`rounded-full px-3.5 py-1.5 text-[11px] font-bold tracking-[0.12em] whitespace-nowrap uppercase transition-colors ${tab(item.id)}`}
+              className={`rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.08em] whitespace-nowrap uppercase transition-colors sm:text-[13px] ${tab(item.id)}`}
             >
               {item.label}
             </button>
@@ -154,18 +154,18 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <a
             href={cvPdf.url}
             download="Erick-Rodriguez-CV.pdf"
-            className={`hidden items-center gap-1.5 rounded-full px-3.5 py-1 text-[11px] font-bold tracking-[0.1em] uppercase transition-colors sm:inline-flex ${ghost}`}
+            className={`hidden items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.08em] uppercase transition-colors sm:inline-flex sm:text-[13px] ${ghost}`}
           >
-            <Download size={12} strokeWidth={2.3} />
+            <Download size={13} strokeWidth={2.3} />
             <span>CV</span>
           </a>
           <button
             type="button"
             onClick={() => scrollToSection("contacto")}
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-2 text-[11px] font-bold tracking-[0.12em] text-white uppercase transition-colors hover:bg-[#0033CC]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-2 text-xs font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0033CC] sm:text-[13px]"
           >
             <span>Hablemos</span>
-            <ArrowUpRight size={13} strokeWidth={2.5} />
+            <ArrowUpRight size={14} strokeWidth={2.5} />
           </button>
           <button
             type="button"

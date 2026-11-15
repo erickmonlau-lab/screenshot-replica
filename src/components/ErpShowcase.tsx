@@ -57,10 +57,10 @@ export function ErpShowcase() {
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303240] pb-2.5">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-wider text-white">
-            <ShieldCheck size={12} /> Confidencial · Modo oscuro
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+            <ShieldCheck size={13} /> Confidencial · Modo oscuro
           </span>
-          <span className="hidden text-xs font-medium text-zinc-300 sm:inline">
+          <span className="hidden text-xs font-medium text-zinc-300 sm:inline sm:text-[13px]">
             Esquema ERP &amp; App privada sin publicar
           </span>
         </div>
@@ -95,14 +95,14 @@ export function ErpShowcase() {
             const Icon = item.icon;
             return (
               <div key={item.label} className="rounded-lg border border-[#323544] bg-[#21222C] p-2">
-                <div className="flex items-center justify-between text-[10.5px] font-medium text-zinc-300">
+                <div className="flex items-center justify-between text-xs font-medium text-zinc-300">
                   <span className="truncate">{item.label}</span>
-                  <Icon size={12} className="shrink-0 text-[#60A5FA]" />
+                  <Icon size={13} className="shrink-0 text-[#60A5FA]" />
                 </div>
-                <div className="mt-0.5 font-display text-[13px] font-bold tracking-tight text-white">
+                <div className="mt-0.5 font-display text-sm font-bold tracking-tight text-white">
                   {item.value}
                 </div>
-                <div className="truncate text-[10px] text-zinc-400">{item.note}</div>
+                <div className="truncate text-[11px] text-zinc-400 sm:text-xs">{item.note}</div>
               </div>
             );
           })}
@@ -111,30 +111,28 @@ export function ErpShowcase() {
         {view === "panels" ? (
           /* Stock & Operations Wireframe Table */
           <div className="flex-1 rounded-xl border border-dashed border-[#3B3F52] bg-[#1C1E27] p-2.5">
-            <div className="mb-1.5 flex items-center justify-between text-[10.5px] font-semibold uppercase tracking-wider text-zinc-300">
+            <div className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-zinc-300">
               <span>Tabla de stock &amp; almacén</span>
               <span className="inline-flex items-center gap-1 text-[#60A5FA]">
-                <Lock size={10} /> Demo completa presencial
+                <Lock size={12} /> Demo completa presencial
               </span>
             </div>
             <div className="space-y-1.5">
               {stockRows.map((row) => (
                 <div
                   key={row.sku}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-[#303240] bg-[#111218] px-3 py-1.5 text-xs"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-[#303240] bg-[#111218] px-3 py-1.5 text-xs sm:text-[13px]"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="font-mono text-[10px] font-bold text-[#60A5FA]">
-                      {row.sku}
-                    </span>
+                    <span className="font-mono text-xs font-bold text-[#60A5FA]">{row.sku}</span>
                     <span className="truncate font-medium text-white">{row.item}</span>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <span className="hidden font-mono text-[11px] text-zinc-300 sm:inline">
+                    <span className="hidden font-mono text-xs text-zinc-300 sm:inline">
                       {row.stock}
                     </span>
                     <span
-                      className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                      className={`rounded px-2.5 py-0.5 text-xs font-bold ${
                         row.state === "Alerta n8n"
                           ? "bg-[#0044FF] text-white"
                           : "bg-[#2A2D3B] text-white"

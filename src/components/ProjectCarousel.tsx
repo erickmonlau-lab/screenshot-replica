@@ -144,24 +144,24 @@ export function ProjectCarousel({
             transition={{ duration: 0.2 }}
           >
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="font-mono text-[11px] font-bold tracking-[0.2em] t-muted">
+              <span className="t-muted font-mono text-xs font-bold tracking-[0.2em] sm:text-[13px]">
                 {current.index} / {String(n).padStart(2, "0")}
               </span>
-              <span className="rounded-full bg-[#0044FF] px-3 py-0.5 text-[11px] font-bold text-white">
+              <span className="rounded-full bg-[#0044FF] px-3.5 py-1 text-xs font-bold text-white sm:text-[13px]">
                 {current.status}
               </span>
             </div>
-            <h3 className="t-ink font-display mt-1.5 text-xl font-extrabold tracking-[-0.03em] 2xl:text-3xl">
+            <h3 className="t-ink font-display mt-2 text-xl font-extrabold tracking-[-0.03em] sm:text-2xl 2xl:text-3xl">
               {current.name}
             </h3>
-            <p className="t-muted mx-auto mt-1.5 max-w-xl text-xs leading-relaxed 2xl:text-sm">
+            <p className="t-muted mx-auto mt-2 max-w-xl text-sm leading-relaxed sm:text-base">
               {current.description}
             </p>
-            <div className="mt-2.5 flex flex-wrap items-center justify-center gap-1.5">
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
               {current.stack.map((tag) => (
                 <span
                   key={tag}
-                  className="t-line t-bg-card t-ink rounded-full border px-2.5 py-0.5 text-[10.5px] font-bold"
+                  className="t-line t-bg-card t-ink rounded-full border px-3 py-1 text-xs font-semibold sm:text-[13px]"
                 >
                   {tag}
                 </span>
@@ -170,7 +170,7 @@ export function ProjectCarousel({
             <a
               href={current.href}
               {...(current.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-              className="t-bg-ink t-on-ink mt-3.5 inline-flex items-center gap-1.5 rounded-full px-5 py-2.5 text-xs font-bold transition-transform hover:scale-[1.03]"
+              className="t-bg-ink t-on-ink mt-4 inline-flex items-center gap-1.5 rounded-full px-6 py-2.5 text-xs font-bold transition-transform hover:scale-[1.03] sm:text-sm"
             >
               <span>{current.ctaLabel}</span>
               <ArrowUpRight size={14} />

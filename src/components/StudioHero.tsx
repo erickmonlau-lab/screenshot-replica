@@ -108,7 +108,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[290px] 2xl:w-[400px]"
       >
         <div className="t-line t-bg-card rounded-2xl border p-4 2xl:p-5">
-          <p className="text-[10px] font-bold tracking-[0.18em] text-[#0044FF] uppercase">
+          <p className="text-xs font-bold tracking-[0.14em] text-[#0044FF] uppercase sm:text-[13px]">
             Desarrollador web &amp; IA · Barcelona
           </p>
           <h1 className="t-ink font-display mt-1.5 text-[22px] leading-[1.05] font-extrabold tracking-[-0.035em] 2xl:text-[30px]">
@@ -136,11 +136,11 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       </motion.div>
 
       <div className="absolute right-8 bottom-8 z-20 hidden flex-col items-end gap-4 sm:flex">
-        <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-[11px] font-bold tracking-[0.1em] uppercase">
+        <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-xs font-bold tracking-[0.1em] uppercase sm:text-[13px]">
           Top 1 Google · diversplas.es
         </span>
         <span
-          className="t-ink text-[10px] font-bold tracking-[0.3em] uppercase"
+          className="t-ink text-xs font-bold tracking-[0.28em] uppercase"
           style={{ writingMode: "vertical-rl" }}
         >
           Scroll down

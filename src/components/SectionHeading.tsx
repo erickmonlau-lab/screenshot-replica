@@ -60,7 +60,7 @@ export function SectionHeading({
       className={`flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-8 ${className}`}
     >
       <div className="max-w-3xl">
-        <p className="t-muted mb-2.5 font-mono text-[10.5px] font-bold tracking-[0.28em] uppercase">
+        <p className="t-muted mb-2 font-mono text-xs font-bold tracking-[0.22em] uppercase sm:text-[13px]">
           {eyebrow}
         </p>
         <h2
@@ -77,7 +77,7 @@ export function SectionHeading({
           ) : null}
         </h2>
         {description ? (
-          <p className="t-muted mt-2.5 max-w-2xl text-[13px] leading-relaxed sm:text-sm 2xl:text-[15px]">
+          <p className="t-muted mt-2.5 max-w-2xl text-sm leading-relaxed sm:text-base">
             {description}
           </p>
         ) : null}
