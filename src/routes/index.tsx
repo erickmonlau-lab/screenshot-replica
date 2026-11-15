@@ -36,6 +36,7 @@ import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ErpShowcase } from "@/components/ErpShowcase";
+import { MetricsBand } from "@/components/MetricsBand";
 import {
   AgentFlow,
   CodeFlow,
@@ -394,6 +395,8 @@ function Index() {
             {marqueeText}
           </VelocityMarqueeRow>
         </div>
+
+        <MetricsBand />
 
         {/* PROYECTOS — 3D Coverflow Gallery */}
         <section id="proyectos" className={`${sectionBase} section-dark`}>
