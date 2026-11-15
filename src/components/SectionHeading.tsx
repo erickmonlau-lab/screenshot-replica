@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useInView } from "framer-motion";
+import { useRef, type ReactNode } from "react";
+import { motion, useInView } from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
 
 interface SectionHeadingProps {
@@ -11,7 +11,9 @@ interface SectionHeadingProps {
   className?: string;
 }
 
-/** Heading that types itself when scrolled into view (reserves its final layout). */
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/** Marketing-scale heading: words rise out of a mask when scrolled into view. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -21,65 +23,58 @@ export function SectionHeading({
   className = "",
 }: SectionHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null);
-  const inView = useInView(ref, { once: true, margin: "0px 0px -15% 0px" });
+  const inView = useInView(ref, { once: true, margin: "0px 0px -12% 0px" });
   const reduce = useReducedMotion();
   const full = accentTitle ? `${title} ${accentTitle}` : title;
-  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    if (reduce) {
-      setCount(full.length);
-      return;
-    }
-    if (!inView) return;
-    let i = 0;
-    const id = window.setInterval(() => {
-      i += 1;
-      setCount(i);
-      if (i >= full.length) window.clearInterval(id);
-    }, 34);
-    return () => window.clearInterval(id);
-  }, [inView, full, reduce]);
-
-  const renderPart = (text: string, start: number, accent: boolean, isLast = false) => {
-    const typed = Math.max(0, Math.min(text.length, count - start));
-    const hasCursor = isLast ? count >= start : count >= start && count < start + text.length;
-    return (
-      <span className={accent ? "t-accent" : undefined} aria-hidden="true">
-        {text.slice(0, typed)}
-        {hasCursor ? (
-          <span className="animate-cursor-blink mx-px inline-block h-[0.78em] w-[3.5px] translate-y-[0.06em] bg-[#0044FF] align-baseline" />
-        ) : null}
-        <span className="invisible">{text.slice(typed)}</span>
-      </span>
-    );
-  };
+  const words = [
+    ...title.split(" ").map((w) => ({ w, accent: false })),
+    ...(accentTitle ? accentTitle.split(" ").map((w) => ({ w, accent: true })) : []),
+  ].filter((x) => x.w);
 
   return (
-    <div
-      className={`flex flex-col gap-3 md:flex-row md:items-end md:justify-between md:gap-8 ${className}`}
-    >
-      <div className="max-w-3xl">
-        <p className="t-muted mb-2 font-mono text-xs font-bold tracking-[0.22em] uppercase sm:text-[13px]">
+    <div className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10 ${className}`}>
+      <div className="max-w-5xl">
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 10 }}
+          animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="mb-4 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]"
+        >
           {eyebrow}
-        </p>
+        </motion.p>
         <h2
           ref={ref}
           aria-label={full}
-          className="t-ink font-display text-[28px] leading-[1.04] font-extrabold tracking-[-0.035em] sm:text-4xl lg:text-[38px] 2xl:text-[52px]"
+          className="t-ink font-display text-[clamp(2.5rem,7.2vw,5.75rem)] leading-[0.98] font-bold tracking-[-0.045em]"
         >
-          {renderPart(title, 0, false, !accentTitle)}
-          {accentTitle ? (
-            <>
-              <span aria-hidden="true"> </span>
-              {renderPart(accentTitle, title.length + 1, true, true)}
-            </>
-          ) : null}
+          {words.map((x, i) => (
+            <span
+              key={`${x.w}-${i}`}
+              aria-hidden="true"
+              className="inline-block overflow-hidden pb-[0.1em] align-top"
+            >
+              <motion.span
+                className={`inline-block ${x.accent ? "text-[#0044FF]" : ""}`}
+                initial={reduce ? false : { y: "115%" }}
+                animate={inView || reduce ? { y: 0 } : { y: "115%" }}
+                transition={{ duration: 0.85, delay: i * 0.06, ease: EASE }}
+              >
+                {x.w}
+                {i < words.length - 1 ? " " : ""}
+              </motion.span>
+            </span>
+          ))}
         </h2>
         {description ? (
-          <p className="t-muted mt-2.5 max-w-2xl text-sm leading-relaxed sm:text-base">
+          <motion.p
+            initial={reduce ? false : { opacity: 0, y: 14 }}
+            animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+            className="t-muted mt-5 max-w-[46ch] text-lg leading-snug font-medium sm:text-xl lg:text-2xl"
+          >
             {description}
-          </p>
+          </motion.p>
         ) : null}
       </div>
       {rightSlot ? <div className="shrink-0">{rightSlot}</div> : null}
