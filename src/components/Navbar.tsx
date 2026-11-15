@@ -41,9 +41,12 @@ export function Navbar({ onChangeMode }: NavbarProps) {
     if (!sections.length) return;
     const update = () => {
       let current = sections[0]!.id;
+      const line = Math.min(window.innerHeight * 0.35, 320);
       for (const section of sections) {
-        if (section.getBoundingClientRect().top <= 80) current = section.id;
+        if (section.getBoundingClientRect().top <= line) current = section.id;
       }
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      if (atBottom) current = sections[sections.length - 1]!.id;
       setActiveId(current);
     };
     update();
