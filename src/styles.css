@@ -4,18 +4,19 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/inter/opsz.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans:
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter", system-ui,
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Inter Variable", "Inter", system-ui,
     sans-serif;
   --font-display:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui,
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter Variable", "Inter", system-ui,
     sans-serif;
   --font-serif:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui,
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter Variable", "Inter", system-ui,
     sans-serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-sm: calc(var(--radius) - 4px);
@@ -112,6 +113,8 @@
   h4 {
     font-family: var(--font-display);
     letter-spacing: -0.025em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   button,
