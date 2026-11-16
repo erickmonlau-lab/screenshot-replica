@@ -43,6 +43,7 @@ import { CursorGlow } from "@/components/CursorGlow";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
+import { OderaloSection } from "@/components/OderaloSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import {
   AgentFlow,
@@ -117,21 +118,6 @@ const projectCases: ProjectCase[] = [
     description:
       "Plataforma propia para trabajar con PDF directamente en el navegador, ya indexada en Google con múltiples páginas operativas.",
     ctaLabel: "Probar plataforma",
-  },
-  {
-    id: "private-erp",
-    index: "04",
-    name: "ERP y app demo en persona",
-    domain: "internal://demo-presencial",
-    type: "Proyectos sin publicar",
-    status: "Demo en vivo",
-    outcome: "Dos proyectos sin publicar para mostrar en vivo",
-    stack: ["ERP a medida", "App Operativa", "n8n Webhooks", "Demo Presencial"],
-    href: "#contacto",
-    description:
-      "Dos proyectos completos sin publicar por confidencialidad (ERP interno y app operativa) listos para enseñarte en directo en una reunión.",
-    ctaLabel: "Agendar demo presencial",
-    isPrivate: true,
   },
 ];
 
@@ -326,7 +312,8 @@ function Index() {
 
   function handleJumpToProjects(caseId?: string) {
     if (caseId) setActiveProjectId(caseId);
-    const section = document.getElementById(caseId ? `caso-${caseId}` : "proyectos");
+    const target = caseId === "private-erp" ? "erp" : caseId ? `caso-${caseId}` : "proyectos";
+    const section = document.getElementById(target);
     if (section) {
       const top = section.getBoundingClientRect().top + window.scrollY - (caseId ? 90 : 62);
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
@@ -384,6 +371,8 @@ function Index() {
             </div>
           </div>
         </section>
+
+        <OderaloSection />
 
         {/* STACK + IA EN ACCIÓN */}
         <section
