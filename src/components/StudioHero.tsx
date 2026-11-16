@@ -1,5 +1,13 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
@@ -23,35 +31,51 @@ interface StudioHeroProps {
   onJumpToProjects: (caseId?: string) => void;
 }
 
+const outlineLine = "ERICK RODRÍGUEZ — WEB · ERPS · IA — ";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** Headline split by words; each word rises out of a mask (Apple-style reveal). */
-function RevealLine({
-  text,
-  start,
-  className = "",
-}: {
-  text: string;
-  start: number;
-  className?: string;
-}) {
+function wrap(min: number, max: number, v: number) {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+}
+
+/** Outlined name marquee: drifts on its own and reacts (speed + direction) to scroll velocity. */
+function ScrollMarquee({ speed = -3.2 }: { speed?: number }) {
   const reduce = useReducedMotion();
-  return (
-    <span className={`block ${className}`}>
-      {text.split(" ").map((word, i) => (
-        <span key={`${word}-${i}`} className="inline-block overflow-hidden pb-[0.12em] align-top">
-          <motion.span
-            className="inline-block"
-            initial={reduce ? false : { y: "115%" }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.9, delay: start + i * 0.07, ease: EASE }}
-          >
-            {word}
-            {i < text.split(" ").length - 1 ? " " : ""}
-          </motion.span>
-        </span>
-      ))}
+  const baseX = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const velocity = useVelocity(scrollY);
+  const smooth = useSpring(velocity, { damping: 50, stiffness: 300 });
+  const boost = useTransform(smooth, [0, 1000], [0, 5], { clamp: false });
+  const dir = useRef(1);
+  const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
+
+  useAnimationFrame((_, delta) => {
+    if (reduce) return;
+    const dt = delta / 1000;
+    const b = boost.get();
+    if (b < -0.08) dir.current = -1;
+    else if (b > 0.08) dir.current = 1;
+    const velocityMultiplier = 1 + Math.min(6, Math.abs(b));
+    baseX.set(baseX.get() + dir.current * speed * dt * velocityMultiplier);
+  });
+
+  const text = (
+    <span className="hero-outline-light font-display pr-12 text-[17vh] leading-none font-bold tracking-[-0.02em] uppercase select-none sm:text-[34vh]">
+      {outlineLine}
     </span>
+  );
+
+  return (
+    <motion.div
+      style={{ x }}
+      className="flex w-max items-center whitespace-nowrap will-change-transform"
+    >
+      {text}
+      {text}
+      {text}
+      {text}
+    </motion.div>
   );
 }
 
@@ -59,10 +83,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const textY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -70]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.8], [1, reduce ? 1 : 0.15]);
-  const portraitY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 110]);
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.06]);
+  const portraitY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
 
   return (
     <section
@@ -70,76 +91,73 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       ref={ref}
       className="t-bg-hero t-ink relative h-[clamp(680px,100svh,1000px)] overflow-hidden"
     >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[27%] z-0 -translate-y-1/2 overflow-hidden sm:top-[50%] sm:-translate-y-[56%]"
+      >
+        <ScrollMarquee />
+      </div>
+
       <motion.div
-        style={{ y: portraitY, scale: portraitScale }}
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex h-[46%] justify-center sm:h-[48%] lg:right-[3%] lg:left-auto lg:h-[68%] lg:w-[52%] lg:justify-end xl:h-[78%]"
+        style={{ y: portraitY }}
+        className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[78%]"
       >
         <motion.img
           src="/erick-portrait-studio.png"
           alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
-          initial={reduce ? false : { y: 80 }}
+          initial={reduce ? false : { y: 100 }}
           animate={{ y: 0 }}
-          transition={{ duration: 1.1, delay: 0.35, ease: EASE }}
+          transition={{ duration: 1.1, ease: EASE }}
           className="h-full w-auto max-w-none object-contain object-bottom select-none"
         />
       </motion.div>
 
       <motion.div
-        style={{ y: textY, opacity: textOpacity }}
-        className="relative z-10 mx-auto flex h-full w-full max-w-[1380px] flex-col justify-start px-5 pt-[88px] sm:px-8 lg:justify-center lg:pt-10"
+        initial={reduce ? false : { y: 40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
+        className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[330px] 2xl:w-[420px]"
       >
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: EASE }}
-          className="text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]"
-        >
-          Erick Rodríguez · Desarrollador web &amp; IA · Barcelona
-        </motion.p>
-
-        <h1 className="t-ink font-display mt-4 max-w-[12ch] text-[clamp(2.9rem,12.5vw,4.6rem)] leading-[0.98] font-bold tracking-[-0.045em] sm:max-w-[14ch] sm:text-[clamp(4rem,9.5vw,7.4rem)] lg:max-w-[9.5ch] lg:text-[clamp(4.6rem,8.6vw,9rem)] lg:leading-[0.94] lg:tracking-[-0.05em]">
-          <RevealLine text="Webs, ERPs" start={0.2} />
-          <RevealLine text="e IA llevados" start={0.4} />
-          <RevealLine text="a producción." start={0.65} className="text-[#0044FF]" />
-        </h1>
-
-        <motion.p
-          initial={reduce ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0, ease: EASE }}
-          className="t-muted mt-5 max-w-[34ch] text-base leading-snug font-medium sm:max-w-[44ch] sm:text-xl lg:text-2xl"
-        >
-          Plataformas propias, SEO que posiciona en el Top 1 y automatización con IA.
-        </motion.p>
-
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.15, ease: EASE }}
-          className="mt-7 flex flex-wrap gap-3"
-        >
-          <button
-            type="button"
-            onClick={() => onJumpToProjects()}
-            className="t-bg-ink t-on-ink inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
-          >
-            <span>Ver proyectos</span>
-            <ArrowDown size={16} strokeWidth={2.5} />
-          </button>
-          <button
-            type="button"
-            onClick={() => onJumpToProjects("private-erp")}
-            className="t-ink t-bg-card inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
-          >
-            <span>Demo ERP</span>
-            <ArrowUpRight size={16} strokeWidth={2.2} />
-          </button>
-        </motion.div>
+        <div className="t-line t-bg-card rounded-2xl border p-4 2xl:p-5">
+          <p className="text-xs font-semibold tracking-[0.14em] text-[#0044FF] uppercase sm:text-[13px]">
+            Desarrollador web &amp; IA · Barcelona
+          </p>
+          <h1 className="t-ink font-display mt-1.5 text-[24px] leading-[1.05] font-bold tracking-[-0.035em] 2xl:text-[32px]">
+            Webs, ERPs e IA llevados a producción.
+          </h1>
+          <div className="mt-3.5 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => onJumpToProjects()}
+              className="t-bg-ink t-on-ink inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[13px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+            >
+              <span>Ver proyectos</span>
+              <ArrowDown size={14} strokeWidth={2.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => onJumpToProjects("private-erp")}
+              className="t-ink inline-flex items-center gap-1.5 rounded-full border-2 border-current px-4 py-2.5 text-[13px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+            >
+              <span>Demo ERP</span>
+              <ArrowUpRight size={14} strokeWidth={2.2} />
+            </button>
+          </div>
+        </div>
       </motion.div>
 
-      <div className="absolute right-5 bottom-5 z-20 hidden sm:right-8 sm:bottom-8 sm:block">
+      <div className="absolute right-8 bottom-8 z-20 hidden flex-col items-end gap-5 sm:flex">
         <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-[13px] font-semibold tracking-[0.04em]">
           Top 1 Google · diversplas.es
+        </span>
+        <span className="flex items-center gap-3">
+          <span
+            className="t-ink text-xs font-semibold tracking-[0.28em] uppercase"
+            style={{ writingMode: "vertical-rl" }}
+          >
+            Scroll down
+          </span>
+          <span aria-hidden="true" className="t-bg-ink block h-14 w-px" />
         </span>
       </div>
     </section>
