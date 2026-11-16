@@ -211,93 +211,150 @@ export function CodeVisual() {
   );
 }
 
-/* ───────────── 4 · second brain: knowledge graph ───────────── */
+/* ───────────── 4 · second brain: an Obsidian-style window with graph view ───────────── */
 
 function rng(seed: number) {
-  let s = seed;
+  let v = seed;
   return () => {
-    s = (s * 16807) % 2147483647;
-    return (s - 1) / 2147483646;
+    v = (v * 16807) % 2147483647;
+    return (v - 1) / 2147483646;
   };
 }
 
-const HUBS = [
-  { id: "reglas", label: "Reglas", x: 380, y: 200 },
-  { id: "skills", label: "Skills", x: 190, y: 110 },
-  { id: "proyectos", label: "Proyectos", x: 580, y: 110 },
-  { id: "clientes", label: "Clientes", x: 600, y: 300 },
-  { id: "erp", label: "ERP", x: 200, y: 310 },
-  { id: "decisiones", label: "Decisiones", x: 390, y: 52 },
+const OBS_BG = "#1E1E1E";
+const OBS_SIDE = "#262626";
+const OBS_TEXT = "#DCDDDE";
+const OBS_MUTED = "#9A9A9A";
+const OBS_NODE = "#8F8F8F";
+const OBS_LINK = "#4A4A4A";
+const OBS_ACCENT = "#A882FF";
+
+const CLUSTERS: { id: string; label: string; x: number; y: number; notes: string[] }[] = [
+  { id: "reglas", label: "reglas-agente", x: 470, y: 225, notes: ["estilo-codigo", "revision-pr", "seguridad"] },
+  { id: "skills", label: "claude-skills", x: 330, y: 135, notes: ["n8n-flujos", "prompts", "agentes"] },
+  { id: "proyectos", label: "proyectos", x: 625, y: 140, notes: ["diversplas", "gesgrama", "breadpdf"] },
+  { id: "clientes", label: "clientes", x: 650, y: 320, notes: ["briefs", "presupuestos"] },
+  { id: "erp", label: "erp-interno", x: 335, y: 320, notes: ["stock", "albaranes", "facturas"] },
+  { id: "decisiones", label: "decisiones", x: 495, y: 85, notes: ["adr-stack", "adr-seo"] },
 ];
 
-const GRAPH = (() => {
-  const r = rng(7);
-  const leaves: { x: number; y: number; hub: number; r: number }[] = [];
-  HUBS.forEach((h, hi) => {
-    const n = hi === 0 ? 12 : 9;
-    for (let k = 0; k < n; k++) {
-      const a = r() * Math.PI * 2;
-      const d = 40 + r() * 78;
-      leaves.push({
-        x: Math.min(735, Math.max(25, h.x + Math.cos(a) * d)),
-        y: Math.min(380, Math.max(22, h.y + Math.sin(a) * d * 0.8)),
-        hub: hi,
-        r: 3.5 + r() * 3,
-      });
-    }
+const BRAIN = (() => {
+  const r = rng(11);
+  return CLUSTERS.map((c, ci) => {
+    const n = ci === 0 ? 17 : 13;
+    const leaves = Array.from({ length: n }, (_, k) => {
+      const ang = r() * Math.PI * 2;
+      const dist = 26 + Math.pow(r(), 0.7) * 84;
+      return {
+        x: Math.min(735, Math.max(232, c.x + Math.cos(ang) * dist * 1.1)),
+        y: Math.min(352, Math.max(60, c.y + Math.sin(ang) * dist * 0.8)),
+        r: 2.6 + r() * 3.2,
+        name: k < c.notes.length ? c.notes[k]! : null,
+      };
+    });
+    const links = leaves.map((l, k) => {
+      const t = k > 2 && r() > 0.45 ? leaves[Math.floor(r() * k)]! : null;
+      return t ? [l.x, l.y, t.x, t.y] : [l.x, l.y, c.x, c.y];
+    });
+    return { ...c, leaves, links };
   });
-  const links: [number, number][] = [];
-  // hubs connect to the central hub
-  for (let i = 1; i < HUBS.length; i++) links.push([0, i]);
-  return { leaves, links };
 })();
 
+const TREE: [string, boolean, boolean][] = [
+  ["reglas", false, false],
+  ["skills", true, false],
+  ["claude-skills.md", false, true],
+  ["n8n-flujos.md", false, false],
+  ["proyectos", false, false],
+  ["clientes", false, false],
+  ["erp-interno", false, false],
+  ["decisiones", false, false],
+];
+
 export function BrainVisual() {
-  const hubPos = HUBS.map((h) => [h.x, h.y] as const);
   return (
-    <Stage label="Grafo de conocimiento: el cerebro de IA en Obsidian">
-      <g stroke="#27407E" strokeWidth={1.6} opacity={0.9}>
-        {GRAPH.leaves.map((l, i) => (
-          <line key={`l${i}`} x1={l.x} y1={l.y} x2={hubPos[l.hub]![0]} y2={hubPos[l.hub]![1]} />
-        ))}
-        {GRAPH.links.map(([a, b], i) => (
-          <line key={`h${i}`} x1={hubPos[a]![0]} y1={hubPos[a]![1]} x2={hubPos[b]![0]} y2={hubPos[b]![1]} strokeWidth={2.6} stroke="#3B82F6" />
-        ))}
-        {/* a few cross links between neighbours */}
-        {GRAPH.leaves.filter((_, i) => i % 3 === 0).map((l, i, arr) => {
-          const o = arr[(i + 1) % arr.length]!;
-          return <line key={`x${i}`} x1={l.x} y1={l.y} x2={o.x} y2={o.y} strokeDasharray="3 6" opacity={0.6} />;
-        })}
-      </g>
-
-      {GRAPH.links.map(([a, b], i) => (
-        <circle key={`p${i}`} r={5} fill={CREAM} filter="url(#glow)">
-          <animateMotion
-            dur={`${3 + (i % 3)}s`}
-            begin={`${i * 0.7}s`}
-            repeatCount="indefinite"
-            path={`M ${hubPos[a]![0]} ${hubPos[a]![1]} L ${hubPos[b]![0]} ${hubPos[b]![1]}`}
+    <Stage label="Vista de grafo del cerebro de IA en Obsidian">
+      <rect width={760} height={400} fill={OBS_BG} />
+      {/* sidebar */}
+      <rect width={196} height={400} fill={OBS_SIDE} />
+      <line x1={196} y1={0} x2={196} y2={400} stroke="#363636" strokeWidth={2} />
+      <text x={16} y={30} fill={OBS_MUTED} fontSize={15} fontWeight={600}>
+        Cerebro
+      </text>
+      {TREE.map(([name, open, active], i) => (
+        <g key={name} transform={`translate(0 ${54 + i * 38})`}>
+          {active ? <rect x={8} y={-4} width={180} height={30} rx={8} fill="#3A3A3A" /> : null}
+          <path
+            d={open ? "M 18 8 L 28 8 L 23 15 Z" : "M 20 5 L 20 15 L 27 10 Z"}
+            fill={OBS_MUTED}
+            transform={name.endsWith(".md") ? "translate(14 0)" : undefined}
+            opacity={name.endsWith(".md") ? 0 : 1}
           />
-        </circle>
-      ))}
-
-      {GRAPH.leaves.map((l, i) => (
-        <circle key={`n${i}`} cx={l.x} cy={l.y} r={l.r} fill="#9CC2FF">
-          <animate attributeName="opacity" values="0.45;1;0.45" dur={`${3 + (i % 5) * 0.7}s`} begin={`${(i % 7) * 0.4}s`} repeatCount="indefinite" />
-        </circle>
-      ))}
-
-      {HUBS.map((h, i) => (
-        <g key={h.id}>
-          <circle cx={h.x} cy={h.y} r={i === 0 ? 30 : 22} fill={BLUE} opacity={0.18}>
-            <animate attributeName="r" values={i === 0 ? "28;38;28" : "20;28;20"} dur={`${3 + i * 0.4}s`} repeatCount="indefinite" />
-          </circle>
-          <circle cx={h.x} cy={h.y} r={i === 0 ? 17 : 12} fill={BLUE} filter="url(#glow)" />
-          <text x={h.x} y={h.y + (i === 0 ? 46 : 38)} textAnchor="middle" fill="#FFFFFF" fontSize={17} fontWeight={700}>
-            {h.label}
+          <text x={name.endsWith(".md") ? 44 : 36} y={16} fill={active ? "#fff" : OBS_TEXT} fontSize={15}>
+            {name}
           </text>
         </g>
       ))}
+
+      {/* tab bar */}
+      <rect x={197} y={0} width={563} height={40} fill="#1A1A1A" />
+      <rect x={210} y={6} width={190} height={34} rx={8} fill={OBS_BG} />
+      <circle cx={232} cy={23} r={5} fill="none" stroke={OBS_MUTED} strokeWidth={2} />
+      <circle cx={246} cy={17} r={3} fill={OBS_MUTED} />
+      <text x={260} y={28} fill={OBS_TEXT} fontSize={15}>
+        Vista de grafo
+      </text>
+
+      {/* graph */}
+      {BRAIN.map((c, ci) => (
+        <g key={c.id} className={ci % 2 ? "drift-b" : "drift-a"}>
+          <g stroke={OBS_LINK} strokeWidth={1.1}>
+            {c.links.map((l, i) => (
+              <line key={i} x1={l[0]} y1={l[1]} x2={l[2]} y2={l[3]} />
+            ))}
+          </g>
+          {c.leaves.map((l, i) => (
+            <circle key={i} cx={l.x} cy={l.y} r={l.r} fill={OBS_NODE} />
+          ))}
+          {/* highlight (hover) pass: purple links and nodes of this cluster */}
+          <g opacity={0}>
+            <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.02;0.08;0.15;0.2;1" dur="12s" begin={`${ci * 2}s`} repeatCount="indefinite" />
+            <g stroke={OBS_ACCENT} strokeWidth={1.8}>
+              {c.links.map((l, i) => (
+                <line key={i} x1={l[0]} y1={l[1]} x2={l[2]} y2={l[3]} />
+              ))}
+            </g>
+            {c.leaves.map((l, i) => (
+              <circle key={i} cx={l.x} cy={l.y} r={l.r + 0.6} fill={OBS_ACCENT} />
+            ))}
+            <circle cx={c.x} cy={c.y} r={13} fill={OBS_ACCENT} />
+          </g>
+          <circle cx={c.x} cy={c.y} r={ci === 0 ? 11 : 9} fill="#B5B5B5" />
+          <text x={c.x} y={c.y + 28} textAnchor="middle" fill={OBS_TEXT} fontSize={15} fontWeight={600}>
+            {c.label}
+          </text>
+          {c.leaves
+            .filter((l) => l.name)
+            .map((l, i) => (
+              <text key={i} x={l.x} y={l.y + 20} textAnchor="middle" fill={OBS_MUTED} fontSize={14}>
+                {l.name}
+              </text>
+            ))}
+        </g>
+      ))}
+
+      {/* settings panel, like Obsidian's graph controls */}
+      <g transform="translate(588 52)">
+        <rect width={156} height={118} rx={10} fill="#262626" stroke="#3A3A3A" strokeWidth={1.5} />
+        {["Filtros", "Grupos", "Visualización", "Fuerzas"].map((t, i) => (
+          <g key={t} transform={`translate(0 ${14 + i * 26})`}>
+            <path d="M 14 6 L 14 16 L 21 11 Z" fill={OBS_MUTED} />
+            <text x={32} y={17} fill={OBS_TEXT} fontSize={15}>
+              {t}
+            </text>
+          </g>
+        ))}
+      </g>
     </Stage>
   );
 }

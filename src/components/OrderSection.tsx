@@ -1,23 +1,27 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { SectionTitle } from "./SectionTitle";
+import { ErpMini, IaMini, WebMini } from "./MethodVisuals";
 import { useReducedMotion } from "./motion-pref";
 
 const steps = [
   {
     label: "1 · Web",
+    art: <WebMini />,
     title: "Una web que posiciona",
     text: "Estructura, SEO técnico y rendimiento pensados desde el primer día para que te encuentren.",
     proof: "Top 1 en Google con diversplas.es",
   },
   {
     label: "2 · ERP",
+    art: <ErpMini />,
     title: "Un sistema que ordena",
     text: "Stock, facturación y albaranes en un mismo sitio, a medida de cómo trabaja tu empresa.",
     proof: "ERP interno con demo en directo",
   },
   {
     label: "3 · IA",
+    art: <IaMini />,
     title: "Flujos que trabajan solos",
     text: "n8n y agentes de IA conectan tu CRM, formularios y WhatsApp sin tareas manuales.",
     proof: "Tarea ejecutada sin intervención",
@@ -56,6 +60,7 @@ export function OrderSection() {
               <div className="bg-[#0044FF] px-5 py-3 text-[15px] font-semibold tracking-[0.08em] text-white uppercase">
                 {s.label}
               </div>
+              <div className="border-b-2 border-[#09090B] bg-[#F4F5F8] p-4">{s.art}</div>
               <div className="p-6 sm:p-7">
                 <h3 className="font-display text-[26px] leading-[1.05] font-bold tracking-[-0.035em] sm:text-[30px]">
                   {s.title}

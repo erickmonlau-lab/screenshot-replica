@@ -377,3 +377,18 @@ body {
   paint-order: stroke fill;
   user-select: none;
 }
+
+@keyframes bar-grow {
+  0%, 100% { transform: scaleY(0.2); }
+  45%, 70% { transform: scaleY(1); }
+}
+.bar-grow {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: bar-grow 3.6s ease-in-out infinite;
+}
+
+@keyframes drift-a { from { transform: translate(0, 0); } to { transform: translate(5px, -4px); } }
+@keyframes drift-b { from { transform: translate(0, 0); } to { transform: translate(-4px, 5px); } }
+.drift-a { animation: drift-a 8s ease-in-out infinite alternate; }
+.drift-b { animation: drift-b 10s ease-in-out infinite alternate; }
