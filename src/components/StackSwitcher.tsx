@@ -12,22 +12,39 @@ export interface StackTool {
 const groups = [
   {
     id: "web",
-    label: "Webs y SEO",
+    word: "WEB",
+    sub: "Webs y SEO",
     line: "Webs rápidas, tipadas y pensadas para posicionar.",
-    names: ["React", "TypeScript", "Next / Vite", "Tailwind", "WordPress", "Shopify"],
+    names: ["React", "TypeScript", "Next / Vite", "Tailwind"],
+  },
+  {
+    id: "cms",
+    word: "CMS",
+    sub: "Tiendas y diseño",
+    line: "Tiendas, gestores de contenido y diseño de interfaces.",
+    names: ["WordPress", "Shopify", "Figma", "Canva"],
   },
   {
     id: "erp",
-    label: "ERP y datos",
+    word: "ERP",
+    sub: "Sistemas y datos",
     line: "Sistemas internos conectados por APIs y webhooks.",
-    names: ["APIs / Hooks", "React", "TypeScript", "Figma", "Canva"],
+    names: ["APIs / Hooks", "React", "TypeScript"],
   },
   {
     id: "ia",
-    label: "Automatización e IA",
+    word: "IA",
+    sub: "Flujos y modelos",
     line: "Flujos autónomos y modelos de lenguaje con contexto de empresa.",
     names: ["n8n", "Agentes IA", "Claude Skills", "Gemini", "ChatGPT", "Obsidian"],
   },
+];
+
+const fan = [
+  "md:-rotate-[5deg] md:translate-y-4",
+  "md:-rotate-[1.6deg]",
+  "md:rotate-[1.6deg]",
+  "md:rotate-[5deg] md:translate-y-4",
 ];
 
 /** "Un núcleo común. Tu sector encima." equivalent: tabs that swap the tool wall. */
@@ -40,22 +57,39 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
 
   return (
     <div>
-      <div role="tablist" aria-label="Grupos de herramientas" className="flex flex-wrap gap-2">
-        {groups.map((g) => (
-          <button
-            key={g.id}
-            role="tab"
-            aria-selected={g.id === active}
-            onClick={() => setActive(g.id)}
-            className={`rounded-full border-2 px-5 py-2.5 text-base font-semibold transition-all duration-150 active:scale-[0.97] sm:text-base ${
-              g.id === active
-                ? "border-white bg-white text-[#09090B]"
-                : "border-white/30 text-white hover:border-white"
-            }`}
-          >
-            {g.label}
-          </button>
-        ))}
+      <div
+        role="tablist"
+        aria-label="Grupos de herramientas"
+        className="grid grid-cols-2 gap-4 [perspective:1200px] md:grid-cols-4 md:gap-6"
+      >
+        {groups.map((g, i) => {
+          const on = g.id === active;
+          return (
+            <button
+              key={g.id}
+              role="tab"
+              aria-selected={on}
+              onClick={() => setActive(g.id)}
+              className={`group relative flex h-[220px] flex-col justify-between overflow-hidden rounded-[18px] border-2 bg-[#1B1D24] p-5 text-left transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-4 hover:rotate-0 md:h-[380px] md:p-6 ${fan[i]} ${
+                on
+                  ? "-translate-y-3 border-[#F4EAD0] md:rotate-0"
+                  : "border-[#3A3D48] hover:border-[#F4EAD0]"
+              }`}
+            >
+              <span className="text-base font-semibold text-zinc-400">0{i + 1}</span>
+              <span
+                className={`font-display block origin-left text-[clamp(3.4rem,7.6vw,7.4rem)] leading-[0.9] font-extrabold tracking-[-0.02em] [transform:scaleX(0.76)] transition-[color,text-shadow] duration-500 ${
+                  on
+                    ? "text-[#F4EAD0] [text-shadow:0_0_26px_rgba(244,234,208,0.75),0_0_60px_rgba(244,234,208,0.35)]"
+                    : "text-[#9A978A] [text-shadow:0_0_12px_rgba(244,234,208,0.12)] group-hover:text-[#F4EAD0] group-hover:[text-shadow:0_0_22px_rgba(244,234,208,0.6)]"
+                }`}
+              >
+                {g.word}
+              </span>
+              <span className="text-lg font-semibold text-zinc-300">{g.sub}</span>
+            </button>
+          );
+        })}
       </div>
 
       <AnimatePresence mode="wait">
@@ -66,7 +100,7 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="mt-6 max-w-[40ch] text-xl leading-snug font-semibold tracking-[-0.02em] text-white sm:text-2xl">
+          <p className="mt-10 max-w-[40ch] text-xl leading-snug font-semibold tracking-[-0.02em] text-white sm:text-2xl">
             {group.line}
           </p>
           <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
