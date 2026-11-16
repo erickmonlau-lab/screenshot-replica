@@ -472,99 +472,108 @@ function Index() {
         <GrantBand />
 
         {/* CONTACTO */}
-        <section id="contacto" className={`${sectionBase} section-light`}>
-          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <p className="mb-5 text-lg font-semibold text-[#0044FF] sm:text-xl">
+        <section
+          id="contacto"
+          className="relative scroll-mt-[62px] overflow-hidden bg-[#09090B] pt-16 pb-10 text-white sm:pt-20"
+        >
+          <img
+            src="/erick-portrait-studio.png"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute right-[1%] bottom-0 z-0 hidden h-[86%] w-auto max-w-none select-none lg:block"
+          />
+          <div className="relative z-10 mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+            <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-1.5 text-[17px] font-bold text-[#09090B] shadow-[4px_4px_0_#ffffff]">
               Disponible en Barcelona
-            </p>
-            <BigHeading
-              className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em] [word-spacing:0.12em]"
-              lines={[{ text: "Hablemos" }, { text: "de tu proyecto.", accent: true }]}
-            />
-            <Reveal delay={0.1} className="mt-8 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-7">
-                <p className="t-muted max-w-[40ch] text-lg leading-snug font-medium sm:text-xl lg:text-2xl">
-                  Cuéntame qué necesitas, o te enseño en persona la demo del ERP y los sistemas en
-                  producción.
-                </p>
-                <div className="mt-7 flex flex-wrap items-center gap-3">
-                  <Magnetic strength={0.1}>
-                    <a
-                      href={whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-full bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
-                    >
-                      <MessageCircle size={18} strokeWidth={2.3} />
-                      <span>Escribir por WhatsApp</span>
-                      <ArrowUpRight size={16} strokeWidth={2.5} />
-                    </a>
-                  </Magnetic>
-                  <a
-                    href={cvPdf.url}
-                    download="Erick-Rodriguez-CV.pdf"
-                    className="t-ink inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border-2 border-current px-7 py-3.5 text-base font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
-                  >
-                    <span>Descargar CV</span>
-                    <Download size={16} />
-                  </a>
-                </div>
-              </div>
-
-              <dl className="lg:col-span-5">
-                {[
-                  {
-                    icon: Mail,
-                    k: "Email",
-                    node: (
-                      <div className="flex min-w-0 items-center justify-between gap-3">
-                        <a
-                          href={`mailto:${email}`}
-                          className="font-display truncate text-lg font-semibold tracking-[-0.02em] hover:text-[#0044FF] sm:text-xl"
-                        >
-                          {email}
-                        </a>
-                        <CopyButton value={email} label="correo" />
-                      </div>
-                    ),
-                  },
-                  {
-                    icon: MessageCircle,
-                    k: "WhatsApp y teléfono",
-                    node: (
-                      <div className="flex min-w-0 items-center justify-between gap-3">
-                        <a
-                          href={whatsapp}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-display text-lg font-semibold tracking-[-0.02em] tabular-nums hover:text-[#0044FF] sm:text-xl"
-                        >
-                          {phoneDisplay}
-                        </a>
-                        <CopyButton value={phoneDisplay} label="teléfono" />
-                      </div>
-                    ),
-                  },
-                  {
-                    icon: MapPin,
-                    k: "Ubicación",
-                    node: (
-                      <span className="font-display text-lg font-semibold tracking-[-0.02em] sm:text-xl">
-                        La Sagrera, Barcelona · Presencial o remoto
-                      </span>
-                    ),
-                  },
-                ].map(({ icon: I, k, node }) => (
-                  <div key={k} className="t-line border-t py-4 first:border-t-2">
-                    <dt className="t-muted mb-1.5 flex items-center gap-2 text-[15px] font-semibold tracking-[0.08em] uppercase">
-                      <I size={14} className="text-[#0044FF]" />
-                      {k}
-                    </dt>
-                    <dd>{node}</dd>
-                  </div>
-                ))}
-              </dl>
+            </span>
+            <Reveal>
+              <h2 className="font-display mt-6 text-[clamp(3.4rem,10.5vw,10rem)] leading-[0.88] font-bold tracking-[-0.06em]">
+                Hablemos
+                <span className="block text-[#0044FF] [text-shadow:4px_4px_0_#ffffff]">de tu</span>
+                <span className="block text-[#0044FF] [text-shadow:4px_4px_0_#ffffff]">
+                  proyecto.
+                </span>
+              </h2>
             </Reveal>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Magnetic strength={0.1}>
+                <a
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-2 border-white bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#ffffff] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#ffffff]"
+                >
+                  <MessageCircle size={18} strokeWidth={2.3} />
+                  <span>Escribir por WhatsApp</span>
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
+                </a>
+              </Magnetic>
+              <a
+                href={cvPdf.url}
+                download="Erick-Rodriguez-CV.pdf"
+                className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-2 border-white px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white hover:text-[#09090B]"
+              >
+                <span>Descargar CV</span>
+                <Download size={16} />
+              </a>
+            </div>
+
+            <dl className="mt-10 grid gap-4 md:grid-cols-3 lg:mt-14">
+              {[
+                {
+                  icon: Mail,
+                  k: "Email",
+                  node: (
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <a
+                        href={`mailto:${email}`}
+                        className="font-display truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#0044FF]"
+                      >
+                        {email}
+                      </a>
+                      <CopyButton value={email} label="correo" />
+                    </div>
+                  ),
+                },
+                {
+                  icon: MessageCircle,
+                  k: "WhatsApp y teléfono",
+                  node: (
+                    <div className="flex min-w-0 items-center justify-between gap-3">
+                      <a
+                        href={whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#0044FF]"
+                      >
+                        {phoneDisplay}
+                      </a>
+                      <CopyButton value={phoneDisplay} label="teléfono" />
+                    </div>
+                  ),
+                },
+                {
+                  icon: MapPin,
+                  k: "Ubicación",
+                  node: (
+                    <span className="font-display text-[18px] font-bold tracking-[-0.02em]">
+                      La Sagrera, Barcelona · Presencial o remoto
+                    </span>
+                  ),
+                },
+              ].map(({ icon: I, k, node }) => (
+                <div
+                  key={k}
+                  className="rounded-2xl border-[3px] border-[#09090B] bg-white p-5 text-[#09090B] shadow-[6px_6px_0_#0044FF]"
+                >
+                  <dt className="mb-2 flex items-center gap-2 text-[15px] font-bold tracking-[0.06em] text-[#52525B] uppercase">
+                    <I size={15} className="text-[#0044FF]" />
+                    {k}
+                  </dt>
+                  <dd>{node}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
 
