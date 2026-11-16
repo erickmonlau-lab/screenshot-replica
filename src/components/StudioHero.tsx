@@ -1,12 +1,10 @@
 import { useRef } from "react";
 import {
   motion,
-  useAnimationFrame,
   useMotionValue,
   useScroll,
   useSpring,
   useTransform,
-  useVelocity,
 } from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
@@ -32,53 +30,7 @@ interface StudioHeroProps {
   onJumpToProjects: (caseId?: string) => void;
 }
 
-const outlineLine = "ERICK RODRÍGUEZ — WEB · ERPS · IA — ";
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-function wrap(min: number, max: number, v: number) {
-  const range = max - min;
-  return ((((v - min) % range) + range) % range) + min;
-}
-
-/** Outlined name marquee: drifts on its own and reacts (speed + direction) to scroll velocity. */
-function ScrollMarquee({ speed = -3.2 }: { speed?: number }) {
-  const reduce = useReducedMotion();
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const velocity = useVelocity(scrollY);
-  const smooth = useSpring(velocity, { damping: 50, stiffness: 300 });
-  const boost = useTransform(smooth, [0, 1000], [0, 5], { clamp: false });
-  const dir = useRef(1);
-  const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
-
-  useAnimationFrame((_, delta) => {
-    if (reduce) return;
-    const dt = delta / 1000;
-    const b = boost.get();
-    if (b < -0.08) dir.current = -1;
-    else if (b > 0.08) dir.current = 1;
-    const velocityMultiplier = 1 + Math.min(6, Math.abs(b));
-    baseX.set(baseX.get() + dir.current * speed * dt * velocityMultiplier);
-  });
-
-  const text = (
-    <span className="hero-outline-light font-display pr-12 text-[17vh] leading-none font-bold tracking-[-0.02em] uppercase select-none sm:text-[34vh]">
-      {outlineLine}
-    </span>
-  );
-
-  return (
-    <motion.div
-      style={{ x }}
-      className="flex w-max items-center whitespace-nowrap will-change-transform"
-    >
-      {text}
-      {text}
-      {text}
-      {text}
-    </motion.div>
-  );
-}
 
 export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   const reduce = useReducedMotion();
@@ -86,106 +38,135 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const portraitY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 90]);
 
+  // Parallax con el puntero: cada capa se mueve a distinta profundidad.
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const sx = useSpring(mx, { stiffness: 70, damping: 18 });
+  const sy = useSpring(my, { stiffness: 70, damping: 18 });
+  const discX = useTransform(sx, (v) => v * -36);
+  const discY = useTransform(sy, (v) => v * -22);
+  const faceX = useTransform(sx, (v) => v * 16);
+  const wordsX = useTransform(sx, (v) => v * -14);
+  const ticketX = useTransform(sx, (v) => v * 46);
+  const ticketY = useTransform(sy, (v) => v * 30);
+
+  const onMove = (e: React.PointerEvent) => {
+    if (reduce) return;
+    mx.set(e.clientX / window.innerWidth - 0.5);
+    my.set(e.clientY / window.innerHeight - 0.5);
+  };
+
+  const word =
+    "font-display block font-bold uppercase leading-[0.84] tracking-[-0.055em] text-[21vw] sm:text-[clamp(96px,17.5vh,190px)]";
+
   return (
     <section
       id="hero"
       ref={ref}
+      onPointerMove={onMove}
       className="t-bg-hero t-ink relative h-[clamp(680px,100svh,1000px)] overflow-hidden"
     >
-      <div
+      {/* Disco cobalto con sombra dura: el "podio" del retrato */}
+      <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[27%] z-0 -translate-y-1/2 overflow-hidden sm:top-[50%] sm:-translate-y-[56%]"
+        style={{ x: discX, y: discY }}
+        className="pointer-events-none absolute bottom-[26%] left-1/2 z-[5] aspect-square w-[78vw] -translate-x-1/2 sm:bottom-[8%] sm:w-auto sm:h-[64%]"
       >
-        <ScrollMarquee />
-      </div>
+        <motion.div
+          initial={reduce ? false : { scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.9, ease: EASE }}
+          className="h-full w-full rounded-full border-[3px] border-[#09090B] bg-[#0044FF] shadow-[12px_12px_0_#09090B]"
+        />
+      </motion.div>
 
       <motion.div
         style={{ y: portraitY }}
         className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
-        <motion.img
-          src="/erick-portrait-studio.png"
-          alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
-          initial={reduce ? false : { y: 100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 1.1, ease: EASE }}
-          className="h-full w-auto max-w-none object-contain object-bottom select-none"
-        />
+        <motion.div style={{ x: faceX }} className="h-full">
+          <motion.img
+            src="/erick-portrait-studio.png"
+            alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
+            initial={reduce ? false : { y: 100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.1, ease: EASE }}
+            className="h-full w-auto max-w-none object-contain object-bottom select-none"
+          />
+        </motion.div>
       </motion.div>
 
-      {/* Bottom-left intro card with Apple HIG frosted glass & refined typography */}
+      {/* Titular gigante POR DELANTE del retrato: las letras cruzan el hombro */}
+      <motion.h1
+        style={{ x: wordsX }}
+        initial={reduce ? false : { y: 60, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+        className="pointer-events-none absolute top-[17%] left-4 z-20 select-none sm:top-[52%] sm:left-[3.5%] sm:-translate-y-1/2"
+      >
+        <span className="sr-only">Desarrollador web e IA en Barcelona. </span>
+        <span className={`${word} text-[#09090B] dark:text-white`}>Webs</span>
+        <span className={`${word} text-[#09090B] dark:text-white`}>ERPs</span>
+        <span
+          className={`${word} text-[#0044FF] [text-shadow:5px_5px_0_#09090B] dark:text-[#5b97ff]`}
+        >
+          &amp; IA
+        </span>
+      </motion.h1>
+
+      {/* Ticket amarillo */}
       <motion.div
-        initial={reduce ? false : { y: 40, opacity: 0 }}
+        style={{ x: ticketX, y: ticketY }}
+        className="pointer-events-none absolute top-[30%] right-3 z-20 sm:top-[34%] sm:right-auto sm:left-[calc(50%+210px)]"
+      >
+        <motion.div
+          initial={reduce ? false : { scale: 0, rotate: -20 }}
+          animate={{ scale: 1, rotate: 6 }}
+          transition={{ type: "spring", stiffness: 160, damping: 12, delay: 0.9 }}
+          className="rounded-xl border-2 border-[#09090B] bg-[#FFD60A] px-4 py-2.5 text-[#09090B] shadow-[5px_5px_0_#09090B]"
+        >
+          <p className="font-display text-[20px] leading-none font-bold tracking-[-0.03em]">
+            Top 1 Google
+          </p>
+          <p className="mt-1 text-[15px] leading-none font-semibold">diversplas.es</p>
+        </motion.div>
+      </motion.div>
+
+      {/* Texto y acciones, sin tarjeta */}
+      <motion.div
+        initial={reduce ? false : { y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[380px] lg:w-[410px] 2xl:w-[450px]"
+        className="absolute right-4 bottom-5 left-4 z-30 sm:right-[4%] sm:bottom-[11%] sm:left-auto sm:w-[320px] lg:w-[360px]"
       >
-        <div className="rounded-[28px] border border-black/[0.08] dark:border-white/10 bg-white/85 dark:bg-zinc-950/85 p-6 sm:p-7 backdrop-blur-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)]">
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 dark:border-blue-400/20 bg-blue-500/10 dark:bg-blue-400/10 px-3 py-1">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0044FF] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0044FF]" />
-            </span>
-            <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.08em] text-[#0044FF] dark:text-[#5b97ff]">
-              Desarrollador Web &amp; IA · Barcelona
-            </span>
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-display mt-3.5 text-[24px] sm:text-[27px] 2xl:text-[32px] font-bold leading-[1.14] tracking-[-0.035em] text-zinc-950 dark:text-white">
-            Webs, ERPs e IA llevados a producción.
-          </h1>
-
-          {/* Action Buttons */}
-          <div className="mt-5 flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={() => onJumpToProjects()}
-              className="group inline-flex items-center gap-2 rounded-full bg-zinc-950 dark:bg-white px-5 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold text-white dark:text-zinc-950 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md active:scale-[0.98]"
-            >
-              <span>Ver proyectos</span>
-              <ArrowDown
-                size={15}
-                strokeWidth={2.4}
-                className="transition-transform duration-200 group-hover:translate-y-0.5"
-              />
-            </button>
-            <button
-              type="button"
-              onClick={() => onJumpToProjects("private-erp")}
-              className="group inline-flex items-center gap-2 rounded-full border border-black/12 dark:border-white/15 bg-black/[0.03] dark:bg-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.12] px-5 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold text-zinc-900 dark:text-white transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
-            >
-              <span>Demo ERP</span>
-              <ArrowUpRight
-                size={15}
-                strokeWidth={2.2}
-                className="text-zinc-500 dark:text-zinc-400 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:group-hover:text-white"
-              />
-            </button>
-          </div>
+        <p className="font-display hidden text-[28px] leading-[1.1] font-bold tracking-[-0.035em] sm:block lg:text-[32px]">
+          Llevados a producción.
+        </p>
+        <p className="mt-2 hidden text-[17px] font-semibold text-[#0044FF] sm:block dark:text-[#5b97ff]">
+          Desarrollador web &amp; IA · Barcelona
+        </p>
+        <div className="flex flex-wrap items-center gap-2.5 sm:mt-5">
+          <button
+            type="button"
+            onClick={() => onJumpToProjects()}
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[16px] font-semibold text-white shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF] dark:border-white dark:bg-white dark:text-[#09090B]"
+          >
+            <span>Ver proyectos</span>
+            <ArrowDown size={17} strokeWidth={2.4} />
+          </button>
+          <button
+            type="button"
+            onClick={() => onJumpToProjects("private-erp")}
+            className="group inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[16px] font-semibold text-[#09090B] shadow-[4px_4px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+          >
+            <span>Demo ERP</span>
+            <ArrowUpRight size={17} strokeWidth={2.4} />
+          </button>
         </div>
       </motion.div>
 
       <div className="pointer-events-none absolute top-0 right-[1%] z-20 hidden xl:block">
         <HangingCard width={210} />
-      </div>
-
-      {/* Bottom-right scroll indicator */}
-      <div className="absolute right-6 bottom-6 lg:right-8 lg:bottom-8 z-20 hidden sm:flex">
-        <motion.button
-          type="button"
-          onClick={() => onJumpToProjects()}
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="group flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide uppercase text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors duration-200"
-        >
-          <span className="tracking-[0.14em]">Scroll</span>
-          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-black/15 dark:border-white/20 transition-transform duration-200 group-hover:translate-y-0.5">
-            <ArrowDown size={11} strokeWidth={2.4} />
-          </span>
-        </motion.button>
       </div>
     </section>
   );
