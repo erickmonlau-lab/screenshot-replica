@@ -41,17 +41,17 @@ const metrics: Metric[] = [
 
 function Counter({ metric }: { metric: Metric }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+  const numRef = useRef<HTMLSpanElement>(null);
+  const inView = useInView(numRef, { once: true, margin: "-15% 0px" });
   const fmt = {
     format: (n: number) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "."),
   };
 
   useEffect(() => {
-    const node = ref.current;
+    const node = numRef.current;
     if (!node) return;
     const write = (v: number) => {
-      node.textContent = `${metric.prefix ?? ""}${fmt.format(Math.round(v))}${metric.suffix ?? ""}`;
+      node.textContent = fmt.format(Math.round(v));
     };
     if (!inView || reduce) {
       write(reduce || inView ? metric.to : metric.from);
@@ -67,8 +67,16 @@ function Counter({ metric }: { metric: Metric }) {
   }, [inView, reduce, metric.to]);
 
   return (
-    <span ref={ref} className="tabular-nums">
-      {`${metric.prefix ?? ""}${fmt.format(metric.to)}${metric.suffix ?? ""}`}
+    <span className="inline-flex items-baseline">
+      {metric.prefix && <span>{metric.prefix}</span>}
+      <span ref={numRef} className="tabular-nums">
+        {fmt.format(metric.to)}
+      </span>
+      {metric.suffix && (
+        <span className="text-[0.62em] font-bold tracking-normal ml-1">
+          {metric.suffix.trim()}
+        </span>
+      )}
     </span>
   );
 }
@@ -101,15 +109,15 @@ export function MetricsBand() {
                 whileHover={{ rotate: 0, y: reduce ? 0 : -8 }}
                 viewport={{ once: true, margin: "-10% 0px" }}
                 transition={{ type: "spring", stiffness: 120, damping: 14, delay: i * 0.12 }}
-                className={`${t.box} ${t.lift} rounded-[24px] border-[3px] border-[#09090B] p-7 shadow-[10px_10px_0_#09090B] sm:p-8`}
+                className={`${t.box} ${t.lift} rounded-[24px] border-[3px] border-[#09090B] p-6 sm:p-7 xl:p-8 shadow-[10px_10px_0_#09090B]`}
               >
-                <p className="font-display text-[clamp(3.6rem,9vw,6rem)] leading-[0.9] font-bold tracking-[-0.055em] whitespace-nowrap md:text-[clamp(3rem,5.6vw,5.6rem)]">
+                <p className="font-display text-[clamp(2.8rem,7vw,4.8rem)] leading-[0.92] font-bold tracking-[-0.045em] whitespace-nowrap md:text-[clamp(2.3rem,3.8vw,3.8rem)] lg:text-[clamp(2.8rem,4.4vw,4.4rem)] xl:text-[clamp(3.4rem,4.8vw,5.2rem)]">
                   <Counter metric={m} />
                 </p>
-                <p className="font-display mt-5 text-[26px] leading-[1.1] font-bold tracking-[-0.03em] sm:text-[30px]">
+                <p className="font-display mt-5 text-[24px] leading-[1.1] font-bold tracking-[-0.03em] sm:text-[28px]">
                   {m.label}
                 </p>
-                <p className={`${t.sub} mt-3 text-[17px] leading-snug font-medium sm:text-lg`}>
+                <p className={`${t.sub} mt-3 text-[16px] leading-snug font-medium sm:text-[17px]`}>
                   {m.detail}
                 </p>
               </motion.div>

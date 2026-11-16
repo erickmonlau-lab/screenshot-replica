@@ -1,6 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { RotatingSeal } from "./RotatingSeal";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -48,7 +47,7 @@ function AutoScroll({
   );
 }
 
-/** ERP Oderalo: grabación de su web (portátil + móvil) con amplia separación del contenido. */
+/** ERP Oderalo: grabación de su web (portátil + móvil) con amplia separación y sin tapar la pantalla. */
 export function OderaloSection() {
   const reduce = useReducedMotion();
   const px = useMotionValue(0);
@@ -57,7 +56,7 @@ export function OderaloSection() {
   const sy = useSpring(py, { stiffness: 70, damping: 16 });
   const rotY = useTransform(sx, (v) => -6 + v * 7);
   const rotX = useTransform(sy, (v) => 2 + v * -5);
-  const phoneX = useTransform(sx, (v) => v * 18);
+  const phoneX = useTransform(sx, (v) => v * 14);
 
   const onMove = (e: React.PointerEvent<HTMLElement>) => {
     if (reduce) return;
@@ -70,7 +69,7 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-16 sm:py-20 lg:py-24 text-[#09090B]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#E3E5E9] pt-16 pb-20 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 text-[#09090B]"
     >
       <div className="mx-auto grid w-full max-w-[1400px] items-center gap-14 px-6 sm:px-10 lg:grid-cols-12 lg:gap-14 xl:gap-20 2xl:gap-24">
         {/* Left: Text Content with generous breathing room */}
@@ -114,7 +113,7 @@ export function OderaloSection() {
           </a>
         </motion.div>
 
-        {/* Right: Mockups (Portátil + Móvil) comfortably spaced */}
+        {/* Right: Mockups (Portátil + Móvil) comfortably spaced, sin tapar la pantalla del tablet */}
         <div className="relative mt-10 sm:mt-12 lg:mt-0 lg:col-span-7" style={{ perspective: 1600 }}>
           <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
             {/* Portátil / Tablet */}
@@ -130,13 +129,13 @@ export function OderaloSection() {
             </div>
             <div className="mx-auto h-3 w-[92%] rounded-b-2xl border-[3px] border-t-0 border-[#09090B] bg-white" />
 
-            {/* Móvil: posición cuidada dentro de la columna, sin invadir el texto de la izquierda */}
+            {/* Móvil: bajado hacia la esquina inferior izquierda para que no tape los textos ni el centro de la tablet */}
             <motion.div
               style={{ x: reduce ? 0 : phoneX }}
-              className="absolute -bottom-6 left-2 sm:left-4 lg:left-6 xl:left-8 w-[26%] min-w-[120px] max-w-[180px] z-20"
+              className="absolute -bottom-10 sm:-bottom-14 lg:-bottom-16 left-0 sm:left-2 lg:left-4 w-[22%] sm:w-[21%] min-w-[105px] max-w-[150px] z-20"
             >
-              <div className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#09090B]">
-                <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[20px] bg-black">
+              <div className="overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#09090B]">
+                <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[18px] bg-black">
                   <AutoScroll
                     src="/oderalo-mobile.webp"
                     alt="Grabación de la web de Oderalo en móvil desplazándose"
@@ -148,18 +147,6 @@ export function OderaloSection() {
               </div>
             </motion.div>
           </motion.div>
-
-          <div className="pointer-events-none absolute -top-8 -right-2 z-10 hidden sm:block lg:-right-4">
-            <RotatingSeal
-              text="ERP · APP DE CAMPO · FACTURACIÓN · ERP · "
-              size={170}
-              className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[6px_6px_0_#09090B]"
-            >
-              <span className="font-display text-[28px] leading-none font-bold tracking-[-0.05em]">
-                ER
-              </span>
-            </RotatingSeal>
-          </div>
         </div>
       </div>
     </section>
