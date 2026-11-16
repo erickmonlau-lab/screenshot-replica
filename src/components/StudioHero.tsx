@@ -104,7 +104,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.img
-          src="/erick-portrait-studio.png"
+          src="/erick-portrait-studio.webp"
           alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
           initial={reduce ? false : { y: 100 }}
           animate={{ y: 0 }}

@@ -162,7 +162,7 @@ export function HangingCard({
         </div>
         <div className="mx-4 mt-3 overflow-hidden rounded-2xl border-2 border-[#09090B] bg-[#0044FF]">
           <img
-            src="/erick-portrait-studio.png"
+            src="/erick-portrait-studio.webp"
             alt="Erick Rodríguez"
             loading="lazy"
             draggable={false}
