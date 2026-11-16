@@ -11,7 +11,7 @@ const navItems = [
   { id: "hero", label: "Inicio" },
   { id: "proceso", label: "Proceso" },
   { id: "proyectos", label: "Proyectos" },
-  { id: "ia", label: "Demos" },
+  { id: "ia", label: "Cerebro" },
   { id: "trayectoria", label: "Trayectoria" },
   { id: "contacto", label: "Contacto" },
 ] as const;

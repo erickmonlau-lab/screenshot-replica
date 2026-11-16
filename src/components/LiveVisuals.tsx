@@ -223,6 +223,8 @@ interface GNode {
   vy: number;
   ax: number;
   ay: number;
+  ox: number;
+  oy: number;
   r: number;
   deg: number;
 }
@@ -263,7 +265,7 @@ function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
   const mk = (name: string, group: GNode["group"], ax: number, ay: number, spread: number): GNode => {
     const ang = r() * Math.PI * 2;
     const d = Math.sqrt(r()) * spread;
-    const n: GNode = { id: nodes.length, name, group, x: ax + Math.cos(ang) * d, y: ay + Math.sin(ang) * d, vx: 0, vy: 0, ax, ay, r: 4, deg: 0 };
+    const n: GNode = { id: nodes.length, name, group, x: 0, y: 0, vx: 0, vy: 0, ax, ay, ox: Math.cos(ang) * d, oy: Math.sin(ang) * d, r: 4, deg: 0 };
     nodes.push(n);
     return n;
   };
@@ -274,23 +276,23 @@ function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
   };
 
   // dense cluster A
-  const A = A_NAMES.map((nm) => mk(nm, "a", 0.46, 0.36, 0.2));
+  const A = A_NAMES.map((nm) => mk(nm, "a", 0.56, 0.46, 0.3));
   A.forEach((n, i) => {
     for (let k = 0; k < 4; k++) {
       const t = A[Math.floor(r() * A.length)]!;
-      if (t !== n && !links.some((l) => (l[0] === n.id && l[1] === t.id) || (l[0] === t.id && l[1] === n.id))) link(n, t, 100);
+      if (t !== n && !links.some((l) => (l[0] === n.id && l[1] === t.id) || (l[0] === t.id && l[1] === n.id))) link(n, t, 125);
     }
-    if (i > 0) link(n, A[Math.floor(r() * 4)]!, 100);
+    if (i > 0) link(n, A[Math.floor(r() * 4)]!, 125);
   });
 
   // star cluster B
-  const hub = mk("MOC-DESIGN", "b", 0.28, 0.72, 0.01);
-  B_NAMES.forEach((nm) => link(hub, mk(nm, "b", 0.26, 0.74, 0.2), 100));
+  const hub = mk("MOC-DESIGN", "b", 0.2, 0.56, 0.01);
+  B_NAMES.forEach((nm) => link(hub, mk(nm, "b", 0.2, 0.56, 0.3), 100));
   link(hub, A[3]!, 150);
 
   // orphans
   O_NAMES.forEach((nm, i) => {
-    const o = mk(nm, "o", 0.1 + r() * 0.82, 0.08 + r() * 0.86, 0.02);
+    const o = mk(nm, "o", 0.08 + r() * 0.84, 0.1 + r() * 0.8, 0.02);
     if (i === 4) link(o, nodes[nodes.length - 2]!, 90);
     if (i === 10) link(o, nodes[nodes.length - 3]!, 90);
   });
@@ -335,8 +337,8 @@ export function BrainVisual() {
       canvas.style.height = nh + "px";
       if (!placed) {
         nodes.forEach((n) => {
-          n.x *= nw;
-          n.y *= nh;
+          n.x = n.ax * nw + n.ox * nh;
+          n.y = n.ay * nh + n.oy * nh;
           n.ax *= nw;
           n.ay *= nh;
         });
@@ -406,7 +408,7 @@ export function BrainVisual() {
 
     const step = (t: number) => {
       const n = nodes.length;
-      const S = Math.min(W, H) / 420;
+      const S = Math.min(W, H) / 400;
       const cut = 320 * S;
       for (let i = 0; i < n; i++) {
         const a = nodes[i]!;
@@ -422,7 +424,7 @@ export function BrainVisual() {
             d2 = 1;
           }
           const aa = a.group === "a" && b.group === "a";
-          const f = Math.min(aa ? 4 : 1.6, ((aa ? 2600 : 620) * S * S) / d2);
+          const f = Math.min(aa ? 4 : 1.6, ((aa ? 3400 : 620) * S * S) / d2);
           const d = Math.sqrt(d2);
           const fx = (dx / d) * f;
           const fy = (dy / d) * f;
@@ -459,8 +461,8 @@ export function BrainVisual() {
         }
         nd.x += nd.vx;
         nd.y += nd.vy;
-        nd.x = Math.min(W - 12, Math.max(12, nd.x));
-        nd.y = Math.min(H - 12, Math.max(12, nd.y));
+        nd.x = Math.min(W - 64, Math.max(64, nd.x));
+        nd.y = Math.min(H - 34, Math.max(20, nd.y));
       }
       if (drag >= 0) {
         const d = nodes[drag]!;

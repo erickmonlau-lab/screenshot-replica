@@ -37,7 +37,7 @@ import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { StackSwitcher } from "@/components/StackSwitcher";
-import { BrainVisual, CodeVisual, ModelsVisual, N8nVisual } from "@/components/LiveVisuals";
+import { BrainVisual } from "@/components/LiveVisuals";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
 import { CursorGlow } from "@/components/CursorGlow";
@@ -396,74 +396,32 @@ function Index() {
             <Reveal className="mb-6">
               <SectionTitle
                 compact
-                word="En vivo"
-                sub="No te lo cuento."
-                accent="Tócalo tú mismo."
+                word="Cerebro"
+                sub="La IA ya sabe"
+                accent="cómo trabajo."
               />
             </Reveal>
 
-            <div className="mx-auto max-w-[940px]">
-              <ol className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4" aria-label="Demos de IA">
-                {aiPhases.map((phase) => {
-                  const on = phase.id === selectedAiPhase.id;
-                  return (
-                    <li key={phase.id}>
-                      <button
-                        type="button"
-                        onClick={() => setActiveAiPhase(phase.id)}
-                        aria-pressed={on}
-                        className={`flex h-full w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-all duration-300 hover:-translate-y-0.5 ${
-                          on
-                            ? "border-[#3B82F6] bg-[#0F1D3D] shadow-[0_0_30px_-8px_#3B82F6]"
-                            : "border-white/15 bg-[#101219] hover:border-white/40"
-                        }`}
-                      >
-                        <span
-                          className={`font-display text-3xl leading-none font-bold tracking-[-0.04em] ${
-                            on ? "text-white" : "text-zinc-600"
-                          }`}
-                        >
-                          {phase.num}
-                        </span>
-                        <span className="font-display text-base leading-tight font-bold tracking-[-0.02em] text-white sm:text-lg">
-                          {phase.kicker}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ol>
+            <div className="aspect-[2.9/1] min-h-[300px] w-full overflow-hidden rounded-[24px] border-2 border-white/80 shadow-[8px_8px_0_#0044FF] max-md:aspect-[4/3]">
+              <BrainVisual />
+            </div>
 
-              <div className="macos-window-frame overflow-hidden rounded-[24px] text-white">
-                <div className="flex items-center gap-2 border-b border-[#303240] px-5 py-3">
-                  <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
-                  <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
-                  <span className="h-3 w-3 rounded-full bg-[#28C840]" />
-                  <span className="ml-3 text-lg font-semibold text-zinc-200">
-                    {selectedAiPhase.title}
-                  </span>
-                  <span className="ml-auto hidden text-base text-zinc-400 md:inline">
-                    {selectedAiPhase.tags.join(" · ")}
-                  </span>
+            <div className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
+              {[
+                ["Memoria entre proyectos", "Cada decisión, regla y cliente vive en una nota. La IA las lee antes de empezar, así no parto de cero."],
+                ["Reglas que se cumplen", "Mis normas de diseño y de código están en el cerebro. Los agentes las aplican siempre, no cuando me acuerdo."],
+                ["Menos contexto repetido", "No vuelvo a explicar cada proyecto en cada sesión: el agente ya sabe qué se decidió y por qué."],
+              ].map(([t, d], i) => (
+                <div key={t} className="rounded-2xl border-2 border-white/15 bg-[#101219] px-5 py-4">
+                  <p className="font-display text-3xl leading-none font-bold tracking-[-0.04em] text-[#3B82F6]">
+                    0{i + 1}
+                  </p>
+                  <h3 className="font-display mt-2 text-xl font-bold tracking-[-0.02em] text-white">
+                    {t}
+                  </h3>
+                  <p className="mt-1.5 text-base leading-snug font-medium text-zinc-400">{d}</p>
                 </div>
-                <div className="aspect-[760/400] w-full">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={selectedAiPhase.id}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="h-full w-full"
-                    >
-                      {selectedAiPhase.id === "automation" && <N8nVisual />}
-                      {selectedAiPhase.id === "models" && <ModelsVisual />}
-                      {selectedAiPhase.id === "code" && <CodeVisual />}
-                      {selectedAiPhase.id === "memory" && <BrainVisual />}
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
