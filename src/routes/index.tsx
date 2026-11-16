@@ -448,7 +448,7 @@ function Index() {
                     {selectedAiPhase.title}
                   </span>
                 </div>
-                <div className="min-h-[330px] flex-1 p-3 sm:p-4">
+                <div className="min-h-[400px] flex-1 p-3 sm:p-4">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}

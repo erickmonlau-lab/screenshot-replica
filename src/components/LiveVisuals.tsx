@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /* Four animated scenes for the "En vivo" window. Pure SVG + SMIL/CSS, no JS loop. */
 
@@ -211,7 +211,21 @@ export function CodeVisual() {
   );
 }
 
-/* ───────────── 4 · second brain: an Obsidian-style window with graph view ───────────── */
+/* ───────────── 4 · second brain: live force-directed graph, Obsidian style ───────────── */
+
+interface GNode {
+  id: number;
+  name: string;
+  group: "a" | "b" | "o";
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  ax: number;
+  ay: number;
+  r: number;
+  deg: number;
+}
 
 function rng(seed: number) {
   let v = seed;
@@ -221,140 +235,304 @@ function rng(seed: number) {
   };
 }
 
-const OBS_BG = "#1E1E1E";
-const OBS_SIDE = "#262626";
-const OBS_TEXT = "#DCDDDE";
-const OBS_MUTED = "#9A9A9A";
-const OBS_NODE = "#8F8F8F";
-const OBS_LINK = "#4A4A4A";
-const OBS_ACCENT = "#A882FF";
-
-const CLUSTERS: { id: string; label: string; x: number; y: number; notes: string[] }[] = [
-  { id: "reglas", label: "reglas-agente", x: 470, y: 225, notes: ["estilo-codigo", "revision-pr", "seguridad"] },
-  { id: "skills", label: "claude-skills", x: 330, y: 135, notes: ["n8n-flujos", "prompts", "agentes"] },
-  { id: "proyectos", label: "proyectos", x: 625, y: 140, notes: ["diversplas", "gesgrama", "breadpdf"] },
-  { id: "clientes", label: "clientes", x: 650, y: 320, notes: ["briefs", "presupuestos"] },
-  { id: "erp", label: "erp-interno", x: 335, y: 320, notes: ["stock", "albaranes", "facturas"] },
-  { id: "decisiones", label: "decisiones", x: 495, y: 85, notes: ["adr-stack", "adr-seo"] },
+const A_NAMES = [
+  "CLAUDE", "AGENTS", "MOC-INDEX", "09-UNIVERSAL-FIELD", "TEMPLATE-DESIGN-SYSTEM", "08-UI-PATTERNS",
+  "07-MOTION", "06-ACCESSIBILITY", "05-TYPOGRAPHY", "04-COLOR", "03-LAYOUT", "02-COMPONENTS", "01-FOUNDATIONS",
+  "SKILL-premium-ui", "SKILL-motion", "SKILL-apple-design", "REGLAS-agente", "DECISIONES", "PROJECTS",
+  "PROMPTS", "N8N-flujos", "ERP-interno", "CLIENTES", "BRIEFS", "PRESUPUESTOS", "ANTIGRAVITY-protocol",
+  "ORDERALO", "PORTFOLIO", "ENGINEERING", "PERFORMANCE", "SEO-tecnico", "REFERENCES", "TEMPLATES",
+  "EVIDENCE-REGISTER", "REFERENCE-INDEX", "AGENT-ROUTER",
+];
+const B_NAMES = [
+  "MOC-PROJECTS", "MOC-APP-PATTERNS", "GALLERY", "MOC-EVIDENCE", "01-CORE-DESIGN-PRINCIPLES",
+  "02-CREATIVE-DIRECTION", "03-START-HERE", "04-COMPOSITION-AND-LAYOUT", "05-TYPOGRAPHY",
+  "06-COLOR-AND-BRAND", "MOC-ENGINEERING", "BREADPDF", "GESGRAMA", "KOVIA", "OTHER-PROJECTS", "REMOTION-DESIGN",
+];
+const O_NAMES = [
+  "ORDERALO_identidad-definitiva", "SKILL-premium-ui-validation", "DESIGN-SYSTEM-proposal",
+  "KOVIA-JARVIS-REMOTION", "2026-11-09-auditoria", "2026-11-10-decision-stack", "ANTIGRAVITY-POSTMORTEM",
+  "PORTFOLIO_AUDIT-fuentes", "OBSIDIAN-IMPLEMENTATION-REPORT", "2026-11-19-decisiones-diseno",
+  "2026-11-18-integraciones", "ideas-sueltas", "checklist-lanzamiento", "inbox", "2026-11-12-notas",
+  "landing-prueba-verificable", "reuniones", "snapshot",
 ];
 
-const BRAIN = (() => {
-  const r = rng(11);
-  return CLUSTERS.map((c, ci) => {
-    const n = ci === 0 ? 17 : 13;
-    const leaves = Array.from({ length: n }, (_, k) => {
-      const ang = r() * Math.PI * 2;
-      const dist = 26 + Math.pow(r(), 0.7) * 84;
-      return {
-        x: Math.min(735, Math.max(232, c.x + Math.cos(ang) * dist * 1.1)),
-        y: Math.min(352, Math.max(60, c.y + Math.sin(ang) * dist * 0.8)),
-        r: 2.6 + r() * 3.2,
-        name: k < c.notes.length ? c.notes[k]! : null,
-      };
-    });
-    const links = leaves.map((l, k) => {
-      const t = k > 2 && r() > 0.45 ? leaves[Math.floor(r() * k)]! : null;
-      return t ? [l.x, l.y, t.x, t.y] : [l.x, l.y, c.x, c.y];
-    });
-    return { ...c, leaves, links };
+function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
+  const r = rng(5);
+  const nodes: GNode[] = [];
+  const links: [number, number, number][] = [];
+  const mk = (name: string, group: GNode["group"], ax: number, ay: number, spread: number): GNode => {
+    const ang = r() * Math.PI * 2;
+    const d = Math.sqrt(r()) * spread;
+    const n: GNode = { id: nodes.length, name, group, x: ax + Math.cos(ang) * d, y: ay + Math.sin(ang) * d, vx: 0, vy: 0, ax, ay, r: 4, deg: 0 };
+    nodes.push(n);
+    return n;
+  };
+  const link = (a: GNode, b: GNode, len: number) => {
+    links.push([a.id, b.id, len]);
+    a.deg++;
+    b.deg++;
+  };
+
+  // dense cluster A
+  const A = A_NAMES.map((nm) => mk(nm, "a", 0.46, 0.36, 0.2));
+  A.forEach((n, i) => {
+    for (let k = 0; k < 4; k++) {
+      const t = A[Math.floor(r() * A.length)]!;
+      if (t !== n && !links.some((l) => (l[0] === n.id && l[1] === t.id) || (l[0] === t.id && l[1] === n.id))) link(n, t, 100);
+    }
+    if (i > 0) link(n, A[Math.floor(r() * 4)]!, 100);
   });
-})();
 
-const TREE: [string, boolean, boolean][] = [
-  ["reglas", false, false],
-  ["skills", true, false],
-  ["claude-skills.md", false, true],
-  ["n8n-flujos.md", false, false],
-  ["proyectos", false, false],
-  ["clientes", false, false],
-  ["erp-interno", false, false],
-  ["decisiones", false, false],
-];
+  // star cluster B
+  const hub = mk("MOC-DESIGN", "b", 0.28, 0.72, 0.01);
+  B_NAMES.forEach((nm) => link(hub, mk(nm, "b", 0.26, 0.74, 0.2), 100));
+  link(hub, A[3]!, 150);
+
+  // orphans
+  O_NAMES.forEach((nm, i) => {
+    const o = mk(nm, "o", 0.1 + r() * 0.82, 0.08 + r() * 0.86, 0.02);
+    if (i === 4) link(o, nodes[nodes.length - 2]!, 90);
+    if (i === 10) link(o, nodes[nodes.length - 3]!, 90);
+  });
+
+  nodes.forEach((n) => {
+    n.r = 3.6 + Math.sqrt(n.deg) * 1.35;
+  });
+  return { nodes, links };
+}
 
 export function BrainVisual() {
+  const wrap = useRef<HTMLDivElement>(null);
+  const cv = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = cv.current;
+    const box = wrap.current;
+    if (!canvas || !box) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const { nodes, links } = buildGraph();
+    const adj: Set<number>[] = nodes.map(() => new Set());
+    links.forEach(([a, b]) => {
+      adj[a]!.add(b);
+      adj[b]!.add(a);
+    });
+    const hubs = [nodes.findIndex((n) => n.name === "MOC-DESIGN"), 0, 3, 13, 26];
+
+    let W = 0;
+    let H = 0;
+    let dpr = 1;
+    let placed = false;
+    const resize = () => {
+      const r = box.getBoundingClientRect();
+      const nw = Math.max(200, r.width);
+      const nh = Math.max(200, r.height);
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = nw * dpr;
+      canvas.height = nh * dpr;
+      canvas.style.width = nw + "px";
+      canvas.style.height = nh + "px";
+      if (!placed) {
+        nodes.forEach((n) => {
+          n.x *= nw;
+          n.y *= nh;
+          n.ax *= nw;
+          n.ay *= nh;
+        });
+        placed = true;
+      } else {
+        nodes.forEach((n) => {
+          n.x *= nw / W;
+          n.y *= nh / H;
+          n.ax *= nw / W;
+          n.ay *= nh / H;
+        });
+      }
+      W = nw;
+      H = nh;
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(box);
+
+    let hover = -1;
+    let drag = -1;
+    const pt = { x: 0, y: 0 };
+    const local = (e: PointerEvent) => {
+      const r = canvas.getBoundingClientRect();
+      pt.x = e.clientX - r.left;
+      pt.y = e.clientY - r.top;
+    };
+    const pick = () => {
+      let best = -1;
+      let bd = 1e9;
+      nodes.forEach((n) => {
+        const d = Math.hypot(n.x - pt.x, n.y - pt.y);
+        if (d < n.r + 10 && d < bd) {
+          bd = d;
+          best = n.id;
+        }
+      });
+      return best;
+    };
+    const onMove = (e: PointerEvent) => {
+      local(e);
+      if (drag < 0) hover = pick();
+    };
+    const onDown = (e: PointerEvent) => {
+      local(e);
+      const p = pick();
+      if (p >= 0) {
+        drag = p;
+        canvas.setPointerCapture(e.pointerId);
+      }
+    };
+    const onUp = () => {
+      drag = -1;
+    };
+    const onLeave = () => {
+      if (drag < 0) hover = -1;
+    };
+    canvas.addEventListener("pointermove", onMove);
+    canvas.addEventListener("pointerdown", onDown);
+    canvas.addEventListener("pointerup", onUp);
+    canvas.addEventListener("pointercancel", onUp);
+    canvas.addEventListener("pointerleave", onLeave);
+
+    let raf = 0;
+    let visible = true;
+    const t0 = performance.now();
+
+    const step = (t: number) => {
+      const n = nodes.length;
+      const S = Math.min(W, H) / 420;
+      const cut = 320 * S;
+      for (let i = 0; i < n; i++) {
+        const a = nodes[i]!;
+        for (let j = i + 1; j < n; j++) {
+          const b = nodes[j]!;
+          let dx = a.x - b.x;
+          let dy = a.y - b.y;
+          let d2 = dx * dx + dy * dy;
+          if (d2 > cut * cut) continue;
+          if (d2 < 1) {
+            dx = Math.random() - 0.5;
+            dy = Math.random() - 0.5;
+            d2 = 1;
+          }
+          const aa = a.group === "a" && b.group === "a";
+          const f = Math.min(aa ? 4 : 1.6, ((aa ? 2600 : 620) * S * S) / d2);
+          const d = Math.sqrt(d2);
+          const fx = (dx / d) * f;
+          const fy = (dy / d) * f;
+          a.vx += fx;
+          a.vy += fy;
+          b.vx -= fx;
+          b.vy -= fy;
+        }
+      }
+      for (const [ia, ib, len] of links) {
+        const a = nodes[ia]!;
+        const b = nodes[ib]!;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const d = Math.hypot(dx, dy) || 1;
+        const f = (d - len * S) * 0.022;
+        const fx = (dx / d) * f;
+        const fy = (dy / d) * f;
+        a.vx += fx;
+        a.vy += fy;
+        b.vx -= fx;
+        b.vy -= fy;
+      }
+      for (const nd of nodes) {
+        const k = nd.group === "o" ? 0.0016 : 0.0007;
+        nd.vx += (nd.ax - nd.x) * k + Math.sin(t * 0.0009 + nd.id * 1.7) * 0.02 * S;
+        nd.vy += (nd.ay - nd.y) * k + Math.cos(t * 0.0008 + nd.id * 2.3) * 0.02 * S;
+        nd.vx *= 0.88;
+        nd.vy *= 0.88;
+        const sp = Math.hypot(nd.vx, nd.vy);
+        if (sp > 4) {
+          nd.vx = (nd.vx / sp) * 4;
+          nd.vy = (nd.vy / sp) * 4;
+        }
+        nd.x += nd.vx;
+        nd.y += nd.vy;
+        nd.x = Math.min(W - 12, Math.max(12, nd.x));
+        nd.y = Math.min(H - 12, Math.max(12, nd.y));
+      }
+      if (drag >= 0) {
+        const d = nodes[drag]!;
+        d.x = pt.x;
+        d.y = pt.y;
+        d.vx = 0;
+        d.vy = 0;
+      }
+    };
+
+    const draw = (t: number) => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = "#1B1B1B";
+      ctx.fillRect(0, 0, W, H);
+
+      const focus = hover >= 0 ? hover : hubs[Math.floor((t - t0) / 3200) % hubs.length]!;
+      const near = adj[focus]!;
+
+      ctx.lineWidth = 1;
+      for (const [ia, ib] of links) {
+        const a = nodes[ia]!;
+        const b = nodes[ib]!;
+        const hot = ia === focus || ib === focus;
+        ctx.strokeStyle = hot ? "rgba(168,130,255,0.95)" : "rgba(150,150,150,0.26)";
+        ctx.lineWidth = hot ? 1.6 : 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+
+      ctx.textAlign = "center";
+      ctx.font = "13px Inter Variable, Inter, system-ui, sans-serif";
+      for (const nd of nodes) {
+        const on = nd.id === focus;
+        const isNear = near.has(nd.id);
+        ctx.fillStyle = on ? "#A882FF" : isNear ? "#CDB8FF" : nd.group === "b" ? "#8A8A8A" : "#B9B9B9";
+        ctx.beginPath();
+        ctx.arc(nd.x, nd.y, nd.r + (on ? 2 : 0), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = on || isNear ? "#EDEDED" : "rgba(160,160,160,0.5)";
+        if (nd.group === "o" || nd.deg >= 7 || on || isNear) ctx.fillText(nd.name, nd.x, nd.y + nd.r + 15);
+      }
+    };
+
+    const loop = (now: number) => {
+      raf = requestAnimationFrame(loop);
+      if (!visible) return;
+      step(now);
+      draw(now);
+    };
+    raf = requestAnimationFrame(loop);
+    const io = new IntersectionObserver((e) => {
+      visible = e[0]?.isIntersecting ?? true;
+    });
+    io.observe(box);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      ro.disconnect();
+      canvas.removeEventListener("pointermove", onMove);
+      canvas.removeEventListener("pointerdown", onDown);
+      canvas.removeEventListener("pointerup", onUp);
+      canvas.removeEventListener("pointercancel", onUp);
+      canvas.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
+
   return (
-    <Stage label="Vista de grafo del cerebro de IA en Obsidian">
-      <rect width={760} height={400} fill={OBS_BG} />
-      {/* sidebar */}
-      <rect width={196} height={400} fill={OBS_SIDE} />
-      <line x1={196} y1={0} x2={196} y2={400} stroke="#363636" strokeWidth={2} />
-      <text x={16} y={30} fill={OBS_MUTED} fontSize={15} fontWeight={600}>
-        Cerebro
-      </text>
-      {TREE.map(([name, open, active], i) => (
-        <g key={name} transform={`translate(0 ${54 + i * 38})`}>
-          {active ? <rect x={8} y={-4} width={180} height={30} rx={8} fill="#3A3A3A" /> : null}
-          <path
-            d={open ? "M 18 8 L 28 8 L 23 15 Z" : "M 20 5 L 20 15 L 27 10 Z"}
-            fill={OBS_MUTED}
-            transform={name.endsWith(".md") ? "translate(14 0)" : undefined}
-            opacity={name.endsWith(".md") ? 0 : 1}
-          />
-          <text x={name.endsWith(".md") ? 44 : 36} y={16} fill={active ? "#fff" : OBS_TEXT} fontSize={15}>
-            {name}
-          </text>
-        </g>
-      ))}
-
-      {/* tab bar */}
-      <rect x={197} y={0} width={563} height={40} fill="#1A1A1A" />
-      <rect x={210} y={6} width={190} height={34} rx={8} fill={OBS_BG} />
-      <circle cx={232} cy={23} r={5} fill="none" stroke={OBS_MUTED} strokeWidth={2} />
-      <circle cx={246} cy={17} r={3} fill={OBS_MUTED} />
-      <text x={260} y={28} fill={OBS_TEXT} fontSize={15}>
-        Vista de grafo
-      </text>
-
-      {/* graph */}
-      {BRAIN.map((c, ci) => (
-        <g key={c.id} className={ci % 2 ? "drift-b" : "drift-a"}>
-          <g stroke={OBS_LINK} strokeWidth={1.1}>
-            {c.links.map((l, i) => (
-              <line key={i} x1={l[0]} y1={l[1]} x2={l[2]} y2={l[3]} />
-            ))}
-          </g>
-          {c.leaves.map((l, i) => (
-            <circle key={i} cx={l.x} cy={l.y} r={l.r} fill={OBS_NODE} />
-          ))}
-          {/* highlight (hover) pass: purple links and nodes of this cluster */}
-          <g opacity={0}>
-            <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.02;0.08;0.15;0.2;1" dur="12s" begin={`${ci * 2}s`} repeatCount="indefinite" />
-            <g stroke={OBS_ACCENT} strokeWidth={1.8}>
-              {c.links.map((l, i) => (
-                <line key={i} x1={l[0]} y1={l[1]} x2={l[2]} y2={l[3]} />
-              ))}
-            </g>
-            {c.leaves.map((l, i) => (
-              <circle key={i} cx={l.x} cy={l.y} r={l.r + 0.6} fill={OBS_ACCENT} />
-            ))}
-            <circle cx={c.x} cy={c.y} r={13} fill={OBS_ACCENT} />
-          </g>
-          <circle cx={c.x} cy={c.y} r={ci === 0 ? 11 : 9} fill="#B5B5B5" />
-          <text x={c.x} y={c.y + 28} textAnchor="middle" fill={OBS_TEXT} fontSize={15} fontWeight={600}>
-            {c.label}
-          </text>
-          {c.leaves
-            .filter((l) => l.name)
-            .map((l, i) => (
-              <text key={i} x={l.x} y={l.y + 20} textAnchor="middle" fill={OBS_MUTED} fontSize={14}>
-                {l.name}
-              </text>
-            ))}
-        </g>
-      ))}
-
-      {/* settings panel, like Obsidian's graph controls */}
-      <g transform="translate(588 52)">
-        <rect width={156} height={118} rx={10} fill="#262626" stroke="#3A3A3A" strokeWidth={1.5} />
-        {["Filtros", "Grupos", "Visualización", "Fuerzas"].map((t, i) => (
-          <g key={t} transform={`translate(0 ${14 + i * 26})`}>
-            <path d="M 14 6 L 14 16 L 21 11 Z" fill={OBS_MUTED} />
-            <text x={32} y={17} fill={OBS_TEXT} fontSize={15}>
-              {t}
-            </text>
-          </g>
-        ))}
-      </g>
-    </Stage>
+    <div ref={wrap} className="relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl bg-[#1B1B1B]">
+      <canvas ref={cv} className="absolute inset-0 cursor-grab touch-none active:cursor-grabbing" role="img" aria-label="Grafo de notas del cerebro de IA en movimiento: arrastra un nodo" />
+    </div>
   );
 }
