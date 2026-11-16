@@ -375,15 +375,13 @@ function Index() {
             <Reveal className="mb-5 2xl:mb-8">
               <SectionTitle compact word="Proyectos" sub="Webs reales y sistemas en producción." />
             </Reveal>
-            <div className="mt-2">
-              <div className="section-dark overflow-hidden rounded-[32px] border-2 border-[#09090B] px-3 pt-8 pb-7 shadow-[8px_8px_0_#0044FF] sm:px-8 sm:pt-9 sm:pb-8">
-                <ProjectCarousel
-                  slides={projectCases}
-                  activeId={activeProjectId}
-                  onChange={setActiveProjectId}
-                  privateSlide={<ErpShowcase />}
-                />
-              </div>
+            <div className="mt-4 sm:mt-6">
+              <ProjectCarousel
+                slides={projectCases}
+                activeId={activeProjectId}
+                onChange={setActiveProjectId}
+                privateSlide={<ErpShowcase />}
+              />
             </div>
           </div>
         </section>
@@ -398,29 +396,21 @@ function Index() {
           </div>
 
           <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1380px] flex-col justify-center px-5 py-14 sm:px-8 lg:py-10">
-            <div className="pointer-events-auto max-w-[500px]">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#0044FF]/25 bg-[#0044FF]/10 px-3.5 py-1 text-xs font-semibold text-[#0044FF]">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0044FF] opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0044FF]" />
-                </span>
-                <span>Obsidian Second Brain</span>
-              </div>
-
+            <div className="pointer-events-auto max-w-[520px]">
               <p
                 aria-hidden="true"
-                className="outline-title font-display mt-3 text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase [--outline-fill:#FAF9F6] text-zinc-900"
+                className="outline-title font-display text-[clamp(3.5rem,8vw,6.8rem)] leading-[0.92] font-bold tracking-[-0.03em] uppercase [--outline-fill:#FAF9F6] text-zinc-900"
               >
                 Cerebro
               </p>
-              <h2 className="font-display mt-3 text-[clamp(2.1rem,3.4vw,3.2rem)] leading-[1.03] font-bold tracking-[-0.04em] text-zinc-950">
+              <h2 className="font-display mt-3 text-[clamp(2.2rem,3.6vw,3.4rem)] leading-[1.02] font-bold tracking-[-0.04em] text-zinc-950">
                 La IA ya sabe <span className="text-[#0044FF]">cómo trabajo.</span>
               </h2>
-              <p className="mt-3 text-lg leading-snug font-medium text-zinc-600">
+              <p className="mt-4 text-xl leading-snug font-medium text-zinc-600">
                 Mi segundo cerebro vive en Obsidian: cada nota es un nodo y la IA lo recorre antes
                 de empezar.
               </p>
-              <ol className="mt-7 space-y-5 border-l-2 border-black/15 pl-5">
+              <ol className="mt-8 space-y-6 border-l-2 border-black/15 pl-6">
                 {[
                   [
                     "Memoria entre proyectos",
@@ -433,10 +423,10 @@ function Index() {
                   ["Menos contexto repetido", "No explico cada proyecto de nuevo en cada sesión."],
                 ].map(([t, d]) => (
                   <li key={t}>
-                    <p className="font-display text-xl font-bold tracking-[-0.02em] text-zinc-950">
+                    <p className="font-display text-2xl font-bold tracking-[-0.02em] text-zinc-950">
                       {t}
                     </p>
-                    <p className="text-base leading-snug font-medium text-zinc-600">{d}</p>
+                    <p className="mt-1 text-lg leading-snug font-medium text-zinc-600">{d}</p>
                   </li>
                 ))}
               </ol>
