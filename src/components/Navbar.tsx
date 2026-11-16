@@ -9,14 +9,14 @@ interface NavbarProps {
 
 const navItems = [
   { id: "hero", label: "Inicio" },
+  { id: "proceso", label: "Proceso" },
   { id: "proyectos", label: "Proyectos" },
-  { id: "servicios", label: "Servicios" },
-  { id: "ia", label: "Stack e IA" },
+  { id: "ia", label: "Demos" },
   { id: "trayectoria", label: "Trayectoria" },
   { id: "contacto", label: "Contacto" },
 ] as const;
 
-const observedIds = ["hero", "metricas", "proyectos", "servicios", "ia", "trayectoria", "contacto"];
+const observedIds = ["hero", "metricas", "orden", "proceso", "proyectos", "ia", "trayectoria", "subvencion", "contacto"];
 
 export function Navbar({ onChangeMode }: NavbarProps) {
   const [activeId, setActiveId] = useState<string>("hero");
