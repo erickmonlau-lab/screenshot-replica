@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { HangingCard } from "./HangingCard";
 
 export interface HeroProjectPreview {
   id: string;
@@ -119,7 +120,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[330px] 2xl:w-[420px]"
       >
         <div className="t-line t-bg-card rounded-2xl border p-4 2xl:p-5">
-          <p className="text-xs font-semibold tracking-[0.14em] text-[#0044FF] uppercase sm:text-[13px]">
+          <p className="text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
             Desarrollador web &amp; IA · Barcelona
           </p>
           <h1 className="t-ink font-display mt-1.5 text-[24px] leading-[1.05] font-bold tracking-[-0.035em] 2xl:text-[32px]">
@@ -129,7 +130,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             <button
               type="button"
               onClick={() => onJumpToProjects()}
-              className="t-bg-ink t-on-ink inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[13px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+              className="t-bg-ink t-on-ink inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[15px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
             >
               <span>Ver proyectos</span>
               <ArrowDown size={14} strokeWidth={2.5} />
@@ -137,7 +138,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             <button
               type="button"
               onClick={() => onJumpToProjects("private-erp")}
-              className="t-ink inline-flex items-center gap-1.5 rounded-full border-2 border-current px-4 py-2.5 text-[13px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+              className="t-ink inline-flex items-center gap-1.5 rounded-full border-2 border-current px-4 py-2.5 text-[15px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
             >
               <span>Demo ERP</span>
               <ArrowUpRight size={14} strokeWidth={2.2} />
@@ -146,13 +147,17 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         </div>
       </motion.div>
 
+      <div className="pointer-events-none absolute top-0 right-[1%] z-20 hidden xl:block">
+        <HangingCard width={210} />
+      </div>
+
       <div className="absolute right-8 bottom-8 z-20 hidden flex-col items-end gap-5 sm:flex">
-        <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-[13px] font-semibold tracking-[0.04em]">
+        <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-[15px] font-semibold tracking-[0.04em]">
           Top 1 Google · diversplas.es
         </span>
         <span className="flex items-center gap-3">
           <span
-            className="t-ink text-xs font-semibold tracking-[0.28em] uppercase"
+            className="t-ink text-[15px] font-semibold tracking-[0.28em] uppercase"
             style={{ writingMode: "vertical-rl" }}
           >
             Scroll down

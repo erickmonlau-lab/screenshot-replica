@@ -291,7 +291,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       onClick={copy}
       title={`Copiar ${label}`}
       aria-label={`Copiar ${label}`}
-      className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-bold transition-all active:scale-95 ${
+      className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-[15px] font-bold transition-all active:scale-95 ${
         copied
           ? "bg-[#10B981] text-white"
           : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
@@ -356,7 +356,7 @@ function Index() {
         >
           <VelocityMarqueeRow
             baseVelocity={-2.2}
-            className="font-display text-xs leading-none font-bold tracking-[0.16em] sm:text-sm"
+            className="font-display text-[15px] leading-none font-bold tracking-[0.08em] sm:text-base"
           >
             {marqueeText}
           </VelocityMarqueeRow>
@@ -381,7 +381,7 @@ function Index() {
                     href="https://github.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="t-ink inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase hover:text-[#0044FF] sm:text-sm"
+                    className="t-ink inline-flex items-center gap-1.5 text-[15px] font-bold tracking-wider uppercase hover:text-[#0044FF] sm:text-base"
                   >
                     <span>Ver más proyectos</span>
                     <ArrowUpRight size={14} />
@@ -412,7 +412,7 @@ function Index() {
             <div className="mt-8 border-t border-current/10 pt-7">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#0044FF] uppercase sm:text-[13px]">
+                  <span className="text-[15px] font-bold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
                     Demostración interactiva en directo
                   </span>
                   <h4 className="t-ink font-display text-lg font-extrabold tracking-tight sm:text-xl">
@@ -427,7 +427,7 @@ function Index() {
                         key={phase.id}
                         type="button"
                         onClick={() => setActiveAiPhase(phase.id)}
-                        className={`rounded-full px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase transition-colors sm:text-[13px] ${
+                        className={`rounded-full px-3.5 py-1.5 text-[15px] font-bold tracking-wider uppercase transition-colors sm:text-[15px] ${
                           active
                             ? "bg-[#0044FF] text-white"
                             : "t-line t-bg-card t-ink border hover:border-[#0044FF]"
@@ -444,11 +444,11 @@ function Index() {
                 <div className="mb-3 flex items-center justify-between border-b border-[#303240] pb-3">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-[#10B981] animate-pulse" />
-                    <span className="text-xs font-bold tracking-wider text-[#60A5FA] uppercase sm:text-sm">
+                    <span className="text-[15px] font-bold tracking-wider text-[#60A5FA] uppercase sm:text-base">
                       FASE {selectedAiPhase.num} / 04 · {selectedAiPhase.title}
                     </span>
                   </div>
-                  <span className="hidden text-xs text-zinc-400 sm:inline sm:text-[13px]">
+                  <span className="hidden text-[15px] text-zinc-400 sm:inline sm:text-[15px]">
                     Simulación activa en tiempo real
                   </span>
                 </div>
@@ -475,7 +475,7 @@ function Index() {
 
             {/* Stack con conmutador */}
             <div className="t-line mt-14 border-t pt-12">
-              <p className="mb-3 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]">
+              <p className="mb-3 text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
                 Stack
               </p>
               <h3 className="t-ink font-display mb-8 max-w-[18ch] text-[clamp(2rem,5vw,4rem)] leading-[1] font-bold tracking-[-0.045em]">
@@ -502,7 +502,7 @@ function Index() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
               {/* Profile Card / Bio Column */}
               <Reveal className="lg:col-span-5">
-                <HangingCard />
+                <HangingCard width={250} className="mx-auto lg:mx-0 lg:-ml-8" />
 
                 <div className="t-line mt-5 border-t" />
 
@@ -513,7 +513,7 @@ function Index() {
                 </p>
 
                 <div className="mt-4">
-                  <span className="t-muted block text-xs font-bold tracking-[0.2em] uppercase sm:text-[13px]">
+                  <span className="t-muted block text-[15px] font-bold tracking-[0.08em] uppercase sm:text-[15px]">
                     Actualmente
                   </span>
                   <div className="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
@@ -527,10 +527,10 @@ function Index() {
                         <div key={k as string} className="flex items-start gap-1.5">
                           <I size={15} className="mt-0.5 shrink-0 text-[#0044FF]" />
                           <div>
-                            <span className="t-ink block text-xs font-bold sm:text-sm">
+                            <span className="t-ink block text-[15px] font-bold sm:text-base">
                               {k as string}
                             </span>
-                            <span className="t-muted block text-xs leading-snug sm:text-[13px]">
+                            <span className="t-muted block text-[15px] leading-snug sm:text-[15px]">
                               {v as string}
                             </span>
                           </div>
@@ -544,7 +544,7 @@ function Index() {
                   {coreStackPills.map((tool) => (
                     <span
                       key={tool}
-                      className="t-line t-bg-card t-ink rounded-md border px-2.5 py-1 text-xs font-semibold sm:text-[13px]"
+                      className="t-line t-bg-card t-ink rounded-md border px-2.5 py-1 text-[15px] font-semibold sm:text-[15px]"
                     >
                       {tool}
                     </span>
@@ -554,7 +554,7 @@ function Index() {
                 <a
                   href={cvPdf.url}
                   download="Erick-Rodriguez-CV.pdf"
-                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 text-xs font-bold tracking-[0.16em] uppercase hover:text-[#0044FF] sm:text-sm"
+                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 text-[15px] font-bold tracking-[0.08em] uppercase hover:text-[#0044FF] sm:text-base"
                 >
                   <span>Descargar CV completo en PDF</span>
                   <Download size={14} />
@@ -588,7 +588,7 @@ function Index() {
                   },
                 ].map((col, ci) => (
                   <div key={col.label}>
-                    <span className="text-xs font-bold tracking-[0.18em] text-[#0044FF] uppercase sm:text-sm">
+                    <span className="text-[15px] font-bold tracking-[0.08em] text-[#0044FF] uppercase sm:text-base">
                       {col.label}
                     </span>
                     <div className="mt-2.5 flex flex-col">
@@ -602,12 +602,12 @@ function Index() {
                             <h4 className="t-ink font-display text-base leading-tight font-bold tracking-[-0.02em] sm:text-lg">
                               {row.title}
                             </h4>
-                            <span className="t-muted shrink-0 text-xs font-bold tracking-wider uppercase sm:text-[13px]">
+                            <span className="t-muted shrink-0 text-[15px] font-bold tracking-wider uppercase sm:text-[15px]">
                               {row.date}
                             </span>
                           </div>
-                          <p className="t-accent mt-0.5 text-xs font-bold sm:text-sm">{row.org}</p>
-                          <ul className="t-muted mt-1.5 list-disc space-y-1 pl-4 text-sm leading-relaxed sm:text-[15px]">
+                          <p className="t-accent mt-0.5 text-[15px] font-bold sm:text-base">{row.org}</p>
+                          <ul className="t-muted mt-1.5 list-disc space-y-1 pl-4 text-base leading-relaxed sm:text-[15px]">
                             {row.body.map((b) => (
                               <li key={b}>{b}</li>
                             ))}
@@ -627,8 +627,8 @@ function Index() {
         {/* CONTACTO */}
         <section id="contacto" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <p className="t-muted mb-5 font-mono text-[12px] font-bold tracking-[0.18em] uppercase sm:text-[13px]">
-              [ 06 — Contacto ] · Disponible en Barcelona
+            <p className="mb-5 text-lg font-semibold text-[#0044FF] sm:text-xl">
+              Disponible en Barcelona
             </p>
             <BigHeading
               className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em]"
@@ -692,7 +692,7 @@ function Index() {
                   ) },
                 ].map(({ icon: I, k, node }) => (
                   <div key={k} className="t-line border-t py-4 first:border-t-2">
-                    <dt className="t-muted mb-1.5 flex items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase">
+                    <dt className="t-muted mb-1.5 flex items-center gap-2 text-[15px] font-semibold tracking-[0.08em] uppercase">
                       <I size={14} className="text-[#0044FF]" />
                       {k}
                     </dt>
@@ -705,7 +705,7 @@ function Index() {
         </section>
 
         {/* Footer en contraste sólido oscuro */}
-        <footer className="section-dark t-line t-muted border-t py-6 text-xs font-medium sm:text-sm">
+        <footer className="section-dark t-line t-muted border-t py-6 text-[15px] font-medium sm:text-base">
           <div className="mx-auto flex max-w-[1380px] flex-wrap items-center justify-between gap-4 px-5 sm:px-8">
             <span>© 2026 Erick Rodríguez · Portfolio</span>
             <span>Desarrollo Web · ERPs a Medida · Automatización IA</span>
