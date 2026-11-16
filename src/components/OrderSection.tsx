@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Search, Sparkles, Workflow, Database } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const steps = [
@@ -9,58 +9,17 @@ const steps = [
     title: "Que te encuentren",
     text: "Marketing, web y SEO técnico pensados desde el primer día para atraer a los clientes correctos.",
     proof: "Webs propias en producción",
-    visual: (
-      <div className="my-5 rounded-2xl border border-white/20 bg-white/95 p-4 text-zinc-900 shadow-sm">
-        <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-500">
-          <Search size={12} className="text-zinc-400" />
-          <span className="truncate">google.es · extraescolares barcelona</span>
-        </div>
-        <p className="mt-1.5 truncate font-display text-sm font-bold text-[#0044FF]">
-          diversplas.es — Extraescolares y Casales
-        </p>
-        <div className="mt-2 flex items-center justify-between text-[11px]">
-          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-0.5 font-semibold text-emerald-800">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            Top 1 Google España
-          </span>
-          <span className="font-mono text-zinc-400">100% Técnico</span>
-        </div>
-      </div>
-    ),
   },
   {
     step: "02",
     tag: "Ordenar",
     title: "Que todo esté en orden",
     text: "Gestión administrativa y un ERP a medida: stock, facturación y albaranes en un mismo sitio.",
-    proof: "Prácticas de gestión y logística · 416 h",
-    visual: (
-      <div className="my-5 rounded-2xl border border-white/20 bg-white/95 p-4 text-zinc-900 shadow-sm">
-        <div className="flex items-center justify-between border-b border-zinc-100 pb-2 text-[11px] font-mono text-zinc-500">
-          <span className="font-semibold text-zinc-800 flex items-center gap-1.5">
-            <Database size={12} className="text-[#0044FF]" />
-            ERP Operativo
-          </span>
-          <span className="inline-flex items-center gap-1 font-semibold text-emerald-700">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-            Producción
-          </span>
-        </div>
-        <div className="mt-2.5 grid grid-cols-3 gap-1.5 text-center">
-          <div className="rounded-lg border border-zinc-100 bg-zinc-50/80 p-2">
-            <span className="block text-[10px] text-zinc-500">Stock</span>
-            <span className="font-bold text-[11px] text-zinc-900">Sincronizado</span>
-          </div>
-          <div className="rounded-lg border border-zinc-100 bg-zinc-50/80 p-2">
-            <span className="block text-[10px] text-zinc-500">Albaranes</span>
-            <span className="font-bold text-[11px] text-zinc-900">Al día</span>
-          </div>
-          <div className="rounded-lg border border-blue-100 bg-blue-50/60 p-2">
-            <span className="block text-[10px] text-blue-600">Facturación</span>
-            <span className="font-bold text-[11px] text-[#0044FF]">Automática</span>
-          </div>
-        </div>
-      </div>
+    proof: (
+      <span>
+        Prácticas de gestión y logística ·{" "}
+        <span className="whitespace-nowrap">416 h</span>
+      </span>
     ),
   },
   {
@@ -68,31 +27,18 @@ const steps = [
     tag: "Automatizar",
     title: "Que se haga solo",
     text: "n8n y agentes de IA conectan tu CRM, formularios y WhatsApp sin tareas manuales.",
-    proof: "Agente del Cambio Tecnológico · 375 h",
-    visual: (
-      <div className="my-5 rounded-2xl border border-white/20 bg-white/95 p-4 text-zinc-900 shadow-sm">
-        <div className="flex items-center justify-between border-b border-zinc-100 pb-2 text-[11px] font-mono text-zinc-500">
-          <span className="font-semibold text-zinc-800 flex items-center gap-1.5">
-            <Workflow size={12} className="text-[#0044FF]" />
-            Pipeline n8n + IA
-          </span>
-          <span className="font-mono text-xs font-bold text-[#0044FF]">0 manual</span>
-        </div>
-        <div className="mt-2.5 flex items-center justify-between gap-1 text-[11px] font-semibold">
-          <span className="rounded bg-zinc-100 px-2 py-1 text-zinc-700">Formulario</span>
-          <span className="text-zinc-300">→</span>
-          <span className="rounded border border-blue-200 bg-blue-50 px-2 py-1 text-[#0044FF]">Agente IA</span>
-          <span className="text-zinc-300">→</span>
-          <span className="rounded border border-emerald-200 bg-emerald-50 px-2 py-1 text-emerald-700">WhatsApp/CRM</span>
-        </div>
-      </div>
+    proof: (
+      <span>
+        Agente del Cambio Tecnológico ·{" "}
+        <span className="whitespace-nowrap">375 h</span>
+      </span>
     ),
   },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** "Apaga el caos": Metodología de tres pasos con micro-interfaces realistas y estética premium. */
+/** "Apaga el caos": Tipografía outline para ATRAER, ORDENAR, AUTOMATIZAR y ajuste perfecto en pantalla. */
 export function OrderSection() {
   const reduce = useReducedMotion();
 
@@ -100,77 +46,73 @@ export function OrderSection() {
     <section
       id="orden"
       aria-label="Metodología de trabajo"
-      className="relative scroll-mt-[62px] overflow-hidden bg-gradient-to-br from-[#003FE6] via-[#0034CC] to-[#002299] py-20 text-white sm:py-24 lg:py-28"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#0044FF] py-10 sm:py-12 lg:py-14 text-white"
     >
-      {/* Ambient background light */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_15%,rgba(255,255,255,0.18),transparent_60%)]"
-      />
-
-      <div className="relative mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+      <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         {/* Header */}
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider text-white/90 backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Metodología de trabajo</span>
-            </div>
-            <h2 className="font-display mt-3 max-w-[18ch] text-[clamp(2.4rem,5.2vw,4.6rem)] font-bold tracking-[-0.04em] leading-[1.02] text-white">
+            <h2 className="font-display max-w-[20ch] text-[clamp(2.1rem,4.2vw,3.6rem)] leading-[1] font-bold tracking-[-0.04em] text-white">
               Apaga el caos: marketing, gestión y tecnología en orden.
             </h2>
           </div>
 
           <a
             href="#proyectos"
-            className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-semibold text-zinc-950 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.35)] transition-all duration-200 hover:scale-[1.03] hover:bg-zinc-100 hover:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.45)] active:scale-[0.98]"
+            className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-base font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] transition-transform duration-150 hover:scale-[1.03] active:translate-x-[2px] active:translate-y-[2px]"
           >
             <span>Ver los proyectos</span>
-            <ArrowUpRight
-              size={18}
-              strokeWidth={2.4}
-              className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+            <ArrowUpRight size={18} strokeWidth={2.6} />
           </a>
         </div>
 
-        {/* 3 Steps Grid */}
-        <div className="mt-14 grid gap-8 md:grid-cols-3 lg:gap-8">
+        {/* 3 Solid High-Contrast Cards with Giant Outline Step Typography */}
+        <div className="mt-8 grid gap-6 md:grid-cols-3 lg:gap-8 sm:mt-10">
           {steps.map((s, i) => (
             <motion.article
               key={s.step}
-              initial={reduce ? false : { opacity: 0, y: 36 }}
+              initial={reduce ? false : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
-              transition={{ duration: 0.8, delay: i * 0.12, ease: EASE }}
-              className="group relative flex flex-col justify-between rounded-[28px] border border-white/15 bg-white/[0.08] p-7 backdrop-blur-2xl shadow-[0_20px_50px_-15px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-300 hover:border-white/30 hover:bg-white/[0.12] sm:p-8"
+              transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
+              className="group relative flex flex-col justify-between rounded-[24px] border-[3px] border-[#09090B] bg-white p-6 sm:p-7 text-[#09090B] shadow-[8px_8px_0_#09090B]"
             >
               <div>
-                {/* Step pill */}
-                <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-white/80">
-                    Paso {s.step} · {s.tag}
+                {/* Step meta row */}
+                <div className="flex items-center justify-between pb-2.5 border-b-2 border-[#09090B]/10">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400">
+                    Paso 0{i + 1}
+                  </span>
+                  <span className="font-mono text-xs font-bold text-[#0044FF] bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                    0{i + 1} / 03
                   </span>
                 </div>
 
-                {/* Micro-UI */}
-                {s.visual}
+                {/* Giant Outlined Step Word: ATRAER / ORDENAR / AUTOMATIZAR */}
+                <div className="overflow-hidden pt-3 pb-1">
+                  <span
+                    aria-hidden="true"
+                    className="font-display block text-[clamp(2.2rem,3.4vw,3.1rem)] leading-[0.92] font-bold tracking-[-0.04em] uppercase select-none text-white [-webkit-text-stroke:2.5px_#09090B] [paint-order:stroke_fill]"
+                  >
+                    {s.tag}
+                  </span>
+                </div>
 
-                {/* Title & Copy */}
-                <h3 className="font-display mt-2 text-2xl font-bold tracking-tight text-white sm:text-[26px]">
+                {/* Title & Body */}
+                <h3 className="font-display mt-3 text-xl sm:text-[23px] font-bold tracking-tight text-[#09090B] leading-tight">
                   {s.title}
                 </h3>
-                <p className="mt-2.5 text-base leading-relaxed font-normal text-white/85 sm:text-[17px]">
+                <p className="mt-2.5 text-base sm:text-[17px] leading-snug font-medium text-zinc-700">
                   {s.text}
                 </p>
               </div>
 
-              {/* Refined Proof Badge */}
+              {/* Solid Yellow Proof Badge without orphaned units */}
               <div className="mt-6 pt-2">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/12 px-3.5 py-1.5 text-xs font-semibold text-white backdrop-blur-md transition-colors group-hover:bg-white/20">
-                  <Check size={14} strokeWidth={2.6} className="text-emerald-300" />
-                  <span>{s.proof}</span>
-                </span>
+                <p className="inline-flex items-center gap-2 rounded-xl border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-2 text-xs sm:text-sm font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
+                  <Check size={16} strokeWidth={3} className="shrink-0" />
+                  <span className="leading-tight">{s.proof}</span>
+                </p>
               </div>
             </motion.article>
           ))}
