@@ -37,16 +37,16 @@ export function OrderSection() {
   return (
     <section
       id="orden"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16 lg:py-14"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#0044FF] py-14 text-white sm:py-16 lg:py-14"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="font-display max-w-[16ch] text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
-            Apaga el caos: <span className="text-[#5b97ff]">web, procesos e IA en orden.</span>
+            Apaga el caos: <span className="[text-shadow:4px_4px_0_#09090B]">web, procesos e IA en orden.</span>
           </h2>
           <a
             href="#proyectos"
-            className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-white bg-white px-7 py-3.5 text-base font-semibold text-[#09090B] shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF]"
+            className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-white bg-white px-7 py-3.5 text-base font-semibold text-[#09090B] shadow-[4px_4px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
           >
             <span>Ver los proyectos</span>
             <ArrowUpRight size={17} strokeWidth={2.4} />
@@ -72,7 +72,7 @@ export function OrderSection() {
               <motion.div
                 whileHover={{ rotate: 0, y: reduce ? 0 : -6 }}
                 style={{ rotate: reduce ? 0 : ROT[i]! }}
-                className="relative z-10 ml-10 mt-[88px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-[#F4F5F8] p-3 shadow-[8px_8px_0_#0044FF] md:ml-14"
+                className="relative z-10 ml-10 mt-[88px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-[#F4F5F8] p-3 shadow-[8px_8px_0_#09090B] md:ml-14"
               >
                 {s.art}
               </motion.div>
@@ -80,8 +80,8 @@ export function OrderSection() {
                 <h3 className="font-display text-[28px] leading-[1.05] font-bold tracking-[-0.035em] sm:text-[32px]">
                   {s.title}
                 </h3>
-                <p className="mt-2.5 text-[17px] leading-snug font-medium text-zinc-300">{s.text}</p>
-                <p className="mt-4 inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#ffffff]">
+                <p className="mt-2.5 text-[17px] leading-snug font-medium text-white">{s.text}</p>
+                <p className="mt-4 inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
                   <Check size={16} strokeWidth={3} />
                   {s.proof}
                 </p>
