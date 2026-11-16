@@ -38,6 +38,7 @@ import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectBento } from "@/components/ProjectBento";
 import { StackSwitcher } from "@/components/StackSwitcher";
 import { GrantBand } from "@/components/GrantBand";
+import { HangingCard } from "@/components/HangingCard";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
@@ -501,25 +502,7 @@ function Index() {
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
               {/* Profile Card / Bio Column */}
               <Reveal className="lg:col-span-5">
-                <div className="flex items-center gap-4">
-                  <img
-                    src="/erick-portrait-studio.png"
-                    alt="Erick Rodríguez"
-                    loading="lazy"
-                    className="t-line h-20 w-20 shrink-0 rounded-full border-2 bg-[#0044FF] object-cover object-top sm:h-24 sm:w-24"
-                  />
-                  <div>
-                    <h3 className="t-ink font-display flex items-center gap-2 text-xl font-extrabold tracking-[-0.03em] sm:text-2xl">
-                      Erick Rodríguez
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#0044FF] text-white">
-                        <Check size={12} strokeWidth={3} />
-                      </span>
-                    </h3>
-                    <p className="t-muted text-xs font-medium sm:text-sm">
-                      Web, Automatización IA &amp; Negocio · La Sagrera, Barcelona
-                    </p>
-                  </div>
-                </div>
+                <HangingCard />
 
                 <div className="t-line mt-5 border-t" />
 
