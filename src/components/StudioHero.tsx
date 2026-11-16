@@ -113,35 +113,55 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         />
       </motion.div>
 
+      {/* Bottom-left intro card with Apple HIG frosted glass & refined typography */}
       <motion.div
         initial={reduce ? false : { y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[330px] 2xl:w-[420px]"
+        className="absolute right-4 bottom-4 left-4 z-20 sm:right-auto sm:bottom-8 sm:left-8 sm:w-[380px] lg:w-[410px] 2xl:w-[450px]"
       >
-        <div className="t-line t-bg-card rounded-2xl border p-4 2xl:p-5">
-          <p className="text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
-            Desarrollador web &amp; IA · Barcelona
-          </p>
-          <h1 className="t-ink font-display mt-1.5 text-[24px] leading-[1.05] font-bold tracking-[-0.035em] 2xl:text-[32px]">
+        <div className="rounded-[28px] border border-black/[0.08] dark:border-white/10 bg-white/85 dark:bg-zinc-950/85 p-6 sm:p-7 backdrop-blur-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.08)]">
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 dark:border-blue-400/20 bg-blue-500/10 dark:bg-blue-400/10 px-3 py-1">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0044FF] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0044FF]" />
+            </span>
+            <span className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.08em] text-[#0044FF] dark:text-[#5b97ff]">
+              Desarrollador Web &amp; IA · Barcelona
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="font-display mt-3.5 text-[24px] sm:text-[27px] 2xl:text-[32px] font-bold leading-[1.14] tracking-[-0.035em] text-zinc-950 dark:text-white">
             Webs, ERPs e IA llevados a producción.
           </h1>
-          <div className="mt-3.5 flex flex-wrap gap-2">
+
+          {/* Action Buttons */}
+          <div className="mt-5 flex flex-wrap items-center gap-2.5">
             <button
               type="button"
               onClick={() => onJumpToProjects()}
-              className="t-bg-ink t-on-ink inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-[15px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 rounded-full bg-zinc-950 dark:bg-white px-5 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold text-white dark:text-zinc-950 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md active:scale-[0.98]"
             >
               <span>Ver proyectos</span>
-              <ArrowDown size={14} strokeWidth={2.5} />
+              <ArrowDown
+                size={15}
+                strokeWidth={2.4}
+                className="transition-transform duration-200 group-hover:translate-y-0.5"
+              />
             </button>
             <button
               type="button"
               onClick={() => onJumpToProjects("private-erp")}
-              className="t-ink inline-flex items-center gap-1.5 rounded-full border-2 border-current px-4 py-2.5 text-[15px] font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 rounded-full border border-black/12 dark:border-white/15 bg-black/[0.03] dark:bg-white/[0.06] hover:bg-black/[0.07] dark:hover:bg-white/[0.12] px-5 py-2.5 sm:py-3 text-[14px] sm:text-[15px] font-semibold text-zinc-900 dark:text-white transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
             >
               <span>Demo ERP</span>
-              <ArrowUpRight size={14} strokeWidth={2.2} />
+              <ArrowUpRight
+                size={15}
+                strokeWidth={2.2}
+                className="text-zinc-500 dark:text-zinc-400 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-zinc-950 dark:group-hover:text-white"
+              />
             </button>
           </div>
         </div>
@@ -151,19 +171,21 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         <HangingCard width={210} />
       </div>
 
-      <div className="absolute right-8 bottom-8 z-20 hidden flex-col items-end gap-5 sm:flex">
-        <span className="t-bg-ink t-on-ink rounded-full px-4 py-2 text-[15px] font-semibold tracking-[0.04em]">
-          Top 1 Google · diversplas.es
-        </span>
-        <span className="flex items-center gap-3">
-          <span
-            className="t-ink text-[15px] font-semibold tracking-[0.28em] uppercase"
-            style={{ writingMode: "vertical-rl" }}
-          >
-            Scroll down
+      {/* Bottom-right scroll indicator */}
+      <div className="absolute right-6 bottom-6 lg:right-8 lg:bottom-8 z-20 hidden sm:flex">
+        <motion.button
+          type="button"
+          onClick={() => onJumpToProjects()}
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="group flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide uppercase text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors duration-200"
+        >
+          <span className="tracking-[0.14em]">Scroll</span>
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-black/15 dark:border-white/20 transition-transform duration-200 group-hover:translate-y-0.5">
+            <ArrowDown size={11} strokeWidth={2.4} />
           </span>
-          <span aria-hidden="true" className="t-bg-ink block h-14 w-px" />
-        </span>
+        </motion.button>
       </div>
     </section>
   );
