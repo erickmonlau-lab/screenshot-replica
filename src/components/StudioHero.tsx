@@ -72,7 +72,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
     >
       <motion.div
         style={{ y: portraitY, scale: portraitScale }}
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex h-[46%] justify-center sm:h-[62%] lg:right-[3%] lg:left-auto lg:h-[68%] lg:w-[52%] lg:justify-end xl:h-[86%]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 flex h-[46%] justify-center sm:h-[48%] lg:right-[3%] lg:left-auto lg:h-[68%] lg:w-[52%] lg:justify-end xl:h-[78%]"
       >
         <motion.img
           src="/erick-portrait-studio.png"
@@ -129,7 +129,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
           <button
             type="button"
             onClick={() => onJumpToProjects("private-erp")}
-            className="t-ink inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
+            className="t-ink t-bg-card inline-flex items-center gap-2 rounded-full border-2 border-current px-6 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
           >
             <span>Demo ERP</span>
             <ArrowUpRight size={16} strokeWidth={2.2} />
