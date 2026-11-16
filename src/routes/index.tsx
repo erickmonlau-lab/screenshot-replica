@@ -34,7 +34,9 @@ import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
-import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { ProjectBento } from "@/components/ProjectBento";
+import { StackSwitcher } from "@/components/StackSwitcher";
+import { GrantBand } from "@/components/GrantBand";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
@@ -363,7 +365,7 @@ function Index() {
         <ProcessSection />
 
         {/* PROYECTOS — 3D Coverflow Gallery */}
-        <section id="proyectos" className={`${sectionBase} section-dark`}>
+        <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
@@ -384,65 +386,23 @@ function Index() {
                 }
               />
             </Reveal>
-            <ProjectCarousel
-              slides={projectCases}
-              activeId={activeProjectId}
-              onChange={setActiveProjectId}
-              privateSlide={<ErpShowcase />}
-            />
+            <div className="mt-12 lg:mt-14">
+              <ProjectBento slides={projectCases} />
+            </div>
           </div>
         </section>
 
         {/* STACK + IA EN ACCIÓN */}
-        <section id="ia" className={`${sectionBase} section-light`}>
+        <section id="ia" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
-                eyebrow="Stack e inteligencia artificial"
-                title="Herramientas reales,"
-                accentTitle="IA en acción."
-                description="Combino desarrollo web de vanguardia, automatización con IA y mentalidad operativa para crear sistemas fiables, eficientes y orientados al negocio."
+                eyebrow="Experiencias en directo"
+                title="No te lo cuento."
+                accentTitle="Tócalo tú mismo."
+                description="Así trabajan los flujos de IA y automatización que construyo: elige una fase y míralos funcionar."
               />
             </Reveal>
-
-            {/* Stack en marquee: dos filas en sentido contrario */}
-            <div
-              className="-mx-5 mt-2 flex flex-col gap-4 overflow-hidden sm:-mx-8"
-              role="list"
-              aria-label="Stack y herramientas"
-            >
-              {[technicalTools.slice(0, 8), technicalTools.slice(8)].map((row, ri) => (
-                <VelocityMarqueeRow key={ri} baseVelocity={ri === 0 ? -1.4 : 1.4}>
-                  {row.map((t) => {
-                    const Icon = t.icon;
-                    return (
-                      <span
-                        key={t.name}
-                        role="listitem"
-                        className="t-line t-bg-card mr-4 inline-flex items-center gap-3 rounded-full border py-2.5 pr-6 pl-2.5"
-                      >
-                        <span
-                          className="flex h-11 w-11 items-center justify-center rounded-full bg-[#09090B] text-white"
-                          style={{ borderBottom: `2px solid ${t.color}` }}
-                        >
-                          {Icon ? (
-                            <Icon size={20} style={{ color: t.color }} />
-                          ) : (
-                            <span className="text-xs font-bold" style={{ color: t.color }}>
-                              {t.label.slice(0, 3)}
-                            </span>
-                          )}
-                        </span>
-                        <span className="font-display text-lg font-semibold tracking-[-0.02em] sm:text-xl">
-                          {t.name}
-                          <span className="t-muted ml-2 text-sm font-medium">{t.category}</span>
-                        </span>
-                      </span>
-                    );
-                  })}
-                </VelocityMarqueeRow>
-              ))}
-            </div>
 
             {/* Live Interactive Systems Demonstration */}
             <div className="mt-8 border-t border-current/10 pt-7">
@@ -509,39 +469,21 @@ function Index() {
               </div>
             </div>
 
-            {/* 375h Acreditación Banner */}
-            <div
-              id="acreditacion-375h"
-              className="mt-6 flex flex-col justify-between gap-4 rounded-2xl bg-[#0044FF] p-5 text-white sm:p-6 lg:flex-row lg:items-center"
-            >
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1 text-xs font-bold tracking-[0.12em] text-[#0044FF] uppercase sm:text-[13px]">
-                  Subvenciones salariales directas para empresa
-                </span>
-                <h3 className="font-display mt-1.5 text-base font-extrabold tracking-[-0.02em] sm:text-lg lg:text-xl">
-                  Acreditación oficial de 375 h como Agente del Cambio Tecnológico
-                </h3>
-                <p className="mt-1 max-w-3xl text-sm leading-relaxed text-blue-50 sm:text-base">
-                  Cuento con 375 horas de acreditación oficial por la Generalitat. La empresa que me
-                  contrate accede directamente a subvenciones salariales bonificadas para
-                  digitalización y proyectos de inteligencia artificial.
-                </p>
-              </div>
-              <Magnetic strength={0.12} className="shrink-0">
-                <a
-                  href="#contacto"
-                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-extrabold tracking-wider text-[#09090B] uppercase transition-colors hover:bg-[#09090B] hover:text-white sm:text-sm"
-                >
-                  <span>Consultar contratación</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              </Magnetic>
+            {/* Stack con conmutador */}
+            <div className="t-line mt-14 border-t pt-12">
+              <p className="mb-3 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]">
+                Stack
+              </p>
+              <h3 className="t-ink font-display mb-8 max-w-[18ch] text-[clamp(2rem,5vw,4rem)] leading-[1] font-bold tracking-[-0.045em]">
+                Un stack común. Tu negocio encima.
+              </h3>
+              <StackSwitcher tools={technicalTools} />
             </div>
           </div>
         </section>
 
         {/* TRAYECTORIA — Sobre Mí / About Me */}
-        <section id="trayectoria" className={`${sectionBase} section-dark`}>
+        <section id="trayectoria" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
               <SectionHeading
@@ -692,6 +634,8 @@ function Index() {
             </div>
           </div>
         </section>
+
+        <GrantBand />
 
         {/* CONTACTO */}
         <section id="contacto" className={`${sectionBase} section-light`}>
