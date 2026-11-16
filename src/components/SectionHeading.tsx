@@ -9,6 +9,7 @@ interface SectionHeadingProps {
   description?: string;
   rightSlot?: ReactNode;
   className?: string;
+  center?: boolean;
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -21,6 +22,7 @@ export function SectionHeading({
   description,
   rightSlot,
   className = "",
+  center = false,
 }: SectionHeadingProps) {
   const ref = useRef<HTMLHeadingElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -12% 0px" });
@@ -34,19 +36,19 @@ export function SectionHeading({
 
   return (
     <div className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10 ${className}`}>
-      <div className="max-w-5xl">
+      <div className={center ? "mx-auto max-w-5xl" : "max-w-5xl"}>
         <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="mb-4 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]"
+          className={`mb-4 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px] ${center ? "text-center" : ""}`}
         >
           {eyebrow}
         </motion.p>
         <h2
           ref={ref}
           aria-label={full}
-          className="t-ink font-display text-[clamp(2.5rem,7.2vw,5.75rem)] leading-[0.98] font-bold tracking-[-0.045em]"
+          className={`t-ink font-display text-[clamp(2.5rem,7.2vw,5.75rem)] leading-[0.98] font-bold tracking-[-0.045em] ${center ? "text-center" : ""}`}
         >
           {words.map((x, i) => (
             <span
@@ -71,7 +73,7 @@ export function SectionHeading({
             initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-            className="t-muted mt-5 max-w-[46ch] text-lg leading-snug font-medium sm:text-xl lg:text-2xl"
+            className={`t-muted mt-5 max-w-[46ch] text-lg leading-snug font-medium sm:text-xl lg:text-2xl ${center ? "mx-auto text-center" : ""}`}
           >
             {description}
           </motion.p>

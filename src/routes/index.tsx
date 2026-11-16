@@ -37,7 +37,8 @@ import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
-import { ServicesSection } from "@/components/ServicesSection";
+import { OrderSection } from "@/components/OrderSection";
+import { ProcessSection } from "@/components/ProcessSection";
 import {
   AgentFlow,
   CodeFlow,
@@ -358,6 +359,8 @@ function Index() {
         </div>
 
         <MetricsBand />
+        <OrderSection />
+        <ProcessSection />
 
         {/* PROYECTOS — 3D Coverflow Gallery */}
         <section id="proyectos" className={`${sectionBase} section-dark`}>
@@ -389,8 +392,6 @@ function Index() {
             />
           </div>
         </section>
-
-        <ServicesSection />
 
         {/* STACK + IA EN ACCIÓN */}
         <section id="ia" className={`${sectionBase} section-light`}>
