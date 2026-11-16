@@ -40,6 +40,13 @@ const groups = [
   },
 ];
 
+const POSTER = [
+  { box: "border-[#09090B] bg-[#0044FF] text-white" },
+  { box: "border-[#09090B] bg-white text-[#09090B]" },
+  { box: "border-[#09090B] bg-[#E3E5E9] text-[#09090B]" },
+  { box: "border-white bg-[#09090B] text-white" },
+] as const;
+
 const fan = [
   "md:-rotate-[5deg] md:translate-y-4",
   "md:-rotate-[1.6deg]",
@@ -109,25 +116,26 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
                   role="tab"
                   aria-selected={on}
                   onClick={() => setActive(g.id)}
-                  className={`group absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[18px] border-2 bg-[#1B1D24] p-5 text-left transition-colors duration-500 md:p-6 [backface-visibility:hidden] ${
-                    on ? "border-[#F4EAD0]" : "border-[#3A3D48] hover:border-[#F4EAD0]"
+                  className={`${POSTER[i]!.box} group absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[18px] border-[3px] p-5 text-left transition-shadow duration-300 md:p-6 [backface-visibility:hidden] ${
+                    on ? "shadow-[12px_12px_0_#ffffff]" : "shadow-[7px_7px_0_#0044FF]"
                   }`}
                 >
-                  <span className="text-base font-semibold text-zinc-400">0{i + 1}</span>
-                  <span
-                    className={`font-display block origin-left text-[clamp(3.4rem,7.6vw,7.4rem)] leading-[0.9] font-extrabold tracking-[-0.02em] [transform:scaleX(0.76)] transition-[color,text-shadow] duration-500 ${
-                      on
-                        ? "text-[#F4EAD0] [text-shadow:0_0_26px_rgba(244,234,208,0.75),0_0_60px_rgba(244,234,208,0.35)]"
-                        : "text-[#9A978A] [text-shadow:0_0_12px_rgba(244,234,208,0.12)] group-hover:text-[#F4EAD0] group-hover:[text-shadow:0_0_22px_rgba(244,234,208,0.6)]"
-                    }`}
-                  >
+                  <span className="flex items-center justify-between text-base font-bold">
+                    <span>0{i + 1}</span>
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-[15px] ${on ? "bg-[#FFD60A] text-[#09090B]" : "opacity-0"}`}
+                    >
+                      Elegido
+                    </span>
+                  </span>
+                  <span className="font-display block text-[clamp(3.6rem,8.2vw,8rem)] leading-[0.8] font-bold tracking-[-0.07em]">
                     {g.word}
                   </span>
-                  <span className="text-lg font-semibold text-zinc-300">{g.sub}</span>
+                  <span className="text-lg font-semibold">{g.sub}</span>
                 </button>
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-[18px] border-2 border-[#F4EAD0] bg-[#0B0D14] [backface-visibility:hidden] [transform:rotateY(180deg)]"
+                  className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-[18px] border-[3px] border-[#09090B] bg-[#0B0D14] [backface-visibility:hidden] [transform:rotateY(180deg)]"
                   style={{
                     backgroundImage:
                       "repeating-radial-gradient(circle at 50% 50%, #0044FF 0 3px, transparent 3px 16px)",
