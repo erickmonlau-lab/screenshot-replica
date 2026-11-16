@@ -11,7 +11,6 @@ import {
   Code2,
   Copy,
   Cpu,
-  Database,
   Download,
   FolderGit2,
   Globe,
@@ -21,7 +20,6 @@ import {
   MapPin,
   MessageCircle,
   Palette,
-  ShieldCheck,
   ShoppingBag,
   Sparkles,
   Workflow,
@@ -39,7 +37,7 @@ import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { StackSwitcher } from "@/components/StackSwitcher";
-import { BrainStudio } from "@/components/BrainStudio";
+import { BrainVisual } from "@/components/LiveVisuals";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
 import { CursorGlow } from "@/components/CursorGlow";
@@ -390,126 +388,63 @@ function Index() {
           </div>
         </section>
 
-        {/* STACK + IA EN ACCIÓN (CEREBRO / OBSIDIAN SECOND BRAIN) */}
+        {/* STACK + IA EN ACCIÓN */}
         <section
           id="ia"
-          className="section-dark t-line relative scroll-mt-[62px] overflow-hidden border-t py-10 lg:py-14"
+          className="section-light t-line relative scroll-mt-[62px] overflow-hidden border-t border-black/10 bg-[#FAF9F6] lg:h-[min(100svh,800px)] lg:min-h-[640px]"
         >
-          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
-              {/* Left Column: Editorial & Storytelling */}
-              <div className="flex flex-col justify-center lg:col-span-5">
-                {/* Live Status Badge */}
-                <div className="inline-flex w-fit items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-semibold text-blue-300">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-blue-500" />
-                  </span>
-                  <span>Obsidian Second Brain · En tiempo real</span>
-                </div>
+          <div className="absolute inset-0 hidden lg:block">
+            <BrainVisual theme="light" />
+          </div>
 
-                {/* Outline Title */}
-                <p
-                  aria-hidden="true"
-                  className="outline-title font-display mt-3 text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase [--outline-fill:#0B0C10]"
-                >
-                  Cerebro
-                </p>
-
-                {/* Main Headline */}
-                <h2 className="t-ink font-display mt-2 text-[clamp(1.7rem,2.6vw,2.4rem)] leading-[1.05] font-bold tracking-[-0.04em]">
-                  La IA ya sabe <span className="text-[#0044FF]">cómo trabajo.</span>
-                </h2>
-
-                {/* Explanatory Lead */}
-                <p className="mt-2 text-base leading-relaxed font-medium text-zinc-400">
-                  Mi segundo cerebro vive en Obsidian: 42 notas interconectadas con normas de diseño
-                  Apple HIG, decisiones arquitectónicas y flujos n8n que los agentes consultan antes
-                  de tocar una sola línea de código.
-                </p>
-
-                {/* 3 Interactive Feature Cards */}
-                <div className="mt-5 space-y-2.5">
-                  <div className="group rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-all duration-200 hover:border-blue-500/40 hover:bg-white/[0.06]">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-blue-500/30 bg-blue-500/15 text-blue-400">
-                        <Database className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-sm font-bold tracking-[-0.01em] text-white sm:text-base">
-                          01 · Memoria persistente
-                        </h3>
-                        <p className="mt-0.5 text-xs leading-snug font-medium text-zinc-400 sm:text-sm">
-                          Decisiones, arquitectura y reglas de clientes indexadas en Markdown puro.
-                          Cero aprendizaje perdido entre sesiones.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="group rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-all duration-200 hover:border-emerald-500/40 hover:bg-white/[0.06]">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/15 text-emerald-400">
-                        <ShieldCheck className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-sm font-bold tracking-[-0.01em] text-white sm:text-base">
-                          02 · Reglas deterministas
-                        </h3>
-                        <p className="mt-0.5 text-xs leading-snug font-medium text-zinc-400 sm:text-sm">
-                          Normas Apple HIG, escala tipográfica proporcional y accesibilidad WCAG AA
-                          aplicadas sin excepción.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="group rounded-xl border border-white/10 bg-white/[0.03] p-3 transition-all duration-200 hover:border-purple-500/40 hover:bg-white/[0.06]">
-                    <div className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-purple-500/30 bg-purple-500/15 text-purple-400">
-                        <Cpu className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <h3 className="font-display text-sm font-bold tracking-[-0.01em] text-white sm:text-base">
-                          03 · Cero fricción de arranque
-                        </h3>
-                        <p className="mt-0.5 text-xs leading-snug font-medium text-zinc-400 sm:text-sm">
-                          Los modelos arrancan con el mapa conceptual completo. Entienden
-                          dependencias y convenciones antes del primer commit.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Vault Metrics Row */}
-                <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4">
-                  <div>
-                    <p className="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">
-                      42
-                    </p>
-                    <p className="text-xs font-medium text-zinc-400">Notas activas</p>
-                  </div>
-                  <div>
-                    <p className="font-display text-xl font-bold tracking-tight text-white sm:text-2xl">
-                      100%
-                    </p>
-                    <p className="text-xs font-medium text-zinc-400">Markdown local</p>
-                  </div>
-                  <div>
-                    <p className="font-display text-xl font-bold tracking-tight text-[#0044FF] sm:text-2xl">
-                      0s
-                    </p>
-                    <p className="text-xs font-medium text-zinc-400">Contexto perdido</p>
-                  </div>
-                </div>
+          <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1380px] flex-col justify-center px-5 py-14 sm:px-8 lg:py-10">
+            <div className="pointer-events-auto max-w-[500px]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#0044FF]/25 bg-[#0044FF]/10 px-3.5 py-1 text-xs font-semibold text-[#0044FF]">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#0044FF] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[#0044FF]" />
+                </span>
+                <span>Obsidian Second Brain</span>
               </div>
 
-              {/* Right Column: Interactive Obsidian Graph Studio */}
-              <div className="h-[480px] sm:h-[520px] lg:col-span-7 lg:h-[580px] xl:h-[620px]">
-                <BrainStudio />
-              </div>
+              <p
+                aria-hidden="true"
+                className="outline-title font-display mt-3 text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase [--outline-fill:#FAF9F6] text-zinc-900"
+              >
+                Cerebro
+              </p>
+              <h2 className="font-display mt-3 text-[clamp(2.1rem,3.4vw,3.2rem)] leading-[1.03] font-bold tracking-[-0.04em] text-zinc-950">
+                La IA ya sabe <span className="text-[#0044FF]">cómo trabajo.</span>
+              </h2>
+              <p className="mt-3 text-lg leading-snug font-medium text-zinc-600">
+                Mi segundo cerebro vive en Obsidian: cada nota es un nodo y la IA lo recorre antes
+                de empezar.
+              </p>
+              <ol className="mt-7 space-y-5 border-l-2 border-black/15 pl-5">
+                {[
+                  [
+                    "Memoria entre proyectos",
+                    "Decisiones, reglas y clientes quedan en notas que la IA lee.",
+                  ],
+                  [
+                    "Reglas que se cumplen",
+                    "Mis normas de diseño y código las aplican siempre los agentes.",
+                  ],
+                  ["Menos contexto repetido", "No explico cada proyecto de nuevo en cada sesión."],
+                ].map(([t, d]) => (
+                  <li key={t}>
+                    <p className="font-display text-xl font-bold tracking-[-0.02em] text-zinc-950">
+                      {t}
+                    </p>
+                    <p className="text-base leading-snug font-medium text-zinc-600">{d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
+          </div>
+
+          <div className="relative h-[380px] lg:hidden">
+            <BrainVisual theme="light" />
           </div>
         </section>
 

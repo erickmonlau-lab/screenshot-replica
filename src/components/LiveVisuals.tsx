@@ -341,4 +341,717 @@ export function CodeVisual() {
 }
 
 /* ───────────── 4 · second brain: live force-directed graph, Obsidian style ───────────── */
-export { BrainStudio as BrainVisual } from "./BrainStudio";
+
+interface GNode {
+  id: number;
+  name: string;
+  group: "hub" | "skill" | "rule" | "project" | "satellite";
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  ax: number;
+  ay: number;
+  ox: number;
+  oy: number;
+  r: number;
+  deg: number;
+}
+
+function rng(seed: number) {
+  let v = seed;
+  return () => {
+    v = (v * 16807) % 2147483647;
+    return (v - 1) / 2147483646;
+  };
+}
+
+function buildGraph(): {
+  nodes: GNode[];
+  links: [number, number, number][];
+  hubIndices: number[];
+} {
+  const r = rng(7);
+  const nodes: GNode[] = [];
+  const links: [number, number, number][] = [];
+
+  const addNode = (
+    name: string,
+    group: GNode["group"],
+    ax: number,
+    ay: number,
+    spread: number,
+  ): GNode => {
+    const ang = r() * Math.PI * 2;
+    const dist = Math.sqrt(r()) * spread;
+    const n: GNode = {
+      id: nodes.length,
+      name,
+      group,
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      ax,
+      ay,
+      ox: Math.cos(ang) * dist,
+      oy: Math.sin(ang) * dist,
+      r: group === "hub" ? 8 : 4.5,
+      deg: 0,
+    };
+    nodes.push(n);
+    return n;
+  };
+
+  const link = (a: GNode, b: GNode, len = 130) => {
+    links.push([a.id, b.id, len]);
+    a.deg++;
+    b.deg++;
+  };
+
+  // 1. Core Hub: MOC-INDEX (Center-right anchor)
+  const mocIndex = addNode("MOC-INDEX", "hub", 0.66, 0.48, 0.02);
+
+  // 2. Design Hub: MOC-DESIGN (Bottom-right cluster)
+  const mocDesign = addNode("MOC-DESIGN", "hub", 0.84, 0.68, 0.02);
+
+  // 3. Projects Hub: PROJECTS (Top-right cluster)
+  const mocProjects = addNode("PROJECTS", "hub", 0.82, 0.26, 0.02);
+
+  // 4. Engineering & Agent Hub: AGENTS (Center-left cluster)
+  const mocAgents = addNode("AGENTS", "hub", 0.52, 0.58, 0.02);
+
+  // Hub connections (Backbone)
+  link(mocIndex, mocDesign, 150);
+  link(mocIndex, mocProjects, 140);
+  link(mocIndex, mocAgents, 130);
+  link(mocDesign, mocProjects, 180);
+
+  // Design cluster (around MOC-DESIGN: 0.84, 0.68)
+  const designNodes = [
+    "SKILL-apple-design",
+    "SKILL-premium-ui",
+    "SKILL-motion",
+    "05-TYPOGRAPHY",
+    "04-COLOR",
+    "03-LAYOUT",
+    "02-COMPONENTS",
+    "01-FOUNDATIONS",
+  ].map((name) => addNode(name, "skill", 0.84, 0.68, 0.18));
+
+  designNodes.forEach((n) => {
+    link(mocDesign, n, 110 + r() * 40);
+  });
+  link(designNodes[0]!, designNodes[3]!, 90); // apple-design -> typography
+  link(designNodes[1]!, designNodes[2]!, 90); // premium-ui -> motion
+  link(designNodes[5]!, designNodes[6]!, 85); // layout -> components
+
+  // Projects cluster (around PROJECTS: 0.82, 0.26)
+  const projectNodes = ["ORDERALO", "GESGRAMA", "BREADPDF", "ERP-interno", "DIVERSPLAS"].map(
+    (name) => addNode(name, "project", 0.82, 0.26, 0.16),
+  );
+
+  projectNodes.forEach((n) => {
+    link(mocProjects, n, 100 + r() * 40);
+  });
+  link(projectNodes[0]!, designNodes[0]!, 160); // Orderalo -> apple-design
+  link(projectNodes[2]!, designNodes[1]!, 160); // BreadPDF -> premium-ui
+
+  // Agent & Rules cluster (around AGENTS: 0.52, 0.58)
+  const agentNodes = [
+    "CLAUDE",
+    "N8N-flujos",
+    "REGLAS-agente",
+    "06-ACCESSIBILITY",
+    "DECISIONES",
+  ].map((name) => addNode(name, "rule", 0.52, 0.58, 0.16));
+
+  agentNodes.forEach((n) => {
+    link(mocAgents, n, 105 + r() * 35);
+  });
+  link(agentNodes[2]!, designNodes[7]!, 170); // reglas-agente -> foundations
+  link(agentNodes[3]!, designNodes[0]!, 180); // accessibility -> apple-design
+
+  // Satellites / Deep context notes floating gracefully
+  const satellites = [
+    "TEMPLATE-DESIGN-SYSTEM",
+    "08-UI-PATTERNS",
+    "07-MOTION",
+    "09-UNIVERSAL-FIELD",
+    "ANTIGRAVITY-protocol",
+    "PERFORMANCE",
+  ].map((name, i) =>
+    addNode(name, "satellite", 0.6 + (i % 3) * 0.14, 0.15 + Math.floor(i / 3) * 0.65, 0.08),
+  );
+
+  link(satellites[0]!, mocDesign, 140);
+  link(satellites[1]!, designNodes[5]!, 100);
+  link(satellites[2]!, designNodes[2]!, 100);
+  link(satellites[3]!, mocAgents, 150);
+  link(satellites[4]!, agentNodes[0]!, 110);
+  link(satellites[5]!, projectNodes[2]!, 120);
+
+  nodes.forEach((n) => {
+    if (n.group === "hub") {
+      n.r = 6.5 + Math.sqrt(n.deg) * 1.2;
+    } else {
+      n.r = 3.6 + Math.sqrt(n.deg) * 0.9;
+    }
+  });
+
+  const hubIndices = [mocIndex.id, mocDesign.id, mocProjects.id, mocAgents.id];
+
+  return { nodes, links, hubIndices };
+}
+
+export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
+  const wrap = useRef<HTMLDivElement>(null);
+  const cv = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = cv.current;
+    const box = wrap.current;
+    if (!canvas || !box) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const isLight = theme === "light";
+
+    const { nodes, links, hubIndices } = buildGraph();
+    const adj: Set<number>[] = nodes.map(() => new Set());
+    links.forEach(([a, b]) => {
+      adj[a]!.add(b);
+      adj[b]!.add(a);
+    });
+
+    let W = 0;
+    let H = 0;
+    let dpr = 1;
+    let placed = false;
+
+    // Active signal pulses traveling through edges (synapses)
+    const pulses: Array<{
+      linkIdx: number;
+      from: number;
+      to: number;
+      progress: number;
+      speed: number;
+    }> = [];
+
+    const spawnPulse = () => {
+      if (pulses.length >= 12) return;
+      const linkIdx = Math.floor(Math.random() * links.length);
+      const [a, b] = links[linkIdx]!;
+      const forward = Math.random() > 0.5;
+      pulses.push({
+        linkIdx,
+        from: forward ? a : b,
+        to: forward ? b : a,
+        progress: 0,
+        speed: 0.007 + Math.random() * 0.009,
+      });
+    };
+
+    // Pre-populate a few pulses
+    for (let i = 0; i < 6; i++) {
+      spawnPulse();
+      if (pulses[i]) pulses[i]!.progress = Math.random();
+    }
+
+    const resize = () => {
+      const r = box.getBoundingClientRect();
+      const nw = Math.max(200, r.width);
+      const nh = Math.max(200, r.height);
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = nw * dpr;
+      canvas.height = nh * dpr;
+      canvas.style.width = `${nw}px`;
+      canvas.style.height = `${nh}px`;
+
+      if (!placed) {
+        nodes.forEach((n) => {
+          n.x = n.ax * nw + n.ox * nh;
+          n.y = n.ay * nh + n.oy * nh;
+          n.ax *= nw;
+          n.ay *= nh;
+        });
+        placed = true;
+      } else {
+        const scaleX = nw / W;
+        const scaleY = nh / H;
+        nodes.forEach((n) => {
+          n.x *= scaleX;
+          n.y *= scaleY;
+          n.ax *= scaleX;
+          n.ay *= scaleY;
+        });
+      }
+      W = nw;
+      H = nh;
+    };
+
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(box);
+
+    let hover = -1;
+    let drag = -1;
+    const pt = { x: 0, y: 0 };
+
+    const local = (e: PointerEvent) => {
+      const r = canvas.getBoundingClientRect();
+      pt.x = e.clientX - r.left;
+      pt.y = e.clientY - r.top;
+    };
+
+    const pick = () => {
+      let best = -1;
+      let minD = 1e9;
+      for (const n of nodes) {
+        const d = Math.hypot(n.x - pt.x, n.y - pt.y);
+        const hitArea = Math.max(24, n.r + 16);
+        if (d < hitArea && d < minD) {
+          minD = d;
+          best = n.id;
+        }
+      }
+      return best;
+    };
+
+    const onMove = (e: PointerEvent) => {
+      local(e);
+      if (drag < 0) hover = pick();
+    };
+
+    const onDown = (e: PointerEvent) => {
+      local(e);
+      const p = pick();
+      if (p >= 0) {
+        drag = p;
+        hover = p;
+        canvas.setPointerCapture(e.pointerId);
+      }
+    };
+
+    const onUp = () => {
+      drag = -1;
+    };
+
+    const onLeave = () => {
+      if (drag < 0) hover = -1;
+    };
+
+    canvas.addEventListener("pointermove", onMove);
+    canvas.addEventListener("pointerdown", onDown);
+    canvas.addEventListener("pointerup", onUp);
+    canvas.addEventListener("pointercancel", onUp);
+    canvas.addEventListener("pointerleave", onLeave);
+
+    let raf = 0;
+    let visible = true;
+    const t0 = performance.now();
+
+    const step = (t: number) => {
+      const n = nodes.length;
+      const S = Math.min(W, H) / 500;
+      const cut = 280 * S;
+
+      // 1. Repulsion between all nodes to prevent clumping
+      for (let i = 0; i < n; i++) {
+        const a = nodes[i]!;
+        for (let j = i + 1; j < n; j++) {
+          const b = nodes[j]!;
+          let dx = a.x - b.x;
+          let dy = a.y - b.y;
+          let d2 = dx * dx + dy * dy;
+          if (d2 > cut * cut) continue;
+          if (d2 < 1) {
+            dx = (Math.random() - 0.5) * 4;
+            dy = (Math.random() - 0.5) * 4;
+            d2 = 1;
+          }
+          const dist = Math.sqrt(d2);
+          const minSeparation = 58 * S;
+          const repulsionConstant = dist < minSeparation ? 2600 : 950;
+          const f = Math.min(4.5, (repulsionConstant * S * S) / (d2 + 10 * S * S));
+          const fx = (dx / dist) * f;
+          const fy = (dy / dist) * f;
+          a.vx += fx;
+          a.vy += fy;
+          b.vx -= fx;
+          b.vy -= fy;
+        }
+      }
+
+      // 2. Link tension (spring physics)
+      for (const [ia, ib, len] of links) {
+        const a = nodes[ia]!;
+        const b = nodes[ib]!;
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const d = Math.hypot(dx, dy) || 1;
+        const targetLen = len * S;
+        const f = (d - targetLen) * 0.016;
+        const fx = (dx / d) * f;
+        const fy = (dy / d) * f;
+        a.vx += fx;
+        a.vy += fy;
+        b.vx -= fx;
+        b.vy -= fy;
+      }
+
+      // 3. Anchor attraction and breathing oscillation
+      for (const nd of nodes) {
+        const k = nd.group === "hub" ? 0.0016 : 0.0009;
+        const breathX =
+          Math.sin(t * 0.0008 + nd.id * 1.6) * 0.025 * S * (nd.group === "hub" ? 0.6 : 1);
+        const breathY =
+          Math.cos(t * 0.0007 + nd.id * 2.2) * 0.025 * S * (nd.group === "hub" ? 0.6 : 1);
+
+        nd.vx += (nd.ax - nd.x) * k + breathX;
+        nd.vy += (nd.ay - nd.y) * k + breathY;
+        nd.vx *= 0.88;
+        nd.vy *= 0.88;
+
+        const sp = Math.hypot(nd.vx, nd.vy);
+        if (sp > 4) {
+          nd.vx = (nd.vx / sp) * 4;
+          nd.vy = (nd.vy / sp) * 4;
+        }
+
+        nd.x += nd.vx;
+        nd.y += nd.vy;
+
+        // Keep nodes gracefully on the right 58% of the canvas on desktop so they don't cover text
+        const minX = W > 800 ? W * 0.44 : 30;
+        const maxX = W - 35;
+        const minY = Math.min(80, H * 0.12);
+        const maxY = H - 35;
+
+        nd.x = Math.min(maxX, Math.max(minX, nd.x));
+        nd.y = Math.min(maxY, Math.max(minY, nd.y));
+      }
+
+      // Drag override
+      if (drag >= 0) {
+        const d = nodes[drag]!;
+        d.x = pt.x;
+        d.y = pt.y;
+        d.vx = 0;
+        d.vy = 0;
+      }
+
+      // 4. Update pulses
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i]!;
+        p.progress += p.speed;
+        if (p.progress >= 1) {
+          pulses.splice(i, 1);
+          if (Math.random() > 0.3) {
+            spawnPulse();
+          }
+        }
+      }
+    };
+
+    const draw = (t: number) => {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // Clean Light Background or Dark
+      ctx.fillStyle = isLight ? "#FAF9F6" : "#0B0C10";
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle ambient spotlight behind the constellation
+      const bgGrad = ctx.createRadialGradient(
+        W * 0.72,
+        H * 0.5,
+        20,
+        W * 0.72,
+        H * 0.5,
+        Math.max(W, H) * 0.55,
+      );
+      if (isLight) {
+        bgGrad.addColorStop(0, "rgba(0, 68, 255, 0.07)");
+        bgGrad.addColorStop(0.5, "rgba(0, 68, 255, 0.02)");
+        bgGrad.addColorStop(1, "transparent");
+      } else {
+        bgGrad.addColorStop(0, "rgba(0, 68, 255, 0.14)");
+        bgGrad.addColorStop(0.5, "rgba(91, 151, 255, 0.04)");
+        bgGrad.addColorStop(1, "transparent");
+      }
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Auto-focus cycle when not hovered
+      const focus =
+        hover >= 0
+          ? hover
+          : hubIndices[Math.floor(Math.max(0, t - t0) / 3600) % hubIndices.length]!;
+      const near = adj[focus] || new Set<number>();
+
+      // 1. Draw Links
+      for (const [ia, ib] of links) {
+        const a = nodes[ia]!;
+        const b = nodes[ib]!;
+        const hot = ia === focus || ib === focus;
+
+        if (isLight) {
+          ctx.strokeStyle = hot ? "rgba(0, 68, 255, 0.95)" : "rgba(15, 23, 42, 0.16)";
+          ctx.lineWidth = hot ? 2 : 1;
+        } else {
+          ctx.strokeStyle = hot ? "rgba(91, 151, 255, 0.95)" : "rgba(160, 175, 215, 0.16)";
+          ctx.lineWidth = hot ? 1.8 : 0.9;
+        }
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+
+      // 2. Draw Synapse Signal Pulses
+      for (const p of pulses) {
+        const a = nodes[p.from]!;
+        const b = nodes[p.to]!;
+        const px = a.x + (b.x - a.x) * p.progress;
+        const py = a.y + (b.y - a.y) * p.progress;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = isLight ? "#0044FF" : "#FFFFFF";
+        ctx.shadowColor = "#0044FF";
+        ctx.shadowBlur = isLight ? 6 : 8;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 3. Draw Nodes with distinctive, noticeable colors!
+      const pulse = ((t - t0) % 3200) / 3200;
+
+      for (const nd of nodes) {
+        const on = nd.id === focus;
+        const isNear = near.has(nd.id);
+        const isHub = nd.group === "hub";
+
+        // Determine node color
+        let nodeColor = "#09090B"; // Default solid black
+        let haloColor = "rgba(0, 68, 255, 0.25)";
+
+        if (isLight) {
+          if (on) {
+            nodeColor = "#0044FF"; // Vivid electric blue when focused
+            haloColor = "rgba(0, 68, 255, 0.35)";
+          } else if (isNear) {
+            nodeColor = "#0044FF";
+            haloColor = "rgba(0, 68, 255, 0.2)";
+          } else if (isHub) {
+            nodeColor = "#09090B"; // Solid deep black for hubs
+            haloColor = "rgba(9, 9, 11, 0.18)";
+          } else if (nd.group === "skill") {
+            nodeColor = "#0044FF"; // Vibrant cobalt
+          } else if (nd.group === "rule") {
+            nodeColor = "#059669"; // Emerald green
+          } else if (nd.group === "project") {
+            nodeColor = "#EA580C"; // Warm orange / amber
+          } else {
+            nodeColor = "#1E293B"; // Dark slate
+          }
+        } else {
+          // Dark mode palette
+          if (on) {
+            nodeColor = "#5B97FF";
+            haloColor = "rgba(91, 151, 255, 0.65)";
+          } else if (isNear) {
+            nodeColor = "#9CC2FF";
+            haloColor = "rgba(91, 151, 255, 0.35)";
+          } else if (isHub) {
+            nodeColor = "#FFFFFF";
+            haloColor = "rgba(255, 255, 255, 0.25)";
+          } else if (nd.group === "skill") {
+            nodeColor = "#38BDF8";
+          } else if (nd.group === "rule") {
+            nodeColor = "#34D399";
+          } else if (nd.group === "project") {
+            nodeColor = "#F59E0B";
+          } else {
+            nodeColor = "#A6B0C8";
+          }
+        }
+
+        // Radial glow for active node or hubs
+        if (isHub || on) {
+          const glowR = nd.r * (on ? 6.5 : 4);
+          const g = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, glowR);
+          g.addColorStop(0, haloColor);
+          g.addColorStop(1, "transparent");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, glowR, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Expanding ripple ring on focused node
+        if (on) {
+          ctx.strokeStyle = isLight
+            ? `rgba(0, 68, 255, ${0.75 * (1 - pulse)})`
+            : `rgba(91, 151, 255, ${0.75 * (1 - pulse)})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, nd.r + 4 + pulse * 36, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Inner solid dot with border
+        ctx.beginPath();
+        ctx.arc(nd.x, nd.y, nd.r + (on ? 2 : 0), 0, Math.PI * 2);
+        ctx.fillStyle = nodeColor;
+        ctx.fill();
+
+        // Subtle crisp white rim in light mode for extra pop
+        if (isLight && (isHub || on)) {
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = on ? "#0044FF" : "#09090B";
+          ctx.stroke();
+        }
+      }
+
+      // 4. Draw Clean Anti-Collision Labels (The Obsidian Way)
+      interface DrawnLabel {
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+      }
+      const drawnBoxes: DrawnLabel[] = [];
+
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const tryDrawLabel = (name: string, x: number, y: number, isHighlight: boolean) => {
+        ctx.font = isHighlight
+          ? "600 13px Inter Variable, Inter, sans-serif"
+          : "500 12px Inter Variable, Inter, sans-serif";
+        const metrics = ctx.measureText(name);
+        const textW = metrics.width;
+        const boxW = textW + 18;
+        const boxH = 24;
+
+        let boxX = x - boxW / 2;
+        let boxY = y + 14;
+
+        // Collision check against already drawn labels
+        const collides = (bx: number, by: number) => {
+          return drawnBoxes.some(
+            (b) =>
+              bx < b.x + b.w + 6 &&
+              bx + boxW + 6 > b.x &&
+              by < b.y + b.h + 4 &&
+              by + boxH + 4 > b.y,
+          );
+        };
+
+        // If it collides below, try placing it above the node
+        if (collides(boxX, boxY)) {
+          boxY = y - boxH - 12;
+        }
+
+        // If it still collides and it's not the primary focused node, omit it to prevent visual soup
+        if (collides(boxX, boxY) && !isHighlight) {
+          return;
+        }
+
+        drawnBoxes.push({ x: boxX, y: boxY, w: boxW, h: boxH });
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.roundRect(boxX, boxY, boxW, boxH, 5);
+
+        if (isLight) {
+          ctx.fillStyle = isHighlight ? "#09090B" : "rgba(255, 255, 255, 0.95)";
+          ctx.fill();
+          ctx.strokeStyle = isHighlight ? "#0044FF" : "rgba(15, 23, 42, 0.16)";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.fillStyle = isHighlight ? "#FFFFFF" : "#09090B";
+        } else {
+          ctx.fillStyle = isHighlight ? "rgba(11, 14, 22, 0.92)" : "rgba(11, 14, 22, 0.78)";
+          ctx.fill();
+          ctx.strokeStyle = isHighlight ? "rgba(91, 151, 255, 0.55)" : "rgba(255, 255, 255, 0.12)";
+          ctx.lineWidth = 1;
+          ctx.stroke();
+
+          ctx.fillStyle = isHighlight ? "#FFFFFF" : "rgba(226, 232, 240, 0.88)";
+        }
+
+        ctx.fillText(name, x, boxY + boxH / 2);
+        ctx.restore();
+      };
+
+      // A. Focused / Hovered node label (highest priority)
+      const focusNode = nodes[focus]!;
+      tryDrawLabel(focusNode.name, focusNode.x, focusNode.y, true);
+
+      // B. Top 2 or 3 direct neighbors of focus node
+      const sortedNeighbors = Array.from(near)
+        .map((id) => nodes[id]!)
+        .sort((a, b) => {
+          const da = Math.hypot(a.x - focusNode.x, a.y - focusNode.y);
+          const db = Math.hypot(b.x - focusNode.x, b.y - focusNode.y);
+          return da - db;
+        })
+        .slice(0, 3);
+
+      for (const nn of sortedNeighbors) {
+        tryDrawLabel(nn.name, nn.x, nn.y, false);
+      }
+
+      // C. Major hubs (when not in conflict)
+      for (const hid of hubIndices) {
+        if (hid !== focus && !near.has(hid)) {
+          const hn = nodes[hid]!;
+          tryDrawLabel(hn.name, hn.x, hn.y, false);
+        }
+      }
+    };
+
+    const loop = (now: number) => {
+      raf = requestAnimationFrame(loop);
+      if (!visible) return;
+      step(now);
+      draw(now);
+    };
+
+    raf = requestAnimationFrame(loop);
+
+    const io = new IntersectionObserver((e) => {
+      visible = e[0]?.isIntersecting ?? true;
+    });
+    io.observe(box);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      ro.disconnect();
+      canvas.removeEventListener("pointermove", onMove);
+      canvas.removeEventListener("pointerdown", onDown);
+      canvas.removeEventListener("pointerup", onUp);
+      canvas.removeEventListener("pointercancel", onUp);
+      canvas.removeEventListener("pointerleave", onLeave);
+    };
+  }, [theme]);
+
+  return (
+    <div
+      ref={wrap}
+      className={`relative h-full min-h-[300px] w-full overflow-hidden ${theme === "light" ? "bg-[#FAF9F6]" : "bg-[#0B0C10]"}`}
+    >
+      <canvas
+        ref={cv}
+        className="absolute inset-0 cursor-grab touch-none active:cursor-grabbing"
+        role="img"
+        aria-label="Grafo de notas del cerebro de IA en movimiento: arrastra un nodo"
+      />
+    </div>
+  );
+}
