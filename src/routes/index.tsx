@@ -478,8 +478,8 @@ function Index() {
               <SectionTitle
                 compact
                 word="Sobre mí"
-                sub="Problem Solver."
-                accent="Perfil híbrido."
+                sub="Perfil híbrido."
+                accent="Negocio + tecnología."
               />
             </Reveal>
 
