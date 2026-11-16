@@ -73,9 +73,6 @@ export function ProcessSection() {
         <div className="sticky top-0 flex h-screen min-h-[620px] items-center overflow-hidden">
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-8">
             <div className="lg:col-span-5">
-              <p className="mb-4 text-lg font-semibold tracking-[-0.01em] text-[#3B82F6] sm:text-xl">
-                Paso {current.n} de 05
-              </p>
               <div className="relative min-h-[19rem] sm:min-h-[25rem]">
                 {steps.map((s, i) => (
                   <div
@@ -105,28 +102,54 @@ export function ProcessSection() {
 
             <div className="lg:col-span-7">
               <ProcessStage active={active} />
-              <ol className="mt-5 grid grid-cols-5 gap-2">
-                {steps.map((st, i) => {
-                  const done = i < active;
-                  const now = i === active;
-                  return (
-                    <li
-                      key={st.n}
-                      className={`flex items-center justify-center gap-1.5 rounded-full border-2 px-2 py-2 text-base font-semibold transition-all duration-300 ${
-                        now
-                          ? "border-[#3B82F6] bg-[#0F1D3D] text-white shadow-[0_0_24px_-6px_#3B82F6]"
-                          : done
-                            ? "border-white/25 bg-[#101219] text-zinc-200"
-                            : "border-white/10 bg-[#0B0D14] text-zinc-500"
-                      }`}
-                    >
-                      {done ? <Check size={16} strokeWidth={3} className="text-[#10B981]" /> : null}
-                      <span className="hidden sm:inline">{st.label}</span>
-                      <span className="sm:hidden">{st.n}</span>
-                    </li>
-                  );
-                })}
-              </ol>
+              <div className="relative mt-7 px-[26px]">
+                <div
+                  aria-hidden="true"
+                  className="absolute top-[26px] right-[26px] left-[26px] h-[6px] -translate-y-1/2 rounded-full bg-white/15"
+                >
+                  <div
+                    className="h-full rounded-full bg-[#0044FF] transition-[width] duration-300"
+                    style={{
+                      width: `${Math.max(
+                        0,
+                        Math.min(1, (progress * steps.length - 0.5) / (steps.length - 1)),
+                      ) * 100}%`,
+                    }}
+                  />
+                </div>
+                <ol className="relative flex justify-between">
+                  {steps.map((st, i) => {
+                    const done = i < active;
+                    const now = i === active;
+                    return (
+                      <li
+                        key={st.n}
+                        aria-current={now ? "step" : undefined}
+                        className="-mx-[26px] flex w-[104px] flex-col items-center gap-2"
+                      >
+                        <span
+                          className={`font-display flex h-[52px] w-[52px] items-center justify-center rounded-full border-[3px] text-[20px] font-bold transition-all duration-300 ${
+                            now
+                              ? "scale-110 border-[#09090B] bg-white text-[#09090B] shadow-[5px_5px_0_#0044FF]"
+                              : done
+                                ? "border-[#09090B] bg-[#0044FF] text-white"
+                                : "border-white/30 bg-[#09090B] text-zinc-400"
+                          }`}
+                        >
+                          {done ? <Check size={22} strokeWidth={3.5} /> : st.n}
+                        </span>
+                        <span
+                          className={`hidden text-[17px] font-semibold transition-colors duration-300 sm:block ${
+                            now ? "text-white" : done ? "text-zinc-300" : "text-zinc-500"
+                          }`}
+                        >
+                          {st.label}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
             </div>
           </div>
         </div>
