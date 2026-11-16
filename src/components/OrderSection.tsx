@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
+import { SectionTitle } from "./SectionTitle";
 import { useReducedMotion } from "./motion-pref";
 
 const steps = [
@@ -35,9 +36,16 @@ export function OrderSection() {
       className="t-bg-hero t-ink t-line scroll-mt-[62px] border-t py-14 text-center sm:py-20 2xl:py-28"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+        <SectionTitle
+          center
+          index="01"
+          label="El método"
+          word="Método"
+          className="[--outline-fill:var(--t-hero)]"
+        />
         <SectionHeading
           center
-          eyebrow="El método"
+          eyebrow=""
           title="Apaga el caos:"
           accentTitle="web, procesos e IA en orden."
           description="Baja y mira cómo se ordena: una web que te trae clientes, un sistema que los gestiona y flujos que se ocupan del resto."

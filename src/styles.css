@@ -369,3 +369,11 @@ body {
 .hover\:t-on-ink:hover {
   color: var(--t-on-ink);
 }
+
+/* Giant section titles: transparent fill, theme-aware stroke (reference: "ABOUT ME") */
+.outline-title {
+  color: var(--outline-fill, var(--t-page));
+  -webkit-text-stroke: 4px var(--t-ink);
+  paint-order: stroke fill;
+  user-select: none;
+}

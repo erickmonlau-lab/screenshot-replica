@@ -34,6 +34,7 @@ import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
+import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectBento } from "@/components/ProjectBento";
 import { StackSwitcher } from "@/components/StackSwitcher";
 import { GrantBand } from "@/components/GrantBand";
@@ -368,8 +369,9 @@ function Index() {
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
+              <SectionTitle index="03" label="Proyectos" word="Proyectos" />
               <SectionHeading
-                eyebrow="Proyectos seleccionados"
+                eyebrow=""
                 title="Galería de Proyectos."
                 accentTitle="Producción y Directo."
                 description="Webs reales con métricas de tráfico, plataformas SaaS propias y desarrollos empresariales listos para mostrar en persona."
@@ -396,8 +398,9 @@ function Index() {
         <section id="ia" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
+              <SectionTitle index="04" label="Demos" word="En vivo" />
               <SectionHeading
-                eyebrow="Experiencias en directo"
+                eyebrow=""
                 title="No te lo cuento."
                 accentTitle="Tócalo tú mismo."
                 description="Así trabajan los flujos de IA y automatización que construyo: elige una fase y míralos funcionar."
@@ -486,8 +489,9 @@ function Index() {
         <section id="trayectoria" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
+              <SectionTitle index="05" label="Sobre mí" word="Sobre mí" />
               <SectionHeading
-                eyebrow="Sobre mí · Trayectoria"
+                eyebrow=""
                 title="Problem Solver."
                 accentTitle="Perfil híbrido."
                 description="Código, negocio y ejecución: desarrollo web, automatización IA, marketing digital y gestión con más de 1.000 h reales en Barcelona."
@@ -640,8 +644,8 @@ function Index() {
         {/* CONTACTO */}
         <section id="contacto" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <p className="mb-5 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]">
-              Contacto · Disponible en Barcelona
+            <p className="t-muted mb-5 font-mono text-[12px] font-bold tracking-[0.18em] uppercase sm:text-[13px]">
+              [ 06 — Contacto ] · Disponible en Barcelona
             </p>
             <BigHeading
               className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em]"

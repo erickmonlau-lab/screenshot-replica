@@ -37,7 +37,8 @@ export function SectionHeading({
   return (
     <div className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10 ${className}`}>
       <div className={center ? "mx-auto max-w-5xl" : "max-w-5xl"}>
-        <motion.p
+        {eyebrow ? (
+          <motion.p
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.6, ease: EASE }}
@@ -45,6 +46,7 @@ export function SectionHeading({
         >
           {eyebrow}
         </motion.p>
+        ) : null}
         <h2
           ref={ref}
           aria-label={full}

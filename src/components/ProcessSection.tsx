@@ -65,8 +65,8 @@ export function ProcessSection() {
         <div className="sticky top-0 flex h-screen min-h-[620px] items-center overflow-hidden">
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
-              <p className="mb-4 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px]">
-                Cómo trabajo · Paso {current.n} de 05
+              <p className="t-muted mb-4 font-mono text-[12px] font-bold tracking-[0.18em] uppercase sm:text-[13px]">
+                [ 02 — Proceso ] · Paso {current.n} de 05
               </p>
               <div className="relative min-h-[17rem] sm:min-h-[21rem]">
                 {steps.map((s, i) => (
