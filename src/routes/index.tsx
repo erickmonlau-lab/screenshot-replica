@@ -320,7 +320,7 @@ const marqueeText =
 function Index() {
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
   const [activeProjectId, setActiveProjectId] = useState<string>("diversplas");
-  const [activeAiPhase, setActiveAiPhase] = useState<string>("automation");
+  const [activeAiPhase, setActiveAiPhase] = useState<string>("memory");
   const [showLiveSystem, setShowLiveSystem] = useState<boolean>(true);
 
   const selectedAiPhase = aiPhases.find((p) => p.id === activeAiPhase) ?? aiPhases[0]!;

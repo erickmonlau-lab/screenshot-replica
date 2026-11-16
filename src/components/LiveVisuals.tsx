@@ -476,7 +476,7 @@ export function BrainVisual() {
       ctx.fillStyle = "#1B1B1B";
       ctx.fillRect(0, 0, W, H);
 
-      const focus = hover >= 0 ? hover : hubs[Math.floor((t - t0) / 3200) % hubs.length]!;
+      const focus = hover >= 0 ? hover : hubs[Math.floor(Math.max(0, t - t0) / 3200) % hubs.length]!;
       const near = adj[focus]!;
 
       ctx.lineWidth = 1;
