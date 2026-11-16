@@ -9,6 +9,7 @@ import {
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { HangingCard } from "./HangingCard";
+import { RotatingSeal } from "./RotatingSeal";
 
 export interface HeroProjectPreview {
   id: string;
@@ -57,7 +58,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   };
 
   const word =
-    "font-display block font-bold uppercase leading-[0.84] tracking-[-0.055em] text-[21vw] sm:text-[clamp(96px,17.5vh,190px)]";
+    "font-display block font-bold uppercase leading-[0.84] tracking-[-0.055em] text-[13vw] sm:text-[clamp(80px,12.8vh,150px)]";
 
   return (
     <section
@@ -104,31 +105,35 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
         className="pointer-events-none absolute top-[17%] left-4 z-20 select-none sm:top-[52%] sm:left-[3.5%] sm:-translate-y-1/2"
       >
-        <span className="sr-only">Desarrollador web e IA en Barcelona. </span>
-        <span className={`${word} text-[#09090B] dark:text-white`}>Webs</span>
-        <span className={`${word} text-[#09090B] dark:text-white`}>ERPs</span>
+        <span className="sr-only">Marketing, gestión, código e IA en Barcelona. </span>
+        <span className={`${word} text-[#09090B] dark:text-white`}>Marketing</span>
+        <span className={`${word} text-[#09090B] dark:text-white`}>Gestión</span>
         <span
-          className={`${word} text-[#0044FF] [text-shadow:5px_5px_0_#09090B] dark:text-[#5b97ff]`}
+          className={`${word} text-white [-webkit-text-stroke:3px_#09090B] [paint-order:stroke_fill] [text-shadow:5px_5px_0_#0044FF]`}
         >
-          &amp; IA
+          Código e IA
         </span>
       </motion.h1>
 
-      {/* Ticket amarillo */}
+      {/* Sello de texto giratorio */}
       <motion.div
         style={{ x: ticketX, y: ticketY }}
-        className="pointer-events-none absolute top-[30%] right-3 z-20 sm:top-[34%] sm:right-auto sm:left-[calc(50%+210px)]"
+        className="pointer-events-none absolute top-[28%] right-2 z-20 sm:top-[30%] sm:right-auto sm:left-[calc(50%+190px)]"
       >
         <motion.div
-          initial={reduce ? false : { scale: 0, rotate: -20 }}
-          animate={{ scale: 1, rotate: 6 }}
-          transition={{ type: "spring", stiffness: 160, damping: 12, delay: 0.9 }}
-          className="rounded-xl border-2 border-[#09090B] bg-[#FFD60A] px-4 py-2.5 text-[#09090B] shadow-[5px_5px_0_#09090B]"
+          initial={reduce ? false : { scale: 0, rotate: -40 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 140, damping: 13, delay: 0.9 }}
         >
-          <p className="font-display text-[20px] leading-none font-bold tracking-[-0.03em]">
-            Top 1 Google
-          </p>
-          <p className="mt-1 text-[15px] leading-none font-semibold">diversplas.es</p>
+          <RotatingSeal
+            text="MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · "
+            size={190}
+            className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[6px_6px_0_#09090B]"
+          >
+            <span className="font-display text-[34px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
+              ER
+            </span>
+          </RotatingSeal>
         </motion.div>
       </motion.div>
 
@@ -140,10 +145,10 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="absolute right-4 bottom-5 left-4 z-30 sm:right-[4%] sm:bottom-[11%] sm:left-auto sm:w-[320px] lg:w-[360px]"
       >
         <p className="font-display hidden text-[28px] leading-[1.1] font-bold tracking-[-0.035em] sm:block lg:text-[32px]">
-          Llevados a producción.
+          Entiendo tu negocio y construyo la solución.
         </p>
         <p className="mt-2 hidden text-[17px] font-semibold text-[#0044FF] sm:block dark:text-[#5b97ff]">
-          Desarrollador web &amp; IA · Barcelona
+          Marketing, gestión y tecnología · Barcelona
         </p>
         <div className="flex flex-wrap items-center gap-2.5 sm:mt-5">
           <button
@@ -159,7 +164,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             onClick={() => onJumpToProjects("private-erp")}
             className="group inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[16px] font-semibold text-[#09090B] shadow-[4px_4px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
           >
-            <span>Demo ERP</span>
+            <span>Ver el ERP</span>
             <ArrowUpRight size={17} strokeWidth={2.4} />
           </button>
         </div>

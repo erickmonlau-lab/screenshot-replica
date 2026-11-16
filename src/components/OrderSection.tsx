@@ -5,25 +5,25 @@ import { useReducedMotion } from "./motion-pref";
 
 const steps = [
   {
-    label: "1 · Web",
+    label: "1 · Atraer",
     art: <WebMini />,
-    title: "Una web que posiciona",
-    text: "Estructura, SEO técnico y rendimiento pensados desde el primer día para que te encuentren.",
-    proof: "Top 1 en Google con diversplas.es",
+    title: "Que te encuentren",
+    text: "Marketing, web y SEO técnico pensados desde el primer día para atraer a los clientes correctos.",
+    proof: "Webs propias en producción",
   },
   {
-    label: "2 · ERP",
+    label: "2 · Ordenar",
     art: <ErpMini />,
-    title: "Un sistema que ordena",
-    text: "Stock, facturación y albaranes en un mismo sitio, a medida de cómo trabaja tu empresa.",
-    proof: "ERP interno con demo en directo",
+    title: "Que todo esté en orden",
+    text: "Gestión administrativa y un ERP a medida: stock, facturación y albaranes en un mismo sitio.",
+    proof: "Prácticas de gestión y logística · 416 h",
   },
   {
-    label: "3 · IA",
+    label: "3 · Automatizar",
     art: <IaMini />,
-    title: "Flujos que trabajan solos",
+    title: "Que se haga solo",
     text: "n8n y agentes de IA conectan tu CRM, formularios y WhatsApp sin tareas manuales.",
-    proof: "Tarea ejecutada sin intervención",
+    proof: "Agente del Cambio Tecnológico · 375 h",
   },
 ];
 
@@ -42,7 +42,7 @@ export function OrderSection() {
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="font-display max-w-[16ch] text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
-            Apaga el caos: <span className="[text-shadow:4px_4px_0_#09090B]">web, procesos e IA en orden.</span>
+            Apaga el caos: <span className="[text-shadow:4px_4px_0_#09090B]">marketing, gestión y tecnología en orden.</span>
           </h2>
           <a
             href="#proyectos"

@@ -79,7 +79,7 @@ export function WebMini() {
           <animate attributeName="opacity" values="1;0.55;1" dur="2s" repeatCount="indefinite" />
         </rect>
         <text x={294} y={77.5} textAnchor="middle" fill="#fff" fontSize={14} fontWeight={800}>
-          Top 1
+          SEO
         </text>
       </g>
     </Mini>
@@ -621,7 +621,7 @@ function Grow() {
         />
         <rect x={490} y={94} width={66} height={26} rx={13} fill={COBALT} />
         <text x={523} y={113} textAnchor="middle" fill="#fff" fontSize={16} fontWeight={800}>
-          Top 1
+          SEO
         </text>
         <rect x={490} y={136} width={106} height={10} rx={5} fill="#2A3042" />
         <rect x={490} y={156} width={80} height={10} rx={5} fill="#2A3042" />

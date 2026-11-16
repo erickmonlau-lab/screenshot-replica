@@ -174,7 +174,7 @@ export function HangingCard({
           <p className="font-display text-[24px] leading-none font-bold tracking-[-0.04em] whitespace-nowrap">
             Erick Rodríguez
           </p>
-          <p className="mt-2 text-base font-semibold text-[#0044FF]">Web · ERPs · IA</p>
+          <p className="mt-2 text-base font-semibold text-[#0044FF]">Negocio + tecnología</p>
           <p className="mt-1 text-base font-medium text-[#52525B]">Barcelona</p>
         </div>
       </div>

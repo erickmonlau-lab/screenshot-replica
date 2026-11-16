@@ -32,11 +32,10 @@ const metrics: Metric[] = [
   },
   {
     id: "seo",
-    prefix: "Top ",
-    from: 9,
-    to: 1,
-    label: "en Google",
-    detail: "diversplas.es, posicionada por SEO técnico en Barcelona.",
+    from: 0,
+    to: 3,
+    label: "proyectos online",
+    detail: "diversplas.es, gesgrama.com y breadpdf.com, en producción.",
   },
 ];
 

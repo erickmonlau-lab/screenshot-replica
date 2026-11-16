@@ -80,13 +80,13 @@ const projectCases: ProjectCase[] = [
     name: "diversplas.es",
     domain: "diversplas.es",
     type: "Web a medida",
-    status: "Top 1 en Google",
-    outcome: "Top 1 en Google en búsquedas de extraescolares en Barcelona",
+    status: "En producción",
+    outcome: "Web a medida para colegios y AFAs: gestión de extraescolares y casales",
     stack: ["Web a medida", "SEO Técnico", "Recién lanzada"],
     href: "https://diversplas.es",
     image: diversplas.url,
     description:
-      "Top 1 en Google en búsquedas de extraescolares en Barcelona con diversplas.es, web desarrollada íntegramente por mí y recién lanzada a producción.",
+      "Web para gestión de extraescolares y casales para colegios y AFAs, desarrollada íntegramente por mí y ya en producción.",
     ctaLabel: "Visitar web",
   },
   {
@@ -315,7 +315,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
 }
 
 const marqueeText =
-  "ERICK RODRÍGUEZ · DESARROLLADOR WEB & AUTOMATIZACIÓN IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · TOP 1 GOOGLE DIVERSPLAS.ES · 375 H AGENTE DEL CAMBIO · ";
+  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
 
 function Index() {
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
@@ -581,7 +581,7 @@ function Index() {
         <footer className="section-dark t-line t-muted border-t py-6 text-[15px] font-medium sm:text-base">
           <div className="mx-auto flex max-w-[1380px] flex-wrap items-center justify-between gap-4 px-5 sm:px-8">
             <span>© 2026 Erick Rodríguez · Portfolio</span>
-            <span>Desarrollo Web · ERPs a Medida · Automatización IA</span>
+            <span>Marketing · Gestión · Desarrollo Web · ERP · Automatización IA</span>
           </div>
         </footer>
       </main>
