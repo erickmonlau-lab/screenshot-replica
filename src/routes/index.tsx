@@ -402,36 +402,31 @@ function Index() {
               />
             </Reveal>
 
-            <div className="grid items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
-              <ol className="flex flex-col gap-3 lg:col-span-5" aria-label="Demos de IA">
+            <div className="mx-auto max-w-[940px]">
+              <ol className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4" aria-label="Demos de IA">
                 {aiPhases.map((phase) => {
                   const on = phase.id === selectedAiPhase.id;
                   return (
-                    <li key={phase.id} className="flex-1">
+                    <li key={phase.id}>
                       <button
                         type="button"
                         onClick={() => setActiveAiPhase(phase.id)}
                         aria-pressed={on}
-                        className={`flex h-full w-full items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 ${
+                        className={`flex h-full w-full items-center gap-3 rounded-2xl border-2 px-4 py-3 text-left transition-all duration-300 hover:-translate-y-0.5 ${
                           on
                             ? "border-[#3B82F6] bg-[#0F1D3D] shadow-[0_0_30px_-8px_#3B82F6]"
                             : "border-white/15 bg-[#101219] hover:border-white/40"
                         }`}
                       >
                         <span
-                          className={`font-display text-4xl leading-none font-bold tracking-[-0.04em] ${
+                          className={`font-display text-3xl leading-none font-bold tracking-[-0.04em] ${
                             on ? "text-white" : "text-zinc-600"
                           }`}
                         >
                           {phase.num}
                         </span>
-                        <span className="min-w-0">
-                          <span className="font-display block text-xl leading-tight font-bold tracking-[-0.02em] text-white sm:text-2xl">
-                            {phase.kicker}
-                          </span>
-                          <span className="mt-1 block text-base leading-snug font-medium text-zinc-400">
-                            {phase.tags.join(" · ")}
-                          </span>
+                        <span className="font-display text-base leading-tight font-bold tracking-[-0.02em] text-white sm:text-lg">
+                          {phase.kicker}
                         </span>
                       </button>
                     </li>
@@ -439,24 +434,27 @@ function Index() {
                 })}
               </ol>
 
-              <div className="macos-window-frame flex flex-col overflow-hidden rounded-[24px] text-white lg:col-span-7">
-                <div className="flex items-center gap-2 border-b border-[#303240] px-5 py-3.5">
+              <div className="macos-window-frame overflow-hidden rounded-[24px] text-white">
+                <div className="flex items-center gap-2 border-b border-[#303240] px-5 py-3">
                   <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
                   <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
                   <span className="h-3 w-3 rounded-full bg-[#28C840]" />
                   <span className="ml-3 text-lg font-semibold text-zinc-200">
                     {selectedAiPhase.title}
                   </span>
+                  <span className="ml-auto hidden text-base text-zinc-400 md:inline">
+                    {selectedAiPhase.tags.join(" · ")}
+                  </span>
                 </div>
-                <div className="min-h-[400px] flex-1 p-3 sm:p-4">
+                <div className="aspect-[760/400] w-full">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="h-full"
+                      className="h-full w-full"
                     >
                       {selectedAiPhase.id === "automation" && <N8nVisual />}
                       {selectedAiPhase.id === "models" && <ModelsVisual />}

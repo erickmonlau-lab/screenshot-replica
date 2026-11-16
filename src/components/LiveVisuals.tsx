@@ -9,7 +9,7 @@ const ORANGE = "#FF6D5A";
 
 function Stage({ children, label }: { children: ReactNode; label?: string }) {
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-2xl bg-[#080A10]">
+    <div className="relative h-full w-full overflow-hidden bg-[#080A10]">
       <svg viewBox="0 0 760 400" className="h-full w-full" role="img" aria-label={label}>
         <defs>
           <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -531,7 +531,7 @@ export function BrainVisual() {
   }, []);
 
   return (
-    <div ref={wrap} className="relative h-full min-h-[400px] w-full overflow-hidden rounded-2xl bg-[#1B1B1B]">
+    <div ref={wrap} className="relative h-full min-h-[260px] w-full overflow-hidden bg-[#1B1B1B]">
       <canvas ref={cv} className="absolute inset-0 cursor-grab touch-none active:cursor-grabbing" role="img" aria-label="Grafo de notas del cerebro de IA en movimiento: arrastra un nodo" />
     </div>
   );
