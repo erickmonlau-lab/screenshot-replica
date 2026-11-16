@@ -124,7 +124,12 @@ export function AboutSection({
           </h3>
           <ul className="space-y-3">
             {education.map((e, i) => (
-              <MiniTicket key={e.title} i={i + 2} title={e.title} meta={`${e.place} · ${e.period}`} />
+              <MiniTicket
+                key={e.title}
+                i={i + 2}
+                title={e.title}
+                meta={`${e.place} · ${e.period}`}
+              />
             ))}
           </ul>
         </div>

@@ -59,7 +59,10 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
       const row = rowRef.current;
       if (!row) return;
       const r = row.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, (window.innerHeight * 0.92 - r.top) / (window.innerHeight * 0.55)));
+      const p = Math.min(
+        1,
+        Math.max(0, (window.innerHeight * 0.92 - r.top) / (window.innerHeight * 0.55)),
+      );
       flips.current.forEach((el, i) => {
         if (!el) return;
         const t = Math.min(1, Math.max(0, p * 1.6 - i * 0.2));

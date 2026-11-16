@@ -35,17 +35,19 @@ export function SectionHeading({
   ].filter((x) => x.w);
 
   return (
-    <div className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10 ${className}`}>
+    <div
+      className={`flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10 ${className}`}
+    >
       <div className={center ? "mx-auto max-w-5xl" : "max-w-5xl"}>
         {eyebrow ? (
           <motion.p
-          initial={reduce ? false : { opacity: 0, y: 10 }}
-          animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className={`mb-4 text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px] ${center ? "text-center" : ""}`}
-        >
-          {eyebrow}
-        </motion.p>
+            initial={reduce ? false : { opacity: 0, y: 10 }}
+            animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            transition={{ duration: 0.6, ease: EASE }}
+            className={`mb-4 text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px] ${center ? "text-center" : ""}`}
+          >
+            {eyebrow}
+          </motion.p>
         ) : null}
         <h2
           ref={ref}

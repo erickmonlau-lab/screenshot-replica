@@ -31,7 +31,12 @@ export function HangingCard({
   const ptr = useRef({ x: 0, y: 0, down: false, gx: 0, gy: 0 });
 
   useEffect(() => {
-    const { pts, A, B, step: physicsStep } = createLanyard({ areaW, areaH, seg: SEG, link: LINK, cardH });
+    const {
+      pts,
+      A,
+      B,
+      step: physicsStep,
+    } = createLanyard({ areaW, areaH, seg: SEG, link: LINK, cardH });
 
     let raf = 0;
     let last = performance.now();
@@ -176,4 +181,3 @@ export function HangingCard({
     </div>
   );
 }
-

@@ -16,7 +16,17 @@ const navItems = [
   { id: "contacto", label: "Contacto" },
 ] as const;
 
-const observedIds = ["hero", "metricas", "orden", "proceso", "proyectos", "ia", "trayectoria", "subvencion", "contacto"];
+const observedIds = [
+  "hero",
+  "metricas",
+  "orden",
+  "proceso",
+  "proyectos",
+  "ia",
+  "trayectoria",
+  "subvencion",
+  "contacto",
+];
 
 export function Navbar({ onChangeMode }: NavbarProps) {
   const [activeId, setActiveId] = useState<string>("hero");
@@ -46,7 +56,8 @@ export function Navbar({ onChangeMode }: NavbarProps) {
       for (const section of sections) {
         if (section.getBoundingClientRect().top <= line) current = section.id;
       }
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
       if (atBottom) current = sections[sections.length - 1]!.id;
       setActiveId(current);
     };

@@ -37,7 +37,10 @@ export function SectionTitle({
         className={`outline-title font-display leading-[0.95] font-bold tracking-[-0.03em] uppercase ${compact ? "text-[clamp(2.4rem,7.4vw,6.4rem)]" : "text-[clamp(2.6rem,11vw,10.5rem)]"}`}
       >
         {words.map((w, i) => (
-          <span key={`${w}-${i}`} className="inline-block overflow-hidden pt-[0.24em] pb-[0.06em] align-top">
+          <span
+            key={`${w}-${i}`}
+            className="inline-block overflow-hidden pt-[0.24em] pb-[0.06em] align-top"
+          >
             <motion.span
               className="inline-block"
               initial={reduce ? false : { y: "110%" }}

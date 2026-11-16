@@ -18,7 +18,12 @@ const services = [
     title: "Webs que posicionan y cargan al instante.",
     description:
       "SEO técnico, Core Web Vitals y despliegue a producción. La base con la que diversplas.es llegó al Top 1 de Google en Barcelona.",
-    skills: ["SEO técnico (Top 1)", "Core Web Vitals", "Despliegue en producción", "Shopify & WordPress"],
+    skills: [
+      "SEO técnico (Top 1)",
+      "Core Web Vitals",
+      "Despliegue en producción",
+      "Shopify & WordPress",
+    ],
   },
   {
     num: "03",
@@ -26,7 +31,13 @@ const services = [
     title: "Flujos autónomos con n8n e IA.",
     description:
       "Procesos operativos automatizados, herramientas conectadas (CRM, formularios, WhatsApp) y modelos LLM enrutados con contexto de empresa.",
-    skills: ["Flujos n8n", "Agentes de IA", "Claude con Skills", "WhatsApp Business", "Second Brain"],
+    skills: [
+      "Flujos n8n",
+      "Agentes de IA",
+      "Claude con Skills",
+      "WhatsApp Business",
+      "Second Brain",
+    ],
   },
 ];
 

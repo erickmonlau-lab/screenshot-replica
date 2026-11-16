@@ -8,8 +8,10 @@ export function CursorGlow() {
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const move = (e: PointerEvent) => {
-      if (halo.current) halo.current.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
-      if (ring.current) ring.current.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
+      if (halo.current)
+        halo.current.style.transform = `translate(${e.clientX - 260}px, ${e.clientY - 260}px)`;
+      if (ring.current)
+        ring.current.style.transform = `translate(${e.clientX - 18}px, ${e.clientY - 18}px)`;
     };
     const over = (e: PointerEvent) => {
       const el = (e.target as HTMLElement | null)?.closest("a,button,[role=tab],.cursor-grab");
@@ -29,7 +31,10 @@ export function CursorGlow() {
         ref={halo}
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-[55] hidden h-[520px] w-[520px] rounded-full [mix-blend-mode:screen] [@media(hover:hover)_and_(pointer:fine)]:block"
-        style={{ background: "radial-gradient(circle, rgba(0,68,255,0.38) 0%, rgba(0,68,255,0) 62%)", transform: "translate(-999px,-999px)" }}
+        style={{
+          background: "radial-gradient(circle, rgba(0,68,255,0.38) 0%, rgba(0,68,255,0) 62%)",
+          transform: "translate(-999px,-999px)",
+        }}
       />
       <div
         ref={ring}

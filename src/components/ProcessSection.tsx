@@ -40,7 +40,6 @@ const steps = [
   },
 ];
 
-
 /** "Del aviso al cobro" equivalent: a pinned section that advances as you scroll. */
 export function ProcessSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -85,7 +84,8 @@ export function ProcessSection() {
                     style={{
                       opacity: i === active ? 1 : 0,
                       transform: `translateY(${i === active ? 0 : i < active ? -36 : 36}px)`,
-                      transition: "opacity 550ms cubic-bezier(0.22,1,0.36,1), transform 550ms cubic-bezier(0.22,1,0.36,1)",
+                      transition:
+                        "opacity 550ms cubic-bezier(0.22,1,0.36,1), transform 550ms cubic-bezier(0.22,1,0.36,1)",
                     }}
                     className="absolute inset-0"
                   >

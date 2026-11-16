@@ -53,7 +53,13 @@ function Node({
     <g transform={`translate(${x} ${y})`}>
       <rect width={w} height={70} rx={16} fill="#12151F" stroke="#2A3042" strokeWidth={2} />
       <rect width={w} height={70} rx={16} fill="none" stroke={color} strokeWidth={2.5} opacity={0}>
-        <animate attributeName="opacity" values="0;1;0" dur="4.8s" begin={`${delay}s`} repeatCount="indefinite" />
+        <animate
+          attributeName="opacity"
+          values="0;1;0"
+          dur="4.8s"
+          begin={`${delay}s`}
+          repeatCount="indefinite"
+        />
       </rect>
       <circle cx={34} cy={35} r={16} fill={color} opacity={0.18} />
       <circle cx={34} cy={35} r={7} fill={color} />
@@ -82,23 +88,56 @@ export function N8nVisual() {
       {edges.map((d, i) => (
         <g key={i}>
           <path d={d} fill="none" stroke="#2A3042" strokeWidth={3} />
-          <path d={d} fill="none" stroke={BLUE} strokeWidth={3} strokeDasharray="6 10" opacity={0.7}>
-            <animate attributeName="stroke-dashoffset" from="32" to="0" dur="1.2s" repeatCount="indefinite" />
+          <path
+            d={d}
+            fill="none"
+            stroke={BLUE}
+            strokeWidth={3}
+            strokeDasharray="6 10"
+            opacity={0.7}
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="32"
+              to="0"
+              dur="1.2s"
+              repeatCount="indefinite"
+            />
           </path>
           <circle r={6} fill={CREAM} filter="url(#glow)">
-            <animateMotion dur="2.4s" begin={`${(i % 4) * 0.6}s`} repeatCount="indefinite" path={d} />
+            <animateMotion
+              dur="2.4s"
+              begin={`${(i % 4) * 0.6}s`}
+              repeatCount="indefinite"
+              path={d}
+            />
           </circle>
         </g>
       ))}
       <Node x={10} y={170} w={190} title="Webhook" sub="Nuevo pedido" color={ORANGE} delay={0} />
-      <Node x={240} y={170} w={190} title="Agente IA" sub="Valida y decide" color={BLUE} delay={0.8} />
+      <Node
+        x={240}
+        y={170}
+        w={190}
+        title="Agente IA"
+        sub="Valida y decide"
+        color={BLUE}
+        delay={0.8}
+      />
       <Node x={480} y={50} title="CRM" sub="Cliente creado" color={GREEN} delay={1.6} />
       <Node x={480} y={170} title="Stock" sub="Reserva stock" color={GREEN} delay={2.0} />
       <Node x={480} y={290} title="WhatsApp" sub="Aviso al cliente" color={GREEN} delay={2.4} />
       <g transform="translate(703 175)">
         <circle cx={30} cy={30} r={30} fill={GREEN} opacity={0.15} />
         <circle cx={30} cy={30} r={22} fill={GREEN} filter="url(#glow)" />
-        <path d="M 19 31 L 27 39 L 42 22" fill="none" stroke="#06150F" strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M 19 31 L 27 39 L 42 22"
+          fill="none"
+          stroke="#06150F"
+          strokeWidth={5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </g>
     </Stage>
   );
@@ -127,11 +166,33 @@ export function ModelsVisual() {
               begin={`${k * 2}s`}
               repeatCount="indefinite"
             />
-            <line x1={380} y1={200} x2={m.x} y2={m.y} stroke={BLUE} strokeWidth={4} strokeDasharray="8 10" filter="url(#glow)">
-              <animate attributeName="stroke-dashoffset" from="36" to="0" dur="1s" repeatCount="indefinite" />
+            <line
+              x1={380}
+              y1={200}
+              x2={m.x}
+              y2={m.y}
+              stroke={BLUE}
+              strokeWidth={4}
+              strokeDasharray="8 10"
+              filter="url(#glow)"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="36"
+                to="0"
+                dur="1s"
+                repeatCount="indefinite"
+              />
             </line>
             <circle cx={m.x} cy={m.y} r={60} fill="#12151F" stroke={CREAM} strokeWidth={3} />
-            <text x={m.x} y={m.y - 2} textAnchor="middle" fill="#FFFFFF" fontSize={18} fontWeight={700}>
+            <text
+              x={m.x}
+              y={m.y - 2}
+              textAnchor="middle"
+              fill="#FFFFFF"
+              fontSize={18}
+              fontWeight={700}
+            >
               {m.name}
             </text>
             <text x={m.x} y={m.y + 20} textAnchor="middle" fill={CREAM} fontSize={15}>
@@ -143,7 +204,15 @@ export function ModelsVisual() {
       <circle cx={380} cy={200} r={74} fill={BLUE} opacity={0.12}>
         <animate attributeName="r" values="70;86;70" dur="3s" repeatCount="indefinite" />
       </circle>
-      <circle cx={380} cy={200} r={58} fill="#0F1D3D" stroke={BLUE} strokeWidth={4} filter="url(#glow)" />
+      <circle
+        cx={380}
+        cy={200}
+        r={58}
+        fill="#0F1D3D"
+        stroke={BLUE}
+        strokeWidth={4}
+        filter="url(#glow)"
+      />
       <text x={380} y={196} textAnchor="middle" fill="#FFFFFF" fontSize={20} fontWeight={800}>
         Tu tarea
       </text>
@@ -168,7 +237,16 @@ export function CodeVisual() {
   const CYCLE = 9;
   return (
     <Stage label="Código que construye una interfaz">
-      <rect x={20} y={20} width={380} height={360} rx={16} fill="#0D1018" stroke="#2A3042" strokeWidth={2} />
+      <rect
+        x={20}
+        y={20}
+        width={380}
+        height={360}
+        rx={16}
+        fill="#0D1018"
+        stroke="#2A3042"
+        strokeWidth={2}
+      />
       <circle cx={42} cy={44} r={6} fill="#FF5F57" />
       <circle cx={62} cy={44} r={6} fill="#FEBC2E" />
       <circle cx={82} cy={44} r={6} fill="#28C840" />
@@ -179,10 +257,23 @@ export function CodeVisual() {
         <g key={i}>
           <clipPath id={`cl${i}`}>
             <rect x={36} y={78 + i * 40} width={0} height={34}>
-              <animate attributeName="width" values="0;0;340;340;0" keyTimes={`0;${(i * 0.1 + 0.02).toFixed(2)};${(i * 0.1 + 0.12).toFixed(2)};0.92;1`} dur={`${CYCLE}s`} repeatCount="indefinite" />
+              <animate
+                attributeName="width"
+                values="0;0;340;340;0"
+                keyTimes={`0;${(i * 0.1 + 0.02).toFixed(2)};${(i * 0.1 + 0.12).toFixed(2)};0.92;1`}
+                dur={`${CYCLE}s`}
+                repeatCount="indefinite"
+              />
             </rect>
           </clipPath>
-          <text x={36} y={102 + i * 40} fill={c} fontSize={17} fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace" clipPath={`url(#cl${i})`}>
+          <text
+            x={36}
+            y={102 + i * 40}
+            fill={c}
+            fontSize={17}
+            fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
+            clipPath={`url(#cl${i})`}
+          >
             {t.replace(/ /g, " ")}
           </text>
         </g>
@@ -192,19 +283,57 @@ export function CodeVisual() {
       </rect>
 
       {/* preview */}
-      <rect x={430} y={20} width={310} height={360} rx={16} fill="#12151F" stroke="#2A3042" strokeWidth={2} />
+      <rect
+        x={430}
+        y={20}
+        width={310}
+        height={360}
+        rx={16}
+        fill="#12151F"
+        stroke="#2A3042"
+        strokeWidth={2}
+      />
       <rect x={446} y={36} width={278} height={14} rx={7} fill="#1E2434" />
       {[0, 1, 2].map((k) => (
-        <rect key={k} x={446 + k * 96} y={66} width={86} height={58} rx={12} fill={BLUE} opacity={0}>
-          <animate attributeName="opacity" values="0;0;0.9;0.9;0" keyTimes={`0;${0.42 + k * 0.05};${0.5 + k * 0.05};0.92;1`} dur={`${CYCLE}s`} repeatCount="indefinite" />
+        <rect
+          key={k}
+          x={446 + k * 96}
+          y={66}
+          width={86}
+          height={58}
+          rx={12}
+          fill={BLUE}
+          opacity={0}
+        >
+          <animate
+            attributeName="opacity"
+            values="0;0;0.9;0.9;0"
+            keyTimes={`0;${0.42 + k * 0.05};${0.5 + k * 0.05};0.92;1`}
+            dur={`${CYCLE}s`}
+            repeatCount="indefinite"
+          />
         </rect>
       ))}
       {[0, 1, 2, 3, 4].map((k) => (
         <g key={k} opacity={0}>
-          <animate attributeName="opacity" values="0;0;1;1;0" keyTimes={`0;${0.58 + k * 0.05};${0.66 + k * 0.05};0.92;1`} dur={`${CYCLE}s`} repeatCount="indefinite" />
+          <animate
+            attributeName="opacity"
+            values="0;0;1;1;0"
+            keyTimes={`0;${0.58 + k * 0.05};${0.66 + k * 0.05};0.92;1`}
+            dur={`${CYCLE}s`}
+            repeatCount="indefinite"
+          />
           <rect x={446} y={146 + k * 44} width={278} height={34} rx={9} fill="#1A1F2E" />
           <rect x={458} y={158 + k * 44} width={70} height={10} rx={5} fill={CREAM} opacity={0.8} />
-          <rect x={620} y={158 + k * 44} width={90} height={10} rx={5} fill={k % 2 ? ORANGE : GREEN} opacity={0.9} />
+          <rect
+            x={620}
+            y={158 + k * 44}
+            width={90}
+            height={10}
+            rx={5}
+            fill={k % 2 ? ORANGE : GREEN}
+            opacity={0.9}
+          />
         </g>
       ))}
     </Stage>
@@ -212,348 +341,4 @@ export function CodeVisual() {
 }
 
 /* ───────────── 4 · second brain: live force-directed graph, Obsidian style ───────────── */
-
-interface GNode {
-  id: number;
-  name: string;
-  group: "a" | "b" | "o";
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  ax: number;
-  ay: number;
-  ox: number;
-  oy: number;
-  r: number;
-  deg: number;
-}
-
-function rng(seed: number) {
-  let v = seed;
-  return () => {
-    v = (v * 16807) % 2147483647;
-    return (v - 1) / 2147483646;
-  };
-}
-
-const A_NAMES = [
-  "CLAUDE", "AGENTS", "MOC-INDEX", "09-UNIVERSAL-FIELD", "TEMPLATE-DESIGN-SYSTEM", "08-UI-PATTERNS",
-  "07-MOTION", "06-ACCESSIBILITY", "05-TYPOGRAPHY", "04-COLOR", "03-LAYOUT", "02-COMPONENTS", "01-FOUNDATIONS",
-  "SKILL-premium-ui", "SKILL-motion", "SKILL-apple-design", "REGLAS-agente", "DECISIONES", "PROJECTS",
-  "PROMPTS", "N8N-flujos", "ERP-interno", "CLIENTES", "BRIEFS", "PRESUPUESTOS", "ANTIGRAVITY-protocol",
-  "ORDERALO", "PORTFOLIO", "ENGINEERING", "PERFORMANCE", "SEO-tecnico", "REFERENCES", "TEMPLATES",
-  "EVIDENCE-REGISTER", "REFERENCE-INDEX", "AGENT-ROUTER",
-];
-const B_NAMES = [
-  "MOC-PROJECTS", "MOC-APP-PATTERNS", "GALLERY", "MOC-EVIDENCE", "01-CORE-DESIGN-PRINCIPLES",
-  "02-CREATIVE-DIRECTION", "03-START-HERE", "04-COMPOSITION-AND-LAYOUT", "05-TYPOGRAPHY",
-  "06-COLOR-AND-BRAND", "MOC-ENGINEERING", "BREADPDF", "GESGRAMA", "KOVIA", "OTHER-PROJECTS", "REMOTION-DESIGN",
-];
-const O_NAMES = [
-  "ORDERALO_identidad-definitiva", "SKILL-premium-ui-validation", "DESIGN-SYSTEM-proposal",
-  "KOVIA-JARVIS-REMOTION", "2026-11-09-auditoria", "2026-11-10-decision-stack", "ANTIGRAVITY-POSTMORTEM",
-  "PORTFOLIO_AUDIT-fuentes", "OBSIDIAN-IMPLEMENTATION-REPORT", "2026-11-19-decisiones-diseno",
-  "2026-11-18-integraciones", "ideas-sueltas", "checklist-lanzamiento", "inbox", "2026-11-12-notas",
-  "landing-prueba-verificable", "reuniones", "snapshot",
-];
-
-function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
-  const r = rng(5);
-  const nodes: GNode[] = [];
-  const links: [number, number, number][] = [];
-  const mk = (name: string, group: GNode["group"], ax: number, ay: number, spread: number): GNode => {
-    const ang = r() * Math.PI * 2;
-    const d = Math.sqrt(r()) * spread;
-    const n: GNode = { id: nodes.length, name, group, x: 0, y: 0, vx: 0, vy: 0, ax, ay, ox: Math.cos(ang) * d, oy: Math.sin(ang) * d, r: 4, deg: 0 };
-    nodes.push(n);
-    return n;
-  };
-  const link = (a: GNode, b: GNode, len: number) => {
-    links.push([a.id, b.id, len]);
-    a.deg++;
-    b.deg++;
-  };
-
-  // dense cluster A
-  const A = A_NAMES.slice(0, 22).map((nm) => mk(nm, "a", 0.62, 0.44, 0.26));
-  A.forEach((n, i) => {
-    for (let k = 0; k < 4; k++) {
-      const t = A[Math.floor(r() * A.length)]!;
-      if (t !== n && !links.some((l) => (l[0] === n.id && l[1] === t.id) || (l[0] === t.id && l[1] === n.id))) link(n, t, 125);
-    }
-    if (i > 0) link(n, A[Math.floor(r() * 4)]!, 125);
-  });
-
-  // star cluster B
-  const hub = mk("MOC-DESIGN", "b", 0.84, 0.74, 0.01);
-  B_NAMES.slice(0, 9).forEach((nm) => link(hub, mk(nm, "b", 0.84, 0.74, 0.2), 100));
-  link(hub, A[3]!, 150);
-
-  // orphans
-  O_NAMES.slice(0, 9).forEach((nm, i) => {
-    const o = mk(nm, "o", 0.42 + r() * 0.52, 0.1 + r() * 0.8, 0.02);
-    if (i === 4) link(o, nodes[nodes.length - 2]!, 90);
-  });
-
-  nodes.forEach((n) => {
-    n.r = 3.6 + Math.sqrt(n.deg) * 1.35;
-  });
-  return { nodes, links };
-}
-
-export function BrainVisual() {
-  const wrap = useRef<HTMLDivElement>(null);
-  const cv = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = cv.current;
-    const box = wrap.current;
-    if (!canvas || !box) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const { nodes, links } = buildGraph();
-    const adj: Set<number>[] = nodes.map(() => new Set());
-    links.forEach(([a, b]) => {
-      adj[a]!.add(b);
-      adj[b]!.add(a);
-    });
-    const hubs = [nodes.findIndex((n) => n.name === "MOC-DESIGN"), 0, 3, 13, 9];
-
-    let W = 0;
-    let H = 0;
-    let dpr = 1;
-    let placed = false;
-    const resize = () => {
-      const r = box.getBoundingClientRect();
-      const nw = Math.max(200, r.width);
-      const nh = Math.max(200, r.height);
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      canvas.width = nw * dpr;
-      canvas.height = nh * dpr;
-      canvas.style.width = nw + "px";
-      canvas.style.height = nh + "px";
-      if (!placed) {
-        nodes.forEach((n) => {
-          n.x = n.ax * nw + n.ox * nh;
-          n.y = n.ay * nh + n.oy * nh;
-          n.ax *= nw;
-          n.ay *= nh;
-        });
-        placed = true;
-      } else {
-        nodes.forEach((n) => {
-          n.x *= nw / W;
-          n.y *= nh / H;
-          n.ax *= nw / W;
-          n.ay *= nh / H;
-        });
-      }
-      W = nw;
-      H = nh;
-    };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(box);
-
-    let hover = -1;
-    let drag = -1;
-    const pt = { x: 0, y: 0 };
-    const local = (e: PointerEvent) => {
-      const r = canvas.getBoundingClientRect();
-      pt.x = e.clientX - r.left;
-      pt.y = e.clientY - r.top;
-    };
-    const pick = () => {
-      let best = -1;
-      let bd = 1e9;
-      nodes.forEach((n) => {
-        const d = Math.hypot(n.x - pt.x, n.y - pt.y);
-        if (d < n.r + 10 && d < bd) {
-          bd = d;
-          best = n.id;
-        }
-      });
-      return best;
-    };
-    const onMove = (e: PointerEvent) => {
-      local(e);
-      if (drag < 0) hover = pick();
-    };
-    const onDown = (e: PointerEvent) => {
-      local(e);
-      const p = pick();
-      if (p >= 0) {
-        drag = p;
-        canvas.setPointerCapture(e.pointerId);
-      }
-    };
-    const onUp = () => {
-      drag = -1;
-    };
-    const onLeave = () => {
-      if (drag < 0) hover = -1;
-    };
-    canvas.addEventListener("pointermove", onMove);
-    canvas.addEventListener("pointerdown", onDown);
-    canvas.addEventListener("pointerup", onUp);
-    canvas.addEventListener("pointercancel", onUp);
-    canvas.addEventListener("pointerleave", onLeave);
-
-    let raf = 0;
-    let visible = true;
-    const t0 = performance.now();
-
-    const step = (t: number) => {
-      const n = nodes.length;
-      const S = Math.min(W, H) / 400;
-      const cut = 320 * S;
-      for (let i = 0; i < n; i++) {
-        const a = nodes[i]!;
-        for (let j = i + 1; j < n; j++) {
-          const b = nodes[j]!;
-          let dx = a.x - b.x;
-          let dy = a.y - b.y;
-          let d2 = dx * dx + dy * dy;
-          if (d2 > cut * cut) continue;
-          if (d2 < 1) {
-            dx = Math.random() - 0.5;
-            dy = Math.random() - 0.5;
-            d2 = 1;
-          }
-          const aa = a.group === "a" && b.group === "a";
-          const f = Math.min(aa ? 4 : 1.6, ((aa ? 3400 : 620) * S * S) / d2);
-          const d = Math.sqrt(d2);
-          const fx = (dx / d) * f;
-          const fy = (dy / d) * f;
-          a.vx += fx;
-          a.vy += fy;
-          b.vx -= fx;
-          b.vy -= fy;
-        }
-      }
-      for (const [ia, ib, len] of links) {
-        const a = nodes[ia]!;
-        const b = nodes[ib]!;
-        const dx = b.x - a.x;
-        const dy = b.y - a.y;
-        const d = Math.hypot(dx, dy) || 1;
-        const f = (d - len * S) * 0.022;
-        const fx = (dx / d) * f;
-        const fy = (dy / d) * f;
-        a.vx += fx;
-        a.vy += fy;
-        b.vx -= fx;
-        b.vy -= fy;
-      }
-      for (const nd of nodes) {
-        const k = nd.group === "o" ? 0.0016 : 0.0007;
-        nd.vx += (nd.ax - nd.x) * k + Math.sin(t * 0.0009 + nd.id * 1.7) * 0.02 * S;
-        nd.vy += (nd.ay - nd.y) * k + Math.cos(t * 0.0008 + nd.id * 2.3) * 0.02 * S;
-        nd.vx *= 0.88;
-        nd.vy *= 0.88;
-        const sp = Math.hypot(nd.vx, nd.vy);
-        if (sp > 4) {
-          nd.vx = (nd.vx / sp) * 4;
-          nd.vy = (nd.vy / sp) * 4;
-        }
-        nd.x += nd.vx;
-        nd.y += nd.vy;
-        nd.x = Math.min(W - 40, Math.max(W * 0.36, nd.x));
-        nd.y = Math.min(H - 40, Math.max(Math.min(90, H * 0.2), nd.y));
-      }
-      if (drag >= 0) {
-        const d = nodes[drag]!;
-        d.x = pt.x;
-        d.y = pt.y;
-        d.vx = 0;
-        d.vy = 0;
-      }
-    };
-
-    const draw = (t: number) => {
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = "#0B0C10";
-      ctx.fillRect(0, 0, W, H);
-
-      const focus = hover >= 0 ? hover : hubs[Math.floor(Math.max(0, t - t0) / 3200) % hubs.length]!;
-      const near = adj[focus]!;
-
-      ctx.lineWidth = 1;
-      for (const [ia, ib] of links) {
-        const a = nodes[ia]!;
-        const b = nodes[ib]!;
-        const hot = ia === focus || ib === focus;
-        ctx.strokeStyle = hot ? "rgba(91,151,255,0.95)" : "rgba(160,170,200,0.22)";
-        ctx.lineWidth = hot ? 2 : 1;
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.stroke();
-      }
-
-      ctx.textAlign = "center";
-      ctx.font = "600 15px Inter Variable, Inter, system-ui, sans-serif";
-      const pulse = ((t - t0) % 3200) / 3200;
-      for (const nd of nodes) {
-        const on = nd.id === focus;
-        const isNear = near.has(nd.id);
-        const big = nd.deg >= 6;
-        if (big || on) {
-          const g = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, nd.r * (on ? 7 : 4.5));
-          g.addColorStop(0, on ? "rgba(91,151,255,0.55)" : "rgba(160,175,215,0.22)");
-          g.addColorStop(1, "rgba(91,151,255,0)");
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(nd.x, nd.y, nd.r * (on ? 7 : 4.5), 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.fillStyle = on ? "#5B97FF" : isNear ? "#9CC2FF" : nd.group === "b" ? "#8E96AD" : "#C3C9DA";
-        ctx.beginPath();
-        ctx.arc(nd.x, nd.y, nd.r + (on ? 2 : 0), 0, Math.PI * 2);
-        ctx.fill();
-        if (on) {
-          ctx.strokeStyle = `rgba(91,151,255,${0.7 * (1 - pulse)})`;
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(nd.x, nd.y, nd.r + 4 + pulse * 40, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-        if (big || on || isNear || nd.id === hover) {
-          ctx.fillStyle = on || isNear || nd.id === hover ? "#FFFFFF" : "rgba(214,219,235,0.78)";
-          ctx.fillText(nd.name, nd.x, nd.y + nd.r + 18);
-        }
-      }
-    };
-
-    const loop = (now: number) => {
-      raf = requestAnimationFrame(loop);
-      if (!visible) return;
-      step(now);
-      draw(now);
-    };
-    raf = requestAnimationFrame(loop);
-    const io = new IntersectionObserver((e) => {
-      visible = e[0]?.isIntersecting ?? true;
-    });
-    io.observe(box);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      io.disconnect();
-      ro.disconnect();
-      canvas.removeEventListener("pointermove", onMove);
-      canvas.removeEventListener("pointerdown", onDown);
-      canvas.removeEventListener("pointerup", onUp);
-      canvas.removeEventListener("pointercancel", onUp);
-      canvas.removeEventListener("pointerleave", onLeave);
-    };
-  }, []);
-
-  return (
-    <div ref={wrap} className="relative h-full min-h-[260px] w-full overflow-hidden bg-[#0B0C10]">
-      <canvas ref={cv} className="absolute inset-0 cursor-grab touch-none active:cursor-grabbing" role="img" aria-label="Grafo de notas del cerebro de IA en movimiento: arrastra un nodo" />
-    </div>
-  );
-}
+export { BrainStudio as BrainVisual } from "./BrainStudio";

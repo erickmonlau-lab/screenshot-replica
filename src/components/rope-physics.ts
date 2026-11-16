@@ -87,7 +87,8 @@ export function createLanyard(opts: {
   /** Rope length from anchor to card top, following the chain. */
   const ropeLength = () => {
     let L = 0;
-    for (let i = 0; i < seg; i++) L += Math.hypot(pts[i + 1]!.x - pts[i]!.x, pts[i + 1]!.y - pts[i]!.y);
+    for (let i = 0; i < seg; i++)
+      L += Math.hypot(pts[i + 1]!.x - pts[i]!.x, pts[i + 1]!.y - pts[i]!.y);
     return L;
   };
 
