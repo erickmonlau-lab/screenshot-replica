@@ -142,15 +142,14 @@ function FunnelFlow({ progress, active }: { progress: number; active: number }) 
         ))}
       </svg>
 
-      <ol className="space-y-3 lg:ml-[340px]" style={{ rowGap: GAP }}>
+      <ol className="space-y-2 lg:ml-[340px] lg:space-y-3">
         {steps.map((s, i) => {
           const done = i < active;
           const now = i === active;
           return (
             <li
               key={s.n}
-              style={{ minHeight: ROW_H }}
-              className={`flex items-center gap-4 rounded-2xl border px-5 transition-all duration-300 ${
+              className={`flex items-center gap-4 rounded-2xl border px-5 py-3 transition-all duration-300 lg:min-h-[84px] lg:py-0 ${
                 now
                   ? "border-[#3B82F6] bg-[#151a2c] shadow-[0_0_30px_-6px_#3B82F6]"
                   : "border-white/10 bg-[#101219]"
