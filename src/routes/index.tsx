@@ -518,7 +518,7 @@ function Index() {
               </a>
             </div>
 
-            <dl className="mt-10 grid gap-4 md:grid-cols-3 lg:mt-14">
+            <dl className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3 lg:mt-14">
               {[
                 {
                   icon: Mail,
@@ -564,7 +564,7 @@ function Index() {
               ].map(({ icon: I, k, node }) => (
                 <div
                   key={k}
-                  className="rounded-2xl border-[3px] border-[#09090B] bg-white p-5 text-[#09090B] shadow-[6px_6px_0_#0044FF]"
+                  className="min-w-0 rounded-2xl border-[3px] border-[#09090B] bg-white p-5 text-[#09090B] shadow-[6px_6px_0_#0044FF]"
                 >
                   <dt className="mb-2 flex items-center gap-2 text-[15px] font-bold tracking-[0.06em] text-[#52525B] uppercase">
                     <I size={15} className="text-[#0044FF]" />
