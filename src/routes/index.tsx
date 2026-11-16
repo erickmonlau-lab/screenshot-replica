@@ -327,9 +327,9 @@ function Index() {
 
   function handleJumpToProjects(caseId?: string) {
     if (caseId) setActiveProjectId(caseId);
-    const section = document.getElementById("proyectos");
+    const section = document.getElementById(caseId ? `caso-${caseId}` : "proyectos");
     if (section) {
-      const top = section.getBoundingClientRect().top + window.scrollY - 62;
+      const top = section.getBoundingClientRect().top + window.scrollY - (caseId ? 90 : 62);
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     }
   }
