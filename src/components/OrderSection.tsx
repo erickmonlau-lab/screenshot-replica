@@ -61,7 +61,7 @@ export function OrderSection() {
               transition={{ duration: 0.8, delay: i * 0.12, ease: EASE }}
               className="group overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[6px_6px_0_#09090B] transition-transform duration-200 hover:-translate-x-0.5 hover:-translate-y-1"
             >
-              <div className="bg-[#0044FF] px-5 py-3 text-[13px] font-semibold tracking-[0.14em] text-white uppercase">
+              <div className="bg-[#0044FF] px-5 py-3 text-[15px] font-semibold tracking-[0.08em] text-white uppercase">
                 {s.label}
               </div>
               <div className="p-6 sm:p-7">
@@ -71,7 +71,7 @@ export function OrderSection() {
                 <p className="mt-3 text-base leading-snug font-medium text-[#52525B] sm:text-[17px]">
                   {s.text}
                 </p>
-                <p className="mt-6 flex items-center gap-2 border-t border-[#09090B]/15 pt-4 text-sm font-semibold text-[#0044FF]">
+                <p className="mt-6 flex items-center gap-2 border-t border-[#09090B]/15 pt-4 text-base font-semibold text-[#0044FF]">
                   <Check size={16} strokeWidth={3} />
                   {s.proof}
                 </p>
@@ -82,7 +82,7 @@ export function OrderSection() {
 
         <a
           href="#proyectos"
-          className="t-bg-ink t-on-ink mt-12 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
+          className="t-bg-ink t-on-ink mt-12 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
         >
           <span>Ver los proyectos</span>
           <ArrowUpRight size={16} strokeWidth={2.4} />

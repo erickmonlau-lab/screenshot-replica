@@ -35,7 +35,7 @@ export function ProjectBento({ slides }: { slides: CarouselSlide[] }) {
                 className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
               />
             )}
-            <span className="absolute top-3 left-3 rounded-full bg-[#0044FF] px-3.5 py-1 text-[13px] font-semibold text-white">
+            <span className="absolute top-3 left-3 rounded-full bg-[#0044FF] px-3.5 py-1 text-[15px] font-semibold text-white">
               {p.status}
             </span>
           </div>
@@ -45,7 +45,7 @@ export function ProjectBento({ slides }: { slides: CarouselSlide[] }) {
               <h3 className="font-display text-2xl leading-tight font-bold tracking-[-0.035em] sm:text-[28px]">
                 {p.name}
               </h3>
-              <span className="text-sm font-semibold text-[#71717A] tabular-nums">{p.index}</span>
+              <span className="text-base font-semibold text-[#71717A] tabular-nums">{p.index}</span>
             </div>
             <p className="mt-2 text-base leading-snug font-medium text-[#52525B] sm:text-[17px]">
               {p.outcome ?? p.description}
@@ -54,7 +54,7 @@ export function ProjectBento({ slides }: { slides: CarouselSlide[] }) {
               {p.stack.map((t) => (
                 <li
                   key={t}
-                  className="rounded-full border border-[#09090B]/20 bg-[#F4F4F5] px-3 py-1 text-[13px] font-semibold"
+                  className="rounded-full border border-[#09090B]/20 bg-[#F4F4F5] px-3 py-1 text-[15px] font-semibold"
                 >
                   {t}
                 </li>
@@ -63,7 +63,7 @@ export function ProjectBento({ slides }: { slides: CarouselSlide[] }) {
             <a
               href={p.href}
               {...(p.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-              className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#09090B] px-6 py-3 text-sm font-semibold text-white transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
+              className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#09090B] px-6 py-3 text-base font-semibold text-white transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
             >
               <span>{p.ctaLabel}</span>
               <ArrowUpRight size={16} strokeWidth={2.4} />

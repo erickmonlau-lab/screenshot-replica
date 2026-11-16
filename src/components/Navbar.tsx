@@ -125,10 +125,10 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           className="flex shrink-0 items-center gap-2.5"
           aria-label="Ir al inicio"
         >
-          <span className="font-display flex h-8 w-8 items-center justify-center rounded-full bg-[#0044FF] text-xs font-extrabold text-white">
+          <span className="font-display flex h-8 w-8 items-center justify-center rounded-full bg-[#0044FF] text-sm font-extrabold text-white">
             ER
           </span>
-          <span className="font-display hidden text-xs font-bold tracking-[0.14em] uppercase min-[460px]:inline sm:text-sm">
+          <span className="font-display hidden text-sm font-bold tracking-[0.14em] uppercase min-[460px]:inline sm:text-sm">
             Erick Rodríguez
           </span>
         </button>
@@ -139,7 +139,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               key={item.id}
               type="button"
               onClick={() => scrollToSection(item.id)}
-              className={`rounded-full px-3 py-1.5 text-xs font-bold tracking-[0.06em] whitespace-nowrap uppercase transition-colors sm:text-[13px] ${tab(item.id)}`}
+              className={`rounded-full px-3 py-1.5 text-sm font-bold tracking-[0.06em] whitespace-nowrap uppercase transition-colors sm:text-sm ${tab(item.id)}`}
             >
               {item.label}
             </button>
@@ -158,7 +158,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <a
             href={cvPdf.url}
             download="Erick-Rodriguez-CV.pdf"
-            className={`hidden items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-[0.08em] uppercase transition-colors sm:inline-flex sm:text-[13px] ${ghost}`}
+            className={`hidden items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold tracking-[0.08em] uppercase transition-colors sm:inline-flex sm:text-sm ${ghost}`}
           >
             <Download size={13} strokeWidth={2.3} />
             <span>CV</span>
@@ -166,7 +166,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <button
             type="button"
             onClick={() => scrollToSection("contacto")}
-            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-3 py-2 text-xs sm:px-4 font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0033CC] sm:text-[13px]"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-3 py-2 text-sm sm:px-4 font-bold tracking-[0.08em] text-white uppercase transition-colors hover:bg-[#0033CC] sm:text-sm"
           >
             <span>Hablemos</span>
             <ArrowUpRight size={14} strokeWidth={2.5} />
@@ -191,7 +191,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
                 key={item.id}
                 type="button"
                 onClick={() => scrollToSection(item.id)}
-                className={`rounded-full px-4 py-2.5 text-left text-xs font-bold tracking-[0.14em] uppercase ${tab(item.id)}`}
+                className={`rounded-full px-4 py-2.5 text-left text-sm font-bold tracking-[0.14em] uppercase ${tab(item.id)}`}
               >
                 {item.label}
               </button>
@@ -199,7 +199,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             <a
               href={cvPdf.url}
               download="Erick-Rodriguez-CV.pdf"
-              className={`mt-1 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-xs font-bold tracking-[0.12em] uppercase ${ghost}`}
+              className={`mt-1 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold tracking-[0.12em] uppercase ${ghost}`}
             >
               <Download size={13} />
               <span>Descargar CV (PDF)</span>

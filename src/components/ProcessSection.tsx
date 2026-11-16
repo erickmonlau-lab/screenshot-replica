@@ -72,8 +72,8 @@ export function ProcessSection() {
         <div className="sticky top-0 flex h-screen min-h-[620px] items-center overflow-hidden">
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
-              <p className="t-muted mb-4 font-mono text-[12px] font-bold tracking-[0.18em] uppercase sm:text-[13px]">
-                [ 02 — Proceso ] · Paso {current.n} de 05
+              <p className="mb-4 text-lg font-semibold tracking-[-0.01em] text-[#3B82F6] sm:text-xl">
+                Paso {current.n} de 05
               </p>
               <div className="relative min-h-[17rem] sm:min-h-[21rem]">
                 {steps.map((s, i) => (
@@ -151,7 +151,7 @@ export function ProcessSection() {
                               : "border-zinc-600 bg-[#09090B]"
                           }`}
                         />
-                        <span className="font-mono text-sm font-bold text-[#3B82F6] tabular-nums">
+                        <span className="font-mono text-base font-bold text-[#3B82F6] tabular-nums">
                           {s.n}
                         </span>
                         <span className="min-w-0">
@@ -162,7 +162,7 @@ export function ProcessSection() {
                           >
                             {s.label}
                           </span>
-                          <span className="hidden text-[13px] font-medium text-zinc-500 sm:block sm:text-sm">
+                          <span className="hidden text-[15px] font-medium text-zinc-500 sm:block sm:text-base">
                             {s.done}
                           </span>
                         </span>

@@ -42,7 +42,7 @@ export function SectionHeading({
           initial={reduce ? false : { opacity: 0, y: 10 }}
           animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className={`mb-4 text-xs font-semibold tracking-[0.16em] text-[#0044FF] uppercase sm:text-[13px] ${center ? "text-center" : ""}`}
+          className={`mb-4 text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px] ${center ? "text-center" : ""}`}
         >
           {eyebrow}
         </motion.p>

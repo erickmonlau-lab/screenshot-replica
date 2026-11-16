@@ -6,14 +6,12 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** Bracket label + giant outlined word, e.g. "[ 01 — MÉTODO ]" over "MÉTODO". */
 export function SectionTitle({
-  index,
-  label,
   word,
   center = false,
   className = "",
 }: {
-  index: string;
-  label: string;
+  index?: string;
+  label?: string;
   word: string;
   center?: boolean;
   className?: string;
@@ -25,9 +23,6 @@ export function SectionTitle({
 
   return (
     <div ref={ref} className={`mb-8 sm:mb-10 ${center ? "text-center" : ""} ${className}`}>
-      <p className="t-muted mb-3 font-mono text-[12px] font-bold tracking-[0.18em] uppercase sm:text-[13px]">
-        [ {index} — {label} ]
-      </p>
       <div
         aria-hidden="true"
         className="outline-title font-display text-[clamp(2.6rem,11vw,10.5rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase"

@@ -57,15 +57,15 @@ export function ErpShowcase() {
       {/* Header Bar */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303240] pb-2.5">
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-white">
+          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-sm font-bold uppercase tracking-wider text-white">
             <ShieldCheck size={13} /> Confidencial · Modo oscuro
           </span>
-          <span className="hidden text-xs font-medium text-zinc-300 sm:inline sm:text-[13px]">
+          <span className="hidden text-sm font-medium text-zinc-300 sm:inline sm:text-sm">
             Esquema ERP &amp; App privada sin publicar
           </span>
         </div>
 
-        <div className="flex items-center gap-1 rounded-full border border-[#383B4B] bg-[#21222C] p-0.5 text-xs font-semibold">
+        <div className="flex items-center gap-1 rounded-full border border-[#383B4B] bg-[#21222C] p-0.5 text-sm font-semibold">
           <button
             type="button"
             onClick={() => setView("panels")}
@@ -95,14 +95,14 @@ export function ErpShowcase() {
             const Icon = item.icon;
             return (
               <div key={item.label} className="rounded-lg border border-[#323544] bg-[#21222C] p-2">
-                <div className="flex items-center justify-between text-xs font-medium text-zinc-300">
+                <div className="flex items-center justify-between text-sm font-medium text-zinc-300">
                   <span className="truncate">{item.label}</span>
                   <Icon size={13} className="shrink-0 text-[#60A5FA]" />
                 </div>
                 <div className="mt-0.5 font-display text-sm font-bold tracking-tight text-white">
                   {item.value}
                 </div>
-                <div className="truncate text-[11px] text-zinc-400 sm:text-xs">{item.note}</div>
+                <div className="truncate text-sm text-zinc-400 sm:text-sm">{item.note}</div>
               </div>
             );
           })}
@@ -111,7 +111,7 @@ export function ErpShowcase() {
         {view === "panels" ? (
           /* Stock & Operations Wireframe Table */
           <div className="flex-1 rounded-xl border border-dashed border-[#3B3F52] bg-[#1C1E27] p-2.5">
-            <div className="mb-1.5 flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-zinc-300">
+            <div className="mb-1.5 flex items-center justify-between text-sm font-semibold uppercase tracking-wider text-zinc-300">
               <span>Tabla de stock &amp; almacén</span>
               <span className="inline-flex items-center gap-1 text-[#60A5FA]">
                 <Lock size={12} /> Demo completa presencial
@@ -121,18 +121,18 @@ export function ErpShowcase() {
               {stockRows.map((row) => (
                 <div
                   key={row.sku}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-[#303240] bg-[#111218] px-3 py-1.5 text-xs sm:text-[13px]"
+                  className="flex items-center justify-between gap-2 rounded-lg border border-[#303240] bg-[#111218] px-3 py-1.5 text-sm sm:text-sm"
                 >
                   <div className="flex min-w-0 items-center gap-2.5">
-                    <span className="font-mono text-xs font-bold text-[#60A5FA]">{row.sku}</span>
+                    <span className="font-mono text-sm font-bold text-[#60A5FA]">{row.sku}</span>
                     <span className="truncate font-medium text-white">{row.item}</span>
                   </div>
                   <div className="flex shrink-0 items-center gap-2">
-                    <span className="hidden font-mono text-xs text-zinc-300 sm:inline">
+                    <span className="hidden font-mono text-sm text-zinc-300 sm:inline">
                       {row.stock}
                     </span>
                     <span
-                      className={`rounded px-2.5 py-0.5 text-xs font-bold ${
+                      className={`rounded px-2.5 py-0.5 text-sm font-bold ${
                         row.state === "Alerta n8n"
                           ? "bg-[#0044FF] text-white"
                           : "bg-[#2A2D3B] text-white"
@@ -154,14 +154,14 @@ export function ErpShowcase() {
                 className="flex flex-col justify-between rounded-xl border border-[#323544] bg-[#21222C] p-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-[#60A5FA]">
+                  <span className="font-mono text-sm font-bold text-[#60A5FA]">
                     NODO {node.step}
                   </span>
                   <GitBranch size={14} className="text-zinc-400" />
                 </div>
                 <div className="mt-2">
                   <div className="font-display text-sm font-bold text-white">{node.title}</div>
-                  <p className="mt-1 text-xs leading-relaxed text-zinc-300">{node.detail}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-zinc-300">{node.detail}</p>
                 </div>
               </div>
             ))}
@@ -171,12 +171,12 @@ export function ErpShowcase() {
 
       {/* Direct In-Person Scheduling Footer */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#303240] pt-2.5">
-        <span className="text-xs font-medium text-zinc-300">
+        <span className="text-sm font-medium text-zinc-300">
           Dos proyectos reales en producción para ver cara a cara
         </span>
         <a
           href="#contacto"
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-1.5 text-xs font-bold text-white shadow-xs transition-colors hover:bg-white hover:text-[#09090B]"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-1.5 text-sm font-bold text-white shadow-xs transition-colors hover:bg-white hover:text-[#09090B]"
         >
           <span>Agendar demo presencial</span>
           <ArrowRight size={13} />

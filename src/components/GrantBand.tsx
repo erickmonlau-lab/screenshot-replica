@@ -18,7 +18,7 @@ export function GrantBand() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="lg:col-span-8"
         >
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[13px] font-semibold tracking-[0.1em] text-[#0044FF] uppercase">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-[15px] font-semibold tracking-[0.1em] text-[#0044FF] uppercase">
             <BadgeCheck size={16} strokeWidth={2.6} />
             Subvenciones salariales directas
           </span>

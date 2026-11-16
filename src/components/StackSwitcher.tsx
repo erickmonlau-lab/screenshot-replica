@@ -47,7 +47,7 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
             role="tab"
             aria-selected={g.id === active}
             onClick={() => setActive(g.id)}
-            className={`rounded-full border-2 px-5 py-2.5 text-sm font-semibold transition-all duration-150 active:scale-[0.97] sm:text-base ${
+            className={`rounded-full border-2 px-5 py-2.5 text-base font-semibold transition-all duration-150 active:scale-[0.97] sm:text-base ${
               g.id === active
                 ? "border-white bg-white text-[#09090B]"
                 : "border-white/30 text-white hover:border-white"
@@ -84,7 +84,7 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
                     {Icon ? (
                       <Icon size={26} style={{ color: t.color }} />
                     ) : (
-                      <span className="text-sm font-bold" style={{ color: t.color }}>
+                      <span className="text-base font-bold" style={{ color: t.color }}>
                         {t.label.slice(0, 3)}
                       </span>
                     )}
@@ -92,7 +92,7 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
                   <span className="font-display text-lg font-semibold tracking-[-0.02em] text-white">
                     {t.name}
                   </span>
-                  <span className="text-[13px] font-medium text-zinc-400">{t.category}</span>
+                  <span className="text-[15px] font-medium text-zinc-400">{t.category}</span>
                 </li>
               );
             })}

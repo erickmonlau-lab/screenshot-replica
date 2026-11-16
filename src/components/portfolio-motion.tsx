@@ -283,7 +283,7 @@ export function AgentFlow() {
             </div>
             <div className="min-w-0">
               <div className="text-sm font-bold text-white">{node.title}</div>
-              <div className="text-xs text-zinc-400">{node.sub}</div>
+              <div className="text-sm text-zinc-400">{node.sub}</div>
             </div>
           </motion.div>
         );
@@ -334,7 +334,7 @@ export function ModelCycle() {
     <div ref={ref} className="flex w-full flex-col gap-3.5" data-active={active}>
       {/* Query Prompt Box */}
       <div className="rounded-xl border border-[#262834] bg-[#09090B] px-4 py-3">
-        <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#60A5FA]">
+        <span className="font-mono text-sm font-bold uppercase tracking-wider text-[#60A5FA]">
           Consulta entrante
         </span>
         <p className="mt-1 text-sm font-semibold text-white sm:text-base">{current.query}</p>
@@ -359,7 +359,7 @@ export function ModelCycle() {
                     }
               }
               transition={{ type: "spring", stiffness: 240, damping: 20 }}
-              className={`flex items-center gap-2.5 rounded-xl border px-3.5 py-3 text-left text-xs font-bold transition-colors sm:text-sm ${
+              className={`flex items-center gap-2.5 rounded-xl border px-3.5 py-3 text-left text-sm font-bold transition-colors sm:text-sm ${
                 isSelected
                   ? "border-[#60A5FA] bg-[#0044FF] text-white"
                   : "border-[#262834] bg-[#14161F] text-zinc-300 hover:text-white"
@@ -378,7 +378,7 @@ export function ModelCycle() {
       </div>
 
       {/* Active Routing Explanation */}
-      <div className="flex items-center gap-2 rounded-lg border border-[#262834] bg-[#14161F] px-3.5 py-2.5 text-xs text-zinc-300 sm:text-sm">
+      <div className="flex items-center gap-2 rounded-lg border border-[#262834] bg-[#14161F] px-3.5 py-2.5 text-sm text-zinc-300 sm:text-sm">
         <Sparkles size={15} className="shrink-0 text-[#60A5FA]" />
         <span>{current.reason}</span>
       </div>
@@ -403,15 +403,15 @@ export function CodeFlow() {
 
   return (
     <div ref={ref} className="flex w-full flex-col gap-3">
-      <div className="flex items-center justify-between text-xs sm:text-sm">
-        <span className="font-mono text-xs font-semibold text-zinc-400 sm:text-[13px]">
+      <div className="flex items-center justify-between text-sm sm:text-sm">
+        <span className="font-mono text-sm font-semibold text-zinc-400 sm:text-sm">
           IDE Agéntico · AI Studio &amp; Stitch
         </span>
         <div className="flex items-center gap-1 rounded-full border border-[#262834] bg-[#09090B] p-0.5">
           <button
             type="button"
             onClick={() => setPhase("code")}
-            className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold transition-colors sm:text-[13px] ${
+            className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold transition-colors sm:text-sm ${
               phase === "code" ? "bg-[#0044FF] text-white" : "text-zinc-400 hover:text-white"
             }`}
           >
@@ -420,7 +420,7 @@ export function CodeFlow() {
           <button
             type="button"
             onClick={() => setPhase("ui")}
-            className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold transition-colors sm:text-[13px] ${
+            className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-semibold transition-colors sm:text-sm ${
               phase === "ui" ? "bg-white text-[#09090B]" : "text-zinc-400 hover:text-white"
             }`}
           >
@@ -434,9 +434,9 @@ export function CodeFlow() {
         <motion.div
           animate={reduce ? {} : { scale: phase === "code" ? 1 : 0.98 }}
           transition={{ duration: 0.25 }}
-          className="rounded-xl border border-[#2C2F3D] bg-[#09090B] p-3.5 font-mono text-xs leading-relaxed text-zinc-200 sm:text-[13px]"
+          className="rounded-xl border border-[#2C2F3D] bg-[#09090B] p-3.5 font-mono text-sm leading-relaxed text-zinc-200 sm:text-sm"
         >
-          <div className="mb-1.5 flex items-center gap-1.5 text-xs font-bold text-[#60A5FA]">
+          <div className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-[#60A5FA]">
             <FileCode2 size={13} /> OrderCard.tsx
           </div>
           <div>
@@ -464,10 +464,10 @@ export function CodeFlow() {
           className="flex flex-col justify-between rounded-xl border bg-white p-3.5 text-[#09090B]"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0044FF]">
+            <span className="text-sm font-bold uppercase tracking-wider text-[#0044FF]">
               Stitch Prototype
             </span>
-            <span className="rounded bg-[#09090B] px-2 py-0.5 text-xs font-bold text-white">
+            <span className="rounded bg-[#09090B] px-2 py-0.5 text-sm font-bold text-white">
               PROD
             </span>
           </div>
@@ -475,7 +475,7 @@ export function CodeFlow() {
             <div className="font-display text-sm font-extrabold sm:text-base">
               Panel Operativo ERP
             </div>
-            <div className="text-xs text-[#6E6E73] sm:text-[13px]">
+            <div className="text-sm text-[#6E6E73] sm:text-sm">
               Web + App conectados por API
             </div>
           </div>
@@ -561,8 +561,8 @@ export function MemoryFlow() {
               }`}
             >
               <Icon size={18} className={isCurrent ? "text-[#60A5FA]" : "text-zinc-400"} />
-              <div className="text-xs font-bold text-white sm:text-sm">{node.label}</div>
-              <div className="text-xs text-zinc-400 sm:text-[13px]">{node.note}</div>
+              <div className="text-sm font-bold text-white sm:text-sm">{node.label}</div>
+              <div className="text-sm text-zinc-400 sm:text-sm">{node.note}</div>
             </motion.div>
           );
         })}
