@@ -37,6 +37,7 @@ import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { StackSwitcher } from "@/components/StackSwitcher";
+import { BrainVisual, CodeVisual, ModelsVisual, N8nVisual } from "@/components/LiveVisuals";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
 import { CursorGlow } from "@/components/CursorGlow";
@@ -447,23 +448,20 @@ function Index() {
                     {selectedAiPhase.title}
                   </span>
                 </div>
-                <p className="px-5 pt-4 text-base font-medium text-zinc-400">
-                  {selectedAiPhase.description}
-                </p>
-                <div className="flex flex-1 items-center px-5 pb-5">
+                <div className="min-h-[330px] flex-1 p-3 sm:p-4">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0 }}
                       transition={{ duration: 0.25 }}
-                      className="w-full"
+                      className="h-full"
                     >
-                      {selectedAiPhase.id === "automation" && <AgentFlow />}
-                      {selectedAiPhase.id === "models" && <ModelCycle />}
-                      {selectedAiPhase.id === "code" && <CodeFlow />}
-                      {selectedAiPhase.id === "memory" && <MemoryFlow />}
+                      {selectedAiPhase.id === "automation" && <N8nVisual />}
+                      {selectedAiPhase.id === "models" && <ModelsVisual />}
+                      {selectedAiPhase.id === "code" && <CodeVisual />}
+                      {selectedAiPhase.id === "memory" && <BrainVisual />}
                     </motion.div>
                   </AnimatePresence>
                 </div>
