@@ -36,7 +36,6 @@ import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
-import { StackSwitcher } from "@/components/StackSwitcher";
 import { BrainVisual } from "@/components/LiveVisuals";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
@@ -439,17 +438,36 @@ function Index() {
         </section>
 
         {/* STACK */}
-        <section id="stack" className={`${sectionBase} section-dark`}>
+        <section
+          id="stack"
+          className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16"
+        >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-8">
-              <SectionTitle
-                compact
-                word="Stack"
-                sub="Un stack común."
-                accent="Tu negocio encima."
-              />
-            </Reveal>
-            <StackSwitcher tools={technicalTools} />
+            <h2 className="font-display text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
+              Con qué <span className="text-[#5b97ff]">trabajo.</span>
+            </h2>
+          </div>
+          <div className="mt-9 space-y-4" aria-label="Herramientas que uso">
+            {[technicalTools.slice(0, 8), technicalTools.slice(8)].map((row, r) => (
+              <VelocityMarqueeRow key={r} baseVelocity={r === 0 ? -1.8 : 1.8}>
+                {row.map((t) => (
+                  <span
+                    key={t.name}
+                    className="mr-4 inline-flex items-center gap-3 rounded-full border-[3px] border-[#09090B] bg-white px-6 py-3 text-[#09090B] shadow-[5px_5px_0_#0044FF]"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-3.5 w-3.5 rounded-full border-2 border-[#09090B]"
+                      style={{ backgroundColor: t.color }}
+                    />
+                    <span className="font-display text-[22px] leading-none font-bold tracking-[-0.03em]">
+                      {t.name}
+                    </span>
+                    <span className="text-[15px] font-semibold text-[#52525B]">{t.category}</span>
+                  </span>
+                ))}
+              </VelocityMarqueeRow>
+            ))}
           </div>
         </section>
 
