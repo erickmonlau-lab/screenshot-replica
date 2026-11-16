@@ -39,6 +39,80 @@ const steps = [
   },
 ];
 
+
+const BAND_W = [200, 164, 128, 94, 62, 38];
+const BAND_H = 62;
+
+/** Stepped funnel: each band draws itself as its step is reached, then fills. */
+function Funnel({ progress }: { progress: number }) {
+  const cx = 110;
+  const bands = steps.map((s, i) => {
+    const y = 10 + i * BAND_H;
+    const wt = BAND_W[i]! / 2;
+    const wb = BAND_W[i + 1]! / 2;
+    const d = `M ${cx - wt} ${y} L ${cx + wt} ${y} L ${cx + wb} ${y + BAND_H} L ${cx - wb} ${y + BAND_H} Z`;
+    const draw = Math.min(1, Math.max(0, progress * steps.length - i));
+    return { s, i, y, d, draw };
+  });
+  const spoutY = 10 + steps.length * BAND_H;
+  const dropOn = progress > 0.97;
+
+  return (
+    <div aria-hidden="true" className="hidden items-center justify-center lg:col-span-3 lg:flex">
+      <svg viewBox="0 0 220 420" className="h-auto w-full max-w-[230px] overflow-visible">
+        {bands.map(({ s, i, y, d, draw }) => (
+          <g key={s.n}>
+            <path d={d} fill="#0B0D14" stroke="#262a38" strokeWidth={2} strokeLinejoin="round" />
+            <path
+              d={d}
+              fill={draw >= 1 ? "#0F1D3D" : "none"}
+              stroke="#3B82F6"
+              strokeWidth={3.5}
+              strokeLinejoin="round"
+              pathLength={1}
+              strokeDasharray={1}
+              strokeDashoffset={1 - draw}
+              style={{
+                filter: draw > 0 ? "drop-shadow(0 0 5px #3B82F6) drop-shadow(0 0 14px #0044FF)" : "none",
+                transition: "fill 300ms",
+              }}
+            />
+            <text
+              x={cx}
+              y={y + BAND_H / 2 + 6}
+              textAnchor="middle"
+              fontSize="17"
+              fontWeight="700"
+              fill={draw >= 1 ? "#FFFFFF" : "#52525B"}
+              style={{ transition: "fill 300ms" }}
+            >
+              {s.n}
+            </text>
+          </g>
+        ))}
+        <path
+          d={`M ${cx - 19} ${spoutY} L ${cx - 19} ${spoutY + 46} M ${cx + 19} ${spoutY} L ${cx + 19} ${spoutY + 46}`}
+          stroke={dropOn ? "#3B82F6" : "#262a38"}
+          strokeWidth={3.5}
+          strokeLinecap="round"
+          fill="none"
+          style={{ filter: dropOn ? "drop-shadow(0 0 6px #3B82F6)" : "none", transition: "stroke 300ms" }}
+        />
+        <circle
+          cx={cx}
+          cy={spoutY + 78}
+          r={dropOn ? 13 : 5}
+          fill={dropOn ? "#3B82F6" : "#262a38"}
+          style={{
+            filter: dropOn ? "drop-shadow(0 0 10px #3B82F6) drop-shadow(0 0 22px #0044FF)" : "none",
+            transition: "all 400ms",
+          }}
+        />
+      </svg>
+    </div>
+  );
+}
+
 /** "Del aviso al cobro" equivalent: a pinned section that advances as you scroll. */
 export function ProcessSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,12 +144,12 @@ export function ProcessSection() {
     <section id="proceso" className="section-dark t-line scroll-mt-[62px] border-t">
       <div ref={ref} className="relative h-[340vh]">
         <div className="sticky top-0 flex h-screen min-h-[620px] items-center overflow-hidden">
-          <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-7">
+          <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 pt-16 sm:px-8 lg:grid-cols-12 lg:gap-8">
+            <div className="lg:col-span-5">
               <p className="mb-4 text-lg font-semibold tracking-[-0.01em] text-[#3B82F6] sm:text-xl">
                 Paso {current.n} de 05
               </p>
-              <div className="relative min-h-[17rem] sm:min-h-[21rem]">
+              <div className="relative min-h-[19rem] sm:min-h-[25rem]">
                 {steps.map((s, i) => (
                   <div
                     key={s.n}
@@ -99,27 +173,11 @@ export function ProcessSection() {
                   </div>
                 ))}
               </div>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 320 150"
-                className="mt-6 hidden h-[120px] w-[260px] overflow-visible lg:block"
-              >
-                <path
-                  d="M6 8 H300 L205 142"
-                  fill="none"
-                  stroke="#3B82F6"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  pathLength={1}
-                  strokeDasharray={1}
-                  strokeDashoffset={1 - progress}
-                  style={{ filter: "drop-shadow(0 0 6px #3B82F6) drop-shadow(0 0 16px #0044FF)" }}
-                />
-              </svg>
             </div>
 
-            <div className="lg:col-span-5">
+            <Funnel progress={progress} />
+
+            <div className="lg:col-span-4">
               <div className="relative pl-9">
                 <span aria-hidden="true" className="absolute top-3 bottom-3 left-[13px] w-px bg-white/15" />
                 <span
