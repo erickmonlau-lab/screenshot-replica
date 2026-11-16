@@ -14,7 +14,7 @@ export function HangingCard({
 }) {
   const SEG = 7; // rope links
   const LINK = 22; // rest length of each link
-  const cardH = Math.round(width * 1.5);
+  const cardH = Math.round(width * 1.66);
   const [areaW, setAreaW] = useState(width + 220);
   useEffect(() => {
     setAreaW(Math.min(width + 220, Math.max(width + 20, window.innerWidth - 40)));
@@ -158,11 +158,11 @@ export function HangingCard({
             loading="lazy"
             draggable={false}
             className="w-full object-cover object-top"
-            style={{ height: Math.round(width * 0.86) }}
+            style={{ height: Math.round(width * 0.74) }}
           />
         </div>
         <div className="px-5 pt-4">
-          <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em]">
+          <p className="font-display text-[24px] leading-none font-bold tracking-[-0.04em] whitespace-nowrap">
             Erick Rodríguez
           </p>
           <p className="mt-2 text-base font-semibold text-[#0044FF]">Web · ERPs · IA</p>

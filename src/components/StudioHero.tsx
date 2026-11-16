@@ -101,7 +101,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
 
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[78%]"
+        className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[68%] xl:h-[72%]"
       >
         <motion.img
           src="/erick-portrait-studio.png"

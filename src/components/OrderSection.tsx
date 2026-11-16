@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
-import { SectionHeading } from "./SectionHeading";
 import { SectionTitle } from "./SectionTitle";
 import { useReducedMotion } from "./motion-pref";
 
@@ -38,17 +37,10 @@ export function OrderSection() {
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <SectionTitle
           center
-          index="01"
-          label="El método"
           word="Método"
+          sub="Apaga el caos:"
+          accent="web, procesos e IA en orden."
           className="[--outline-fill:var(--t-hero)]"
-        />
-        <SectionHeading
-          center
-          eyebrow=""
-          title="Apaga el caos:"
-          accentTitle="web, procesos e IA en orden."
-          description="Baja y mira cómo se ordena: una web que te trae clientes, un sistema que los gestiona y flujos que se ocupan del resto."
         />
 
         <div className="mt-12 grid gap-6 text-left md:grid-cols-3 lg:mt-16">

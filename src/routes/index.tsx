@@ -35,10 +35,11 @@ import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
-import { ProjectBento } from "@/components/ProjectBento";
+import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { StackSwitcher } from "@/components/StackSwitcher";
 import { GrantBand } from "@/components/GrantBand";
-import { HangingCard } from "@/components/HangingCard";
+import { AboutSection } from "@/components/AboutSection";
+import { CursorGlow } from "@/components/CursorGlow";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
@@ -337,6 +338,7 @@ function Index() {
   return (
     <div className="t-bg-page t-ink min-h-screen">
       <ScrollProgressRail />
+      <CursorGlow />
       <Navbar mode={heroMode} onChangeMode={setHeroMode} />
 
       <main>
@@ -370,27 +372,19 @@ function Index() {
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="03" label="Proyectos" word="Proyectos" />
-              <SectionHeading
-                eyebrow=""
-                title="Galería de Proyectos."
-                accentTitle="Producción y Directo."
-                description="Webs reales con métricas de tráfico, plataformas SaaS propias y desarrollos empresariales listos para mostrar en persona."
-                rightSlot={
-                  <a
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="t-ink inline-flex items-center gap-1.5 text-[15px] font-bold tracking-wider uppercase hover:text-[#0044FF] sm:text-base"
-                  >
-                    <span>Ver más proyectos</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                }
+              <SectionTitle index="03" label="Proyectos" word="Proyectos"
+                sub="Webs reales y sistemas en producción."
               />
             </Reveal>
             <div className="mt-12 lg:mt-14">
-              <ProjectBento slides={projectCases} />
+              <div className="section-dark overflow-hidden rounded-[32px] border-2 border-[#09090B] px-3 pt-10 pb-10 shadow-[8px_8px_0_#0044FF] sm:px-8 sm:pt-14 sm:pb-14">
+                <ProjectCarousel
+                  slides={projectCases}
+                  activeId={activeProjectId}
+                  onChange={setActiveProjectId}
+                  privateSlide={<ErpShowcase />}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -399,12 +393,8 @@ function Index() {
         <section id="ia" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="04" label="Demos" word="En vivo" />
-              <SectionHeading
-                eyebrow=""
-                title="No te lo cuento."
-                accentTitle="Tócalo tú mismo."
-                description="Así trabajan los flujos de IA y automatización que construyo: elige una fase y míralos funcionar."
+              <SectionTitle index="04" label="Demos" word="En vivo"
+                sub="No te lo cuento." accent="Tócalo tú mismo."
               />
             </Reveal>
 
@@ -490,135 +480,17 @@ function Index() {
         <section id="trayectoria" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="05" label="Sobre mí" word="Sobre mí" />
-              <SectionHeading
-                eyebrow=""
-                title="Problem Solver."
-                accentTitle="Perfil híbrido."
-                description="Código, negocio y ejecución: desarrollo web, automatización IA, marketing digital y gestión con más de 1.000 h reales en Barcelona."
+              <SectionTitle index="05" label="Sobre mí" word="Sobre mí"
+                sub="Problem Solver." accent="Perfil híbrido."
               />
             </Reveal>
 
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
-              {/* Profile Card / Bio Column */}
-              <Reveal className="lg:col-span-5">
-                <HangingCard width={250} className="mx-auto lg:mx-0 lg:-ml-8" />
-
-                <div className="t-line mt-5 border-t" />
-
-                <p className="t-muted mt-5 text-base leading-snug font-medium sm:text-lg">
-                  Combino desarrollo web e IA con base sólida en marketing digital y gestión
-                  administrativa: construyo la solución completa y la llevo a producción sin
-                  depender de intermediarios. Español y catalán nativos, inglés B2.
-                </p>
-
-                <div className="mt-4">
-                  <span className="t-muted block text-[15px] font-bold tracking-[0.08em] uppercase sm:text-[15px]">
-                    Actualmente
-                  </span>
-                  <div className="mt-2.5 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
-                    {[
-                      [Wrench, "Construyendo", "Webs y ERPs a medida"],
-                      [Sparkles, "Explorando", "Agentes IA y n8n"],
-                      [GraduationCap, "Aprendiendo", "Second Brain en Obsidian"],
-                    ].map(([Icon, k, v]) => {
-                      const I = Icon as typeof Wrench;
-                      return (
-                        <div key={k as string} className="flex items-start gap-1.5">
-                          <I size={15} className="mt-0.5 shrink-0 text-[#0044FF]" />
-                          <div>
-                            <span className="t-ink block text-[15px] font-bold sm:text-base">
-                              {k as string}
-                            </span>
-                            <span className="t-muted block text-[15px] leading-snug sm:text-[15px]">
-                              {v as string}
-                            </span>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {coreStackPills.map((tool) => (
-                    <span
-                      key={tool}
-                      className="t-line t-bg-card t-ink rounded-md border px-2.5 py-1 text-[15px] font-semibold sm:text-[15px]"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-
-                <a
-                  href={cvPdf.url}
-                  download="Erick-Rodriguez-CV.pdf"
-                  className="t-ink mt-5 inline-flex items-center gap-2 border-b-2 border-current pb-0.5 text-[15px] font-bold tracking-[0.08em] uppercase hover:text-[#0044FF] sm:text-base"
-                >
-                  <span>Descargar CV completo en PDF</span>
-                  <Download size={14} />
-                </a>
-              </Reveal>
-
-              {/* 2-Column Ledger: 01 Experiencia & 02 Formación */}
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-7">
-                {[
-                  {
-                    label: "01 · Experiencia",
-                    icon: Briefcase,
-                    rows: experience.map((e) => ({
-                      key: `${e.place}-${e.period}`,
-                      title: e.role,
-                      org: e.place,
-                      date: e.period,
-                      body: e.points,
-                    })),
-                  },
-                  {
-                    label: "02 · Formación oficial",
-                    icon: GraduationCap,
-                    rows: education.map((e) => ({
-                      key: e.title,
-                      title: e.title,
-                      org: e.place,
-                      date: e.period,
-                      body: [e.summary],
-                    })),
-                  },
-                ].map((col, ci) => (
-                  <div key={col.label}>
-                    <span className="text-[15px] font-bold tracking-[0.08em] text-[#0044FF] uppercase sm:text-base">
-                      {col.label}
-                    </span>
-                    <div className="mt-2.5 flex flex-col">
-                      {col.rows.map((row, ri) => (
-                        <Reveal
-                          key={row.key}
-                          delay={ci * 0.05 + ri * 0.08}
-                          className="t-line border-t py-3.5"
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <h4 className="t-ink font-display text-base leading-tight font-bold tracking-[-0.02em] sm:text-lg">
-                              {row.title}
-                            </h4>
-                            <span className="t-muted shrink-0 text-[15px] font-bold tracking-wider uppercase sm:text-[15px]">
-                              {row.date}
-                            </span>
-                          </div>
-                          <p className="t-accent mt-0.5 text-[15px] font-bold sm:text-base">{row.org}</p>
-                          <ul className="t-muted mt-1.5 list-disc space-y-1 pl-4 text-base leading-relaxed sm:text-[15px]">
-                            {row.body.map((b) => (
-                              <li key={b}>{b}</li>
-                            ))}
-                          </ul>
-                        </Reveal>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <AboutSection
+              experience={experience}
+              education={education}
+              pills={coreStackPills}
+              cvUrl={cvPdf.url}
+            />
           </div>
         </section>
 
@@ -631,7 +503,7 @@ function Index() {
               Disponible en Barcelona
             </p>
             <BigHeading
-              className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em]"
+              className="t-ink font-display text-[clamp(3.2rem,12.5vw,11.5rem)] leading-[0.92] font-bold tracking-[-0.055em] [word-spacing:0.12em]"
               lines={[
                 { text: "Hablemos" },
                 { text: "de tu proyecto.", accent: true },

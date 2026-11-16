@@ -60,7 +60,7 @@ export function ProjectCarousel({
       onBlur={() => setPaused(false)}
     >
       <div
-        className="relative mx-auto h-[210px] w-full sm:h-[290px] lg:h-[clamp(220px,34vh,400px)]"
+        className="relative mx-auto h-[210px] w-full sm:h-[290px] lg:h-[clamp(300px,46vh,470px)]"
         style={{ perspective: 1300 }}
         role="group"
         aria-roledescription="carrusel"
@@ -74,10 +74,10 @@ export function ProjectCarousel({
           return (
             <motion.div
               key={slide.id}
-              className="absolute top-0 left-1/2 h-full w-[min(540px,74vw)] -ml-[min(270px,37vw)]"
+              className="absolute top-0 left-1/2 h-full w-[min(680px,74vw)] -ml-[min(340px,37vw)]"
               initial={false}
               animate={{
-                x: `${off * 66}%`,
+                x: `${off * 58}%`,
                 rotateY: Math.max(-48, Math.min(48, off * -34)),
                 scale: 1 - abs * 0.14,
                 filter: `brightness(${abs === 0 ? 1 : 0.55})`,

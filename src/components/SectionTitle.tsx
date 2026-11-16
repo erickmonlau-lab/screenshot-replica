@@ -7,9 +7,13 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /** Bracket label + giant outlined word, e.g. "[ 01 — MÉTODO ]" over "MÉTODO". */
 export function SectionTitle({
   word,
+  sub,
+  accent,
   center = false,
   className = "",
 }: {
+  sub?: string;
+  accent?: string;
   index?: string;
   label?: string;
   word: string;
@@ -28,7 +32,7 @@ export function SectionTitle({
         className="outline-title font-display text-[clamp(2.6rem,11vw,10.5rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase"
       >
         {words.map((w, i) => (
-          <span key={`${w}-${i}`} className="inline-block overflow-hidden pb-[0.08em] align-top">
+          <span key={`${w}-${i}`} className="inline-block overflow-hidden pt-[0.24em] pb-[0.06em] align-top">
             <motion.span
               className="inline-block"
               initial={reduce ? false : { y: "110%" }}
@@ -41,6 +45,16 @@ export function SectionTitle({
           </span>
         ))}
       </div>
+      {sub ? (
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+          className={`t-ink font-display mt-5 max-w-[26ch] text-[clamp(1.7rem,3.4vw,3rem)] leading-[1.05] font-bold tracking-[-0.04em] sm:max-w-[38ch] ${center ? "mx-auto" : ""}`}
+        >
+          {sub} {accent ? <span className="text-[#0044FF]">{accent}</span> : null}
+        </motion.p>
+      ) : null}
     </div>
   );
 }
