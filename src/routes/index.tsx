@@ -372,12 +372,12 @@ function Index() {
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="03" label="Proyectos" word="Proyectos"
+              <SectionTitle compact word="Proyectos"
                 sub="Webs reales y sistemas en producción."
               />
             </Reveal>
-            <div className="mt-12 lg:mt-14">
-              <div className="section-dark overflow-hidden rounded-[32px] border-2 border-[#09090B] px-3 pt-10 pb-10 shadow-[8px_8px_0_#0044FF] sm:px-8 sm:pt-14 sm:pb-14">
+            <div className="mt-2">
+              <div className="section-dark overflow-hidden rounded-[32px] border-2 border-[#09090B] px-3 pt-8 pb-7 shadow-[8px_8px_0_#0044FF] sm:px-8 sm:pt-9 sm:pb-8">
                 <ProjectCarousel
                   slides={projectCases}
                   activeId={activeProjectId}
@@ -392,66 +392,73 @@ function Index() {
         {/* STACK + IA EN ACCIÓN */}
         <section id="ia" className={`${sectionBase} section-dark`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="04" label="Demos" word="En vivo"
-                sub="No te lo cuento." accent="Tócalo tú mismo."
+            <Reveal className="mb-6">
+              <SectionTitle
+                compact
+                word="En vivo"
+                sub="No te lo cuento."
+                accent="Tócalo tú mismo."
               />
             </Reveal>
 
-            {/* Live Interactive Systems Demonstration */}
-            <div className="mt-8 border-t border-current/10 pt-7">
-              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <span className="text-[15px] font-bold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
-                    Demostración interactiva en directo
-                  </span>
-                  <h4 className="t-ink font-display text-lg font-extrabold tracking-tight sm:text-xl">
-                    Sistemas IA y Automatización Operativa
-                  </h4>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {aiPhases.map((phase) => {
-                    const active = phase.id === selectedAiPhase.id;
-                    return (
+            <div className="grid items-stretch gap-6 lg:grid-cols-12 lg:gap-8">
+              <ol className="flex flex-col gap-3 lg:col-span-5" aria-label="Demos de IA">
+                {aiPhases.map((phase) => {
+                  const on = phase.id === selectedAiPhase.id;
+                  return (
+                    <li key={phase.id} className="flex-1">
                       <button
-                        key={phase.id}
                         type="button"
                         onClick={() => setActiveAiPhase(phase.id)}
-                        className={`rounded-full px-3.5 py-1.5 text-[15px] font-bold tracking-wider uppercase transition-colors sm:text-[15px] ${
-                          active
-                            ? "bg-[#0044FF] text-white"
-                            : "t-line t-bg-card t-ink border hover:border-[#0044FF]"
+                        aria-pressed={on}
+                        className={`flex h-full w-full items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 ${
+                          on
+                            ? "border-[#3B82F6] bg-[#0F1D3D] shadow-[0_0_30px_-8px_#3B82F6]"
+                            : "border-white/15 bg-[#101219] hover:border-white/40"
                         }`}
                       >
-                        {phase.num} · {phase.kicker}
+                        <span
+                          className={`font-display text-4xl leading-none font-bold tracking-[-0.04em] ${
+                            on ? "text-white" : "text-zinc-600"
+                          }`}
+                        >
+                          {phase.num}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="font-display block text-xl leading-tight font-bold tracking-[-0.02em] text-white sm:text-2xl">
+                            {phase.kicker}
+                          </span>
+                          <span className="mt-1 block text-base leading-snug font-medium text-zinc-400">
+                            {phase.tags.join(" · ")}
+                          </span>
+                        </span>
                       </button>
-                    );
-                  })}
-                </div>
-              </div>
+                    </li>
+                  );
+                })}
+              </ol>
 
-              <div className="macos-window-frame overflow-hidden rounded-[22px] p-4 text-white sm:p-5">
-                <div className="mb-3 flex items-center justify-between border-b border-[#303240] pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-[#10B981] animate-pulse" />
-                    <span className="text-[15px] font-bold tracking-wider text-[#60A5FA] uppercase sm:text-base">
-                      FASE {selectedAiPhase.num} / 04 · {selectedAiPhase.title}
-                    </span>
-                  </div>
-                  <span className="hidden text-[15px] text-zinc-400 sm:inline sm:text-[15px]">
-                    Simulación activa en tiempo real
+              <div className="macos-window-frame flex flex-col overflow-hidden rounded-[24px] text-white lg:col-span-7">
+                <div className="flex items-center gap-2 border-b border-[#303240] px-5 py-3.5">
+                  <span className="h-3 w-3 rounded-full bg-[#FF5F57]" />
+                  <span className="h-3 w-3 rounded-full bg-[#FEBC2E]" />
+                  <span className="h-3 w-3 rounded-full bg-[#28C840]" />
+                  <span className="ml-3 text-lg font-semibold text-zinc-200">
+                    {selectedAiPhase.title}
                   </span>
                 </div>
-
-                <div className="min-h-[190px]">
+                <p className="px-5 pt-4 text-base font-medium text-zinc-400">
+                  {selectedAiPhase.description}
+                </p>
+                <div className="flex flex-1 items-center px-5 pb-5">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={selectedAiPhase.id}
-                      initial={{ opacity: 0, y: 6 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex min-h-[180px] items-center"
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25 }}
+                      className="w-full"
                     >
                       {selectedAiPhase.id === "automation" && <AgentFlow />}
                       {selectedAiPhase.id === "models" && <ModelCycle />}
@@ -462,17 +469,16 @@ function Index() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Stack con conmutador */}
-            <div className="t-line mt-14 border-t pt-12">
-              <p className="mb-3 text-[15px] font-semibold tracking-[0.08em] text-[#0044FF] uppercase sm:text-[15px]">
-                Stack
-              </p>
-              <h3 className="t-ink font-display mb-8 max-w-[18ch] text-[clamp(2rem,5vw,4rem)] leading-[1] font-bold tracking-[-0.045em]">
-                Un stack común. Tu negocio encima.
-              </h3>
-              <StackSwitcher tools={technicalTools} />
-            </div>
+        {/* STACK */}
+        <section id="stack" className={`${sectionBase} section-dark`}>
+          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
+            <Reveal className="mb-8">
+              <SectionTitle compact word="Stack" sub="Un stack común." accent="Tu negocio encima." />
+            </Reveal>
+            <StackSwitcher tools={technicalTools} />
           </div>
         </section>
 
@@ -480,7 +486,7 @@ function Index() {
         <section id="trayectoria" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle index="05" label="Sobre mí" word="Sobre mí"
+              <SectionTitle compact word="Sobre mí"
                 sub="Problem Solver." accent="Perfil híbrido."
               />
             </Reveal>
@@ -488,7 +494,6 @@ function Index() {
             <AboutSection
               experience={experience}
               education={education}
-              pills={coreStackPills}
               cvUrl={cvPdf.url}
             />
           </div>

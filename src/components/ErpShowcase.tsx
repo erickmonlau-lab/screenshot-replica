@@ -58,10 +58,10 @@ export function ErpShowcase() {
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#303240] pb-2.5">
         <div className="flex items-center gap-2">
           <span className="inline-flex items-center gap-1.5 rounded-md bg-[#0044FF] px-2.5 py-1 text-sm font-bold uppercase tracking-wider text-white">
-            <ShieldCheck size={13} /> Confidencial · Modo oscuro
+            <ShieldCheck size={13} /> Vista previa
           </span>
           <span className="hidden text-sm font-medium text-zinc-300 sm:inline sm:text-sm">
-            Esquema ERP &amp; App privada sin publicar
+            ERP interno · datos de ejemplo
           </span>
         </div>
 
@@ -114,7 +114,7 @@ export function ErpShowcase() {
             <div className="mb-1.5 flex items-center justify-between text-sm font-semibold uppercase tracking-wider text-zinc-300">
               <span>Tabla de stock &amp; almacén</span>
               <span className="inline-flex items-center gap-1 text-[#60A5FA]">
-                <Lock size={12} /> Demo completa presencial
+                <Lock size={12} /> Datos de ejemplo
               </span>
             </div>
             <div className="space-y-1.5">
@@ -169,18 +169,10 @@ export function ErpShowcase() {
         )}
       </div>
 
-      {/* Direct In-Person Scheduling Footer */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#303240] pt-2.5">
+      <div className="border-t border-[#303240] pt-2.5">
         <span className="text-sm font-medium text-zinc-300">
-          Dos proyectos reales en producción para ver cara a cara
+          Maqueta del ERP: la demo completa se enseña en persona
         </span>
-        <a
-          href="#contacto"
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#0044FF] px-4 py-1.5 text-sm font-bold text-white shadow-xs transition-colors hover:bg-white hover:text-[#09090B]"
-        >
-          <span>Agendar demo presencial</span>
-          <ArrowRight size={13} />
-        </a>
       </div>
     </div>
   );

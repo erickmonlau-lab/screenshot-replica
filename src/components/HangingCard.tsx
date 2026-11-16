@@ -7,19 +7,23 @@ import { createLanyard } from "./rope-physics";
  */
 export function HangingCard({
   width = 250,
+  seg = 7,
+  bottom = 100,
   className = "",
 }: {
   width?: number;
+  seg?: number;
+  bottom?: number;
   className?: string;
 }) {
-  const SEG = 7; // rope links
+  const SEG = seg; // rope links
   const LINK = 22; // rest length of each link
   const cardH = Math.round(width * 1.66);
   const [areaW, setAreaW] = useState(width + 220);
   useEffect(() => {
     setAreaW(Math.min(width + 220, Math.max(width + 20, window.innerWidth - 40)));
   }, [width]);
-  const areaH = SEG * LINK + cardH + 100;
+  const areaH = SEG * LINK + cardH + bottom;
 
   const boxRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);

@@ -60,7 +60,7 @@ export function ProjectCarousel({
       onBlur={() => setPaused(false)}
     >
       <div
-        className="relative mx-auto h-[210px] w-full sm:h-[290px] lg:h-[clamp(300px,46vh,470px)]"
+        className="relative mx-auto h-[210px] w-full sm:h-[290px] lg:h-[clamp(240px,36vh,340px)]"
         style={{ perspective: 1300 }}
         role="group"
         aria-roledescription="carrusel"
@@ -136,62 +136,39 @@ export function ProjectCarousel({
         </button>
       </div>
 
-      <div className="mt-10 lg:mt-14">
+      <div className="mt-8">
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id}
-            initial={reduce ? false : { opacity: 0, y: 18 }}
+            initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -12 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="t-line grid gap-8 border-t-2 border-current pt-8 lg:grid-cols-12 lg:gap-12 lg:pt-10"
+            exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="t-line grid items-end gap-5 border-t-2 border-current pt-5 lg:grid-cols-12 lg:gap-10"
           >
             <div className="lg:col-span-7">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="t-muted text-sm font-semibold tracking-[0.16em] tabular-nums">
+                <span className="t-muted text-base font-semibold tabular-nums">
                   {current.index} / {String(n).padStart(2, "0")}
                 </span>
-                <span className="rounded-full bg-[#0044FF] px-3.5 py-1 text-[13px] font-semibold text-white">
+                <span className="rounded-full bg-[#0044FF] px-3.5 py-1 text-[15px] font-semibold text-white">
                   {current.status}
                 </span>
               </div>
-              <h3 className="t-ink font-display mt-4 text-[clamp(2.2rem,5.4vw,4.6rem)] leading-[0.98] font-bold tracking-[-0.045em]">
+              <h3 className="t-ink font-display mt-2 text-[clamp(1.9rem,3.6vw,3.1rem)] leading-[1] font-bold tracking-[-0.045em]">
                 {current.name}
               </h3>
-              <p className="t-ink mt-5 max-w-[30ch] text-xl leading-snug font-semibold tracking-[-0.02em] sm:text-2xl lg:text-[28px]">
+              <p className="t-muted mt-2 max-w-[48ch] text-lg leading-snug font-medium">
                 {current.outcome ?? current.description}
               </p>
             </div>
 
-            <div className="lg:col-span-5">
-              <p className="t-muted text-base leading-snug font-medium sm:text-lg">
-                {current.description}
-              </p>
-              <dl className="mt-6 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-                {current.type ? (
-                  <div>
-                    <dt className="t-muted text-xs font-semibold tracking-[0.14em] uppercase">
-                      Tipo
-                    </dt>
-                    <dd className="t-ink font-display mt-1 text-lg font-semibold tracking-[-0.02em]">
-                      {current.type}
-                    </dd>
-                  </div>
-                ) : null}
-                <div>
-                  <dt className="t-muted text-xs font-semibold tracking-[0.14em] uppercase">
-                    Estado
-                  </dt>
-                  <dd className="t-ink font-display mt-1 text-lg font-semibold tracking-[-0.02em]">
-                    {current.status}
-                  </dd>
-                </div>
-              </dl>
-              <ul className="mt-5 flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-3 lg:col-span-5 lg:justify-end">
+              <ul className="flex flex-wrap gap-2 lg:justify-end">
                 {current.stack.map((tag) => (
                   <li
                     key={tag}
-                    className="t-line t-bg-card t-ink rounded-full border px-3.5 py-1.5 text-[13px] font-semibold"
+                    className="t-line t-bg-card t-ink rounded-full border px-3.5 py-1.5 text-[15px] font-semibold"
                   >
                     {tag}
                   </li>
@@ -200,7 +177,7 @@ export function ProjectCarousel({
               <a
                 href={current.href}
                 {...(current.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-                className="t-bg-ink t-on-ink mt-7 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
+                className="t-bg-ink t-on-ink inline-flex items-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97]"
               >
                 <span>{current.ctaLabel}</span>
                 <ArrowUpRight size={16} strokeWidth={2.4} />
@@ -209,7 +186,7 @@ export function ProjectCarousel({
           </motion.div>
         </AnimatePresence>
 
-        <div className="mt-8 flex items-center gap-1.5" aria-hidden="true">
+        <div className="mt-5 flex items-center gap-1.5" aria-hidden="true">
           {slides.map((s) => (
             <span
               key={s.id}

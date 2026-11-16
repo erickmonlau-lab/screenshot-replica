@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export interface StackTool {
@@ -50,6 +50,30 @@ const fan = [
 /** "Un núcleo común. Tu sector encima." equivalent: tabs that swap the tool wall. */
 export function StackSwitcher({ tools }: { tools: StackTool[] }) {
   const [active, setActive] = useState(groups[0]!.id);
+  const rowRef = useRef<HTMLDivElement>(null);
+  const flips = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+    const update = () => {
+      const row = rowRef.current;
+      if (!row) return;
+      const r = row.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (window.innerHeight * 0.92 - r.top) / (window.innerHeight * 0.55)));
+      flips.current.forEach((el, i) => {
+        if (!el) return;
+        const t = Math.min(1, Math.max(0, p * 1.6 - i * 0.2));
+        el.style.transform = `rotateY(${(1 - ease(t)) * 180}deg)`;
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
   const group = groups.find((g) => g.id === active) ?? groups[0]!;
   const shown = group.names
     .map((n) => tools.find((t) => t.name === n))
@@ -58,36 +82,60 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
   return (
     <div>
       <div
+        ref={rowRef}
         role="tablist"
         aria-label="Grupos de herramientas"
-        className="grid grid-cols-2 gap-4 [perspective:1200px] md:grid-cols-4 md:gap-6"
+        className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6"
       >
         {groups.map((g, i) => {
           const on = g.id === active;
           return (
-            <button
+            <div
               key={g.id}
-              role="tab"
-              aria-selected={on}
-              onClick={() => setActive(g.id)}
-              className={`group relative flex h-[220px] flex-col justify-between overflow-hidden rounded-[18px] border-2 bg-[#1B1D24] p-5 text-left transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-4 hover:rotate-0 md:h-[380px] md:p-6 ${fan[i]} ${
-                on
-                  ? "-translate-y-3 border-[#F4EAD0] md:rotate-0"
-                  : "border-[#3A3D48] hover:border-[#F4EAD0]"
-              }`}
+              className={`transition-transform duration-500 ${fan[i]} ${on ? "md:!rotate-0 md:!-translate-y-3" : ""} md:hover:!rotate-0 md:hover:!-translate-y-4`}
+              style={{ perspective: 1200 }}
             >
-              <span className="text-base font-semibold text-zinc-400">0{i + 1}</span>
-              <span
-                className={`font-display block origin-left text-[clamp(3.4rem,7.6vw,7.4rem)] leading-[0.9] font-extrabold tracking-[-0.02em] [transform:scaleX(0.76)] transition-[color,text-shadow] duration-500 ${
-                  on
-                    ? "text-[#F4EAD0] [text-shadow:0_0_26px_rgba(244,234,208,0.75),0_0_60px_rgba(244,234,208,0.35)]"
-                    : "text-[#9A978A] [text-shadow:0_0_12px_rgba(244,234,208,0.12)] group-hover:text-[#F4EAD0] group-hover:[text-shadow:0_0_22px_rgba(244,234,208,0.6)]"
-                }`}
+              <div
+                ref={(el) => {
+                  flips.current[i] = el;
+                }}
+                className="relative h-[220px] md:h-[330px]"
+                style={{ transformStyle: "preserve-3d", transform: "rotateY(180deg)" }}
               >
-                {g.word}
-              </span>
-              <span className="text-lg font-semibold text-zinc-300">{g.sub}</span>
-            </button>
+                <button
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => setActive(g.id)}
+                  className={`group absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[18px] border-2 bg-[#1B1D24] p-5 text-left transition-colors duration-500 md:p-6 [backface-visibility:hidden] ${
+                    on ? "border-[#F4EAD0]" : "border-[#3A3D48] hover:border-[#F4EAD0]"
+                  }`}
+                >
+                  <span className="text-base font-semibold text-zinc-400">0{i + 1}</span>
+                  <span
+                    className={`font-display block origin-left text-[clamp(3.4rem,7.6vw,7.4rem)] leading-[0.9] font-extrabold tracking-[-0.02em] [transform:scaleX(0.76)] transition-[color,text-shadow] duration-500 ${
+                      on
+                        ? "text-[#F4EAD0] [text-shadow:0_0_26px_rgba(244,234,208,0.75),0_0_60px_rgba(244,234,208,0.35)]"
+                        : "text-[#9A978A] [text-shadow:0_0_12px_rgba(244,234,208,0.12)] group-hover:text-[#F4EAD0] group-hover:[text-shadow:0_0_22px_rgba(244,234,208,0.6)]"
+                    }`}
+                  >
+                    {g.word}
+                  </span>
+                  <span className="text-lg font-semibold text-zinc-300">{g.sub}</span>
+                </button>
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-[18px] border-2 border-[#F4EAD0] bg-[#0B0D14] [backface-visibility:hidden] [transform:rotateY(180deg)]"
+                  style={{
+                    backgroundImage:
+                      "repeating-radial-gradient(circle at 50% 50%, #0044FF 0 3px, transparent 3px 16px)",
+                  }}
+                >
+                  <span className="font-display flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#F4EAD0] bg-[#0B0D14] text-2xl font-bold text-[#F4EAD0]">
+                    ER
+                  </span>
+                </div>
+              </div>
+            </div>
           );
         })}
       </div>
@@ -100,10 +148,10 @@ export function StackSwitcher({ tools }: { tools: StackTool[] }) {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="mt-10 max-w-[40ch] text-xl leading-snug font-semibold tracking-[-0.02em] text-white sm:text-2xl">
+          <p className="mt-12 max-w-[40ch] text-xl leading-snug font-semibold tracking-[-0.02em] text-white sm:text-2xl">
             {group.line}
           </p>
-          <ul className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
             {shown.map((t) => {
               const Icon = t.icon;
               return (
