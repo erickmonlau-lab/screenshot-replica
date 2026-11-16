@@ -19,7 +19,7 @@ export function HangingCard({
   useEffect(() => {
     setAreaW(Math.min(width + 220, Math.max(width + 20, window.innerWidth - 40)));
   }, [width]);
-  const areaH = SEG * LINK + cardH + 150;
+  const areaH = SEG * LINK + cardH + 100;
 
   const boxRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
