@@ -118,22 +118,35 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       {/* Sello de texto giratorio */}
       <motion.div
         style={{ x: ticketX, y: ticketY }}
-        className="pointer-events-none absolute top-[28%] right-2 z-20 sm:top-[30%] sm:right-auto sm:left-[calc(50%+190px)]"
+        className="pointer-events-none absolute top-[47%] right-2 z-20 sm:top-[30%] sm:right-auto sm:left-[calc(50%+190px)]"
       >
         <motion.div
           initial={reduce ? false : { scale: 0, rotate: -40 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ type: "spring", stiffness: 140, damping: 13, delay: 0.9 }}
         >
-          <RotatingSeal
-            text="MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · "
-            size={190}
-            className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[6px_6px_0_#09090B]"
-          >
-            <span className="font-display text-[34px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
-              ER
-            </span>
-          </RotatingSeal>
+          <div className="sm:hidden">
+            <RotatingSeal
+              text="MARKETING · GESTIÓN · IA · "
+              size={118}
+              className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[4px_4px_0_#09090B]"
+            >
+              <span className="font-display text-[26px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
+                ER
+              </span>
+            </RotatingSeal>
+          </div>
+          <div className="hidden sm:block">
+            <RotatingSeal
+              text="MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · "
+              size={190}
+              className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[6px_6px_0_#09090B]"
+            >
+              <span className="font-display text-[34px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
+                ER
+              </span>
+            </RotatingSeal>
+          </div>
         </motion.div>
       </motion.div>
 
