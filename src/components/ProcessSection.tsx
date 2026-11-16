@@ -4,30 +4,35 @@ import { Check } from "lucide-react";
 const steps = [
   {
     n: "01",
+    label: "Escuchar",
     title: "Escucho qué necesita tu negocio.",
     text: "Objetivos, clientes y el proceso que más tiempo te quita.",
     done: "Brief claro",
   },
   {
     n: "02",
+    label: "Diseñar",
     title: "Diseño la solución completa.",
     text: "Estructura de la web, flujos y datos, antes de escribir una línea de código.",
     done: "Diseño aprobado",
   },
   {
     n: "03",
+    label: "Construir",
     title: "Construyo con código tipado.",
     text: "React y TypeScript, APIs, base de datos e integraciones con tus herramientas.",
     done: "Producto construido",
   },
   {
     n: "04",
+    label: "Publicar",
     title: "Lo llevo a producción.",
     text: "Despliegue, rendimiento y Core Web Vitals cuidados.",
     done: "En producción",
   },
   {
     n: "05",
+    label: "Crecer",
     title: "Lo hago crecer y automatizo.",
     text: "SEO técnico para que te encuentren y n8n con IA para que se gestione solo.",
     done: "Posicionando y automatizado",
@@ -38,6 +43,7 @@ const steps = [
 export function ProcessSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const update = () => {
@@ -46,6 +52,7 @@ export function ProcessSection() {
       const r = el.getBoundingClientRect();
       const total = r.height - window.innerHeight;
       const v = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+      setProgress(v);
       setActive(Math.min(steps.length - 1, Math.floor(v * steps.length * 0.999)));
     };
     update();
@@ -92,41 +99,76 @@ export function ProcessSection() {
                   </div>
                 ))}
               </div>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 320 150"
+                className="mt-6 hidden h-[120px] w-[260px] overflow-visible lg:block"
+              >
+                <path
+                  d="M6 8 H300 L205 142"
+                  fill="none"
+                  stroke="#3B82F6"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  pathLength={1}
+                  strokeDasharray={1}
+                  strokeDashoffset={1 - progress}
+                  style={{ filter: "drop-shadow(0 0 6px #3B82F6) drop-shadow(0 0 16px #0044FF)" }}
+                />
+              </svg>
             </div>
 
             <div className="lg:col-span-5">
-              <div className="rounded-[22px] border-2 border-white bg-[#111114] p-5 shadow-[6px_6px_0_#0044FF] sm:p-6">
-                <div className="mb-4 flex items-center gap-2 border-b border-white/15 pb-3">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
-                  <span className="text-[13px] font-semibold tracking-[0.12em] text-zinc-300 uppercase">
-                    Estado del proyecto
-                  </span>
-                </div>
-                <ol className="space-y-2.5">
+              <div className="relative pl-9">
+                <span aria-hidden="true" className="absolute top-3 bottom-3 left-[13px] w-px bg-white/15" />
+                <span
+                  aria-hidden="true"
+                  className="absolute top-3 left-[12px] w-[3px] rounded-full bg-[#3B82F6]"
+                  style={{
+                    height: `calc((100% - 24px) * ${progress})`,
+                    boxShadow: "0 0 12px #3B82F6, 0 0 26px #0044FF",
+                  }}
+                />
+                <ol className="space-y-2 sm:space-y-3">
                   {steps.map((s, i) => {
                     const done = i < active;
                     const now = i === active;
                     return (
                       <li
                         key={s.n}
-                        className={`flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors duration-300 ${
-                          now ? "bg-[#0044FF] text-white" : "text-zinc-400"
+                        className={`relative flex items-center gap-4 rounded-2xl border px-5 py-3 transition-all sm:py-4 duration-300 ${
+                          now
+                            ? "border-[#3B82F6] bg-[#151a2c] shadow-[0_0_28px_-6px_#3B82F6]"
+                            : "border-white/10 bg-[#101219]"
                         }`}
                       >
                         <span
-                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                            done
-                              ? "bg-[#10B981] text-[#09090B]"
-                              : now
-                                ? "bg-white text-[#0044FF]"
-                                : "border border-zinc-600"
+                          aria-hidden="true"
+                          className={`absolute top-1/2 -left-[31px] h-3 w-3 -translate-y-1/2 rounded-full border-2 transition-colors duration-300 ${
+                            done || now
+                              ? "border-[#3B82F6] bg-[#3B82F6] shadow-[0_0_10px_#3B82F6]"
+                              : "border-zinc-600 bg-[#09090B]"
                           }`}
-                        >
-                          {done ? <Check size={14} strokeWidth={3} /> : s.n}
+                        />
+                        <span className="font-mono text-sm font-bold text-[#3B82F6] tabular-nums">
+                          {s.n}
                         </span>
-                        <span className="text-[15px] font-semibold sm:text-base">
-                          {done || now ? s.done : `Paso ${s.n}`}
+                        <span className="min-w-0">
+                          <span
+                            className={`font-display block text-lg font-semibold tracking-[-0.02em] sm:text-xl ${
+                              now ? "text-white" : "text-zinc-300"
+                            }`}
+                          >
+                            {s.label}
+                          </span>
+                          <span className="hidden text-[13px] font-medium text-zinc-500 sm:block sm:text-sm">
+                            {s.done}
+                          </span>
                         </span>
+                        {done ? (
+                          <Check size={16} strokeWidth={3} className="ml-auto shrink-0 text-[#10B981]" />
+                        ) : null}
                       </li>
                     );
                   })}
