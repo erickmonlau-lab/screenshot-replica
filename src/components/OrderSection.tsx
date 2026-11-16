@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
-import { SectionTitle } from "./SectionTitle";
 import { ErpMini, IaMini, WebMini } from "./MethodVisuals";
 import { useReducedMotion } from "./motion-pref";
 
@@ -30,24 +29,31 @@ const steps = [
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** "Apaga el caos" equivalent: three numbered step cards with a coloured header. */
+const ROT = [-2.5, 1.8, -1.5] as const;
+
+/** "Apaga el caos": tres pasos con numerales gigantes en outline tras ilustraciones inclinadas. */
 export function OrderSection() {
   const reduce = useReducedMotion();
   return (
     <section
       id="orden"
-      className="t-bg-hero t-ink t-line scroll-mt-[62px] border-t py-14 text-center sm:py-20 2xl:py-28"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16 lg:py-14"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-        <SectionTitle
-          center
-          word="Método"
-          sub="Apaga el caos:"
-          accent="web, procesos e IA en orden."
-          className="[--outline-fill:var(--t-hero)]"
-        />
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 className="font-display max-w-[16ch] text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
+            Apaga el caos: <span className="text-[#5b97ff]">web, procesos e IA en orden.</span>
+          </h2>
+          <a
+            href="#proyectos"
+            className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-white bg-white px-7 py-3.5 text-base font-semibold text-[#09090B] shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF]"
+          >
+            <span>Ver los proyectos</span>
+            <ArrowUpRight size={17} strokeWidth={2.4} />
+          </a>
+        </div>
 
-        <div className="mt-12 grid gap-6 text-left md:grid-cols-3 lg:mt-16">
+        <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-8 lg:mt-14">
           {steps.map((s, i) => (
             <motion.article
               key={s.label}
@@ -55,20 +61,27 @@ export function OrderSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{ duration: 0.8, delay: i * 0.12, ease: EASE }}
-              className="group overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[6px_6px_0_#09090B] transition-transform duration-200 hover:-translate-x-0.5 hover:-translate-y-1"
+              className="relative"
             >
-              <div className="bg-[#0044FF] px-5 py-3 text-[15px] font-semibold tracking-[0.08em] text-white uppercase">
-                {s.label}
-              </div>
-              <div className="border-b-2 border-[#09090B] bg-[#F4F5F8] p-4">{s.art}</div>
-              <div className="p-6 sm:p-7">
-                <h3 className="font-display text-[26px] leading-[1.05] font-bold tracking-[-0.035em] sm:text-[30px]">
+              <span
+                aria-hidden="true"
+                className="font-display pointer-events-none absolute -top-6 -left-1 text-[170px] leading-none font-bold tracking-[-0.06em] text-transparent select-none [-webkit-text-stroke:2px_#ffffff]"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <motion.div
+                whileHover={{ rotate: 0, y: reduce ? 0 : -6 }}
+                style={{ rotate: reduce ? 0 : ROT[i]! }}
+                className="relative z-10 ml-10 mt-[88px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-[#F4F5F8] p-3 shadow-[8px_8px_0_#0044FF] md:ml-14"
+              >
+                {s.art}
+              </motion.div>
+              <div className="relative z-10 mt-6">
+                <h3 className="font-display text-[28px] leading-[1.05] font-bold tracking-[-0.035em] sm:text-[32px]">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-base leading-snug font-medium text-[#52525B] sm:text-[17px]">
-                  {s.text}
-                </p>
-                <p className="mt-6 flex items-center gap-2 border-t border-[#09090B]/15 pt-4 text-base font-semibold text-[#0044FF]">
+                <p className="mt-2.5 text-[17px] leading-snug font-medium text-zinc-300">{s.text}</p>
+                <p className="mt-4 inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#ffffff]">
                   <Check size={16} strokeWidth={3} />
                   {s.proof}
                 </p>
@@ -76,14 +89,6 @@ export function OrderSection() {
             </motion.article>
           ))}
         </div>
-
-        <a
-          href="#proyectos"
-          className="t-bg-ink t-on-ink mt-12 inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-semibold transition-transform duration-150 hover:scale-[1.04] active:scale-[0.97] sm:text-base"
-        >
-          <span>Ver los proyectos</span>
-          <ArrowUpRight size={16} strokeWidth={2.4} />
-        </a>
       </div>
     </section>
   );
