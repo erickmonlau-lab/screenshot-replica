@@ -391,38 +391,46 @@ function Index() {
         </section>
 
         {/* STACK + IA EN ACCIÓN */}
-        <section id="ia" className={`${sectionBase} section-dark`}>
-          <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-6">
-              <SectionTitle
-                compact
-                word="Cerebro"
-                sub="La IA ya sabe"
-                accent="cómo trabajo."
-              />
-            </Reveal>
+        <section
+          id="ia"
+          className="section-dark t-line relative scroll-mt-[62px] overflow-hidden border-t lg:h-[min(100svh,800px)] lg:min-h-[640px]"
+        >
+          <div className="absolute inset-0 hidden lg:block">
+            <BrainVisual />
+          </div>
 
-            <div className="aspect-[2.9/1] min-h-[300px] w-full overflow-hidden rounded-[24px] border-2 border-white/80 shadow-[8px_8px_0_#0044FF] max-md:aspect-[4/3]">
-              <BrainVisual />
+          <div className="pointer-events-none relative z-10 mx-auto flex h-full w-full max-w-[1380px] flex-col justify-center px-5 py-14 sm:px-8 lg:py-10">
+            <div className="max-w-[460px]">
+              <p
+                aria-hidden="true"
+                className="outline-title font-display text-[clamp(3.2rem,7vw,6.2rem)] leading-[0.95] font-bold tracking-[-0.03em] uppercase [--outline-fill:#0B0C10]"
+              >
+                Cerebro
+              </p>
+              <h2 className="t-ink font-display mt-4 text-[clamp(1.9rem,3vw,2.8rem)] leading-[1.03] font-bold tracking-[-0.04em]">
+                La IA ya sabe <span className="text-[#0044FF]">cómo trabajo.</span>
+              </h2>
+              <p className="mt-3 text-lg leading-snug font-medium text-zinc-400">
+                Mi segundo cerebro vive en Obsidian: cada nota es un nodo y la IA lo recorre antes de
+                empezar.
+              </p>
+              <ol className="mt-7 space-y-5 border-l-2 border-white/15 pl-5">
+                {[
+                  ["Memoria entre proyectos", "Decisiones, reglas y clientes quedan en notas que la IA lee."],
+                  ["Reglas que se cumplen", "Mis normas de diseño y código las aplican siempre los agentes."],
+                  ["Menos contexto repetido", "No explico cada proyecto de nuevo en cada sesión."],
+                ].map(([t, d]) => (
+                  <li key={t}>
+                    <p className="font-display text-xl font-bold tracking-[-0.02em] text-white">{t}</p>
+                    <p className="text-base leading-snug font-medium text-zinc-400">{d}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
+          </div>
 
-            <div className="mt-6 grid gap-4 md:grid-cols-3 md:gap-6">
-              {[
-                ["Memoria entre proyectos", "Cada decisión, regla y cliente vive en una nota. La IA las lee antes de empezar, así no parto de cero."],
-                ["Reglas que se cumplen", "Mis normas de diseño y de código están en el cerebro. Los agentes las aplican siempre, no cuando me acuerdo."],
-                ["Menos contexto repetido", "No vuelvo a explicar cada proyecto en cada sesión: el agente ya sabe qué se decidió y por qué."],
-              ].map(([t, d], i) => (
-                <div key={t} className="rounded-2xl border-2 border-white/15 bg-[#101219] px-5 py-4">
-                  <p className="font-display text-3xl leading-none font-bold tracking-[-0.04em] text-[#3B82F6]">
-                    0{i + 1}
-                  </p>
-                  <h3 className="font-display mt-2 text-xl font-bold tracking-[-0.02em] text-white">
-                    {t}
-                  </h3>
-                  <p className="mt-1.5 text-base leading-snug font-medium text-zinc-400">{d}</p>
-                </div>
-              ))}
-            </div>
+          <div className="relative h-[380px] lg:hidden">
+            <BrainVisual />
           </div>
         </section>
 

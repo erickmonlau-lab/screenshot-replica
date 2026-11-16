@@ -276,7 +276,7 @@ function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
   };
 
   // dense cluster A
-  const A = A_NAMES.map((nm) => mk(nm, "a", 0.56, 0.46, 0.3));
+  const A = A_NAMES.slice(0, 22).map((nm) => mk(nm, "a", 0.62, 0.44, 0.26));
   A.forEach((n, i) => {
     for (let k = 0; k < 4; k++) {
       const t = A[Math.floor(r() * A.length)]!;
@@ -286,15 +286,14 @@ function buildGraph(): { nodes: GNode[]; links: [number, number, number][] } {
   });
 
   // star cluster B
-  const hub = mk("MOC-DESIGN", "b", 0.2, 0.56, 0.01);
-  B_NAMES.forEach((nm) => link(hub, mk(nm, "b", 0.2, 0.56, 0.3), 100));
+  const hub = mk("MOC-DESIGN", "b", 0.84, 0.74, 0.01);
+  B_NAMES.slice(0, 9).forEach((nm) => link(hub, mk(nm, "b", 0.84, 0.74, 0.2), 100));
   link(hub, A[3]!, 150);
 
   // orphans
-  O_NAMES.forEach((nm, i) => {
-    const o = mk(nm, "o", 0.08 + r() * 0.84, 0.1 + r() * 0.8, 0.02);
+  O_NAMES.slice(0, 9).forEach((nm, i) => {
+    const o = mk(nm, "o", 0.42 + r() * 0.52, 0.1 + r() * 0.8, 0.02);
     if (i === 4) link(o, nodes[nodes.length - 2]!, 90);
-    if (i === 10) link(o, nodes[nodes.length - 3]!, 90);
   });
 
   nodes.forEach((n) => {
@@ -320,7 +319,7 @@ export function BrainVisual() {
       adj[a]!.add(b);
       adj[b]!.add(a);
     });
-    const hubs = [nodes.findIndex((n) => n.name === "MOC-DESIGN"), 0, 3, 13, 26];
+    const hubs = [nodes.findIndex((n) => n.name === "MOC-DESIGN"), 0, 3, 13, 9];
 
     let W = 0;
     let H = 0;
@@ -461,8 +460,8 @@ export function BrainVisual() {
         }
         nd.x += nd.vx;
         nd.y += nd.vy;
-        nd.x = Math.min(W - 64, Math.max(64, nd.x));
-        nd.y = Math.min(H - 34, Math.max(20, nd.y));
+        nd.x = Math.min(W - 40, Math.max(W * 0.36, nd.x));
+        nd.y = Math.min(H - 40, Math.max(Math.min(90, H * 0.2), nd.y));
       }
       if (drag >= 0) {
         const d = nodes[drag]!;
@@ -475,7 +474,7 @@ export function BrainVisual() {
 
     const draw = (t: number) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = "#1B1B1B";
+      ctx.fillStyle = "#0B0C10";
       ctx.fillRect(0, 0, W, H);
 
       const focus = hover >= 0 ? hover : hubs[Math.floor(Math.max(0, t - t0) / 3200) % hubs.length]!;
@@ -486,8 +485,8 @@ export function BrainVisual() {
         const a = nodes[ia]!;
         const b = nodes[ib]!;
         const hot = ia === focus || ib === focus;
-        ctx.strokeStyle = hot ? "rgba(168,130,255,0.95)" : "rgba(150,150,150,0.26)";
-        ctx.lineWidth = hot ? 1.6 : 1;
+        ctx.strokeStyle = hot ? "rgba(91,151,255,0.95)" : "rgba(160,170,200,0.22)";
+        ctx.lineWidth = hot ? 2 : 1;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -495,16 +494,36 @@ export function BrainVisual() {
       }
 
       ctx.textAlign = "center";
-      ctx.font = "13px Inter Variable, Inter, system-ui, sans-serif";
+      ctx.font = "600 15px Inter Variable, Inter, system-ui, sans-serif";
+      const pulse = ((t - t0) % 3200) / 3200;
       for (const nd of nodes) {
         const on = nd.id === focus;
         const isNear = near.has(nd.id);
-        ctx.fillStyle = on ? "#A882FF" : isNear ? "#CDB8FF" : nd.group === "b" ? "#8A8A8A" : "#B9B9B9";
+        const big = nd.deg >= 6;
+        if (big || on) {
+          const g = ctx.createRadialGradient(nd.x, nd.y, 0, nd.x, nd.y, nd.r * (on ? 7 : 4.5));
+          g.addColorStop(0, on ? "rgba(91,151,255,0.55)" : "rgba(160,175,215,0.22)");
+          g.addColorStop(1, "rgba(91,151,255,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, nd.r * (on ? 7 : 4.5), 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = on ? "#5B97FF" : isNear ? "#9CC2FF" : nd.group === "b" ? "#8E96AD" : "#C3C9DA";
         ctx.beginPath();
         ctx.arc(nd.x, nd.y, nd.r + (on ? 2 : 0), 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = on || isNear ? "#EDEDED" : "rgba(160,160,160,0.5)";
-        if (nd.group === "o" || nd.deg >= 7 || on || isNear) ctx.fillText(nd.name, nd.x, nd.y + nd.r + 15);
+        if (on) {
+          ctx.strokeStyle = `rgba(91,151,255,${0.7 * (1 - pulse)})`;
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.arc(nd.x, nd.y, nd.r + 4 + pulse * 40, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+        if (big || on || isNear || nd.id === hover) {
+          ctx.fillStyle = on || isNear || nd.id === hover ? "#FFFFFF" : "rgba(214,219,235,0.78)";
+          ctx.fillText(nd.name, nd.x, nd.y + nd.r + 18);
+        }
       }
     };
 
@@ -533,7 +552,7 @@ export function BrainVisual() {
   }, []);
 
   return (
-    <div ref={wrap} className="relative h-full min-h-[260px] w-full overflow-hidden bg-[#1B1B1B]">
+    <div ref={wrap} className="relative h-full min-h-[260px] w-full overflow-hidden bg-[#0B0C10]">
       <canvas ref={cv} className="absolute inset-0 cursor-grab touch-none active:cursor-grabbing" role="img" aria-label="Grafo de notas del cerebro de IA en movimiento: arrastra un nodo" />
     </div>
   );
