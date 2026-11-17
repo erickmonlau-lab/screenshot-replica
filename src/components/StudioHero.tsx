@@ -87,29 +87,25 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         </motion.div>
       </motion.div>
 
-      {/* Texto y acciones estilo Oderalo */}
+      {/* Titular estilo Oderalo (dos tonos con acento violeta #6D28D9 y sin amarillo) */}
       <motion.div
         initial={reduce ? false : { y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[7%] sm:left-[3%] sm:max-w-[440px] xl:max-w-[480px]"
+        className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[8%] sm:left-[3.5%] sm:max-w-[460px] xl:max-w-[500px]"
       >
-        <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3 py-1 sm:px-3.5 sm:py-1.5 text-[13px] sm:text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B] sm:shadow-[4px_4px_0_#09090B]">
-          Marketing, gestión y tecnología · Barcelona
-        </span>
-
-        <h1 className="font-display mt-3.5 text-[clamp(2.1rem,3.6vw,3.3rem)] leading-[0.94] font-bold tracking-[-0.06em] text-[#09090B] dark:text-white">
-          Entiendo tu negocio
+        <h1 className="font-display text-[clamp(2.3rem,4.1vw,3.6rem)] leading-[1.04] font-bold tracking-[-0.055em] text-[#09090B] dark:text-white">
+          Entiendo tu negocio.{" "}
+          <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
+            Construyo la solución.
+          </span>
         </h1>
-        <p className="font-display mt-2 text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.04] font-bold tracking-[-0.045em] text-[#0044FF]">
-          y construyo la solución.
-        </p>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={() => onJumpToProjects()}
-            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#0044FF] sm:shadow-[5px_5px_0_#0044FF] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#0044FF]"
+            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#6D28D9] sm:shadow-[5px_5px_0_#6D28D9] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#6D28D9] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#6D28D9]"
           >
             <span>Ver proyectos</span>
             <ArrowDown size={17} strokeWidth={2.5} />
