@@ -7,43 +7,15 @@ const VIOLET = "#6D28D9";
 const LIME = "#C6F432";
 const INK = "#09090B";
 
-// Recorrido (en % de la altura de la imagen) para que la captura se deslice de arriba abajo
-// dentro de una pantalla: 1 - (alto visible / alto imagen).
-const LAPTOP_TRAVEL = -(1 - (10 / 16) * (1440 / 2660)) * 100;
-const PHONE_TRAVEL = -(1 - 19.5 / 9 / (3376 / 390)) * 100;
-
-/** Auto-scroll fluido de la grabación real de Oderalo dentro de la pantalla */
-function AutoScroll({
-  src,
-  alt,
-  travel,
-  duration,
-  delay = 0,
-}: {
-  src: string;
-  alt: string;
-  travel: number;
-  duration: number;
-  delay?: number;
-}) {
-  const reduce = useReducedMotion();
+/** Captura real de la plataforma Oderalo (datos de demostración) */
+function Screen({ src, alt }: { src: string; alt: string }) {
   return (
-    <motion.img
+    <img
       src={src}
       alt={alt}
       loading="lazy"
       draggable={false}
-      className="block w-full select-none"
-      initial={{ y: "0%" }}
-      animate={reduce ? { y: "0%" } : { y: ["0%", `${travel}%`] }}
-      transition={{
-        duration,
-        delay,
-        ease: "easeInOut",
-        repeat: Infinity,
-        repeatType: "mirror",
-        repeatDelay: 1.2,
-      }}
+      className="block h-full w-full object-cover object-top select-none"
     />
   );
 }
@@ -172,31 +144,20 @@ export function OderaloSection() {
                   <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
-                  <AutoScroll
-                    src="/oderalo-desktop.webp"
-                    alt="Grabación real de la web de Oderalo desplazándose"
-                    travel={LAPTOP_TRAVEL}
-                    duration={16}
-                  />
+                  <Screen src="/oderalo-app-agenda.png" alt="Agenda de citas de Oderalo: listado, contadores del día y filtros" />
                 </div>
               </div>
 
               <motion.div
                 style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-2 -left-2 z-20 w-[30%] max-w-[180px] min-w-[112px] sm:-left-6 lg:-bottom-6 lg:-left-3"
+                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[230px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:-left-3"
               >
                 <div
                   className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#C6F432]"
                   style={{ transform: "rotate(-4deg)" }}
                 >
                   <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[20px] bg-black">
-                    <AutoScroll
-                      src="/oderalo-mobile.webp"
-                      alt="Grabación de la app móvil de Oderalo desplazándose"
-                      travel={PHONE_TRAVEL}
-                      duration={20}
-                      delay={0.6}
-                    />
+                    <Screen src="/oderalo-app-campo.png" alt="App de campo de Oderalo: ruta del técnico con sus citas del día" />
                   </div>
                 </div>
               </motion.div>
