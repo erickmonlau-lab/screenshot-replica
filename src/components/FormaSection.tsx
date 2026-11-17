@@ -9,14 +9,12 @@ const features = ["Plan semanal", "Entreno del día", "Ejercicio guiado", "Serie
 function Phone({
   src,
   alt,
-  width,
   rotate,
   delay,
   className = "",
 }: {
   src: string;
   alt: string;
-  width: number;
   rotate: number;
   delay: number;
   className?: string;
@@ -29,7 +27,6 @@ function Phone({
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{ duration: 0.9, delay, ease: EASE }}
       className={className}
-      style={{ width }}
     >
       <motion.div
         animate={reduce ? { y: 0 } : { y: [0, -12, 0] }}
@@ -95,22 +92,20 @@ export function FormaSection() {
           </a>
         </motion.div>
 
-        <div className="relative mx-auto flex h-[560px] w-full max-w-[640px] items-center justify-center lg:col-span-6">
+        <div className="relative mx-auto flex h-[440px] w-full max-w-[640px] items-center justify-center sm:h-[560px] lg:col-span-6">
           <Phone
             src="/forma-dashboard.png"
             alt="Pantalla de inicio de Forma con el plan semanal"
-            width={250}
             rotate={-5}
             delay={0}
-            className="absolute left-[4%] top-4 z-10 sm:left-[8%]"
+            className="absolute top-2 left-[1%] z-10 w-[44vw] max-w-[250px] sm:top-4 sm:left-[8%]"
           />
           <Phone
             src="/forma-exercise.png"
             alt="Pantalla de ejercicio guiado de Forma"
-            width={262}
             rotate={4}
             delay={0.3}
-            className="absolute right-[2%] bottom-0 sm:right-[6%]"
+            className="absolute right-[1%] bottom-0 w-[46vw] max-w-[262px] sm:right-[6%]"
           />
         </div>
       </div>
