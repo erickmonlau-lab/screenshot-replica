@@ -259,7 +259,7 @@ const coreStackPills = [
   "Canva",
 ];
 
-function CopyButton({ value, label }: { value: string; label: string }) {
+function CopyButton({ value, label, dark = false }: { value: string; label: string; dark?: boolean }) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -281,7 +281,9 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-[15px] font-bold transition-all active:scale-95 ${
         copied
           ? "bg-[#10B981] text-white"
-          : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
+          : dark
+            ? "border-2 border-[#3D6BFF] bg-[#0B1A52] text-white hover:bg-[#0044FF]"
+            : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
       }`}
     >
       {copied ? (
@@ -481,106 +483,121 @@ function Index() {
         {/* CONTACTO */}
         <section
           id="contacto"
-          className="relative scroll-mt-[62px] overflow-hidden bg-[#09090B] pt-16 pb-10 text-white sm:pt-20"
+          className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-14 text-[#09090B] sm:py-16"
         >
-          <img
-            src="/erick-portrait-studio.png"
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute right-[1%] bottom-0 z-0 hidden h-[86%] w-auto max-w-none select-none lg:block"
-          />
-          <div className="relative z-10 mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-1.5 text-[17px] font-bold text-[#09090B] shadow-[4px_4px_0_#ffffff]">
-              Disponible en Barcelona
-            </span>
-            <Reveal>
-              <h2 className="font-display mt-6 text-[clamp(3.4rem,10.5vw,10rem)] leading-[0.88] font-bold tracking-[-0.06em]">
-                Hablemos
-                <span className="block text-[#0044FF] [text-shadow:4px_4px_0_#ffffff]">de tu</span>
-                <span className="block text-[#0044FF] [text-shadow:4px_4px_0_#ffffff]">
-                  proyecto.
-                </span>
-              </h2>
-            </Reveal>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Magnetic strength={0.1}>
+          <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-7">
+              <span className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[16px] font-bold text-white">
+                <span className="led-dot h-2.5 w-2.5 rounded-full" />
+                Disponible en Barcelona
+              </span>
+              <Reveal>
+                <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
+                  Hablemos
+                  <span className="block text-[#0044FF]">de tu proyecto.</span>
+                </h2>
+              </Reveal>
+              <p className="mt-5 max-w-[44ch] text-lg leading-snug font-medium text-[#3F3F46] sm:text-xl">
+                Cuéntame qué necesitas y te respondo, o te enseño en persona Oderalo y Forma.
+              </p>
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <Magnetic strength={0.1}>
+                  <a
+                    href={whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-2 border-[#09090B] bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+                  >
+                    <MessageCircle size={18} strokeWidth={2.3} />
+                    <span>Escribir por WhatsApp</span>
+                    <ArrowUpRight size={16} strokeWidth={2.5} />
+                  </a>
+                </Magnetic>
                 <a
-                  href={whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-2 border-white bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#ffffff] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#ffffff]"
+                  href={cvPdf.url}
+                  download="Erick-Rodriguez-CV.pdf"
+                  className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-7 py-3.5 text-base font-semibold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
                 >
-                  <MessageCircle size={18} strokeWidth={2.3} />
-                  <span>Escribir por WhatsApp</span>
-                  <ArrowUpRight size={16} strokeWidth={2.5} />
+                  <span>Descargar CV</span>
+                  <Download size={16} />
                 </a>
-              </Magnetic>
-              <a
-                href={cvPdf.url}
-                download="Erick-Rodriguez-CV.pdf"
-                className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-2 border-white px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white hover:text-[#09090B]"
-              >
-                <span>Descargar CV</span>
-                <Download size={16} />
-              </a>
+              </div>
             </div>
 
-            <dl className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-3 lg:mt-14">
-              {[
-                {
-                  icon: Mail,
-                  k: "Email",
-                  node: (
-                    <div className="flex min-w-0 items-center justify-between gap-3">
-                      <a
-                        href={`mailto:${email}`}
-                        className="font-display truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#0044FF]"
-                      >
-                        {email}
-                      </a>
-                      <CopyButton value={email} label="correo" />
-                    </div>
-                  ),
-                },
-                {
-                  icon: MessageCircle,
-                  k: "WhatsApp y teléfono",
-                  node: (
-                    <div className="flex min-w-0 items-center justify-between gap-3">
-                      <a
-                        href={whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#0044FF]"
-                      >
-                        {phoneDisplay}
-                      </a>
-                      <CopyButton value={phoneDisplay} label="teléfono" />
-                    </div>
-                  ),
-                },
-                {
-                  icon: MapPin,
-                  k: "Ubicación",
-                  node: (
-                    <span className="font-display text-[18px] font-bold tracking-[-0.02em]">
-                      La Sagrera, Barcelona · Presencial o remoto
-                    </span>
-                  ),
-                },
-              ].map(({ icon: I, k, node }) => (
-                <div
-                  key={k}
-                  className="min-w-0 rounded-2xl border-[3px] border-[#09090B] bg-white p-5 text-[#09090B] shadow-[6px_6px_0_#0044FF]"
-                >
-                  <dt className="mb-2 flex items-center gap-2 text-[15px] font-bold tracking-[0.06em] text-[#52525B] uppercase">
-                    <I size={15} className="text-[#0044FF]" />
-                    {k}
-                  </dt>
-                  <dd>{node}</dd>
+            <div className="lg:col-span-5">
+              <div className="led-box p-5 text-white sm:p-6">
+                <div className="flex items-center gap-4 border-b-2 border-[#1B2A66] pb-5">
+                  <img
+                    src="/erick-portrait-studio.png"
+                    alt=""
+                    aria-hidden="true"
+                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-2 border-[#3D6BFF] bg-[#0044FF] object-cover object-top"
+                  />
+                  <div>
+                    <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em]">
+                      Erick Rodríguez
+                    </p>
+                    <p className="mt-1.5 text-[16px] font-semibold text-[#9DB8FF]">
+                      Marketing · Gestión · Tecnología
+                    </p>
+                  </div>
                 </div>
-              ))}
-            </dl>
+
+                <dl className="divide-y-2 divide-[#1B2A66]">
+                  {[
+                    {
+                      icon: Mail,
+                      k: "Email",
+                      node: (
+                        <div className="flex min-w-0 items-center justify-between gap-3">
+                          <a
+                            href={`mailto:${email}`}
+                            className="font-display truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#9DB8FF]"
+                          >
+                            {email}
+                          </a>
+                          <CopyButton value={email} label="correo" dark />
+                        </div>
+                      ),
+                    },
+                    {
+                      icon: MessageCircle,
+                      k: "WhatsApp y teléfono",
+                      node: (
+                        <div className="flex min-w-0 items-center justify-between gap-3">
+                          <a
+                            href={whatsapp}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#9DB8FF]"
+                          >
+                            {phoneDisplay}
+                          </a>
+                          <CopyButton value={phoneDisplay} label="teléfono" dark />
+                        </div>
+                      ),
+                    },
+                    {
+                      icon: MapPin,
+                      k: "Ubicación",
+                      node: (
+                        <span className="font-display text-[18px] font-bold tracking-[-0.02em]">
+                          La Sagrera, Barcelona · Presencial o remoto
+                        </span>
+                      ),
+                    },
+                  ].map(({ icon: I, k, node }) => (
+                    <div key={k} className="py-4 last:pb-0">
+                      <dt className="mb-1.5 flex items-center gap-2 text-[15px] font-bold tracking-[0.08em] text-[#9DB8FF] uppercase">
+                        <I size={15} />
+                        {k}
+                      </dt>
+                      <dd>{node}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </div>
           </div>
         </section>
 

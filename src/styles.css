@@ -392,3 +392,31 @@ body {
 @keyframes drift-b { from { transform: translate(0, 0); } to { transform: translate(-4px, 5px); } }
 .drift-a { animation: drift-a 8s ease-in-out infinite alternate; }
 .drift-b { animation: drift-b 10s ease-in-out infinite alternate; }
+
+/* Estilo LED (como Oderalo): superficie oscura sólida con borde y halo de color. Sin transparencias. */
+.led-box {
+  background: #09090b;
+  border: 2px solid #0044ff;
+  border-radius: 22px;
+  box-shadow: 0 0 0 5px #08143f, 0 0 30px 4px #0044ff;
+}
+.led-text {
+  text-shadow: 0 0 22px #0044ff, 0 0 4px #5b8cff;
+}
+.led-chip {
+  background: #0b1a52;
+  border: 2px solid #3d6bff;
+  color: #ffffff;
+  box-shadow: 0 0 14px 1px #0044ff;
+}
+.led-dot {
+  background: #5b8cff;
+  box-shadow: 0 0 10px 2px #0044ff;
+}
+.led-seg {
+  background: #0044ff;
+  box-shadow: 0 0 10px 1px #0044ff;
+}
+.led-seg-off {
+  background: #1b2a66;
+}
