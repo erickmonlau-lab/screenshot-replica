@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { Play } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -49,13 +49,13 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[10.5rem]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-10"
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[2%] mx-auto flex w-full max-w-[1720px] justify-end px-6 sm:px-10"
+        className="pointer-events-none absolute inset-x-0 bottom-[5%] mx-auto flex w-full max-w-[1720px] justify-end px-6 sm:px-10"
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
@@ -94,11 +94,12 @@ export function OderaloSection() {
             </span>
 
             <h2 className="font-display mt-7 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
-              Del aviso a la factura,{" "}
-              <span className="whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">sin papeles.</span>
+              Del aviso a la factura,
+              <br />
+              <span className="mt-1 inline-block whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">sin papeles.</span>
             </h2>
 
-            <p className="mt-6 max-w-[44ch] text-[16px] leading-relaxed font-medium text-white">
+            <p className="mt-6 max-w-[46ch] text-[18px] leading-relaxed font-medium text-white xl:text-[19px]">
               <strong>Oderalo</strong> es el ERP que desarrollé a medida para empresas de servicios
               en campo: citas, rutas, parte firmado y facturación en un único flujo.
             </p>
@@ -129,13 +130,13 @@ export function OderaloSection() {
               href="#contacto"
               className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
             >
-              <span>Pídeme la demo de Oderalo</span>
-              <ArrowUpRight size={18} strokeWidth={2.5} />
+              <Play size={18} strokeWidth={2.5} fill="currentColor" />
+              <span>Ver vídeo demostración</span>
             </a>
           </motion.div>
 
           {/* Pantallas reales */}
-          <div className="relative pb-10 lg:col-span-7 lg:pb-12 lg:pt-10" style={{ perspective: 1600 }}>
+          <div className="relative pb-10 lg:col-span-7 lg:pt-2 lg:pb-[calc(clamp(7rem,10.5vw,9.5rem)+3.5rem)]" style={{ perspective: 1600 }}>
             <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
               <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[10px_10px_0_#09090B] sm:p-2.5">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
