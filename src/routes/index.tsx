@@ -391,7 +391,7 @@ function Index() {
         </section>
 
         <OderaloSection />
-        {/* <FormaSection /> retirada para enfocar el portfolio en aplicaciones web */}
+        <FormaSection />
 
         {/* STACK + IA EN ACCIÓN */}
         <section
