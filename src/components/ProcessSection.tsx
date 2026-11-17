@@ -100,7 +100,7 @@ export function ProcessSection() {
                       <span className="hero-outline-light font-display block text-[clamp(4.5rem,12vw,9rem)] leading-[0.9] font-bold tracking-[-0.04em]">
                         {s.n}
                       </span>
-                      <span className="rounded-full border-2 border-[#09090B] bg-[#FFD200] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-[#09090B] shadow-[3px_3px_0_#0044FF]">
+                      <span className="rounded-full border-2 border-[#09090B] bg-[#A78BFA] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-[#09090B] shadow-[3px_3px_0_#6D28D9]">
                         {s.label}
                       </span>
                     </div>
@@ -111,8 +111,8 @@ export function ProcessSection() {
                       {s.text}
                     </p>
                     <div className="mt-5 flex items-center gap-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400">
-                        <Check size={14} className="stroke-[3]" />
+                      <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#8B5CF6]/40 bg-[#6D28D9]/15 px-3 py-1.5 text-xs font-bold text-[#DDD6FE]">
+                        <Check size={14} className="stroke-[3] text-[#A78BFA]" />
                         Entregable: {s.done}
                       </span>
                     </div>
@@ -129,7 +129,7 @@ export function ProcessSection() {
                   className="absolute top-[26px] right-[26px] left-[26px] h-[6px] -translate-y-1/2 rounded-full bg-[#27272A]"
                 >
                   <div
-                    className="h-full rounded-full bg-[#0044FF] transition-[width] duration-300"
+                    className="h-full rounded-full bg-[#6D28D9] transition-[width] duration-300"
                     style={{
                       width: `${Math.max(
                         0,
@@ -154,9 +154,9 @@ export function ProcessSection() {
                           aria-label={`Ver paso ${st.n}: ${st.label}`}
                           className={`font-display flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border-[3px] text-[20px] font-bold transition-all duration-300 hover:scale-105 ${
                             now
-                              ? "scale-110 border-[#09090B] bg-white text-[#09090B] shadow-[5px_5px_0_#0044FF]"
+                              ? "scale-110 border-[#09090B] bg-white text-[#09090B] shadow-[5px_5px_0_#6D28D9]"
                               : done
-                                ? "border-[#09090B] bg-[#0044FF] text-white"
+                                ? "border-[#09090B] bg-[#6D28D9] text-white"
                                 : "border-[#52525B] bg-[#09090B] text-zinc-400 hover:border-[#B4B8C2]"
                           }`}
                         >
