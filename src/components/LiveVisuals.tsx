@@ -511,11 +511,31 @@ function buildGraph(): {
   return { nodes, links, hubIndices };
 }
 
-/* Silueta de cerebro (vista lateral) en un lienzo de 400x330, y sus circunvoluciones */
-const BRAIN_D =
-  "M70 196 C38 176 28 124 66 88 C86 58 138 40 174 56 C198 24 262 24 286 56 C330 40 378 76 366 126 C396 152 382 204 346 214 C334 240 298 250 274 238 C262 264 230 268 216 246 C190 256 162 244 150 238 C116 240 94 222 70 196 Z M262 240 C292 232 336 244 338 270 C338 294 296 304 270 288 C252 274 248 250 262 240 Z M218 246 C222 268 226 286 232 304 L252 304 C250 284 248 262 248 242 Z";
-const FOLDS_D =
-  "M104 128 C124 104 158 112 168 138 C178 160 206 154 216 128 M146 196 C162 172 194 178 204 200 M224 84 C238 106 268 98 284 76 M240 152 C256 132 292 142 302 168 C308 184 328 182 338 160 M96 168 C112 152 134 158 138 178 M284 198 C296 182 322 188 330 204 M120 92 C132 82 150 84 156 96 M300 104 C316 96 336 104 340 120";
+/* Cerebro en vista lateral sobre un lienzo de 400x330: cerebro, cerebelo, tronco y circunvoluciones */
+const CEREBRUM_D =
+  "M55 170 C33 140 45 96 86 70 C116 40 166 30 200 42 C226 22 276 24 298 48 C336 40 372 68 368 108 C392 128 388 168 362 184 C350 196 330 200 312 198 C296 206 270 208 250 214 C238 238 190 246 155 238 C135 232 120 222 118 210 C104 200 78 192 55 170 Z";
+const CEREBELLUM_D =
+  "M262 214 C290 208 340 212 346 238 C350 262 318 282 288 278 C262 274 246 250 262 214 Z";
+const STEM_D = "M222 230 C226 258 232 284 238 306 L262 306 C260 282 258 256 258 230 Z";
+const FOLDS_D = [
+  "M215 44 C222 80 205 110 218 140 C226 160 214 176 222 198",
+  "M120 208 C160 190 205 190 250 208",
+  "M70 100 C90 90 110 108 130 98 C150 88 165 104 185 96",
+  "M62 136 C90 122 105 142 128 132 C150 122 170 140 192 128",
+  "M72 166 C92 152 108 170 130 160 C150 150 168 166 190 158",
+  "M238 70 C262 62 275 84 298 76 C318 70 335 86 352 80",
+  "M232 108 C258 98 275 120 300 110 C325 100 340 118 360 110",
+  "M236 146 C262 138 280 158 306 148 C330 138 345 154 366 148",
+  "M232 178 C256 170 276 186 300 178 C320 170 336 180 352 172",
+  "M146 58 C162 74 190 68 202 56",
+  "M100 72 C112 62 130 64 140 74",
+  "M140 224 C165 214 190 230 215 222",
+  "M150 238 C175 228 200 244 232 236",
+  "M276 226 C300 219 330 225 340 240",
+  "M272 242 C300 235 332 241 342 256",
+  "M278 258 C298 253 324 259 332 270",
+  "M232 252 C236 268 240 282 244 298",
+].join(" ");
 
 export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -571,20 +591,33 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       if (pulses[i]) pulses[i]!.progress = Math.random();
     }
 
-    const brainSrc = new Path2D(BRAIN_D);
+    const cerebrumSrc = new Path2D(CEREBRUM_D);
+    const cerebellumSrc = new Path2D(CEREBELLUM_D);
+    const stemSrc = new Path2D(STEM_D);
     const foldsSrc = new Path2D(FOLDS_D);
-    let brainPath = new Path2D();
+    let parts: Path2D[] = [];
     let bs = 1;
     let bx0 = 0;
     let by0 = 0;
     const buildBrain = (nw: number, nh: number) => {
-      bs = Math.min((nw * 0.94) / 400, (nh * 0.94) / 330);
+      bs = Math.min((nw * 0.92) / 400, (nh * 0.92) / 330);
       bx0 = (nw - 400 * bs) / 2;
       by0 = (nh - 330 * bs) / 2;
-      brainPath = new Path2D();
-      brainPath.addPath(brainSrc, { a: bs, b: 0, c: 0, d: bs, e: bx0, f: by0 });
+      parts = [cerebrumSrc, cerebellumSrc, stemSrc].map((src) => {
+        const q = new Path2D();
+        q.addPath(src, { a: bs, b: 0, c: 0, d: bs, e: bx0, f: by0 });
+        return q;
+      });
     };
-    const inBrain = (x: number, y: number) => ctx.isPointInPath(brainPath, x * dpr, y * dpr);
+    const inBrainPt = (x: number, y: number) =>
+      parts.some((q) => ctx.isPointInPath(q, x * dpr, y * dpr));
+    // Con margen: el nodo y sus 4 vecinos a 12 px deben quedar dentro (no pisa el contorno)
+    const inBrain = (x: number, y: number) =>
+      inBrainPt(x, y) &&
+      inBrainPt(x - 12, y) &&
+      inBrainPt(x + 12, y) &&
+      inBrainPt(x, y - 12) &&
+      inBrainPt(x, y + 12);
 
     const resize = () => {
       const r = box.getBoundingClientRect();
@@ -819,27 +852,38 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, W, H);
 
-      // Cerebro: silueta rellena, circunvoluciones y contorno grueso
+      // Cerebro: sombra dura, tronco, cerebelo, cerebro y circunvoluciones
+      const OUT = isLight ? "#09090B" : "#FFFFFF";
       if (isLight) {
         ctx.save();
         ctx.translate(14, 14);
         ctx.fillStyle = "#09090B";
-        ctx.fill(brainPath);
+        for (const q of parts) ctx.fill(q);
         ctx.restore();
       }
-      ctx.fillStyle = isLight ? "#FFFFFF" : "#1E1B4B";
-      ctx.fill(brainPath);
       ctx.save();
       ctx.translate(bx0, by0);
       ctx.scale(bs, bs);
-      ctx.lineCap = "round";
-      ctx.strokeStyle = isLight ? "#DDD6FE" : "#4C1D95";
-      ctx.lineWidth = 6;
-      ctx.stroke(foldsSrc);
       ctx.lineJoin = "round";
-      ctx.strokeStyle = isLight ? "#09090B" : "#FFFFFF";
+      ctx.lineCap = "round";
       ctx.lineWidth = 5 / bs;
-      ctx.stroke(brainSrc);
+      ctx.strokeStyle = OUT;
+      ctx.fillStyle = isLight ? "#DDD6FE" : "#312E81";
+      ctx.fill(stemSrc);
+      ctx.stroke(stemSrc);
+      ctx.fillStyle = isLight ? "#C4B5FD" : "#3B2A8F";
+      ctx.fill(cerebellumSrc);
+      ctx.stroke(cerebellumSrc);
+      ctx.fillStyle = isLight ? "#FFFFFF" : "#1E1B4B";
+      ctx.fill(cerebrumSrc);
+      ctx.stroke(cerebrumSrc);
+      // Circunvoluciones: trazo ancho lavanda + línea fina violeta encima
+      ctx.strokeStyle = isLight ? "#EDE9FE" : "#4C1D95";
+      ctx.lineWidth = 9;
+      ctx.stroke(foldsSrc);
+      ctx.strokeStyle = isLight ? "#8B5CF6" : "#A78BFA";
+      ctx.lineWidth = 2.4;
+      ctx.stroke(foldsSrc);
       ctx.restore();
 
       // Auto-focus cycle when not hovered
