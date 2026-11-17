@@ -44,8 +44,6 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   const my = useMotionValue(0);
   const sx = useSpring(mx, { stiffness: 70, damping: 18 });
   const sy = useSpring(my, { stiffness: 70, damping: 18 });
-  const discX = useTransform(sx, (v) => v * -36);
-  const discY = useTransform(sy, (v) => v * -22);
   const faceX = useTransform(sx, (v) => v * 16);
 
   const onMove = (e: React.PointerEvent) => {
@@ -72,19 +70,6 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         />
       </div>
 
-      {/* Disco cobalto con sombra dura: el "podio" del retrato */}
-      <motion.div
-        aria-hidden="true"
-        style={{ x: discX, y: discY }}
-        className="pointer-events-none absolute bottom-[26%] left-1/2 z-[5] aspect-square w-[78vw] -translate-x-1/2 sm:bottom-[8%] sm:w-auto sm:h-[64%]"
-      >
-        <motion.div
-          initial={reduce ? false : { scale: 0.6, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="h-full w-full rounded-full border-[3px] border-[#09090B] bg-[#0044FF] shadow-[12px_12px_0_#09090B]"
-        />
-      </motion.div>
 
       <motion.div
         style={{ y: portraitY }}
@@ -102,35 +87,40 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         </motion.div>
       </motion.div>
 
-      {/* Texto y acciones, sin tarjeta */}
+      {/* Texto y acciones estilo Oderalo */}
       <motion.div
         initial={reduce ? false : { y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[8%] sm:left-[3.5%] sm:w-[400px]"
+        className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[7%] sm:left-[3%] sm:max-w-[440px] xl:max-w-[480px]"
       >
-        <p className="hidden text-[17px] font-bold text-[#0044FF] sm:block dark:text-[#5b97ff]">
+        <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3 py-1 sm:px-3.5 sm:py-1.5 text-[13px] sm:text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B] sm:shadow-[4px_4px_0_#09090B]">
           Marketing, gestión y tecnología · Barcelona
-        </p>
-        <h1 className="font-display text-[clamp(1.9rem,3vw,2.7rem)] leading-[1.04] font-bold tracking-[-0.045em] sm:mt-2">
-          Entiendo tu negocio y construyo la solución.
+        </span>
+
+        <h1 className="font-display mt-3.5 text-[clamp(2.1rem,3.6vw,3.3rem)] leading-[0.94] font-bold tracking-[-0.06em] text-[#09090B] dark:text-white">
+          Entiendo tu negocio
         </h1>
-        <div className="mt-5 flex flex-wrap items-center gap-2.5">
+        <p className="font-display mt-2 text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.04] font-bold tracking-[-0.045em] text-[#0044FF]">
+          y construyo la solución.
+        </p>
+
+        <div className="mt-5 flex flex-wrap items-center gap-3">
           <button
             type="button"
             onClick={() => onJumpToProjects()}
-            className="group inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[16px] font-semibold text-white shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF] dark:border-white dark:bg-white dark:text-[#09090B]"
+            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#0044FF] sm:shadow-[5px_5px_0_#0044FF] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#0044FF]"
           >
             <span>Ver proyectos</span>
-            <ArrowDown size={17} strokeWidth={2.4} />
+            <ArrowDown size={17} strokeWidth={2.5} />
           </button>
           <button
             type="button"
             onClick={() => onJumpToProjects("private-erp")}
-            className="group inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[16px] font-semibold text-[#09090B] shadow-[4px_4px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[15px] sm:text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] sm:shadow-[5px_5px_0_#09090B] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] dark:border-white dark:bg-[#18181B] dark:text-white dark:shadow-[4px_4px_0_#ffffff]"
           >
             <span>Ver el ERP</span>
-            <ArrowUpRight size={17} strokeWidth={2.4} />
+            <ArrowUpRight size={17} strokeWidth={2.5} />
           </button>
         </div>
       </motion.div>
