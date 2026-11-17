@@ -247,7 +247,7 @@ function ListenStage({ active }: { active: boolean }) {
           </div>
           <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-2.5 text-[14px] sm:text-sm text-zinc-200">
             <p className="font-medium">
-              Eso nos ahorraría más de 15 horas a la semana. ¡Adelante!
+              Perfecto, empecemos. ¡Adelante!
             </p>
           </div>
         </div>
@@ -264,7 +264,7 @@ function ListenStage({ active }: { active: boolean }) {
         </div>
         <div className="flex items-center gap-2">
           <span className="hidden sm:inline-block rounded-full border border-amber-400/30 bg-amber-400/20 px-2.5 py-0.5 text-[14px] font-bold text-amber-300">
-            ⚡ Ahorro: ~15h/sem
+            ⚡ Objetivos definidos
           </span>
           <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
             ✓ BRIEF CLARO
@@ -345,13 +345,13 @@ function DesignStage({ active }: { active: boolean }) {
               <span className="text-[14px] text-zinc-400 block">Avisos activos</span>
               <span className="font-display text-[14px] font-bold text-white flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                38 en curso
+                Agenda al día
               </span>
             </div>
             <div className="rounded-lg border border-[#27272A] bg-[#161D2E] p-2">
               <span className="text-[14px] text-zinc-400 block">Facturación hoy</span>
               <span className="font-display text-[14px] font-bold text-emerald-400">
-                3.160,00 €
+                Factura automática
               </span>
             </div>
           </div>
@@ -385,7 +385,7 @@ function DesignStage({ active }: { active: boolean }) {
 
           <div className="mt-2 border-t border-[#27272A] pt-2 text-[14px] text-zinc-400">
             <p className="font-semibold text-zinc-300">Tipografía: Manrope</p>
-            <p>Componentes: 100% Accesibles</p>
+            <p>Componentes accesibles</p>
           </div>
         </div>
       </div>
@@ -498,7 +498,7 @@ function BuildStage({ active }: { active: boolean }) {
             $ pnpm run build --mode production
           </span>
           <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[14px] font-bold text-emerald-300 border border-emerald-500/30">
-            ⚡ Vite v6 · 184ms
+            ⚡ Vite · build
           </span>
         </div>
 
@@ -530,10 +530,10 @@ function BuildStage({ active }: { active: boolean }) {
 /* Stage 4: Publicar (En producción) */
 function PublishStage({ active }: { active: boolean }) {
   const scores = [
-    { label: "Rendimiento", score: 100, color: "#10B981" },
-    { label: "Accesibilidad", score: 100, color: "#10B981" },
-    { label: "Buenas Prácticas", score: 100, color: "#10B981" },
-    { label: "SEO Técnico", score: 100, color: "#10B981" },
+    { label: "Rendimiento", score: "✓", color: "#10B981" },
+    { label: "Accesibilidad", score: "✓", color: "#10B981" },
+    { label: "Buenas Prácticas", score: "✓", color: "#10B981" },
+    { label: "SEO Técnico", score: "✓", color: "#10B981" },
   ];
 
   return (
@@ -555,7 +555,7 @@ function PublishStage({ active }: { active: boolean }) {
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-1 rounded-full bg-blue-500/20 px-2.5 py-0.5 text-[14px] font-semibold text-blue-300 border border-blue-500/30">
             <Globe size={12} />
-            Cloudflare Edge · 14ms
+            Despliegue en la nube
           </span>
         </div>
       </div>
@@ -564,7 +564,7 @@ function PublishStage({ active }: { active: boolean }) {
       <div className="my-auto py-2">
         <div className="mb-3 text-center">
           <span className="text-[14px] font-extrabold uppercase tracking-wider text-emerald-400">
-            ✦ Google Lighthouse Score · Core Web Vitals
+            ✦ Rendimiento · SEO · Accesibilidad
           </span>
         </div>
         <div className="grid grid-cols-4 gap-2 sm:gap-3">
@@ -597,7 +597,7 @@ function PublishStage({ active }: { active: boolean }) {
               <span className="mt-2 text-[14px] font-bold text-zinc-200 leading-tight">
                 {s.label}
               </span>
-              <span className="mt-0.5 text-[14px] text-emerald-400 font-semibold">Perfecto ✓</span>
+              <span className="mt-0.5 text-[14px] text-emerald-400 font-semibold">Cuidado</span>
             </div>
           ))}
         </div>
@@ -608,8 +608,8 @@ function PublishStage({ active }: { active: boolean }) {
         <div className="flex items-center gap-2">
           <span className="flex h-3 w-3 rounded-full bg-emerald-400 animate-ping" />
           <div>
-            <p className="text-[14px] font-bold text-white">● EN PRODUCCIÓN · Despliegue CI/CD Automático</p>
-            <p className="text-[14px] text-emerald-300">0 caídas, SSL TLS 1.3 y caché global activada</p>
+            <p className="text-[14px] font-bold text-white">● EN PRODUCCIÓN · Despliegue cuidado</p>
+            <p className="text-[14px] text-emerald-300">HTTPS, caché y despliegue automático</p>
           </div>
         </div>
         <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
@@ -634,16 +634,16 @@ function GrowStage({ active }: { active: boolean }) {
       <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-0.5 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF] flex items-center gap-1">
           <Star size={12} className="fill-[#09090B]" />
-          #1 EN GOOGLE ESPAÑA
+          SEO TÉCNICO
         </span>
         <div className="flex items-center gap-3 text-[14px] font-bold">
           <span className="text-emerald-400 flex items-center gap-1">
             <TrendingUp size={14} />
-            +340% Tráfico Orgánico
+            Más visitas orgánicas
           </span>
           <span className="text-blue-400 flex items-center gap-1">
             <Cpu size={14} />
-            100% Automatizado
+            Flujos con IA
           </span>
         </div>
       </div>
@@ -662,16 +662,16 @@ function GrowStage({ active }: { active: boolean }) {
               Tu Empresa · Software a Medida y Automatización
             </h4>
             <p className="mt-1 text-[14px] text-zinc-300 leading-snug">
-              Plataforma digital líder: presupuestos en segundos, seguimiento de avisos y facturación directa sin papeleos.
+              Plataforma digital: presupuestos en segundos, seguimiento de avisos y facturación directa sin papeleos.
             </p>
           </div>
 
           <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-500/10 p-2 border border-emerald-500/20">
             <span className="text-[14px] font-bold text-emerald-300">
-              ★★★★★ 4.9 (128 reseñas)
+              Resultado en buscadores
             </span>
             <span className="rounded bg-emerald-400 px-1.5 py-0.2 text-[14px] font-black text-black">
-              TOP 1 GOOGLE
+              SEO
             </span>
           </div>
         </div>
@@ -705,7 +705,7 @@ function GrowStage({ active }: { active: boolean }) {
                 <Bot size={14} />
               </div>
               <div className="text-[14px]">
-                <p className="font-bold text-white leading-none">Agente IA (GPT-4o)</p>
+                <p className="font-bold text-white leading-none">Agente IA</p>
                 <p className="text-[14px] text-zinc-400">Clasifica y asigna técnico</p>
               </div>
             </div>
@@ -729,10 +729,10 @@ function GrowStage({ active }: { active: boolean }) {
       <div className="flex items-center justify-between gap-2 rounded-xl border border-blue-500/30 bg-[#0C1220] p-2.5 text-[14px] text-blue-200">
         <span className="flex items-center gap-1.5 font-medium truncate">
           <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-ping" />
-          142 ejecuciones hoy sin errores · Respuesta &lt; 30s
+          Flujo de ejemplo ejecutándose solo
         </span>
         <span className="shrink-0 whitespace-nowrap rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
-          ✓ AUTOMATIZADO & TOP 1
+          ✓ AUTOMATIZADO
         </span>
       </div>
     </div>
