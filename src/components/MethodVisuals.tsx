@@ -180,7 +180,7 @@ export function IaMini() {
 
 /* ───────────── PROCESO STAGE (Elevated, Vibrant & High-Contrast) ───────────── */
 
-/* Stage 1: Escuchar (Brief Claro) */
+/* Stage 1: Diagnóstico (Auditoría Técnica y de Negocio — Sin chats falsos) */
 function ListenStage({ active }: { active: boolean }) {
   return (
     <div
@@ -198,78 +198,80 @@ function ListenStage({ active }: { active: boolean }) {
             <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
             <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
           </div>
-          <span className="ml-2 flex items-center gap-1.5 text-[14px] font-bold text-zinc-300">
-            <MessageSquare size={13} className="text-[#0044FF]" />
-            Diagnóstico y Objetivos
+          <span className="ml-2 flex items-center gap-1.5 text-[14px] font-bold text-zinc-200">
+            <Terminal size={14} className="text-[#A78BFA]" />
+            Auditoría de Procesos · Diagnóstico Inicial
           </span>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[14px] font-semibold text-emerald-400">
-          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          Sesión en directo · Erick × Cliente
+        <div className="flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 px-2.5 py-0.5 text-[13px] font-semibold text-[#DDD6FE]">
+          <span className="h-2 w-2 rounded-full bg-[#A78BFA] animate-pulse" />
+          Análisis en vivo del sistema
         </div>
       </div>
 
-      {/* Chat Messages */}
-      <div className="my-auto flex flex-col gap-3 py-1">
-        {/* Client bubble */}
-        <div className="flex items-start gap-2.5 max-w-[85%]">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[14px] font-extrabold text-[#09090B] ring-2 ring-amber-400/40">
-            CL
-          </div>
-          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-3 text-[14px] sm:text-sm text-zinc-100 shadow-md">
-            <p className="font-medium leading-relaxed">
-              Queremos digitalizar la captación y los avisos. Ahora mismo perdemos presupuestos y horas entre llamadas y WhatsApp.
-            </p>
-            <span className="mt-1 block text-[14px] font-medium text-zinc-400">10:14</span>
-          </div>
-        </div>
-
-        {/* Erick bubble */}
-        <div className="flex items-start justify-end gap-2.5 self-end max-w-[88%]">
-          <div className="rounded-2xl rounded-tr-sm border border-blue-400/40 bg-gradient-to-r from-[#0044FF] to-[#2563EB] p-3 text-[14px] sm:text-sm text-white shadow-[0_4px_16px_rgba(0,68,255,0.4)]">
-            <p className="font-semibold leading-relaxed">
-              Entendido. Diseñaremos un flujo automatizado: del formulario web directo al ERP y WhatsApp sin tareas manuales.
-            </p>
-            <div className="mt-1 flex items-center justify-end gap-1 text-[14px] text-blue-200">
-              <span>10:15</span>
-              <span className="font-bold">✓✓ Leído</span>
+      {/* Audit Findings Matrix */}
+      <div className="my-auto flex flex-col gap-2.5 py-1">
+        {/* Finding 1 */}
+        <div className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#14141C] p-3 transition-colors hover:border-purple-500/40">
+          <div className="flex items-start gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-rose-500/15 font-mono text-xs font-bold text-rose-400 border border-rose-500/30">
+              01
+            </span>
+            <div>
+              <p className="text-[14px] font-bold text-white">Fuga de presupuestos en WhatsApp</p>
+              <p className="text-[13px] text-zinc-400">Pérdida de clientes por respuesta tardía entre llamadas y mensajes.</p>
             </div>
           </div>
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0044FF] text-[14px] font-extrabold text-white ring-2 ring-blue-400/40">
-            ER
-          </div>
+          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 rounded-md bg-[#6D28D9]/20 px-2.5 py-1 font-mono text-[12px] font-bold text-[#DDD6FE] border border-[#8B5CF6]/30">
+            → Respuesta &lt; 30s
+          </span>
         </div>
 
-        {/* Client confirmation */}
-        <div className="flex items-start gap-2.5 max-w-[80%]">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[14px] font-extrabold text-[#09090B]">
-            CL
+        {/* Finding 2 */}
+        <div className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#14141C] p-3 transition-colors hover:border-purple-500/40">
+          <div className="flex items-start gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-amber-500/15 font-mono text-xs font-bold text-amber-400 border border-amber-500/30">
+              02
+            </span>
+            <div>
+              <p className="text-[14px] font-bold text-white">14 h/semana en transcripción manual</p>
+              <p className="text-[13px] text-zinc-400">Datos duplicados a mano entre Excel, facturas en papel y albaranes.</p>
+            </div>
           </div>
-          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-2.5 text-[14px] sm:text-sm text-zinc-200">
-            <p className="font-medium">
-              Perfecto, empecemos. ¡Adelante!
-            </p>
+          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 rounded-md bg-[#6D28D9]/20 px-2.5 py-1 font-mono text-[12px] font-bold text-[#DDD6FE] border border-[#8B5CF6]/30">
+            → ERP sincronizado
+          </span>
+        </div>
+
+        {/* Finding 3 */}
+        <div className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#14141C] p-3 transition-colors hover:border-purple-500/40">
+          <div className="flex items-start gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-purple-500/15 font-mono text-xs font-bold text-purple-300 border border-purple-500/30">
+              03
+            </span>
+            <div>
+              <p className="text-[14px] font-bold text-white">Web lenta y sin captación orgánica</p>
+              <p className="text-[13px] text-zinc-400">Sin posicionamiento local ni medición de conversiones reales.</p>
+            </div>
           </div>
+          <span className="hidden sm:inline-flex shrink-0 items-center gap-1 rounded-md bg-[#6D28D9]/20 px-2.5 py-1 font-mono text-[12px] font-bold text-[#DDD6FE] border border-[#8B5CF6]/30">
+            → Web &lt; 0.8s + SEO
+          </span>
         </div>
       </div>
 
-      {/* Deliverable Banner */}
-      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418] p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
-        <div className="flex items-center gap-2">
-          <CheckCircle2 size={18} className="text-[#10B981]" />
+      {/* Audit Outcome Bar */}
+      <div className="flex items-center justify-between rounded-xl border border-[#8B5CF6]/40 bg-[#150F24]/90 p-3 shadow-[0_0_20px_rgba(109,40,217,0.2)]">
+        <div className="flex items-center gap-2.5">
+          <CheckCircle2 size={18} className="text-[#A78BFA] shrink-0" />
           <div>
-            <p className="text-[14px] font-bold text-white">Entregable: Brief Técnico y Plan de Proyecto</p>
-            <p className="text-[14px] text-emerald-300">Objetivos claros, arquitectura y fechas comprometidas</p>
+            <p className="text-[14px] font-bold text-white">Plan técnico validado</p>
+            <p className="text-[13px] text-[#C4B5FD]">Objetivos definidos, arquitectura planificada y ahorro estimado de tiempo</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-block rounded-full border border-amber-400/30 bg-amber-400/20 px-2.5 py-0.5 text-[14px] font-bold text-amber-300">
-            ⚡ Objetivos definidos
-          </span>
-          <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
-            ✓ BRIEF CLARO
-          </span>
-        </div>
+        <span className="rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3 py-1 text-[13px] font-black text-white shadow-[2px_2px_0_#09090B]">
+          ✓ DIAGNÓSTICO CERRADO
+        </span>
       </div>
     </div>
   );
@@ -317,9 +319,9 @@ function DesignStage({ active }: { active: boolean }) {
           {/* Mockup Header */}
           <div className="flex items-center justify-between border-b border-[#1C1C20] pb-2">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-[14px] text-[#0044FF] tracking-tight">ODERALO</span>
+              <span className="font-extrabold text-[14px] text-[#A78BFA] tracking-tight">ODERALO</span>
               <div className="flex gap-1.5 text-[14px] text-zinc-400">
-                <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-blue-300 font-semibold">Avisos</span>
+                <span className="rounded bg-purple-500/20 px-1.5 py-0.5 text-purple-300 font-semibold">Avisos</span>
                 <span className="px-1 py-0.5">Facturas</span>
                 <span className="px-1 py-0.5">Clientes</span>
               </div>
@@ -328,14 +330,14 @@ function DesignStage({ active }: { active: boolean }) {
           </div>
 
           {/* Hero Widget in Prototype */}
-          <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-[#0044FF] via-[#4338CA] to-[#6D28D9] p-3 text-white shadow-md">
-            <p className="text-[14px] font-medium text-blue-200">Gestión de avisos en campo</p>
+          <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-[#4C1D95] via-[#6D28D9] to-[#7C3AED] p-3 text-white shadow-md">
+            <p className="text-[14px] font-medium text-purple-200">Gestión de avisos en campo</p>
             <h4 className="font-display text-sm font-extrabold leading-tight">Del aviso a la factura sin papeles</h4>
             <div className="mt-2.5 flex items-center justify-between">
-              <span className="rounded bg-[#FFD200] px-2.5 py-0.5 text-[14px] font-extrabold text-[#09090B] shadow-sm">
+              <span className="rounded bg-[#6D28D9] border border-[#A78BFA] px-2.5 py-0.5 text-[13px] font-black text-white shadow-sm">
                 + Crear Aviso
               </span>
-              <span className="text-[14px] text-blue-100 font-medium">Sincronización en vivo</span>
+              <span className="text-[13px] text-purple-100 font-medium">Sincronización en vivo</span>
             </div>
           </div>
 
@@ -365,20 +367,20 @@ function DesignStage({ active }: { active: boolean }) {
             </span>
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2">
-                <span className="h-4 w-4 rounded-md bg-[#0044FF] shadow-sm" />
-                <span className="text-[14px] font-mono text-zinc-200">#0044FF</span>
+                <span className="h-4 w-4 rounded-md bg-[#09090B] border border-zinc-700 shadow-sm" />
+                <span className="text-[14px] font-mono text-zinc-200">#09090B</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-4 w-4 rounded-md bg-[#FFD200] shadow-sm" />
-                <span className="text-[14px] font-mono text-zinc-200">#FFD200</span>
+                <span className="h-4 w-4 rounded-md bg-white border border-zinc-700 shadow-sm" />
+                <span className="text-[14px] font-mono text-zinc-200">#FFFFFF</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-4 w-4 rounded-md bg-[#10B981] shadow-sm" />
-                <span className="text-[14px] font-mono text-zinc-200">#10B981</span>
+                <span className="h-4 w-4 rounded-md bg-[#6D28D9] shadow-sm" />
+                <span className="text-[14px] font-mono text-zinc-200">#6D28D9</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="h-4 w-4 rounded-md bg-[#8B5CF6] shadow-sm" />
-                <span className="text-[14px] font-mono text-zinc-200">#8B5CF6</span>
+                <span className="h-4 w-4 rounded-md bg-[#A78BFA] shadow-sm" />
+                <span className="text-[14px] font-mono text-zinc-200">#A78BFA</span>
               </div>
             </div>
           </div>
@@ -391,14 +393,14 @@ function DesignStage({ active }: { active: boolean }) {
       </div>
 
       {/* Approval Badge */}
-      <div className="flex items-center justify-between rounded-xl border border-amber-400/40 bg-amber-400/10 p-3">
+      <div className="flex items-center justify-between rounded-xl border border-[#8B5CF6]/40 bg-[#150F24]/90 p-3 shadow-[0_0_20px_rgba(109,40,217,0.2)]">
         <div className="flex items-center gap-2">
-          <Sparkles size={16} className="text-[#FFD200]" />
+          <Sparkles size={16} className="text-[#A78BFA]" />
           <p className="text-[14px] font-semibold text-zinc-200">
             Flujos y diseño aprobados antes de escribir una línea de código.
           </p>
         </div>
-        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[3px_3px_0_#0044FF]">
+        <span className="rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3 py-1 text-[13px] font-black text-white shadow-[2px_2px_0_#09090B]">
           ✓ DISEÑO APROBADO
         </span>
       </div>
@@ -424,12 +426,12 @@ function BuildStage({ active }: { active: boolean }) {
             <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
             <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
           </div>
-          <div className="flex items-center gap-1 rounded-t border-b-2 border-[#0044FF] bg-[#141A29] px-2.5 py-1 text-[14px] font-semibold text-white">
-            <span className="rounded bg-[#3178C6] px-1 text-[14px] font-bold text-white">TS</span>
+          <div className="flex items-center gap-1 rounded-t border-b-2 border-[#6D28D9] bg-[#161224] px-2.5 py-1 text-[14px] font-semibold text-white">
+            <span className="rounded bg-[#6D28D9] px-1 text-[13px] font-bold text-white">TS</span>
             orders.service.ts
           </div>
           <div className="hidden sm:flex items-center gap-1 px-2 py-1 text-[14px] text-zinc-400">
-            <span className="text-cyan-400 font-bold text-[14px]">⚛</span>
+            <span className="text-[#A78BFA] font-bold text-[14px]">⚛</span>
             App.tsx
           </div>
         </div>
@@ -491,10 +493,10 @@ function BuildStage({ active }: { active: boolean }) {
       </div>
 
       {/* Terminal & Build Execution */}
-      <div className="rounded-xl border border-blue-500/20 bg-[#0E1424] p-3 flex flex-col gap-2">
+      <div className="rounded-xl border border-[#8B5CF6]/30 bg-[#100D1C] p-3 flex flex-col gap-2">
         <div className="flex items-center justify-between text-[14px] font-mono">
           <span className="text-zinc-400 flex items-center gap-1.5">
-            <Terminal size={14} className="text-[#0044FF]" />
+            <Terminal size={14} className="text-[#A78BFA]" />
             $ pnpm run build --mode production
           </span>
           <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[14px] font-bold text-emerald-300 border border-emerald-500/30">
@@ -505,7 +507,7 @@ function BuildStage({ active }: { active: boolean }) {
         {/* Progress Bar & Tech Tags */}
         <div className="flex items-center justify-between gap-3">
           <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800">
-            <div className="h-full w-full rounded-full bg-gradient-to-r from-[#0044FF] via-[#10B981] to-[#FFD200]" />
+            <div className="h-full w-full rounded-full bg-gradient-to-r from-[#6D28D9] via-[#8B5CF6] to-emerald-400" />
           </div>
           <span className="shrink-0 text-[14px] font-bold text-emerald-400 flex items-center gap-1">
             <CheckCircle2 size={14} />
@@ -515,12 +517,14 @@ function BuildStage({ active }: { active: boolean }) {
 
         <div className="flex items-center justify-between pt-1 border-t border-[#1C1C20] text-[14px]">
           <div className="flex gap-1.5">
-            <span className="rounded bg-cyan-500/10 px-2 py-0.5 font-bold text-cyan-300 border border-cyan-500/20">React 19</span>
-            <span className="rounded bg-blue-500/10 px-2 py-0.5 font-bold text-blue-300 border border-blue-500/20">TypeScript</span>
-            <span className="rounded bg-sky-500/10 px-2 py-0.5 font-bold text-sky-300 border border-sky-500/20">Tailwind</span>
-            <span className="rounded bg-indigo-500/10 px-2 py-0.5 font-bold text-indigo-300 border border-indigo-500/20">PostgreSQL</span>
+            <span className="rounded bg-purple-500/10 px-2 py-0.5 font-bold text-purple-300 border border-purple-500/20">React 19</span>
+            <span className="rounded bg-indigo-500/10 px-2 py-0.5 font-bold text-indigo-300 border border-indigo-500/20">TypeScript</span>
+            <span className="rounded bg-violet-500/10 px-2 py-0.5 font-bold text-violet-300 border border-violet-500/20">Tailwind</span>
+            <span className="rounded bg-zinc-800 px-2 py-0.5 font-bold text-zinc-300 border border-zinc-700">PostgreSQL</span>
           </div>
-          <span className="font-bold text-[#FFD200]">✓ PRODUCTO CONSTRUIDO</span>
+          <span className="rounded-md border border-[#A78BFA] bg-[#6D28D9] px-2.5 py-0.5 text-[12px] font-black text-white shadow-[2px_2px_0_#09090B]">
+            ✓ PRODUCTO CONSTRUIDO
+          </span>
         </div>
       </div>
     </div>
@@ -604,15 +608,15 @@ function PublishStage({ active }: { active: boolean }) {
       </div>
 
       {/* Production Deployment Status Banner */}
-      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418] p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
+      <div className="flex items-center justify-between rounded-xl border border-[#8B5CF6]/40 bg-[#150F24]/90 p-3 shadow-[0_0_20px_rgba(109,40,217,0.2)]">
         <div className="flex items-center gap-2">
           <span className="flex h-3 w-3 rounded-full bg-emerald-400 animate-ping" />
           <div>
             <p className="text-[14px] font-bold text-white">● EN PRODUCCIÓN · Despliegue cuidado</p>
-            <p className="text-[14px] text-emerald-300">HTTPS, caché y despliegue automático</p>
+            <p className="text-[13px] text-[#C4B5FD]">HTTPS, caché y despliegue automático</p>
           </div>
         </div>
-        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
+        <span className="rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3 py-1 text-[13px] font-black text-white shadow-[2px_2px_0_#09090B]">
           ✓ EN PRODUCCIÓN
         </span>
       </div>
@@ -632,8 +636,8 @@ function GrowStage({ active }: { active: boolean }) {
     >
       {/* Top Impact Metric Tags */}
       <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
-        <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-0.5 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF] flex items-center gap-1">
-          <Star size={12} className="fill-[#09090B]" />
+        <span className="rounded-md border border-[#09090B] bg-[#6D28D9] px-2.5 py-0.5 text-[13px] font-black text-white shadow-[2px_2px_0_#09090B] flex items-center gap-1">
+          <Star size={12} className="fill-white" />
           SEO TÉCNICO
         </span>
         <div className="flex items-center gap-3 text-[14px] font-bold">
@@ -641,7 +645,7 @@ function GrowStage({ active }: { active: boolean }) {
             <TrendingUp size={14} />
             Más visitas orgánicas
           </span>
-          <span className="text-blue-400 flex items-center gap-1">
+          <span className="text-[#A78BFA] flex items-center gap-1">
             <Cpu size={14} />
             Flujos con IA
           </span>
@@ -651,36 +655,36 @@ function GrowStage({ active }: { active: boolean }) {
       {/* Main Split: SEO SERP Result & n8n Autonomous Workflow */}
       <div className="grid grid-cols-12 gap-3 my-auto py-1">
         {/* Left: Google Search Result & Growth */}
-        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-blue-500/20 bg-[#111726] p-3 shadow-md">
+        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-zinc-800 bg-[#12111A] p-3 shadow-md">
           <div>
             <div className="flex items-center gap-1.5 text-[14px] text-emerald-400 font-medium">
               <span>https://tuempresa.es</span>
               <span className="text-zinc-500">›</span>
               <span>servicios</span>
             </div>
-            <h4 className="font-display text-[14px] sm:text-sm font-bold text-blue-400 mt-1 hover:underline cursor-pointer">
+            <h4 className="font-display text-[14px] sm:text-sm font-bold text-[#A78BFA] mt-1 hover:underline cursor-pointer">
               Tu Empresa · Software a Medida y Automatización
             </h4>
-            <p className="mt-1 text-[14px] text-zinc-300 leading-snug">
+            <p className="mt-1 text-[13px] text-zinc-300 leading-snug">
               Plataforma digital: presupuestos en segundos, seguimiento de avisos y facturación directa sin papeleos.
             </p>
           </div>
 
-          <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-500/10 p-2 border border-emerald-500/20">
-            <span className="text-[14px] font-bold text-emerald-300">
+          <div className="mt-2 flex items-center justify-between rounded-lg bg-purple-500/10 p-2 border border-purple-500/20">
+            <span className="text-[13px] font-bold text-[#DDD6FE]">
               Resultado en buscadores
             </span>
-            <span className="rounded bg-emerald-400 px-1.5 py-0.2 text-[14px] font-black text-black">
+            <span className="rounded bg-[#6D28D9] px-1.5 py-0.2 text-[12px] font-black text-white">
               SEO
             </span>
           </div>
         </div>
 
         {/* Right: n8n AI Autonomous Workflow */}
-        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101524] p-3">
+        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101018] p-3">
           <div className="flex items-center justify-between">
-            <span className="text-[14px] font-extrabold uppercase tracking-wider text-zinc-400 flex items-center gap-1">
-              <Workflow size={12} className="text-[#0044FF]" />
+            <span className="text-[13px] font-extrabold uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+              <Workflow size={12} className="text-[#A78BFA]" />
               Pipeline Autónomo (n8n + IA)
             </span>
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -689,36 +693,36 @@ function GrowStage({ active }: { active: boolean }) {
           {/* Workflow Connected Nodes */}
           <div className="flex flex-col gap-2 my-1">
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-purple-500/20 text-[#A78BFA] border border-purple-500/40">
                 <Zap size={14} />
               </div>
-              <div className="text-[14px]">
+              <div className="text-[13px]">
                 <p className="font-bold text-white leading-none">Formulario / WhatsApp</p>
-                <p className="text-[14px] text-zinc-400">Captación de aviso</p>
+                <p className="text-[12px] text-zinc-400">Captación de aviso</p>
               </div>
             </div>
 
-            <div className="pl-3.5 text-blue-400 text-[14px] font-black">↓</div>
+            <div className="pl-3.5 text-[#A78BFA] text-[13px] font-black">↓</div>
 
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0A1B5C] text-blue-400 border border-blue-500/40">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#2E1065] text-[#C4B5FD] border border-purple-500/40">
                 <Bot size={14} />
               </div>
-              <div className="text-[14px]">
+              <div className="text-[13px]">
                 <p className="font-bold text-white leading-none">Agente IA</p>
-                <p className="text-[14px] text-zinc-400">Clasifica y asigna técnico</p>
+                <p className="text-[12px] text-zinc-400">Clasifica y asigna técnico</p>
               </div>
             </div>
 
-            <div className="pl-3.5 text-emerald-400 text-[14px] font-black">↓</div>
+            <div className="pl-3.5 text-emerald-400 text-[13px] font-black">↓</div>
 
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                 <CheckCircle2 size={14} />
               </div>
-              <div className="text-[14px]">
+              <div className="text-[13px]">
                 <p className="font-bold text-white leading-none">ERP & Facturación</p>
-                <p className="text-[14px] text-zinc-400">Cobro y factura en PDF</p>
+                <p className="text-[12px] text-zinc-400">Cobro y factura en PDF</p>
               </div>
             </div>
           </div>
@@ -726,12 +730,12 @@ function GrowStage({ active }: { active: boolean }) {
       </div>
 
       {/* Bottom Live Activity Banner */}
-      <div className="flex items-center justify-between gap-2 rounded-xl border border-blue-500/30 bg-[#0C1220] p-2.5 text-[14px] text-blue-200">
+      <div className="flex items-center justify-between gap-2 rounded-xl border border-[#8B5CF6]/30 bg-[#140F24] p-2.5 text-[14px] text-purple-200">
         <span className="flex items-center gap-1.5 font-medium truncate">
           <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-ping" />
           Flujo de ejemplo ejecutándose solo
         </span>
-        <span className="shrink-0 whitespace-nowrap rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
+        <span className="shrink-0 whitespace-nowrap rounded-md border border-[#09090B] bg-[#6D28D9] px-2.5 py-1 text-[13px] font-black text-white shadow-[2px_2px_0_#09090B]">
           ✓ AUTOMATIZADO
         </span>
       </div>
@@ -743,11 +747,11 @@ function GrowStage({ active }: { active: boolean }) {
 
 export function ProcessStage({ active }: { active: number }) {
   return (
-    <div className="relative aspect-[640/440] min-h-[380px] w-full overflow-hidden rounded-[24px] border-2 border-[#D4D4D8] bg-[#090D17] shadow-[8px_8px_0_#0044FF]">
-      {/* Background radial ambient lights for depth */}
-      <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-600/15 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-indigo-600/10 blur-3xl" />
+    <div className="relative aspect-[640/440] min-h-[380px] w-full overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-[#0C0D14] shadow-[8px_8px_0_#09090B] hover:shadow-[10px_10px_0_#6D28D9] transition-all">
+      {/* Background radial ambient lights for depth in purple */}
+      <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-purple-600/20 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-600/10 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-violet-600/15 blur-3xl" />
 
       {/* 5 High-Impact Stages */}
       <ListenStage active={active === 0} />
