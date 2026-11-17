@@ -64,7 +64,7 @@ export function OderaloSection() {
   const rotY = useTransform(sx, (v) => -6 + v * 7);
   const rotX = useTransform(sy, (v) => 3 + v * -5);
   const phoneX = useTransform(sx, (v) => v * 14);
-  const wordX = useTransform(sx, (v) => v * -30);
+  const wordX = useTransform(sx, (v) => v * -14);
 
   const onMove = (e: React.PointerEvent<HTMLElement>) => {
     if (reduce) return;
@@ -81,13 +81,17 @@ export function OderaloSection() {
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
-      <motion.div
+      <div
         aria-hidden="true"
-        style={{ x: reduce ? 0 : wordX }}
-        className="font-display pointer-events-none absolute right-[2%] bottom-[2%] select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,13vw,15rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+        className="pointer-events-none absolute inset-x-0 bottom-[2%] mx-auto flex w-full max-w-[1560px] justify-end px-6 sm:px-10"
       >
-        ODERALO
-      </motion.div>
+        <motion.div
+          style={{ x: reduce ? 0 : wordX }}
+          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,13vw,15rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+        >
+          ODERALO
+        </motion.div>
+      </div>
 
       {/* Bloques de color */}
       <div
@@ -179,7 +183,7 @@ export function OderaloSection() {
 
               <motion.div
                 style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-2 -left-2 z-20 w-[30%] max-w-[180px] min-w-[112px] sm:-left-6 lg:-bottom-6 lg:-left-12"
+                className="absolute -bottom-2 -left-2 z-20 w-[30%] max-w-[180px] min-w-[112px] sm:-left-6 lg:-bottom-6 lg:-left-3"
               >
                 <div
                   className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#C6F432]"
