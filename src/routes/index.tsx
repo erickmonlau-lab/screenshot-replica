@@ -396,10 +396,10 @@ function Index() {
         {/* CEREBRO: segundo cerebro en Obsidian que la IA lee antes de trabajar */}
         <section
           id="ia"
-          className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#6D28D9] py-12 text-white sm:py-14"
+          className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#6D28D9] py-12 text-white sm:py-14 lg:py-16"
         >
-          <div className="mx-auto w-full max-w-[1400px] px-5 sm:px-8">
-            <div className="grid items-stretch gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="mx-auto w-full max-w-[1680px] px-5 sm:px-8 lg:px-10">
+            <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
               {/* Explicación */}
               <div className="flex flex-col lg:col-span-5">
                 <p
@@ -408,18 +408,20 @@ function Index() {
                 >
                   Cerebro
                 </p>
-                <h2 className="font-display mt-4 text-[clamp(2.1rem,3.4vw,3.2rem)] leading-[1.02] font-bold tracking-[-0.04em]">
-                  La IA ya sabe{" "}
-                  <span className="box-decoration-clone rounded-lg bg-[#09090B] px-2.5">
-                    cómo trabajo.
+                <h2 className="font-display mt-6 text-[clamp(2.1rem,3.4vw,3.2rem)] leading-[1.02] font-bold tracking-[-0.04em]">
+                  La IA ya sabe
+                  <span className="mt-3 block">
+                    <span className="inline-block rounded-lg bg-[#09090B] px-3 py-0.5">
+                      cómo trabajo.
+                    </span>
                   </span>
                 </h2>
-                <p className="mt-4 max-w-[46ch] text-[18px] leading-relaxed font-semibold">
+                <p className="mt-5 max-w-[46ch] text-[18px] leading-relaxed font-semibold">
                   Guardo mis decisiones, reglas y datos de cada proyecto en notas enlazadas en
                   Obsidian. Antes de empezar, la IA lee las que necesita.
                 </p>
 
-                <ol className="mt-6 grid gap-3">
+                <ol className="mt-7 grid gap-3.5">
                   {[
                     ["Escribo", "Cada decisión, regla o cliente es una nota enlazada."],
                     ["La IA lee", "Abre el índice y carga solo las notas del proyecto."],
@@ -443,65 +445,15 @@ function Index() {
                 </ol>
               </div>
 
-              {/* Grafo interactivo con su leyenda */}
+              {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
-                <div className="flex h-full flex-col overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[10px_10px_0_#09090B]">
-                  <div className="h-[380px] sm:h-[460px] lg:h-auto lg:min-h-[480px] lg:flex-1">
-                    <BrainVisual theme="light" />
-                  </div>
-                  <ul
-                    className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t-[3px] border-[#09090B] bg-[#09090B] px-4 py-3 text-[15px] font-bold text-white"
-                    aria-label="Leyenda del grafo"
-                  >
-                    {[
-                      ["#09090B", "Índices"],
-                      ["#F59E0B", "Proyectos"],
-                      ["#6D28D9", "Skills y diseño"],
-                      ["#4C1D95", "Agentes y reglas"],
-                      ["#A1A1AA", "Notas sueltas"],
-                    ].map(([c, l]) => (
-                      <li key={l} className="inline-flex items-center gap-2">
-                        <span
-                          aria-hidden="true"
-                          className="h-3.5 w-3.5 rounded-full border-2 border-white"
-                          style={{ background: c }}
-                        />
-                        {l}
-                      </li>
-                    ))}
-                    <li className="text-zinc-300">· Arrastra un nodo</li>
-                  </ul>
+                <div className="h-[380px] sm:h-[480px] lg:h-[640px]">
+                  <BrainVisual theme="light" />
                 </div>
+                <p className="mx-auto mt-4 w-fit max-w-full rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-center text-[15px] font-bold text-[#09090B]">
+                  Mi cerebro: cada punto es una nota. Arrastra uno para ver sus conexiones.
+                </p>
               </div>
-            </div>
-
-            {/* Ejemplo real de lectura */}
-            <div className="mt-9 grid items-center gap-4 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] p-4 sm:p-5 lg:grid-cols-[auto_1fr_auto_1fr_auto_1fr] lg:gap-5">
-              <p className="font-display text-[20px] leading-tight font-bold uppercase lg:max-w-[9ch]">
-                Ejemplo real
-              </p>
-              {[
-                ["AGENT-ROUTER.md", "dice qué leer", "#FFFFFF", "#09090B"],
-                ["PROJECTS/ORDERALO.md", "dossier del proyecto", "#6D28D9", "#FFFFFF"],
-                ["_DECISIONS/", "decisiones ya tomadas", "#F59E0B", "#09090B"],
-              ].map(([f, d, bg, fg], i) => (
-                <div key={f} className="contents">
-                  {i > 0 && (
-                    <span aria-hidden="true" className="font-display hidden text-[28px] font-black lg:block">
-                      →
-                    </span>
-                  )}
-                  <div>
-                    <span
-                      className="inline-block rounded-md px-2.5 py-1 font-mono text-[15px] font-bold"
-                      style={{ background: bg, color: fg }}
-                    >
-                      {f}
-                    </span>
-                    <p className="mt-1.5 text-[15px] font-semibold text-zinc-300">{d}</p>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </section>

@@ -491,6 +491,13 @@ function buildGraph(): {
   link(satellites[4]!, agentNodes[0]!, 110);
   link(satellites[5]!, projectNodes[2]!, 120);
 
+  // Notas sueltas sin título: dan densidad al cerebro (no llevan etiqueta)
+  const hosts = nodes.filter((n) => n.group !== "hub");
+  for (let i = 0; i < 26; i++) {
+    const sat = addNode("", "satellite", 0.5 + 0.4 * r(), 0.12 + 0.62 * r(), 0.04);
+    link(sat, hosts[Math.floor(r() * hosts.length)]!, 90 + r() * 60);
+  }
+
   nodes.forEach((n) => {
     if (n.group === "hub") {
       n.r = 6.5 + Math.sqrt(n.deg) * 1.2;
@@ -503,6 +510,12 @@ function buildGraph(): {
 
   return { nodes, links, hubIndices };
 }
+
+/* Silueta de cerebro (vista lateral) en un lienzo de 400x330, y sus circunvoluciones */
+const BRAIN_D =
+  "M70 196 C38 176 28 124 66 88 C86 58 138 40 174 56 C198 24 262 24 286 56 C330 40 378 76 366 126 C396 152 382 204 346 214 C334 240 298 250 274 238 C262 264 230 268 216 246 C190 256 162 244 150 238 C116 240 94 222 70 196 Z M262 240 C292 232 336 244 338 270 C338 294 296 304 270 288 C252 274 248 250 262 240 Z M218 246 C222 268 226 286 232 304 L252 304 C250 284 248 262 248 242 Z";
+const FOLDS_D =
+  "M104 128 C124 104 158 112 168 138 C178 160 206 154 216 128 M146 196 C162 172 194 178 204 200 M224 84 C238 106 268 98 284 76 M240 152 C256 132 292 142 302 168 C308 184 328 182 338 160 M96 168 C112 152 134 158 138 178 M284 198 C296 182 322 188 330 204 M120 92 C132 82 150 84 156 96 M300 104 C316 96 336 104 340 120";
 
 export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -558,6 +571,21 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       if (pulses[i]) pulses[i]!.progress = Math.random();
     }
 
+    const brainSrc = new Path2D(BRAIN_D);
+    const foldsSrc = new Path2D(FOLDS_D);
+    let brainPath = new Path2D();
+    let bs = 1;
+    let bx0 = 0;
+    let by0 = 0;
+    const buildBrain = (nw: number, nh: number) => {
+      bs = Math.min((nw * 0.94) / 400, (nh * 0.94) / 330);
+      bx0 = (nw - 400 * bs) / 2;
+      by0 = (nh - 330 * bs) / 2;
+      brainPath = new Path2D();
+      brainPath.addPath(brainSrc, { a: bs, b: 0, c: 0, d: bs, e: bx0, f: by0 });
+    };
+    const inBrain = (x: number, y: number) => ctx.isPointInPath(brainPath, x * dpr, y * dpr);
+
     const resize = () => {
       const r = box.getBoundingClientRect();
       const nw = Math.max(200, r.width);
@@ -569,17 +597,17 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       canvas.style.height = `${nh}px`;
 
       if (!placed) {
+        buildBrain(nw, nh);
         nodes.forEach((n) => {
-          // Reparte el grafo por todo el lienzo (las anclas originales ocupaban solo la mitad derecha)
-          n.ax = 0.08 + ((n.ax - 0.5) / 0.4) * 0.84;
-          n.ay = 0.1 + ((n.ay - 0.12) / 0.62) * 0.8;
-          n.x = n.ax * nw + n.ox * nh;
-          n.y = n.ay * nh + n.oy * nh;
-          n.ax *= nw;
-          n.ay *= nh;
+          // Reparte los nodos por el interior del cerebro (anclas originales remapeadas)
+          n.ax = bx0 + (0.2 + ((n.ax - 0.5) / 0.4) * 0.6) * 400 * bs;
+          n.ay = by0 + (0.18 + ((n.ay - 0.12) / 0.62) * 0.5) * 330 * bs;
+          n.x = n.ax + n.ox * nh * 0.5;
+          n.y = n.ay + n.oy * nh * 0.5;
         });
         placed = true;
       } else {
+        buildBrain(nw, nh);
         const scaleX = nw / W;
         const scaleY = nh / H;
         nodes.forEach((n) => {
@@ -597,14 +625,13 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
     const ro = new ResizeObserver(resize);
     ro.observe(box);
 
-    let offX = 0;
     let hover = -1;
     let drag = -1;
     const pt = { x: 0, y: 0 };
 
     const local = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect();
-      pt.x = e.clientX - r.left - offX;
+      pt.x = e.clientX - r.left;
       pt.y = e.clientY - r.top;
     };
 
@@ -726,25 +753,17 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         nd.x += nd.vx;
         nd.y += nd.vy;
 
-        // El grafo ocupa todo el lienzo (el texto va en otra columna)
-        const minX = 30;
-        const maxX = W - 35;
-        const minY = Math.min(80, H * 0.12);
-        const maxY = H - 35;
-
-        nd.x = Math.min(maxX, Math.max(minX, nd.x));
-        nd.y = Math.min(maxY, Math.max(minY, nd.y));
+        // Mantiene cada nodo dentro de la silueta del cerebro
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (!inBrain(nd.x, nd.y)) {
+          const cx = bx0 + 200 * bs;
+          const cy = by0 + 150 * bs;
+          nd.x += (cx - nd.x) * 0.18;
+          nd.y += (cy - nd.y) * 0.18;
+          nd.vx *= 0.5;
+          nd.vy *= 0.5;
+        }
       }
-
-      // Centra horizontalmente la nube de nodos en el lienzo
-      let mnX = Infinity;
-      let mxX = -Infinity;
-      for (const nd of nodes) {
-        mnX = Math.min(mnX, nd.x);
-        mxX = Math.max(mxX, nd.x);
-      }
-      const targetOff = Math.max(-W * 0.3, Math.min(W * 0.3, W / 2 - (mnX + mxX) / 2));
-      offX += (targetOff - offX) * 0.04;
 
       // Drag override
       if (drag >= 0) {
@@ -772,8 +791,12 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       // Clean Light Background or Dark
-      ctx.fillStyle = isLight ? "#FFFFFF" : "#0B0C10";
-      ctx.fillRect(0, 0, W, H);
+      if (isLight) {
+        ctx.clearRect(0, 0, W, H);
+      } else {
+        ctx.fillStyle = "#0B0C10";
+        ctx.fillRect(0, 0, W, H);
+      }
 
       // Subtle ambient spotlight behind the constellation
       const bgGrad = ctx.createRadialGradient(
@@ -795,7 +818,29 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       }
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, W, H);
-      ctx.translate(offX, 0);
+
+      // Cerebro: silueta rellena, circunvoluciones y contorno grueso
+      if (isLight) {
+        ctx.save();
+        ctx.translate(14, 14);
+        ctx.fillStyle = "#09090B";
+        ctx.fill(brainPath);
+        ctx.restore();
+      }
+      ctx.fillStyle = isLight ? "#FFFFFF" : "#1E1B4B";
+      ctx.fill(brainPath);
+      ctx.save();
+      ctx.translate(bx0, by0);
+      ctx.scale(bs, bs);
+      ctx.lineCap = "round";
+      ctx.strokeStyle = isLight ? "#DDD6FE" : "#4C1D95";
+      ctx.lineWidth = 6;
+      ctx.stroke(foldsSrc);
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = isLight ? "#09090B" : "#FFFFFF";
+      ctx.lineWidth = 5 / bs;
+      ctx.stroke(brainSrc);
+      ctx.restore();
 
       // Auto-focus cycle when not hovered
       const focus =
@@ -944,6 +989,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       ctx.textBaseline = "middle";
 
       const tryDrawLabel = (name: string, x: number, y: number, isHighlight: boolean) => {
+        if (!name) return;
         ctx.font = isHighlight
           ? "700 15px Inter Variable, Inter, sans-serif"
           : "600 15px Inter Variable, Inter, sans-serif";
@@ -1060,7 +1106,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
   return (
     <div
       ref={wrap}
-      className={`relative h-full min-h-[300px] w-full overflow-hidden ${theme === "light" ? "bg-white" : "bg-[#0B0C10]"}`}
+      className={`relative h-full min-h-[300px] w-full overflow-hidden ${theme === "light" ? "bg-transparent" : "bg-[#0B0C10]"}`}
     >
       <canvas
         ref={cv}
