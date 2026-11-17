@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
-import { ProcessStage } from "./MethodVisuals";
+import { ProcessScenes } from "./ProcessScenes";
 
 const steps = [
   {
@@ -9,7 +9,7 @@ const steps = [
     titlePrefix: "Diagnóstico.",
     titleSuffix: "Auditoría técnica y operativa.",
     text: "Analizo tus procesos actuales para detectar fugas de tiempo y pedidos que se pierden por falta de sincronización.",
-    done: "Cuellos de botella resueltos",
+    done: "Fugas de tiempo detectadas",
   },
   {
     n: "02",
@@ -17,23 +17,23 @@ const steps = [
     titlePrefix: "Arquitectura.",
     titleSuffix: "El mapa completo del sistema.",
     text: "Estructura de la base de datos, flujos de clientes y cómo se comunican la web, el ERP y tus herramientas.",
-    done: "Sistema escalable sin parches",
+    done: "Sistema ordenado desde el diseño",
   },
   {
     n: "03",
     label: "Desarrollo",
     titlePrefix: "Desarrollo.",
     titleSuffix: "Código tipado y robusto.",
-    text: "React y TypeScript, APIs seguras y backend probado en producción sin librerías innecesarias.",
-    done: "0 errores y rendimiento nativo",
+    text: "React y TypeScript, APIs seguras e integraciones con tus herramientas, pieza a pieza.",
+    done: "Código tipado y mantenible",
   },
   {
     n: "04",
     label: "Producción",
     titlePrefix: "Producción.",
-    titleSuffix: "Despliegue a máxima velocidad.",
-    text: "Infraestructura cloud, edge caching y Core Web Vitals en verde para cargar en milisegundos.",
-    done: "Carga en < 0.8s y 100% operativo",
+    titleSuffix: "Despliegue y rendimiento.",
+    text: "Despliegue en la nube con el rendimiento y los Core Web Vitals cuidados.",
+    done: "En producción y vigilado",
   },
   {
     n: "05",
@@ -41,7 +41,7 @@ const steps = [
     titlePrefix: "Automatización.",
     titleSuffix: "Flujos autónomos con IA.",
     text: "n8n y modelos de IA gestionan avisos, facturas y atención sin tareas manuales.",
-    done: "Ahorro de +15 h semanales",
+    done: "Tareas repetitivas automatizadas",
   },
 ];
 
@@ -105,7 +105,7 @@ export function ProcessSection() {
                       <span className="font-display block text-[clamp(4.5rem,12vw,8.5rem)] leading-[0.9] font-black tracking-[-0.04em] text-transparent [-webkit-text-stroke:2.5px_#09090B]">
                         {s.n}
                       </span>
-                      <span className="rounded-full border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-xs font-black uppercase tracking-wider text-white shadow-[3px_3px_0_#09090B]">
+                      <span className="rounded-full border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-[15px] font-black uppercase tracking-wider text-white shadow-[3px_3px_0_#09090B]">
                         {s.label}
                       </span>
                     </div>
@@ -117,7 +117,7 @@ export function ProcessSection() {
                       {s.text}
                     </p>
                     <div className="mt-5 flex items-center gap-2">
-                      <span className="inline-flex items-center gap-2 rounded-xl border-2 border-[#09090B] bg-white px-3.5 py-1.5 text-xs sm:text-sm font-bold text-[#09090B] shadow-[3px_3px_0_#6D28D9]">
+                      <span className="inline-flex items-center gap-2 rounded-xl border-2 border-[#09090B] bg-white px-3.5 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#6D28D9]">
                         <Check size={16} strokeWidth={3} className="text-[#6D28D9]" />
                         {s.done}
                       </span>
@@ -128,7 +128,7 @@ export function ProcessSection() {
             </div>
 
             <div className="lg:col-span-7">
-              <ProcessStage active={active} />
+              <ProcessScenes active={active} />
               <div className="relative mt-7 px-[26px]">
                 <div
                   aria-hidden="true"
