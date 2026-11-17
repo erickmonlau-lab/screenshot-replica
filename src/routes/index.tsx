@@ -355,7 +355,7 @@ function Index() {
         </div>
 
         <MetricsBand />
-        <OrderSection />
+        {/* <OrderSection /> eliminada para evitar redundancia de 3 tarjetas sobre 3 tarjetas */}
         <ProcessSection />
 
         {/* PROYECTOS — 3D Coverflow Gallery */}
