@@ -81,11 +81,6 @@ function Counter({ metric }: { metric: Metric }) {
   );
 }
 
-const TILES = [
-  { box: "bg-[#0044FF] text-white", sub: "text-white", rot: -2.2, lift: "md:mt-0" },
-  { box: "bg-[#09090B] text-white", sub: "text-zinc-300", rot: 1.6, lift: "md:mt-12" },
-  { box: "bg-[#FFD60A] text-[#09090B]", sub: "text-[#09090B]", rot: -1.2, lift: "md:mt-4" },
-] as const;
 
 /** Tres bloques de color inclinados con cifras gigantes y sombra dura. */
 export function MetricsBand() {
@@ -95,34 +90,34 @@ export function MetricsBand() {
     <section
       id="metricas"
       aria-label="Resultados en cifras"
-      className="section-light t-ink border-t border-[var(--t-line)] py-16 sm:py-20 lg:py-24"
+      className="border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-14 text-[#09090B] sm:py-16"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-12 xl:px-16">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-8 lg:gap-12">
-          {metrics.map((m, i) => {
-            const t = TILES[i % TILES.length]!;
-            return (
-              <motion.div
-                key={m.id}
-                initial={reduce ? false : { opacity: 0, y: 50, rotate: 0 }}
-                whileInView={{ opacity: 1, y: 0, rotate: reduce ? 0 : t.rot }}
-                whileHover={{ rotate: 0, y: reduce ? 0 : -8 }}
-                viewport={{ once: true, margin: "-10% 0px" }}
-                transition={{ type: "spring", stiffness: 120, damping: 14, delay: i * 0.12 }}
-                className={`${t.box} ${t.lift} rounded-[24px] border-[3px] border-[#09090B] p-6 sm:p-7 xl:p-8 shadow-[10px_10px_0_#09090B]`}
-              >
-                <p className="font-display text-[clamp(2.8rem,7vw,4.8rem)] leading-[0.92] font-bold tracking-[-0.045em] whitespace-nowrap md:text-[clamp(2.3rem,3.8vw,3.8rem)] lg:text-[clamp(2.8rem,4.4vw,4.4rem)] xl:text-[clamp(3.4rem,4.8vw,5.2rem)]">
-                  <Counter metric={m} />
-                </p>
-                <p className="font-display mt-5 text-[24px] leading-[1.1] font-bold tracking-[-0.03em] sm:text-[28px]">
-                  {m.label}
-                </p>
-                <p className={`${t.sub} mt-3 text-[16px] leading-snug font-medium sm:text-[17px]`}>
-                  {m.detail}
-                </p>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 gap-7 md:grid-cols-3 lg:gap-10">
+          {metrics.map((m, i) => (
+            <motion.div
+              key={m.id}
+              initial={reduce ? false : { opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px" }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              className="led-box flex min-w-0 flex-col p-6 text-white sm:p-7"
+            >
+              <span className="flex items-center gap-2.5 text-[15px] font-bold tracking-[0.1em] text-[#9DB8FF] uppercase">
+                <span className="led-dot h-2.5 w-2.5 rounded-full" />
+                0{i + 1}
+              </span>
+              <p className="font-display led-text mt-4 text-[clamp(3.4rem,7vw,5.2rem)] leading-[0.9] font-bold tracking-[-0.055em] whitespace-nowrap md:text-[clamp(2.8rem,4.6vw,4.6rem)]">
+                <Counter metric={m} />
+              </p>
+              <p className="font-display mt-5 text-[24px] leading-[1.1] font-bold tracking-[-0.03em] sm:text-[27px]">
+                {m.label}
+              </p>
+              <p className="mt-3 text-[16px] leading-snug font-medium text-[#D4D4D8] sm:text-[17px]">
+                {m.detail}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
