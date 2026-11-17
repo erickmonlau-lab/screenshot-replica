@@ -27,37 +27,37 @@ interface ProjectCarouselProps {
 
 const THEMES = [
   {
-    bg: "bg-[#0044FF]",
+    bg: "bg-[#6D28D9]",
     ink: "text-white",
-    sub: "text-white",
+    sub: "text-purple-100",
     chip: "bg-white text-[#09090B]",
-    tag: "border-white text-white",
+    tag: "border-white/80 text-white",
     btn: "bg-white text-[#09090B] shadow-[4px_4px_0_#09090B]",
   },
   {
     bg: "bg-[#09090B]",
-    frame: "border-[#0044FF] shadow-[0_0_0_5px_#08143F,0_0_34px_5px_#0044FF]",
+    frame: "border-[#6D28D9] shadow-[0_0_0_5px_#1E0D38,0_0_34px_5px_#6D28D9]",
     ink: "text-white",
     sub: "text-zinc-300",
-    chip: "bg-[#0044FF] text-white",
+    chip: "bg-[#6D28D9] text-white",
     tag: "border-[#B4B8C2] text-white",
-    btn: "bg-[#0044FF] text-white shadow-[4px_4px_0_#ffffff]",
+    btn: "bg-[#6D28D9] text-white shadow-[4px_4px_0_#ffffff]",
   },
   {
     bg: "bg-[#E3E5E9]",
     ink: "text-[#09090B]",
     sub: "text-zinc-700",
-    chip: "bg-[#0044FF] text-white",
+    chip: "bg-[#6D28D9] text-white",
     tag: "border-[#52525B] text-[#09090B]",
-    btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#0044FF]",
+    btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#6D28D9]",
   },
   {
     bg: "bg-white",
     ink: "text-[#09090B]",
     sub: "text-zinc-700",
-    chip: "bg-[#0044FF] text-white",
+    chip: "bg-[#6D28D9] text-white",
     tag: "border-[#52525B] text-[#09090B]",
-    btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#0044FF]",
+    btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#6D28D9]",
   },
 ] as const;
 

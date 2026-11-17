@@ -80,19 +80,19 @@ export function OderaloSection() {
           transition={{ duration: 0.8, ease: EASE }}
           className="lg:col-span-5 lg:pr-4 xl:pr-8"
         >
-          <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-1.5 text-[15px] sm:text-[16px] font-bold shadow-[4px_4px_0_#09090B]">
-            ERP + app de campo · prototipo funcional
+          <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1.5 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#09090B]">
+            Software a medida · Sistema en producción
           </span>
-          <h2 className="font-display mt-5 text-[clamp(3.8rem,9vw,8rem)] leading-[0.88] font-bold tracking-[-0.065em]">
-            Oderalo
+          <h2 className="font-display mt-5 text-[clamp(3.8rem,9vw,7.5rem)] leading-[0.88] font-black tracking-[-0.05em] text-[#09090B]">
+            ERP
           </h2>
-          <p className="font-display mt-4 text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.08] font-bold tracking-[-0.04em] text-[#0044FF]">
+          <p className="font-display mt-4 text-[clamp(1.6rem,2.8vw,2.4rem)] leading-[1.08] font-black tracking-[-0.04em] text-[#6D28D9]">
             Del aviso a la factura, sin papeles.
           </p>
           <p className="mt-4 max-w-[38ch] text-base leading-relaxed font-medium text-[#3F3F46] sm:text-lg lg:text-xl">
-            Mi ERP para empresas de servicios en campo: agenda, app del técnico con firma del
-            cliente, stock y facturación en un mismo sistema. Versión de prueba local: los datos
-            se guardan solo en el navegador.
+            Un sistema ERP completo desarrollado a medida para empresas de servicios y logística:
+            agenda operativa, app de campo con firma digital del cliente, control de stock y
+            facturación automática en un único lugar.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2.5">
             {features.map((f) => (
@@ -106,7 +106,7 @@ export function OderaloSection() {
           </ul>
           <a
             href="#contacto"
-            className="mt-8 inline-flex min-h-[54px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#0044FF] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF]"
+            className="mt-8 inline-flex min-h-[54px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#6D28D9] transition-all duration-150 hover:bg-[#6D28D9] hover:border-[#6D28D9] hover:shadow-[5px_5px_0_#09090B] active:translate-x-[2px] active:translate-y-[2px]"
           >
             <span>Pídeme la demo en directo</span>
             <ArrowUpRight size={18} strokeWidth={2.5} />
@@ -117,7 +117,7 @@ export function OderaloSection() {
         <div className="relative mt-10 sm:mt-12 lg:mt-0 lg:col-span-7" style={{ perspective: 1600 }}>
           <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
             {/* Portátil / Tablet */}
-            <div className="overflow-hidden rounded-[18px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[12px_12px_0_#0044FF]">
+            <div className="overflow-hidden rounded-[18px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[12px_12px_0_#6D28D9]">
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
                 <AutoScroll
                   src="/oderalo-desktop.webp"

@@ -361,8 +361,23 @@ function Index() {
         {/* PROYECTOS — 3D Coverflow Gallery */}
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle compact word="Proyectos" sub="Webs reales y sistemas en producción." />
+            <Reveal className="mb-6 sm:mb-10">
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <span className="font-mono text-xs font-black uppercase tracking-wider text-[#6D28D9] dark:text-[#A78BFA] block mb-2">
+                    [ Casos reales en producción ]
+                  </span>
+                  <h2 className="font-display text-[clamp(2.4rem,5.2vw,4.5rem)] leading-[0.98] font-black tracking-[-0.04em] text-zinc-950 dark:text-white">
+                    Proyectos.{" "}
+                    <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
+                      Webs reales y aplicaciones en producción.
+                    </span>
+                  </h2>
+                </div>
+                <p className="font-medium text-zinc-600 dark:text-zinc-300 max-w-[34ch] text-base sm:text-lg leading-snug shrink-0">
+                  Software a medida pensado para captar clientes, gestionar operaciones y automatizar tareas.
+                </p>
+              </div>
             </Reveal>
             <div className="mt-4 sm:mt-6">
               <ProjectCarousel
@@ -376,7 +391,7 @@ function Index() {
         </section>
 
         <OderaloSection />
-        <FormaSection />
+        {/* <FormaSection /> retirada para enfocar el portfolio en aplicaciones web */}
 
         {/* STACK + IA EN ACCIÓN */}
         <section
@@ -500,7 +515,7 @@ function Index() {
                 </h2>
               </Reveal>
               <p className="mt-5 max-w-[44ch] text-lg leading-snug font-medium text-[#3F3F46] sm:text-xl">
-                Cuéntame qué necesitas y te respondo, o te enseño en persona Oderalo y Forma.
+                Cuéntame qué necesitas y te respondo, o te enseño en persona el ERP y cómo automatizar tus procesos.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Magnetic strength={0.1}>
