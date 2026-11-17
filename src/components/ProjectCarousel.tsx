@@ -36,6 +36,7 @@ const THEMES = [
   },
   {
     bg: "bg-[#09090B]",
+    frame: "border-[#0044FF] shadow-[0_0_0_5px_#08143F,0_0_34px_5px_#0044FF]",
     ink: "text-white",
     sub: "text-zinc-300",
     chip: "bg-[#0044FF] text-white",
@@ -133,7 +134,7 @@ function Panel({
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       style={{ ["--t" as string]: `${78 + i * 12}px` }}
-      className={`${t.bg} ${t.ink} relative mb-6 flex flex-col overflow-hidden rounded-[28px] border-[3px] border-[#09090B] shadow-[10px_10px_0_#09090B] lg:sticky lg:top-[var(--t)] lg:mb-8 lg:block lg:h-[calc(100svh-150px)] lg:max-h-[780px] lg:min-h-[600px]`}
+      className={`${t.bg} ${t.ink} relative mb-6 flex flex-col overflow-hidden rounded-[28px] border-[3px] ${"frame" in t ? t.frame : "border-[#09090B] shadow-[10px_10px_0_#09090B]"} lg:sticky lg:top-[var(--t)] lg:mb-8 lg:block lg:h-[calc(100svh-150px)] lg:max-h-[780px] lg:min-h-[600px]`}
     >
       <motion.p
         aria-hidden="true"
