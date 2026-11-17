@@ -121,8 +121,8 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         </div>
       </motion.div>
 
-      <div className="pointer-events-none absolute top-0 right-[1%] z-20 hidden xl:block">
-        <HangingCard width={210} />
+      <div className="pointer-events-none absolute top-0 right-[2.5%] z-20 hidden xl:block">
+        <HangingCard width={210} seg={11} />
       </div>
     </section>
   );
