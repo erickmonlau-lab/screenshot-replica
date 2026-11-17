@@ -49,7 +49,7 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-16 lg:pb-[9rem]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-16 lg:pb-[15rem]"
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
@@ -77,7 +77,7 @@ export function OderaloSection() {
       />
 
       <div className="relative mx-auto w-full max-w-[1560px] px-6 sm:px-10">
-        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16 xl:gap-24">
           {/* Texto */}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 36 }}
@@ -150,7 +150,7 @@ export function OderaloSection() {
 
               <motion.div
                 style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[230px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:-left-3"
+                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[200px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:left-4"
               >
                 <div
                   className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#C6F432]"
