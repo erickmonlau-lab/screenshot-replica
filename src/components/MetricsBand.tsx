@@ -73,7 +73,7 @@ function Counter({ metric }: { metric: Metric }) {
         {fmt.format(metric.to)}
       </span>
       {metric.suffix && (
-        <span className="text-[0.62em] font-bold tracking-normal ml-1 text-[#A78BFA]">
+        <span className="text-[0.62em] font-black tracking-normal ml-1.5 text-[#6D28D9]">
           {metric.suffix.trim()}
         </span>
       )}
@@ -81,8 +81,7 @@ function Counter({ metric }: { metric: Metric }) {
   );
 }
 
-
-/** Tres bloques de color inclinados con cifras gigantes y sombra dura. */
+/** Tres tarjetas fondo blanco, texto negro y sombras brutales en morado y negro. */
 export function MetricsBand() {
   const reduce = useReducedMotion();
 
@@ -90,7 +89,7 @@ export function MetricsBand() {
     <section
       id="metricas"
       aria-label="Resultados en cifras"
-      className="border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-14 text-[#09090B] sm:py-16"
+      className="border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-16 text-[#09090B] sm:py-20"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-12 xl:px-16">
         <div
@@ -105,11 +104,11 @@ export function MetricsBand() {
                   ? false
                   : {
                       opacity: 0,
-                      scale: 0.6,
-                      rotateY: i % 2 === 0 ? 180 : -180,
-                      rotateX: 40,
-                      rotateZ: i === 0 ? -12 : i === 2 ? 12 : 0,
-                      y: 90,
+                      scale: 0.65,
+                      rotateY: i % 2 === 0 ? 140 : -140,
+                      rotateX: 35,
+                      rotateZ: i === 0 ? -6 : i === 2 ? 6 : 0,
+                      y: 80,
                     }
               }
               whileInView={{
@@ -122,17 +121,17 @@ export function MetricsBand() {
               }}
               viewport={{ once: true, margin: "-10% 0px" }}
               transition={{
-                duration: 1.1,
-                delay: i * 0.2,
+                duration: 1.05,
+                delay: i * 0.18,
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover={
                 reduce
                   ? {}
                   : {
-                      scale: 1.03,
-                      rotateY: 6,
-                      rotateX: -6,
+                      scale: 1.025,
+                      rotateY: i === 0 ? 4 : i === 2 ? -4 : 0,
+                      rotateX: -4,
                       transition: { duration: 0.25, ease: "easeOut" },
                     }
               }
@@ -140,44 +139,28 @@ export function MetricsBand() {
                 transformStyle: "preserve-3d",
                 willChange: "transform, opacity",
               }}
-              className={`group flex min-w-0 flex-col rounded-[24px] border-2 p-6 sm:p-7 text-white transition-all duration-300 cursor-pointer ${
+              className={`group relative flex min-w-0 flex-col rounded-[22px] border-[3px] border-[#09090B] bg-white p-7 sm:p-9 text-[#09090B] transition-all duration-300 cursor-pointer ${
                 i === 1
-                  ? "border-[#8B5CF6] bg-gradient-to-b from-[#1E0D38] to-[#0A0515] shadow-[6px_6px_0_#8B5CF6] hover:shadow-[9px_9px_0_#A78BFA]"
-                  : "border-[#6D28D9] bg-[#09090B] shadow-[6px_6px_0_#6D28D9] hover:shadow-[9px_9px_0_#8B5CF6]"
+                  ? "shadow-[8px_8px_0_#6D28D9] hover:shadow-[12px_12px_0_#09090B]"
+                  : "shadow-[8px_8px_0_#09090B] hover:shadow-[12px_12px_0_#6D28D9]"
               }`}
             >
-              <motion.div
-                initial={reduce ? false : { opacity: 0, filter: "blur(8px)", y: 6 }}
+              <motion.p
+                initial={reduce ? false : { opacity: 0, filter: "blur(14px)", y: 12 }}
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.2 + 0.22, ease: [0.16, 1, 0.3, 1] }}
-                className="flex items-center justify-between"
-              >
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#8B5CF6]/40 bg-[#6D28D9]/15 px-3 py-1 font-mono text-xs font-bold tracking-wider text-[#C4B5FD] uppercase">
-                  <span className="h-2 w-2 rounded-full bg-[#A78BFA] shadow-[0_0_8px_#8B5CF6]" />
-                  0{i + 1}
-                </span>
-                <span className="font-mono text-xs text-[#71717A] tracking-wider uppercase font-semibold">
-                  {i === 0 ? "Práctica" : i === 1 ? "Oficial" : "Producción"}
-                </span>
-              </motion.div>
-
-              <motion.p
-                initial={reduce ? false : { opacity: 0, filter: "blur(14px)", scale: 0.94 }}
-                whileInView={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.85, delay: i * 0.2 + 0.34, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display mt-5 text-[clamp(3.4rem,7vw,5.2rem)] leading-[0.88] font-black tracking-[-0.06em] text-white whitespace-nowrap md:text-[clamp(2.8rem,4.6vw,4.6rem)]"
+                transition={{ duration: 0.8, delay: i * 0.18 + 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display text-[clamp(3.6rem,7.5vw,5.4rem)] leading-[0.88] font-black tracking-[-0.06em] text-[#09090B] whitespace-nowrap"
               >
                 <Counter metric={m} />
               </motion.p>
 
               <motion.p
-                initial={reduce ? false : { opacity: 0, filter: "blur(8px)", y: 8 }}
+                initial={reduce ? false : { opacity: 0, filter: "blur(10px)", y: 10 }}
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.75, delay: i * 0.2 + 0.46, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display mt-5 text-[23px] sm:text-[26px] leading-[1.1] font-bold tracking-[-0.03em] text-white"
+                transition={{ duration: 0.75, delay: i * 0.18 + 0.28, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display mt-6 text-[23px] sm:text-[26px] leading-[1.12] font-black tracking-[-0.03em] text-[#09090B]"
               >
                 {m.label}
               </motion.p>
@@ -186,8 +169,8 @@ export function MetricsBand() {
                 initial={reduce ? false : { opacity: 0, filter: "blur(8px)", y: 8 }}
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.75, delay: i * 0.2 + 0.56, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#D4D4D8]"
+                transition={{ duration: 0.7, delay: i * 0.18 + 0.38, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#52525B]"
               >
                 {m.detail}
               </motion.p>
