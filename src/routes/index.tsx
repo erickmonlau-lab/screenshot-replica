@@ -526,8 +526,8 @@ function Index() {
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <div className="led-box p-5 text-white sm:p-6">
+            <div className="min-w-0 lg:col-span-5">
+              <div className="led-box min-w-0 p-5 text-white sm:p-6">
                 <div className="flex items-center gap-4 border-b-2 border-[#1B2A66] pb-5">
                   <img
                     src="/erick-portrait-studio.png"
@@ -554,7 +554,7 @@ function Index() {
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
                             href={`mailto:${email}`}
-                            className="font-display truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#9DB8FF]"
+                            className="font-display min-w-0 truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#9DB8FF]"
                           >
                             {email}
                           </a>
