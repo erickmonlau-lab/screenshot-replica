@@ -44,7 +44,7 @@ function PortfolioIndexV2() {
       </main>
 
       {/* Footer Minimalista Técnico Suizo */}
-      <FooterV2 />
+      <FooterV2 cvUrl={cvUrl} />
     </div>
   );
 }

@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { ArrowUpRight, Check, ExternalLink, Layers, Terminal, Sparkles, Shield, Cpu, Smartphone, Laptop } from "lucide-react";
 
+import breadpdf from "@/assets/breadpdf.com.png.asset.json";
+import diversplas from "@/assets/diversplas.es.png.asset.json";
+import gesgrama from "@/assets/gesgrama.com.png.asset.json";
+
 interface CaseStudy {
   id: string;
   num: string;
@@ -106,7 +110,7 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
     evidenceImages: [
       {
-        src: "/breadpdf-preview.png",
+        src: breadpdf.url,
         caption: "Interfaz real de BreadPDF: optimizador de imágenes y herramientas documentales",
         device: "desktop",
       },
@@ -148,12 +152,12 @@ const CASE_STUDIES: CaseStudy[] = [
     ],
     evidenceImages: [
       {
-        src: "/gesgrama-preview.png",
+        src: gesgrama.url,
         caption: "Gesgrama: plataforma inmobiliaria y administración de fincas en producción",
         device: "desktop",
       },
       {
-        src: "/diversplas-preview.png",
+        src: diversplas.url,
         caption: "Diversplas: web para colegios y AFAs en Santa Coloma de Gramenet",
         device: "desktop",
       },
@@ -437,14 +441,14 @@ export function CaseStudiesV2() {
                 </div>
 
                 {/* Screenshot image display */}
-                <div className="overflow-hidden rounded-lg bg-zinc-950 flex items-center justify-center min-h-[300px] max-h-[460px]">
+                <div className="overflow-hidden rounded-lg bg-zinc-950 flex items-center justify-center min-h-[280px] max-h-[460px]">
                   <img
                     src={current.evidenceImages[selectedImageIndex]?.src}
                     alt={current.evidenceImages[selectedImageIndex]?.caption}
-                    className={`block w-full object-contain max-h-[440px] select-none ${
+                    className={`block select-none ${
                       current.evidenceImages[selectedImageIndex]?.device === "mobile"
-                        ? "max-w-[240px] mx-auto py-2"
-                        : "w-full"
+                        ? "max-w-[240px] max-h-[440px] object-contain mx-auto py-2"
+                        : "w-full max-h-[440px] object-cover object-top"
                     }`}
                     loading="lazy"
                   />

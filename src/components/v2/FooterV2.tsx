@@ -1,7 +1,11 @@
 import React from "react";
 import { ArrowUp, Download, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
-export const FooterV2: React.FC = () => {
+interface FooterV2Props {
+  cvUrl?: string;
+}
+
+export const FooterV2: React.FC<FooterV2Props> = ({ cvUrl = "/erick-rodriguez-cv.pdf" }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -118,7 +122,7 @@ export const FooterV2: React.FC = () => {
             </div>
 
             <a
-              href="/erick-rodriguez-cv.pdf"
+              href={cvUrl}
               download="Erick_Rodriguez_CV_2026.pdf"
               className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#1D4ED8] hover:bg-[#1E40AF] text-white font-mono text-xs uppercase tracking-wider font-bold transition-colors"
             >

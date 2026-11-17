@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Download, Menu, X, ArrowUpRight, FileText, Briefcase, Mail } from "lucide-react";
 
 interface HeaderV2Props {
@@ -8,7 +9,12 @@ interface HeaderV2Props {
 export function HeaderV2({ cvUrl = "/erick-rodriguez-cv.pdf" }: HeaderV2Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,9 +57,11 @@ export function HeaderV2({ cvUrl = "/erick-rodriguez-cv.pdf" }: HeaderV2Props) {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
-        scrolled
-          ? "border-b border-[#D4D4D0] bg-[#F6F5F0]/95 backdrop-blur-md shadow-xs py-3"
-          : "border-b border-transparent bg-[#F6F5F0]/80 backdrop-blur-xs py-4 sm:py-5"
+        mobileOpen
+          ? "border-b border-[#D4D4D0] bg-[#F6F5F0] py-3 shadow-xs"
+          : scrolled
+            ? "border-b border-[#D4D4D0] bg-[#F6F5F0]/95 backdrop-blur-md shadow-xs py-3"
+            : "border-b border-transparent bg-[#F6F5F0]/80 backdrop-blur-xs py-4 sm:py-5"
       }`}
     >
       <div className="mx-auto flex w-full max-w-[1380px] items-center justify-between px-5 sm:px-8">
@@ -134,74 +142,78 @@ export function HeaderV2({ cvUrl = "/erick-rodriguez-cv.pdf" }: HeaderV2Props) {
         </div>
       </div>
 
-      {/* Accessible Mobile Drawer */}
-      {mobileOpen && (
-        <div
-          ref={menuRef}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Menú de navegación móvil"
-          className="fixed inset-0 top-[65px] z-40 flex flex-col justify-between border-t border-[#D4D4D0] bg-[#F6F5F0] p-6 shadow-2xl md:hidden"
-        >
-          <div className="space-y-6">
-            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#57575C]">
-              Navegación
-            </p>
-            <nav className="flex flex-col gap-3">
-              {navLinks.map((link, idx) => (
+      {/* Accessible Mobile Drawer rendered directly into document.body to avoid parent backdrop-filter containing block */}
+      {mounted &&
+        mobileOpen &&
+        createPortal(
+          <div
+            ref={menuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menú de navegación móvil"
+            className="fixed inset-x-0 top-[61px] bottom-0 z-[9999] flex flex-col justify-between border-t border-[#D4D4D0] bg-[#F6F5F0] p-6 shadow-2xl md:hidden overflow-y-auto"
+            style={{ backgroundColor: "#F6F5F0", minHeight: "calc(100vh - 61px)" }}
+          >
+            <div className="space-y-6">
+              <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#57575C]">
+                Navegación
+              </p>
+              <nav className="flex flex-col gap-3">
+                {navLinks.map((link, idx) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between border-b border-[#D4D4D0]/60 pb-3 font-display text-2xl font-bold tracking-tight text-[#111111] hover:text-[#1D4ED8]"
+                  >
+                    <span>{link.label}</span>
+                    <span className="font-mono text-xs text-[#57575C]">0{idx + 1}</span>
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Dual Path Actions in Mobile */}
+            <div className="space-y-3 pt-6 border-t border-[#D4D4D0]">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#57575C]">
+                ¿Qué necesitas?
+              </p>
+              <div className="grid grid-cols-2 gap-3">
                 <a
-                  key={link.href}
-                  href={link.href}
+                  href="#contacto"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-between border-b border-[#D4D4D0]/60 pb-3 font-display text-2xl font-bold tracking-tight text-[#111111] hover:text-[#1D4ED8]"
+                  className="flex flex-col items-start gap-1 rounded-xl border-2 border-[#111111] bg-[#1D4ED8] p-3 text-white shadow-[3px_3px_0_#111111]"
                 >
-                  <span>{link.label}</span>
-                  <span className="font-mono text-xs text-[#57575C]">0{idx + 1}</span>
+                  <div className="flex items-center justify-between w-full">
+                    <Briefcase size={16} />
+                    <ArrowUpRight size={14} />
+                  </div>
+                  <span className="font-bold text-sm mt-1">Iniciar Proyecto</span>
+                  <span className="text-[11px] text-blue-100">Clientes & Pymes</span>
                 </a>
-              ))}
-            </nav>
-          </div>
 
-          {/* Dual Path Actions in Mobile */}
-          <div className="space-y-3 pt-6 border-t border-[#D4D4D0]">
-            <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#57575C]">
-              ¿Qué necesitas?
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-              <a
-                href="#contacto"
-                onClick={() => setMobileOpen(false)}
-                className="flex flex-col items-start gap-1 rounded-xl border-2 border-[#111111] bg-[#1D4ED8] p-3 text-white shadow-[3px_3px_0_#111111]"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <Briefcase size={16} />
-                  <ArrowUpRight size={14} />
-                </div>
-                <span className="font-bold text-sm mt-1">Iniciar Proyecto</span>
-                <span className="text-[11px] text-blue-100">Clientes & Pymes</span>
-              </a>
+                <a
+                  href={cvUrl}
+                  download="Erick-Rodriguez-CV.pdf"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex flex-col items-start gap-1 rounded-xl border-2 border-[#111111] bg-white p-3 text-[#111111] shadow-[3px_3px_0_#111111]"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <FileText size={16} className="text-[#1D4ED8]" />
+                    <Download size={14} />
+                  </div>
+                  <span className="font-bold text-sm mt-1">Descargar CV</span>
+                  <span className="text-[11px] text-[#57575C]">Recruiters (PDF)</span>
+                </a>
+              </div>
 
-              <a
-                href={cvUrl}
-                download="Erick-Rodriguez-CV.pdf"
-                onClick={() => setMobileOpen(false)}
-                className="flex flex-col items-start gap-1 rounded-xl border-2 border-[#111111] bg-white p-3 text-[#111111] shadow-[3px_3px_0_#111111]"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <FileText size={16} className="text-[#1D4ED8]" />
-                  <Download size={14} />
-                </div>
-                <span className="font-bold text-sm mt-1">Descargar CV</span>
-                <span className="text-[11px] text-[#57575C]">Recruiters (PDF)</span>
-              </a>
+              <div className="pt-2 text-center text-xs font-medium text-[#57575C]">
+                hola.erickrodriguez@gmail.com · Barcelona
+              </div>
             </div>
-
-            <div className="pt-2 text-center text-xs font-medium text-[#57575C]">
-              hola.erickrodriguez@gmail.com · Barcelona
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </header>
   );
 }
