@@ -4,7 +4,7 @@ import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIOLET = "#6D28D9";
-const LIME = "#C6F432";
+const WHITE = "#FFFFFF";
 const INK = "#09090B";
 
 /** Captura real de la plataforma Oderalo (datos de demostración) */
@@ -59,7 +59,7 @@ export function OderaloSection() {
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
-          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(7rem,10.5vw,9.5rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(7rem,10.5vw,9.5rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#FFFFFF]"
         >
           ODERALO
         </motion.div>
@@ -69,7 +69,7 @@ export function OderaloSection() {
       <div
         aria-hidden="true"
         className="absolute -top-10 right-[8%] h-28 w-28 rotate-12 border-[3px] border-[#09090B]"
-        style={{ background: LIME }}
+        style={{ background: WHITE }}
       />
       <div
         aria-hidden="true"
@@ -88,14 +88,14 @@ export function OderaloSection() {
           >
             <span
               className="inline-flex items-center rounded-lg border-[3px] border-[#09090B] px-3.5 py-1.5 text-[15px] font-black tracking-wider text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]"
-              style={{ background: LIME }}
+              style={{ background: WHITE }}
             >
               Caso real · en producción
             </span>
 
             <h2 className="font-display mt-7 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
               Del aviso a la factura,{" "}
-              <span className="text-[#C6F432]">sin papeles.</span>
+              <span className="whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">sin papeles.</span>
             </h2>
 
             <p className="mt-6 max-w-[44ch] text-[16px] leading-relaxed font-medium text-white">
@@ -103,15 +103,15 @@ export function OderaloSection() {
               en campo: citas, rutas, parte firmado y facturación en un único flujo.
             </p>
 
-            <ol className="mt-8 grid gap-3.5">
+            <ol className="mt-8 grid max-w-[540px] gap-3.5">
               {flow.map((f) => (
                 <li
                   key={f.n}
-                  className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-white p-2 shadow-[4px_4px_0_#09090B]"
+                  className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-white p-2"
                 >
                   <span
-                    className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] text-[22px] font-black text-[#09090B]"
-                    style={{ background: LIME }}
+                    className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] text-[22px] font-black text-white"
+                    style={{ background: VIOLET }}
                   >
                     {f.n}
                   </span>
@@ -127,7 +127,7 @@ export function OderaloSection() {
 
             <a
               href="#contacto"
-              className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#C6F432] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
+              className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
             >
               <span>Pídeme la demo de Oderalo</span>
               <ArrowUpRight size={18} strokeWidth={2.5} />
@@ -137,7 +137,7 @@ export function OderaloSection() {
           {/* Pantallas reales */}
           <div className="relative pb-10 lg:col-span-7 lg:pb-12 lg:pt-10" style={{ perspective: 1600 }}>
             <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
-              <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[14px_14px_0_#09090B] sm:p-2.5">
+              <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[10px_10px_0_#09090B] sm:p-2.5">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
                   <Screen src="/oderalo-app-agenda-v2.png" alt="Agenda de citas de Oderalo: listado, contadores del día y filtros" />
                 </div>
@@ -145,10 +145,10 @@ export function OderaloSection() {
 
               <motion.div
                 style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[200px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:-left-8"
+                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[200px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:left-0"
               >
                 <div
-                  className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#C6F432]"
+                  className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[6px_6px_0_#09090B]"
                   style={{ transform: "rotate(-4deg)" }}
                 >
                   <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[20px] bg-black">
