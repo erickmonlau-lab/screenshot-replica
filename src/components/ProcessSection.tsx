@@ -65,7 +65,17 @@ export function ProcessSection() {
     };
   }, []);
 
-  const current = steps[active]!;
+  const scrollToStep = (index: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const total = el.offsetHeight - window.innerHeight;
+    if (total > 0) {
+      const targetScrollTop = window.scrollY + r.top + (index / (steps.length - 1)) * total + 10;
+      window.scrollTo({ top: targetScrollTop, behavior: "smooth" });
+    }
+    setActive(index);
+  };
 
   return (
     <section id="proceso" className="section-dark t-line scroll-mt-[62px] border-t">
@@ -84,17 +94,28 @@ export function ProcessSection() {
                       transition:
                         "opacity 550ms cubic-bezier(0.22,1,0.36,1), transform 550ms cubic-bezier(0.22,1,0.36,1)",
                     }}
-                    className="absolute inset-0"
+                    className="absolute inset-0 flex flex-col justify-center"
                   >
-                    <span className="hero-outline-light font-display block text-[clamp(5rem,15vw,11rem)] leading-[0.9] font-bold tracking-[-0.04em]">
-                      {s.n}
-                    </span>
-                    <h2 className="t-ink font-display mt-2 max-w-[16ch] text-[clamp(2rem,5.2vw,4.4rem)] leading-[1] font-bold tracking-[-0.045em]">
+                    <div className="flex items-center gap-3">
+                      <span className="hero-outline-light font-display block text-[clamp(4.5rem,12vw,9rem)] leading-[0.9] font-bold tracking-[-0.04em]">
+                        {s.n}
+                      </span>
+                      <span className="rounded-full border-2 border-[#09090B] bg-[#FFD200] px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider text-[#09090B] shadow-[3px_3px_0_#0044FF]">
+                        {s.label}
+                      </span>
+                    </div>
+                    <h2 className="t-ink font-display mt-2 max-w-[16ch] text-[clamp(2rem,5vw,4.2rem)] leading-[1.05] font-bold tracking-[-0.045em]">
                       {s.title}
                     </h2>
-                    <p className="t-muted mt-4 max-w-[40ch] text-lg leading-snug font-medium sm:text-xl">
+                    <p className="t-muted mt-4 max-w-[42ch] text-lg leading-relaxed font-medium sm:text-xl">
                       {s.text}
                     </p>
+                    <div className="mt-5 flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400">
+                        <Check size={14} className="stroke-[3]" />
+                        Entregable: {s.done}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -127,17 +148,20 @@ export function ProcessSection() {
                         aria-current={now ? "step" : undefined}
                         className="-mx-[26px] flex w-[104px] flex-col items-center gap-2"
                       >
-                        <span
-                          className={`font-display flex h-[52px] w-[52px] items-center justify-center rounded-full border-[3px] text-[20px] font-bold transition-all duration-300 ${
+                        <button
+                          type="button"
+                          onClick={() => scrollToStep(i)}
+                          aria-label={`Ver paso ${st.n}: ${st.label}`}
+                          className={`font-display flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-full border-[3px] text-[20px] font-bold transition-all duration-300 hover:scale-105 ${
                             now
                               ? "scale-110 border-[#09090B] bg-white text-[#09090B] shadow-[5px_5px_0_#0044FF]"
                               : done
                                 ? "border-[#09090B] bg-[#0044FF] text-white"
-                                : "border-white/30 bg-[#09090B] text-zinc-400"
+                                : "border-white/30 bg-[#09090B] text-zinc-400 hover:border-white/60"
                           }`}
                         >
                           {done ? <Check size={22} strokeWidth={3.5} /> : st.n}
-                        </span>
+                        </button>
                         <span
                           className={`hidden text-[17px] font-semibold transition-colors duration-300 sm:block ${
                             now ? "text-white" : done ? "text-zinc-300" : "text-zinc-500"
