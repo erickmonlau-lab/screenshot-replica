@@ -49,7 +49,7 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-16 lg:pb-[12rem]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[11rem]"
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
@@ -59,7 +59,7 @@ export function OderaloSection() {
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
-          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,13vw,15rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,13vw,12rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
         >
           ODERALO
         </motion.div>
@@ -138,13 +138,8 @@ export function OderaloSection() {
           <div className="relative pb-10 lg:col-span-7 lg:pb-12 lg:pt-10" style={{ perspective: 1600 }}>
             <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
               <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[14px_14px_0_#09090B] sm:p-2.5">
-                <div className="mb-1 flex items-center gap-2 rounded-t-lg bg-[#181820] px-3.5 py-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
-                </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
-                  <Screen src="/oderalo-app-agenda.png" alt="Agenda de citas de Oderalo: listado, contadores del día y filtros" />
+                  <Screen src="/oderalo-app-agenda-v2.png" alt="Agenda de citas de Oderalo: listado, contadores del día y filtros" />
                 </div>
               </div>
 
@@ -157,7 +152,7 @@ export function OderaloSection() {
                   style={{ transform: "rotate(-4deg)" }}
                 >
                   <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[20px] bg-black">
-                    <Screen src="/oderalo-app-campo.png" alt="App de campo de Oderalo: ruta del técnico con sus citas del día" />
+                    <Screen src="/oderalo-app-campo-v2.png" alt="App de campo de Oderalo: ruta del técnico con sus citas del día" />
                   </div>
                 </div>
               </motion.div>
