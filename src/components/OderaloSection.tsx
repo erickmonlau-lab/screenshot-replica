@@ -49,17 +49,17 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[13.5rem]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[10.5rem]"
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[2%] mx-auto flex w-full max-w-[1560px] justify-end px-6 sm:px-10"
+        className="pointer-events-none absolute inset-x-0 bottom-[2%] mx-auto flex w-full max-w-[1720px] justify-end px-6 sm:px-10"
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
-          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,13vw,12rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(7rem,10.5vw,9.5rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
         >
           ODERALO
         </motion.div>
@@ -73,10 +73,10 @@ export function OderaloSection() {
       />
       <div
         aria-hidden="true"
-        className="absolute bottom-[-30px] left-[34%] hidden h-24 w-64 -skew-x-12 border-[3px] border-[#09090B] bg-[#09090B] lg:block"
+        className="absolute bottom-[-30px] left-[5%] hidden h-24 w-64 -skew-x-12 border-[3px] border-[#09090B] bg-[#09090B] lg:block"
       />
 
-      <div className="relative mx-auto w-full max-w-[1560px] px-6 sm:px-10">
+      <div className="relative mx-auto w-full max-w-[1720px] px-6 sm:px-10">
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10 xl:gap-12 min-[1700px]:gap-24">
           {/* Texto */}
           <motion.div
