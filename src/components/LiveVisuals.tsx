@@ -570,6 +570,9 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
 
       if (!placed) {
         nodes.forEach((n) => {
+          // Reparte el grafo por todo el lienzo (las anclas originales ocupaban solo la mitad derecha)
+          n.ax = 0.08 + ((n.ax - 0.5) / 0.4) * 0.84;
+          n.ay = 0.1 + ((n.ay - 0.12) / 0.62) * 0.8;
           n.x = n.ax * nw + n.ox * nh;
           n.y = n.ay * nh + n.oy * nh;
           n.ax *= nw;
@@ -594,13 +597,14 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
     const ro = new ResizeObserver(resize);
     ro.observe(box);
 
+    let offX = 0;
     let hover = -1;
     let drag = -1;
     const pt = { x: 0, y: 0 };
 
     const local = (e: PointerEvent) => {
       const r = canvas.getBoundingClientRect();
-      pt.x = e.clientX - r.left;
+      pt.x = e.clientX - r.left - offX;
       pt.y = e.clientY - r.top;
     };
 
@@ -702,7 +706,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
 
       // 3. Anchor attraction and breathing oscillation
       for (const nd of nodes) {
-        const k = nd.group === "hub" ? 0.0016 : 0.0009;
+        const k = nd.group === "hub" ? 0.006 : 0.003;
         const breathX =
           Math.sin(t * 0.0008 + nd.id * 1.6) * 0.025 * S * (nd.group === "hub" ? 0.6 : 1);
         const breathY =
@@ -722,8 +726,8 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         nd.x += nd.vx;
         nd.y += nd.vy;
 
-        // Keep nodes gracefully on the right 58% of the canvas on desktop so they don't cover text
-        const minX = W > 800 ? W * 0.44 : 30;
+        // El grafo ocupa todo el lienzo (el texto va en otra columna)
+        const minX = 30;
         const maxX = W - 35;
         const minY = Math.min(80, H * 0.12);
         const maxY = H - 35;
@@ -731,6 +735,16 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         nd.x = Math.min(maxX, Math.max(minX, nd.x));
         nd.y = Math.min(maxY, Math.max(minY, nd.y));
       }
+
+      // Centra horizontalmente la nube de nodos en el lienzo
+      let mnX = Infinity;
+      let mxX = -Infinity;
+      for (const nd of nodes) {
+        mnX = Math.min(mnX, nd.x);
+        mxX = Math.max(mxX, nd.x);
+      }
+      const targetOff = Math.max(-W * 0.3, Math.min(W * 0.3, W / 2 - (mnX + mxX) / 2));
+      offX += (targetOff - offX) * 0.04;
 
       // Drag override
       if (drag >= 0) {
@@ -758,7 +772,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       // Clean Light Background or Dark
-      ctx.fillStyle = isLight ? "#FAF9F6" : "#0B0C10";
+      ctx.fillStyle = isLight ? "#FFFFFF" : "#0B0C10";
       ctx.fillRect(0, 0, W, H);
 
       // Subtle ambient spotlight behind the constellation
@@ -771,8 +785,8 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         Math.max(W, H) * 0.55,
       );
       if (isLight) {
-        bgGrad.addColorStop(0, "rgba(0, 68, 255, 0.07)");
-        bgGrad.addColorStop(0.5, "rgba(0, 68, 255, 0.02)");
+        bgGrad.addColorStop(0, "transparent");
+        bgGrad.addColorStop(0.5, "transparent");
         bgGrad.addColorStop(1, "transparent");
       } else {
         bgGrad.addColorStop(0, "rgba(0, 68, 255, 0.14)");
@@ -781,6 +795,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
       }
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, W, H);
+      ctx.translate(offX, 0);
 
       // Auto-focus cycle when not hovered
       const focus =
@@ -796,8 +811,8 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         const hot = ia === focus || ib === focus;
 
         if (isLight) {
-          ctx.strokeStyle = hot ? "rgba(0, 68, 255, 0.95)" : "rgba(15, 23, 42, 0.16)";
-          ctx.lineWidth = hot ? 2 : 1;
+          ctx.strokeStyle = hot ? "#6D28D9" : "rgba(9, 9, 11, 0.22)";
+          ctx.lineWidth = hot ? 2.5 : 1;
         } else {
           ctx.strokeStyle = hot ? "rgba(91, 151, 255, 0.95)" : "rgba(160, 175, 215, 0.16)";
           ctx.lineWidth = hot ? 1.8 : 0.9;
@@ -818,9 +833,9 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         ctx.save();
         ctx.beginPath();
         ctx.arc(px, py, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = isLight ? "#0044FF" : "#FFFFFF";
-        ctx.shadowColor = "#0044FF";
-        ctx.shadowBlur = isLight ? 6 : 8;
+        ctx.fillStyle = isLight ? "#6D28D9" : "#FFFFFF";
+        ctx.shadowColor = "#6D28D9";
+        ctx.shadowBlur = isLight ? 0 : 8;
         ctx.fill();
         ctx.restore();
       }
@@ -838,23 +853,24 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         let haloColor = "rgba(0, 68, 255, 0.25)";
 
         if (isLight) {
+          // Marca: violeta + negro; ámbar solo como acento (proyectos)
           if (on) {
-            nodeColor = "#0044FF"; // Vivid electric blue when focused
-            haloColor = "rgba(0, 68, 255, 0.35)";
+            nodeColor = "#6D28D9";
+            haloColor = "rgba(109, 40, 217, 0.3)";
           } else if (isNear) {
-            nodeColor = "#0044FF";
-            haloColor = "rgba(0, 68, 255, 0.2)";
+            nodeColor = "#6D28D9";
+            haloColor = "rgba(109, 40, 217, 0.2)";
           } else if (isHub) {
-            nodeColor = "#09090B"; // Solid deep black for hubs
-            haloColor = "rgba(9, 9, 11, 0.18)";
+            nodeColor = "#09090B"; // índices (mapas)
+            haloColor = "rgba(9, 9, 11, 0.16)";
           } else if (nd.group === "skill") {
-            nodeColor = "#0044FF"; // Vibrant cobalt
+            nodeColor = "#6D28D9"; // skills y guías de diseño
           } else if (nd.group === "rule") {
-            nodeColor = "#059669"; // Emerald green
+            nodeColor = "#4C1D95"; // agentes y reglas
           } else if (nd.group === "project") {
-            nodeColor = "#EA580C"; // Warm orange / amber
+            nodeColor = "#F59E0B"; // proyectos
           } else {
-            nodeColor = "#1E293B"; // Dark slate
+            nodeColor = "#A1A1AA"; // notas sueltas
           }
         } else {
           // Dark mode palette
@@ -893,7 +909,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         // Expanding ripple ring on focused node
         if (on) {
           ctx.strokeStyle = isLight
-            ? `rgba(0, 68, 255, ${0.75 * (1 - pulse)})`
+            ? `rgba(109, 40, 217, ${0.75 * (1 - pulse)})`
             : `rgba(91, 151, 255, ${0.75 * (1 - pulse)})`;
           ctx.lineWidth = 2;
           ctx.beginPath();
@@ -910,7 +926,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         // Subtle crisp white rim in light mode for extra pop
         if (isLight && (isHub || on)) {
           ctx.lineWidth = 1.5;
-          ctx.strokeStyle = on ? "#0044FF" : "#09090B";
+          ctx.strokeStyle = on ? "#6D28D9" : "#09090B";
           ctx.stroke();
         }
       }
@@ -929,12 +945,12 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
 
       const tryDrawLabel = (name: string, x: number, y: number, isHighlight: boolean) => {
         ctx.font = isHighlight
-          ? "600 13px Inter Variable, Inter, sans-serif"
-          : "500 12px Inter Variable, Inter, sans-serif";
+          ? "700 15px Inter Variable, Inter, sans-serif"
+          : "600 15px Inter Variable, Inter, sans-serif";
         const metrics = ctx.measureText(name);
         const textW = metrics.width;
-        const boxW = textW + 18;
-        const boxH = 24;
+        const boxW = textW + 20;
+        const boxH = 28;
 
         let boxX = x - boxW / 2;
         let boxY = y + 14;
@@ -969,7 +985,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
         if (isLight) {
           ctx.fillStyle = isHighlight ? "#09090B" : "rgba(255, 255, 255, 0.95)";
           ctx.fill();
-          ctx.strokeStyle = isHighlight ? "#0044FF" : "rgba(15, 23, 42, 0.16)";
+          ctx.strokeStyle = isHighlight ? "#6D28D9" : "rgba(9, 9, 11, 0.3)";
           ctx.lineWidth = 1;
           ctx.stroke();
 
@@ -1044,7 +1060,7 @@ export function BrainVisual({ theme = "light" }: { theme?: "light" | "dark" }) {
   return (
     <div
       ref={wrap}
-      className={`relative h-full min-h-[300px] w-full overflow-hidden ${theme === "light" ? "bg-[#FAF9F6]" : "bg-[#0B0C10]"}`}
+      className={`relative h-full min-h-[300px] w-full overflow-hidden ${theme === "light" ? "bg-white" : "bg-[#0B0C10]"}`}
     >
       <canvas
         ref={cv}
