@@ -81,16 +81,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Erick Rodríguez — Product Builder | Negocio + Tecnología" },
+      { title: "Erick Rodríguez — Desarrollo web e IA" },
       {
         name: "description",
-        content: "Conecto negocio y tecnología para crear soluciones digitales que funcionan: productos web, sistemas de gestión y automatizaciones desde Barcelona.",
+        content: "Desarrollo web, apps y automatización con IA desde Barcelona.",
       },
       { name: "author", content: "Erick Rodríguez" },
-      { property: "og:title", content: "Erick Rodríguez — Product Builder" },
+      { property: "og:title", content: "Erick Rodríguez — Desarrollo web e IA" },
       {
         property: "og:description",
-        content: "Conecto negocio y tecnología para crear soluciones digitales que funcionan.",
+        content: "Soluciones digitales completas, desde la idea hasta producción.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
