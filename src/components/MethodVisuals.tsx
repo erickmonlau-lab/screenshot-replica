@@ -198,12 +198,12 @@ function ListenStage({ active }: { active: boolean }) {
             <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
             <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
           </div>
-          <span className="ml-2 flex items-center gap-1.5 text-xs font-bold text-zinc-300">
+          <span className="ml-2 flex items-center gap-1.5 text-[14px] font-bold text-zinc-300">
             <MessageSquare size={13} className="text-[#0044FF]" />
             Diagnóstico y Objetivos
           </span>
         </div>
-        <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400">
+        <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[14px] font-semibold text-emerald-400">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
           Sesión en directo · Erick × Cliente
         </div>
@@ -213,39 +213,39 @@ function ListenStage({ active }: { active: boolean }) {
       <div className="my-auto flex flex-col gap-3 py-1">
         {/* Client bubble */}
         <div className="flex items-start gap-2.5 max-w-[85%]">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[11px] font-extrabold text-[#09090B] ring-2 ring-amber-400/40">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[14px] font-extrabold text-[#09090B] ring-2 ring-amber-400/40">
             CL
           </div>
-          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-3 text-xs sm:text-sm text-zinc-100 shadow-md">
+          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-3 text-[14px] sm:text-sm text-zinc-100 shadow-md">
             <p className="font-medium leading-relaxed">
               Queremos digitalizar la captación y los avisos. Ahora mismo perdemos presupuestos y horas entre llamadas y WhatsApp.
             </p>
-            <span className="mt-1 block text-[10px] font-medium text-zinc-400">10:14</span>
+            <span className="mt-1 block text-[14px] font-medium text-zinc-400">10:14</span>
           </div>
         </div>
 
         {/* Erick bubble */}
         <div className="flex items-start justify-end gap-2.5 self-end max-w-[88%]">
-          <div className="rounded-2xl rounded-tr-sm border border-blue-400/40 bg-gradient-to-r from-[#0044FF] to-[#2563EB] p-3 text-xs sm:text-sm text-white shadow-[0_4px_16px_rgba(0,68,255,0.4)]">
+          <div className="rounded-2xl rounded-tr-sm border border-blue-400/40 bg-gradient-to-r from-[#0044FF] to-[#2563EB] p-3 text-[14px] sm:text-sm text-white shadow-[0_4px_16px_rgba(0,68,255,0.4)]">
             <p className="font-semibold leading-relaxed">
               Entendido. Diseñaremos un flujo automatizado: del formulario web directo al ERP y WhatsApp sin tareas manuales.
             </p>
-            <div className="mt-1 flex items-center justify-end gap-1 text-[10px] text-blue-200">
+            <div className="mt-1 flex items-center justify-end gap-1 text-[14px] text-blue-200">
               <span>10:15</span>
               <span className="font-bold">✓✓ Leído</span>
             </div>
           </div>
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0044FF] text-[11px] font-extrabold text-white ring-2 ring-blue-400/40">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#0044FF] text-[14px] font-extrabold text-white ring-2 ring-blue-400/40">
             ER
           </div>
         </div>
 
         {/* Client confirmation */}
         <div className="flex items-start gap-2.5 max-w-[80%]">
-          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[11px] font-extrabold text-[#09090B]">
+          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#F59E0B] text-[14px] font-extrabold text-[#09090B]">
             CL
           </div>
-          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-2.5 text-xs sm:text-sm text-zinc-200">
+          <div className="rounded-2xl rounded-tl-sm border border-blue-500/20 bg-[#141C2E] p-2.5 text-[14px] sm:text-sm text-zinc-200">
             <p className="font-medium">
               Eso nos ahorraría más de 15 horas a la semana. ¡Adelante!
             </p>
@@ -258,15 +258,15 @@ function ListenStage({ active }: { active: boolean }) {
         <div className="flex items-center gap-2">
           <CheckCircle2 size={18} className="text-[#10B981]" />
           <div>
-            <p className="text-xs font-bold text-white">Entregable: Brief Técnico y Plan de Proyecto</p>
-            <p className="text-[11px] text-emerald-300">Objetivos claros, arquitectura y fechas comprometidas</p>
+            <p className="text-[14px] font-bold text-white">Entregable: Brief Técnico y Plan de Proyecto</p>
+            <p className="text-[14px] text-emerald-300">Objetivos claros, arquitectura y fechas comprometidas</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="hidden sm:inline-block rounded-full border border-amber-400/30 bg-amber-400/20 px-2.5 py-0.5 text-[11px] font-bold text-amber-300">
+          <span className="hidden sm:inline-block rounded-full border border-amber-400/30 bg-amber-400/20 px-2.5 py-0.5 text-[14px] font-bold text-amber-300">
             ⚡ Ahorro: ~15h/sem
           </span>
-          <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-xs font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
+          <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
             ✓ BRIEF CLARO
           </span>
         </div>
@@ -288,22 +288,22 @@ function DesignStage({ active }: { active: boolean }) {
       {/* Top Figma Canvas Bar */}
       <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <div className="flex items-center gap-2">
-          <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 text-[10px] font-black text-white">
+          <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 text-[14px] font-black text-white">
             F
           </div>
-          <span className="text-xs font-bold text-zinc-200">
+          <span className="text-[14px] font-bold text-zinc-200">
             Oderalo_Design_System_v3.fig
           </span>
-          <span className="hidden sm:inline-block rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-400">
+          <span className="hidden sm:inline-block rounded bg-zinc-800 px-1.5 py-0.5 text-[14px] font-semibold text-zinc-400">
             ✦ Hi-Fi Prototype
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 rounded-full bg-purple-600/30 px-2 py-0.5 text-[10px] font-bold text-purple-300 border border-purple-500/40">
+          <span className="flex items-center gap-1 rounded-full bg-purple-600/30 px-2 py-0.5 text-[14px] font-bold text-purple-300 border border-purple-500/40">
             <span className="h-1.5 w-1.5 rounded-full bg-purple-400 animate-pulse" />
             Erick
           </span>
-          <span className="flex items-center gap-1 rounded-full bg-emerald-600/30 px-2 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-500/40">
+          <span className="flex items-center gap-1 rounded-full bg-emerald-600/30 px-2 py-0.5 text-[14px] font-bold text-emerald-300 border border-emerald-500/40">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Cliente
           </span>
@@ -317,40 +317,40 @@ function DesignStage({ active }: { active: boolean }) {
           {/* Mockup Header */}
           <div className="flex items-center justify-between border-b border-[#1C1C20] pb-2">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-xs text-[#0044FF] tracking-tight">ODERALO</span>
-              <div className="flex gap-1.5 text-[10px] text-zinc-400">
+              <span className="font-extrabold text-[14px] text-[#0044FF] tracking-tight">ODERALO</span>
+              <div className="flex gap-1.5 text-[14px] text-zinc-400">
                 <span className="rounded bg-blue-500/20 px-1.5 py-0.5 text-blue-300 font-semibold">Avisos</span>
                 <span className="px-1 py-0.5">Facturas</span>
                 <span className="px-1 py-0.5">Clientes</span>
               </div>
             </div>
-            <span className="text-[10px] text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded border border-[#27272A] font-mono">⌘K</span>
+            <span className="text-[14px] text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded border border-[#27272A] font-mono">⌘K</span>
           </div>
 
           {/* Hero Widget in Prototype */}
           <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-[#0044FF] via-[#4338CA] to-[#6D28D9] p-3 text-white shadow-md">
-            <p className="text-[11px] font-medium text-blue-200">Gestión de avisos en campo</p>
+            <p className="text-[14px] font-medium text-blue-200">Gestión de avisos en campo</p>
             <h4 className="font-display text-sm font-extrabold leading-tight">Del aviso a la factura sin papeles</h4>
             <div className="mt-2.5 flex items-center justify-between">
-              <span className="rounded bg-[#FFD200] px-2.5 py-0.5 text-[10px] font-extrabold text-[#09090B] shadow-sm">
+              <span className="rounded bg-[#FFD200] px-2.5 py-0.5 text-[14px] font-extrabold text-[#09090B] shadow-sm">
                 + Crear Aviso
               </span>
-              <span className="text-[10px] text-blue-100 font-medium">Sincronización en vivo</span>
+              <span className="text-[14px] text-blue-100 font-medium">Sincronización en vivo</span>
             </div>
           </div>
 
           {/* 2 Quick Indicator Cards */}
           <div className="grid grid-cols-2 gap-2">
             <div className="rounded-lg border border-[#27272A] bg-[#161D2E] p-2">
-              <span className="text-[10px] text-zinc-400 block">Avisos activos</span>
-              <span className="font-display text-xs font-bold text-white flex items-center gap-1">
+              <span className="text-[14px] text-zinc-400 block">Avisos activos</span>
+              <span className="font-display text-[14px] font-bold text-white flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 38 en curso
               </span>
             </div>
             <div className="rounded-lg border border-[#27272A] bg-[#161D2E] p-2">
-              <span className="text-[10px] text-zinc-400 block">Facturación hoy</span>
-              <span className="font-display text-xs font-bold text-emerald-400">
+              <span className="text-[14px] text-zinc-400 block">Facturación hoy</span>
+              <span className="font-display text-[14px] font-bold text-emerald-400">
                 3.160,00 €
               </span>
             </div>
@@ -360,30 +360,30 @@ function DesignStage({ active }: { active: boolean }) {
         {/* Right: Design Tokens */}
         <div className="col-span-4 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101524] p-3">
           <div>
-            <span className="text-[10px] font-extrabold uppercase tracking-wider text-zinc-400 block mb-2">
+            <span className="text-[14px] font-extrabold uppercase tracking-wider text-zinc-400 block mb-2">
               ✦ Design Tokens
             </span>
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-2">
                 <span className="h-4 w-4 rounded-md bg-[#0044FF] shadow-sm" />
-                <span className="text-[11px] font-mono text-zinc-200">#0044FF</span>
+                <span className="text-[14px] font-mono text-zinc-200">#0044FF</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-4 w-4 rounded-md bg-[#FFD200] shadow-sm" />
-                <span className="text-[11px] font-mono text-zinc-200">#FFD200</span>
+                <span className="text-[14px] font-mono text-zinc-200">#FFD200</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-4 w-4 rounded-md bg-[#10B981] shadow-sm" />
-                <span className="text-[11px] font-mono text-zinc-200">#10B981</span>
+                <span className="text-[14px] font-mono text-zinc-200">#10B981</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="h-4 w-4 rounded-md bg-[#8B5CF6] shadow-sm" />
-                <span className="text-[11px] font-mono text-zinc-200">#8B5CF6</span>
+                <span className="text-[14px] font-mono text-zinc-200">#8B5CF6</span>
               </div>
             </div>
           </div>
 
-          <div className="mt-2 border-t border-[#27272A] pt-2 text-[10px] text-zinc-400">
+          <div className="mt-2 border-t border-[#27272A] pt-2 text-[14px] text-zinc-400">
             <p className="font-semibold text-zinc-300">Tipografía: Manrope</p>
             <p>Componentes: 100% Accesibles</p>
           </div>
@@ -394,11 +394,11 @@ function DesignStage({ active }: { active: boolean }) {
       <div className="flex items-center justify-between rounded-xl border border-amber-400/40 bg-amber-400/10 p-3">
         <div className="flex items-center gap-2">
           <Sparkles size={16} className="text-[#FFD200]" />
-          <p className="text-xs font-semibold text-zinc-200">
+          <p className="text-[14px] font-semibold text-zinc-200">
             Flujos y diseño aprobados antes de escribir una línea de código.
           </p>
         </div>
-        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-xs font-extrabold text-[#09090B] shadow-[3px_3px_0_#0044FF]">
+        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[3px_3px_0_#0044FF]">
           ✓ DISEÑO APROBADO
         </span>
       </div>
@@ -424,23 +424,23 @@ function BuildStage({ active }: { active: boolean }) {
             <span className="h-3 w-3 rounded-full bg-[#FFBD2E]" />
             <span className="h-3 w-3 rounded-full bg-[#27C93F]" />
           </div>
-          <div className="flex items-center gap-1 rounded-t border-b-2 border-[#0044FF] bg-[#141A29] px-2.5 py-1 text-xs font-semibold text-white">
-            <span className="rounded bg-[#3178C6] px-1 text-[9px] font-bold text-white">TS</span>
+          <div className="flex items-center gap-1 rounded-t border-b-2 border-[#0044FF] bg-[#141A29] px-2.5 py-1 text-[14px] font-semibold text-white">
+            <span className="rounded bg-[#3178C6] px-1 text-[14px] font-bold text-white">TS</span>
             orders.service.ts
           </div>
-          <div className="hidden sm:flex items-center gap-1 px-2 py-1 text-xs text-zinc-400">
-            <span className="text-cyan-400 font-bold text-[10px]">⚛</span>
+          <div className="hidden sm:flex items-center gap-1 px-2 py-1 text-[14px] text-zinc-400">
+            <span className="text-cyan-400 font-bold text-[14px]">⚛</span>
             App.tsx
           </div>
         </div>
-        <span className="text-[11px] font-mono font-semibold text-emerald-400 flex items-center gap-1">
+        <span className="text-[14px] font-mono font-semibold text-emerald-400 flex items-center gap-1">
           <Check size={12} strokeWidth={3} />
           TypeScript 5.7 · Strict Mode
         </span>
       </div>
 
       {/* Code Editor Surface */}
-      <div className="my-auto rounded-xl border border-[#27272A] bg-[#0A0E18] p-3 font-mono text-[11px] sm:text-xs leading-relaxed text-zinc-200 shadow-inner">
+      <div className="my-auto rounded-xl border border-[#27272A] bg-[#0A0E18] p-3 font-mono text-[14px] sm:text-[14px] leading-relaxed text-zinc-200 shadow-inner">
         <div className="flex gap-2">
           <span className="select-none text-zinc-600">01</span>
           <p>
@@ -492,12 +492,12 @@ function BuildStage({ active }: { active: boolean }) {
 
       {/* Terminal & Build Execution */}
       <div className="rounded-xl border border-blue-500/20 bg-[#0E1424] p-3 flex flex-col gap-2">
-        <div className="flex items-center justify-between text-xs font-mono">
+        <div className="flex items-center justify-between text-[14px] font-mono">
           <span className="text-zinc-400 flex items-center gap-1.5">
             <Terminal size={14} className="text-[#0044FF]" />
             $ pnpm run build --mode production
           </span>
-          <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-500/30">
+          <span className="rounded bg-emerald-500/20 px-2 py-0.5 text-[14px] font-bold text-emerald-300 border border-emerald-500/30">
             ⚡ Vite v6 · 184ms
           </span>
         </div>
@@ -507,13 +507,13 @@ function BuildStage({ active }: { active: boolean }) {
           <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800">
             <div className="h-full w-full rounded-full bg-gradient-to-r from-[#0044FF] via-[#10B981] to-[#FFD200]" />
           </div>
-          <span className="shrink-0 text-xs font-bold text-emerald-400 flex items-center gap-1">
+          <span className="shrink-0 text-[14px] font-bold text-emerald-400 flex items-center gap-1">
             <CheckCircle2 size={14} />
             0 errores
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-[#1C1C20] text-[10px]">
+        <div className="flex items-center justify-between pt-1 border-t border-[#1C1C20] text-[14px]">
           <div className="flex gap-1.5">
             <span className="rounded bg-cyan-500/10 px-2 py-0.5 font-bold text-cyan-300 border border-cyan-500/20">React 19</span>
             <span className="rounded bg-blue-500/10 px-2 py-0.5 font-bold text-blue-300 border border-blue-500/20">TypeScript</span>
@@ -547,13 +547,13 @@ function PublishStage({ active }: { active: boolean }) {
       {/* Cloud & Browser Bar */}
       <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#0F172A] px-3 py-1 text-xs font-mono text-zinc-200">
+          <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#0F172A] px-3 py-1 text-[14px] font-mono text-zinc-200">
             <Lock size={12} className="text-emerald-400" />
             <span className="text-emerald-400">https://</span>tuempresa.es
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1 rounded-full bg-blue-500/20 px-2.5 py-0.5 text-[11px] font-semibold text-blue-300 border border-blue-500/30">
+          <span className="flex items-center gap-1 rounded-full bg-blue-500/20 px-2.5 py-0.5 text-[14px] font-semibold text-blue-300 border border-blue-500/30">
             <Globe size={12} />
             Cloudflare Edge · 14ms
           </span>
@@ -563,7 +563,7 @@ function PublishStage({ active }: { active: boolean }) {
       {/* Google Lighthouse 100/100 Gauges */}
       <div className="my-auto py-2">
         <div className="mb-3 text-center">
-          <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400">
+          <span className="text-[14px] font-extrabold uppercase tracking-wider text-emerald-400">
             ✦ Google Lighthouse Score · Core Web Vitals
           </span>
         </div>
@@ -594,10 +594,10 @@ function PublishStage({ active }: { active: boolean }) {
                   {s.score}
                 </span>
               </div>
-              <span className="mt-2 text-[11px] font-bold text-zinc-200 leading-tight">
+              <span className="mt-2 text-[14px] font-bold text-zinc-200 leading-tight">
                 {s.label}
               </span>
-              <span className="mt-0.5 text-[10px] text-emerald-400 font-semibold">Perfecto ✓</span>
+              <span className="mt-0.5 text-[14px] text-emerald-400 font-semibold">Perfecto ✓</span>
             </div>
           ))}
         </div>
@@ -608,11 +608,11 @@ function PublishStage({ active }: { active: boolean }) {
         <div className="flex items-center gap-2">
           <span className="flex h-3 w-3 rounded-full bg-emerald-400 animate-ping" />
           <div>
-            <p className="text-xs font-bold text-white">● EN PRODUCCIÓN · Despliegue CI/CD Automático</p>
-            <p className="text-[11px] text-emerald-300">0 caídas, SSL TLS 1.3 y caché global activada</p>
+            <p className="text-[14px] font-bold text-white">● EN PRODUCCIÓN · Despliegue CI/CD Automático</p>
+            <p className="text-[14px] text-emerald-300">0 caídas, SSL TLS 1.3 y caché global activada</p>
           </div>
         </div>
-        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-xs font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
+        <span className="rounded-lg border-2 border-[#09090B] bg-[#FFD200] px-3 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
           ✓ EN PRODUCCIÓN
         </span>
       </div>
@@ -632,11 +632,11 @@ function GrowStage({ active }: { active: boolean }) {
     >
       {/* Top Impact Metric Tags */}
       <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
-        <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-0.5 text-xs font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF] flex items-center gap-1">
+        <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-0.5 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF] flex items-center gap-1">
           <Star size={12} className="fill-[#09090B]" />
           #1 EN GOOGLE ESPAÑA
         </span>
-        <div className="flex items-center gap-3 text-xs font-bold">
+        <div className="flex items-center gap-3 text-[14px] font-bold">
           <span className="text-emerald-400 flex items-center gap-1">
             <TrendingUp size={14} />
             +340% Tráfico Orgánico
@@ -653,24 +653,24 @@ function GrowStage({ active }: { active: boolean }) {
         {/* Left: Google Search Result & Growth */}
         <div className="col-span-6 flex flex-col justify-between rounded-xl border border-blue-500/20 bg-[#111726] p-3 shadow-md">
           <div>
-            <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+            <div className="flex items-center gap-1.5 text-[14px] text-emerald-400 font-medium">
               <span>https://tuempresa.es</span>
               <span className="text-zinc-500">›</span>
               <span>servicios</span>
             </div>
-            <h4 className="font-display text-xs sm:text-sm font-bold text-blue-400 mt-1 hover:underline cursor-pointer">
+            <h4 className="font-display text-[14px] sm:text-sm font-bold text-blue-400 mt-1 hover:underline cursor-pointer">
               Tu Empresa · Software a Medida y Automatización
             </h4>
-            <p className="mt-1 text-[11px] text-zinc-300 leading-snug">
+            <p className="mt-1 text-[14px] text-zinc-300 leading-snug">
               Plataforma digital líder: presupuestos en segundos, seguimiento de avisos y facturación directa sin papeleos.
             </p>
           </div>
 
           <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-500/10 p-2 border border-emerald-500/20">
-            <span className="text-[10px] font-bold text-emerald-300">
+            <span className="text-[14px] font-bold text-emerald-300">
               ★★★★★ 4.9 (128 reseñas)
             </span>
-            <span className="rounded bg-emerald-400 px-1.5 py-0.2 text-[9px] font-black text-black">
+            <span className="rounded bg-emerald-400 px-1.5 py-0.2 text-[14px] font-black text-black">
               TOP 1 GOOGLE
             </span>
           </div>
@@ -679,7 +679,7 @@ function GrowStage({ active }: { active: boolean }) {
         {/* Right: n8n AI Autonomous Workflow */}
         <div className="col-span-6 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101524] p-3">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-extrabold uppercase tracking-wider text-zinc-400 flex items-center gap-1">
+            <span className="text-[14px] font-extrabold uppercase tracking-wider text-zinc-400 flex items-center gap-1">
               <Workflow size={12} className="text-[#0044FF]" />
               Pipeline Autónomo (n8n + IA)
             </span>
@@ -692,33 +692,33 @@ function GrowStage({ active }: { active: boolean }) {
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40">
                 <Zap size={14} />
               </div>
-              <div className="text-[11px]">
+              <div className="text-[14px]">
                 <p className="font-bold text-white leading-none">Formulario / WhatsApp</p>
-                <p className="text-[10px] text-zinc-400">Captación de aviso</p>
+                <p className="text-[14px] text-zinc-400">Captación de aviso</p>
               </div>
             </div>
 
-            <div className="pl-3.5 text-blue-400 text-xs font-black">↓</div>
+            <div className="pl-3.5 text-blue-400 text-[14px] font-black">↓</div>
 
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0A1B5C] text-blue-400 border border-blue-500/40">
                 <Bot size={14} />
               </div>
-              <div className="text-[11px]">
+              <div className="text-[14px]">
                 <p className="font-bold text-white leading-none">Agente IA (GPT-4o)</p>
-                <p className="text-[10px] text-zinc-400">Clasifica y asigna técnico</p>
+                <p className="text-[14px] text-zinc-400">Clasifica y asigna técnico</p>
               </div>
             </div>
 
-            <div className="pl-3.5 text-emerald-400 text-xs font-black">↓</div>
+            <div className="pl-3.5 text-emerald-400 text-[14px] font-black">↓</div>
 
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                 <CheckCircle2 size={14} />
               </div>
-              <div className="text-[11px]">
+              <div className="text-[14px]">
                 <p className="font-bold text-white leading-none">ERP & Facturación</p>
-                <p className="text-[10px] text-zinc-400">Cobro y factura en PDF</p>
+                <p className="text-[14px] text-zinc-400">Cobro y factura en PDF</p>
               </div>
             </div>
           </div>
@@ -726,12 +726,12 @@ function GrowStage({ active }: { active: boolean }) {
       </div>
 
       {/* Bottom Live Activity Banner */}
-      <div className="flex items-center justify-between gap-2 rounded-xl border border-blue-500/30 bg-[#0C1220] p-2.5 text-xs text-blue-200">
+      <div className="flex items-center justify-between gap-2 rounded-xl border border-blue-500/30 bg-[#0C1220] p-2.5 text-[14px] text-blue-200">
         <span className="flex items-center gap-1.5 font-medium truncate">
           <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-ping" />
           142 ejecuciones hoy sin errores · Respuesta &lt; 30s
         </span>
-        <span className="shrink-0 whitespace-nowrap rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[11px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
+        <span className="shrink-0 whitespace-nowrap rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-1 text-[14px] font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF]">
           ✓ AUTOMATIZADO & TOP 1
         </span>
       </div>
