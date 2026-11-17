@@ -49,7 +49,7 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[11rem]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:pt-14 lg:pb-[13.5rem]"
       style={{ background: VIOLET }}
     >
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
@@ -93,17 +93,17 @@ export function OderaloSection() {
               Caso real · en producción
             </span>
 
-            <h2 className="font-display mt-5 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
+            <h2 className="font-display mt-7 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
               Del aviso a la factura,{" "}
               <span className="text-[#C6F432]">sin papeles.</span>
             </h2>
 
-            <p className="mt-3 max-w-[44ch] text-[16px] leading-relaxed font-medium text-white">
+            <p className="mt-6 max-w-[44ch] text-[16px] leading-relaxed font-medium text-white">
               <strong>Oderalo</strong> es el ERP que desarrollé a medida para empresas de servicios
               en campo: citas, rutas, parte firmado y facturación en un único flujo.
             </p>
 
-            <ol className="mt-5 grid gap-2.5">
+            <ol className="mt-8 grid gap-3.5">
               {flow.map((f) => (
                 <li
                   key={f.n}
@@ -127,7 +127,7 @@ export function OderaloSection() {
 
             <a
               href="#contacto"
-              className="mt-6 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#C6F432] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
+              className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#C6F432] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
             >
               <span>Pídeme la demo de Oderalo</span>
               <ArrowUpRight size={18} strokeWidth={2.5} />
