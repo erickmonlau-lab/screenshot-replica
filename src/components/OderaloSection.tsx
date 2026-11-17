@@ -1,8 +1,11 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, Laptop, Smartphone, Zap, ShieldCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
+const VIOLET = "#6D28D9";
+const LIME = "#C6F432";
+const INK = "#09090B";
 
 // Recorrido (en % de la altura de la imagen) para que la captura se deslice de arriba abajo
 // dentro de una pantalla: 1 - (alto visible / alto imagen).
@@ -45,16 +48,23 @@ function AutoScroll({
   );
 }
 
-/** ERP Oderalo: caso real en producción con el portátil y móvil reales, redacción y presentación visual estilo Apple */
+const flow = [
+  { n: "1", t: "Cita", d: "Se agenda y se asigna al técnico con su ruta." },
+  { n: "2", t: "Parte", d: "El técnico lo rellena en el sitio y el cliente firma en pantalla." },
+  { n: "3", t: "Factura", d: "Sale de los datos del parte, sin volver a escribir nada." },
+];
+
+/** ERP Oderalo: caso real. Pantalla grande cruzando el título gigante, sobre el morado de la marca. */
 export function OderaloSection() {
   const reduce = useReducedMotion();
   const px = useMotionValue(0);
   const py = useMotionValue(0);
   const sx = useSpring(px, { stiffness: 65, damping: 16 });
   const sy = useSpring(py, { stiffness: 65, damping: 16 });
-  const rotY = useTransform(sx, (v) => -5 + v * 7);
-  const rotX = useTransform(sy, (v) => 2 + v * -5);
-  const phoneX = useTransform(sx, (v) => v * 12);
+  const rotY = useTransform(sx, (v) => -6 + v * 7);
+  const rotX = useTransform(sy, (v) => 3 + v * -5);
+  const phoneX = useTransform(sx, (v) => v * 14);
+  const wordX = useTransform(sx, (v) => v * -30);
 
   const onMove = (e: React.PointerEvent<HTMLElement>) => {
     if (reduce) return;
@@ -67,11 +77,32 @@ export function OderaloSection() {
     <section
       id="erp"
       onPointerMove={onMove}
-      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#F4F4F6] py-14 sm:py-18 lg:py-22 text-[#09090B]"
+      className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] py-12 text-white sm:py-14 lg:py-12"
+      style={{ background: VIOLET }}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-18">
-          {/* Columna Izquierda: Redacción estilo Apple con Oderalo como caso real */}
+      {/* Palabra gigante en contorno: las pantallas la cruzan */}
+      <motion.div
+        aria-hidden="true"
+        style={{ x: reduce ? 0 : wordX }}
+        className="font-display pointer-events-none absolute top-[3%] right-[-2%] select-none text-[clamp(6rem,17vw,16rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+      >
+        ODERALO
+      </motion.div>
+
+      {/* Bloques de color */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-10 right-[8%] h-28 w-28 rotate-12 border-[3px] border-[#09090B]"
+        style={{ background: LIME }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[-30px] left-[34%] hidden h-24 w-64 -skew-x-12 border-[3px] border-[#09090B] bg-[#09090B] lg:block"
+      />
+
+      <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+          {/* Texto */}
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 36 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -79,114 +110,64 @@ export function OderaloSection() {
             transition={{ duration: 0.8, ease: EASE }}
             className="lg:col-span-5"
           >
-            <span className="inline-flex items-center gap-2 rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1.5 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-[3px_3px_0_#09090B]">
-              Caso Real · ERP Oderalo en Producción
+            <span
+              className="inline-flex items-center rounded-lg border-[3px] border-[#09090B] px-3.5 py-1.5 text-[15px] font-black tracking-wider text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]"
+              style={{ background: LIME }}
+            >
+              Caso real · en producción
             </span>
 
-            {/* Titular contundente estilo Apple */}
-            <h2 className="font-display mt-5 text-[clamp(3.6rem,7.5vw,6.2rem)] leading-[0.88] font-black tracking-[-0.05em] text-[#09090B]">
-              ERP.
-              <span className="block text-[clamp(1.8rem,3.2vw,2.9rem)] leading-[1.05] font-black tracking-[-0.04em] text-[#6D28D9] mt-3">
-                Oderalo: del aviso a la factura, sin papeles.
-              </span>
+            <h2 className="font-display mt-5 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
+              Del aviso a la factura,{" "}
+              <span className="text-[#C6F432]">sin papeles.</span>
             </h2>
 
-            <p className="mt-5 max-w-[42ch] text-base leading-relaxed font-medium text-[#27272A] sm:text-lg">
-              <strong>Oderalo</strong> es mi sistema ERP desarrollado a medida para empresas de
-              servicios en campo. Centraliza llamadas, despacha rutas a los técnicos, recoge la firma
-              del cliente en pantalla y emite la factura en un único flujo continuo sin papeles.
+            <p className="mt-3 max-w-[44ch] text-[16px] leading-relaxed font-medium text-white">
+              <strong>Oderalo</strong> es el ERP que desarrollé a medida para empresas de servicios
+              en campo: citas, rutas, parte firmado y facturación en un único flujo.
             </p>
 
-            {/* Tríada de ventajas clave con formato Apple */}
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="rounded-xl border-2 border-[#09090B] bg-white p-3.5 shadow-[3px_3px_0_#09090B]">
-                <p className="font-display text-xl font-black tracking-tight text-[#6D28D9]">
-                  0 papeles.
-                </p>
-                <p className="mt-1 text-xs leading-snug font-semibold text-[#52525B]">
-                  Firma digital del cliente en la app de campo de Oderalo.
-                </p>
-              </div>
-
-              <div className="rounded-xl border-2 border-[#09090B] bg-white p-3.5 shadow-[3px_3px_0_#09090B]">
-                <p className="font-display text-xl font-black tracking-tight text-[#09090B]">
-                  Tiempo real.
-                </p>
-                <p className="mt-1 text-xs leading-snug font-semibold text-[#52525B]">
-                  La central Oderalo controla rutas GPS, avisos y stock al segundo.
-                </p>
-              </div>
-
-              <div className="rounded-xl border-2 border-[#09090B] bg-white p-3.5 shadow-[3px_3px_0_#6D28D9]">
-                <p className="font-display text-xl font-black tracking-tight text-[#6D28D9]">
-                  1 clic.
-                </p>
-                <p className="mt-1 text-xs leading-snug font-semibold text-[#52525B]">
-                  El albarán validado en Oderalo emite y concilia la factura al instante.
-                </p>
-              </div>
-            </div>
-
-            {/* Píldoras de arquitectura técnica */}
-            <div className="mt-6 flex flex-wrap gap-2">
-              {[
-                "Oderalo Web & Cloud",
-                "Oderalo App PWA",
-                "Firma Digital en Pantalla",
-                "Facturación Automática",
-              ].map((pill) => (
-                <span
-                  key={pill}
-                  className="rounded-full border-2 border-[#09090B] bg-white px-3.5 py-1 text-xs sm:text-sm font-bold text-[#09090B] shadow-[2px_2px_0_#09090B]"
+            <ol className="mt-5 grid gap-2.5">
+              {flow.map((f) => (
+                <li
+                  key={f.n}
+                  className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-white p-2 shadow-[4px_4px_0_#09090B]"
                 >
-                  {pill}
-                </span>
+                  <span
+                    className="font-display flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] text-[22px] font-black text-[#09090B]"
+                    style={{ background: LIME }}
+                  >
+                    {f.n}
+                  </span>
+                  <p className="text-[15px] leading-snug font-semibold text-[#52525B]">
+                    <span className="font-display block text-[19px] font-black text-[#09090B]">
+                      {f.t}
+                    </span>
+                    {f.d}
+                  </p>
+                </li>
               ))}
-            </div>
+            </ol>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href="#contacto"
-                className="inline-flex min-h-[52px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-7 py-3.5 text-base font-bold text-white shadow-[4px_4px_0_#6D28D9] transition-all duration-150 hover:bg-[#6D28D9] hover:border-[#6D28D9] hover:shadow-[4px_4px_0_#09090B] active:translate-x-[2px] active:translate-y-[2px]"
-              >
-                <span>Pídeme la demo de Oderalo</span>
-                <ArrowUpRight size={18} strokeWidth={2.5} />
-              </a>
-            </div>
+            <a
+              href="#contacto"
+              className="mt-6 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#C6F432] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
+            >
+              <span>Pídeme la demo de Oderalo</span>
+              <ArrowUpRight size={18} strokeWidth={2.5} />
+            </a>
           </motion.div>
 
-          {/* Columna Derecha: Mockups Reales de Oderalo (Tablet/Portátil + Móvil) */}
-          <div className="relative mt-8 sm:mt-10 lg:mt-0 lg:col-span-7" style={{ perspective: 1600 }}>
-            {/* Badge flotante superior estilo Apple */}
-            <div className="absolute -top-5 right-2 z-30 hidden sm:flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-3.5 py-1 text-xs font-bold shadow-[3px_3px_0_#6D28D9]">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Oderalo Cloud en Vivo · Sistema en producción</span>
-            </div>
-
+          {/* Pantallas reales */}
+          <div className="relative pb-10 lg:col-span-7 lg:pb-12 lg:pt-10" style={{ perspective: 1600 }}>
             <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
-              {/* Portátil / Tablet mostrando la web real de Oderalo */}
-              <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 sm:p-2.5 shadow-[12px_12px_0_#6D28D9]">
-                {/* Cabecera / Barra estilo navegador macOS */}
-                <div className="flex items-center justify-between border-b border-[#272730] bg-[#181820] px-3.5 py-1.5 rounded-t-lg mb-1">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
-                    </div>
-                    <span className="ml-1 inline-flex items-center gap-1 rounded bg-[#6D28D9] px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-white">
-                      ODERALO
-                    </span>
-                    <span className="font-mono text-[11px] text-zinc-400">
-                      oderalo.app/despacho
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-zinc-400">
-                    <Laptop size={12} className="text-[#A78BFA]" />
-                    <span className="hidden sm:inline">Vista Central / Oficina</span>
-                  </div>
+              <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[14px_14px_0_#09090B] sm:p-2.5">
+                <div className="mb-1 flex items-center gap-2 rounded-t-lg bg-[#181820] px-3.5 py-2">
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
+                  <span className="ml-2 font-mono text-[13px] text-zinc-300">oderalo.app</span>
                 </div>
-
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
                   <AutoScroll
                     src="/oderalo-desktop.webp"
@@ -196,22 +177,16 @@ export function OderaloSection() {
                   />
                 </div>
               </div>
-              <div className="mx-auto h-3 w-[92%] rounded-b-2xl border-[3px] border-t-0 border-[#09090B] bg-white shadow-md" />
 
-              {/* Móvil mostrando la grabación real de la app de campo de Oderalo */}
               <motion.div
                 style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-8 sm:-bottom-12 lg:-bottom-14 left-0 sm:left-2 lg:left-4 w-[24%] sm:w-[22%] min-w-[110px] max-w-[155px] z-30"
+                className="absolute -bottom-2 -left-2 z-20 w-[30%] max-w-[180px] min-w-[112px] sm:-left-6 lg:-bottom-6 lg:-left-12"
               >
-                <div className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#09090B]">
-                  {/* Badge de dispositivo */}
-                  <div className="flex items-center justify-between text-[8px] font-bold text-zinc-400 px-1.5 py-0.5 bg-[#181820] rounded-t-[18px] border-b border-[#272730]">
-                    <span className="text-white flex items-center gap-1">
-                      <Smartphone size={9} /> Oderalo Móvil
-                    </span>
-                    <span className="text-emerald-400">● PWA</span>
-                  </div>
-                  <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-b-[18px] bg-black">
+                <div
+                  className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[8px_8px_0_#C6F432]"
+                  style={{ transform: "rotate(-4deg)" }}
+                >
+                  <div className="relative aspect-[9/19.5] w-full overflow-hidden rounded-[20px] bg-black">
                     <AutoScroll
                       src="/oderalo-mobile.webp"
                       alt="Grabación de la app móvil de Oderalo desplazándose"
