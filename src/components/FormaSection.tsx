@@ -67,11 +67,21 @@ export function FormaSection() {
       id="web-apps"
       className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 lg:py-14"
     >
-      {/* Bloque de color de fondo */}
+      {/* Panel violeta a sangre en el lado derecho + palabra gigante en contorno */}
       <div
         aria-hidden="true"
-        className="absolute -top-8 left-[46%] hidden h-24 w-24 rotate-12 border-[3px] border-[#09090B] lg:block"
+        className="absolute inset-y-0 right-0 hidden w-[42%] border-l-[3px] border-[#09090B] lg:block"
         style={{ background: VIOLET }}
+      />
+      <div
+        aria-hidden="true"
+        className="font-display pointer-events-none absolute top-[3%] right-[1.5%] hidden leading-none font-black tracking-[-0.05em] text-transparent select-none lg:block lg:text-[clamp(8rem,13vw,16rem)] [-webkit-text-stroke:3px_#FFFFFF]"
+      >
+        APPS
+      </div>
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[-26px] left-[58%] hidden h-20 w-56 -skew-x-12 border-[3px] border-[#09090B] bg-[#09090B] lg:block"
       />
 
       <div className="relative mx-auto w-full max-w-[1400px] px-6 sm:px-10">
@@ -146,27 +156,34 @@ export function FormaSection() {
             </a>
           </motion.div>
 
-          {/* Móviles sobre panel violeta */}
-          <div className="relative mx-auto w-full max-w-[600px] lg:col-span-5">
+          {/* Tres móviles en abanico, cruzando la palabra gigante */}
+          <div className="relative mx-auto w-full max-w-[640px] lg:col-span-5 lg:mt-6 lg:max-w-none">
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 top-[4%] bottom-[4%] rounded-[28px] border-[3px] border-[#09090B]"
-              style={{ background: VIOLET, boxShadow: `10px 10px 0 ${INK}` }}
+              className="absolute inset-x-0 top-[6%] bottom-[2%] rounded-[28px] border-[3px] border-[#09090B] lg:hidden"
+              style={{ background: VIOLET, boxShadow: `8px 8px 0 ${INK}` }}
             />
-            <div className="relative flex items-center justify-center gap-4 py-6 sm:gap-6">
-              <Phone
-                src="/forma-home-v2.png"
-                alt="GYMVITY: pantalla de inicio con rutinas de la comunidad"
-                rotate={-4}
-                delay={0}
-                className="w-[44%] max-w-[240px] translate-y-6"
-              />
+            <div className="relative flex items-end justify-center -space-x-5 py-6 sm:-space-x-8 lg:-space-x-6 lg:py-0">
               <Phone
                 src="/forma-ejercicios-v2.png"
                 alt="GYMVITY: biblioteca de 144 ejercicios con filtros"
-                rotate={3}
+                rotate={-6}
                 delay={0.2}
-                className="w-[44%] max-w-[240px] -translate-y-4"
+                className="w-[34%] max-w-[250px] translate-y-3 lg:translate-y-8"
+              />
+              <Phone
+                src="/forma-home-v2.png"
+                alt="GYMVITY: pantalla de inicio con rutinas de la comunidad"
+                rotate={0}
+                delay={0}
+                className="relative z-10 w-[44%] max-w-[330px]"
+              />
+              <Phone
+                src="/forma-progreso-v2.png"
+                alt="GYMVITY: registro de progreso con consistencia y volumen"
+                rotate={6}
+                delay={0.4}
+                className="w-[34%] max-w-[250px] translate-y-3 lg:translate-y-8"
               />
             </div>
           </div>
