@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
-import { RotatingSeal } from "./RotatingSeal";
 import { useReducedMotion } from "./motion-pref";
 
 interface Job {
@@ -24,10 +23,7 @@ const techPoints = [
   "Flujos con n8n y agentes de IA que trabajan solos.",
 ];
 
-const facts = [
-  { k: "Ubicación", v: "La Sagrera, Barcelona" },
-  { k: "Idiomas", v: "Español · Catalán · Inglés B2" },
-];
+const facts = ["La Sagrera, Barcelona", "Español · Catalán · Inglés B2"];
 
 /** Perfil híbrido: tres pilares (marketing, gestión, tecnología) con su evidencia real. */
 export function AboutSection({
@@ -44,28 +40,19 @@ export function AboutSection({
   const pillars = [
     {
       name: "Marketing",
-      head: "bg-[#0044FF] text-white",
-      shadow: "shadow-[8px_8px_0_#0044FF]",
-      study: education[0]?.title ?? "",
-      studyPlace: education[0]?.place ?? "",
+      study: education[0],
       job: experience[0],
       points: experience[0]?.points ?? [],
     },
     {
       name: "Gestión",
-      head: "bg-[#09090B] text-white",
-      shadow: "shadow-[8px_8px_0_#09090B]",
-      study: education[1]?.title ?? "",
-      studyPlace: education[1]?.place ?? "",
+      study: education[1],
       job: experience[1],
       points: experience[1]?.points ?? [],
     },
     {
       name: "Tecnología",
-      head: "bg-[#FFD60A] text-[#09090B]",
-      shadow: "shadow-[8px_8px_0_#0044FF]",
-      study: education[2]?.title ?? "",
-      studyPlace: education[2]?.place ?? "",
+      study: education[2],
       job: undefined,
       points: techPoints,
     },
@@ -73,48 +60,45 @@ export function AboutSection({
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-8">
-      <div className="flex flex-col items-center gap-6 lg:col-span-4 lg:items-start">
-        <RotatingSeal
-          text="MARKETING · GESTIÓN · TECNOLOGÍA · MARKETING · GESTIÓN · TECNOLOGÍA · "
-          size={340}
-          fontSize={17}
-          duration={28}
-          className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[8px_8px_0_#09090B]"
-        >
+      <div className="lg:col-span-3">
+        <div className="relative overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-[#0044FF] shadow-[10px_10px_0_#09090B]">
           <img
             src="/erick-portrait-studio.png"
             alt="Erick Rodríguez"
             loading="lazy"
-            className="h-[224px] w-[224px] rounded-full border-[3px] border-[#09090B] bg-[#0044FF] object-cover object-top"
+            className="mx-auto mt-6 h-[330px] w-auto max-w-none object-contain object-bottom"
           />
-        </RotatingSeal>
+          <div className="flex items-center gap-2.5 border-t-[3px] border-[#09090B] bg-[#09090B] px-4 py-3">
+            <span className="led-dot h-2.5 w-2.5 rounded-full" />
+            <span className="font-display text-[20px] leading-none font-bold tracking-[-0.03em] text-white">
+              Erick Rodríguez
+            </span>
+          </div>
+        </div>
 
-        <dl className="grid w-full max-w-[340px] gap-2.5">
+        <ul className="mt-6 grid gap-2.5">
           {facts.map((f) => (
-            <div
-              key={f.k}
-              className="rounded-xl border-[3px] border-[#09090B] bg-white px-4 py-2.5 text-[#09090B] shadow-[4px_4px_0_#09090B]"
+            <li
+              key={f}
+              className="led-chip rounded-xl px-4 py-2.5 text-[17px] leading-tight font-bold"
             >
-              <dt className="text-[15px] font-semibold text-[#52525B]">{f.k}</dt>
-              <dd className="font-display text-[18px] leading-tight font-bold tracking-[-0.02em]">
-                {f.v}
-              </dd>
-            </div>
+              {f}
+            </li>
           ))}
-        </dl>
+        </ul>
 
         <a
           href={cvUrl}
           download="Erick-Rodriguez-CV.pdf"
-          className="inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-7 py-3.5 text-base font-semibold text-white shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF] dark:border-white dark:bg-white dark:text-[#09090B]"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-7 py-3.5 text-base font-semibold text-white shadow-[4px_4px_0_#0044FF] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#0044FF]"
         >
           <span>Descargar CV completo</span>
           <Download size={18} />
         </a>
       </div>
 
-      <div className="lg:col-span-8">
-        <p className="t-ink font-display max-w-[34ch] text-[clamp(1.5rem,2.3vw,2.1rem)] leading-[1.12] font-bold tracking-[-0.035em]">
+      <div className="lg:col-span-9">
+        <p className="t-ink font-display max-w-[36ch] text-[clamp(1.5rem,2.3vw,2.1rem)] leading-[1.12] font-bold tracking-[-0.035em]">
           No soy solo programador: vengo del marketing y la gestión, y por eso construyo lo que tu
           negocio necesita de verdad.
         </p>
@@ -127,29 +111,28 @@ export function AboutSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-5% 0px" }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
-              className={`${p.shadow} flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B]`}
+              className="led-box flex flex-col p-5 text-white"
             >
-              <h3
-                className={`${p.head} font-display border-b-[3px] border-[#09090B] px-5 py-3 text-[28px] leading-none font-bold tracking-[-0.04em]`}
-              >
+              <h3 className="font-display flex items-center gap-2.5 text-[28px] leading-none font-bold tracking-[-0.04em]">
+                <span className="led-dot h-3 w-3 rounded-full" />
                 {p.name}
               </h3>
-              <div className="flex flex-1 flex-col gap-3 p-5">
+              <div className="mt-4 flex flex-1 flex-col gap-3">
                 <p className="text-[16px] leading-snug font-bold">
-                  {p.study}
-                  <span className="block text-[15px] font-semibold text-[#52525B]">
-                    {p.studyPlace}
+                  {p.study?.title}
+                  <span className="block text-[15px] font-semibold text-[#B4B8C2]">
+                    {p.study?.place}
                   </span>
                 </p>
                 {p.job ? (
-                  <p className="text-[16px] leading-snug font-bold text-[#0044FF]">
+                  <p className="text-[16px] leading-snug font-bold text-[#9DB8FF]">
                     {p.job.role}
-                    <span className="block text-[15px] font-semibold text-[#52525B]">
+                    <span className="block text-[15px] font-semibold text-[#B4B8C2]">
                       {p.job.place} · {p.job.period}
                     </span>
                   </p>
                 ) : null}
-                <ul className="mt-auto space-y-1.5 border-t-2 border-[#09090B]/15 pt-3 text-[15px] leading-snug font-medium text-[#3F3F46]">
+                <ul className="mt-auto space-y-1.5 border-t-2 border-[#1B2A66] pt-3 text-[15px] leading-snug font-medium text-[#D4D4D8]">
                   {p.points.map((pt) => (
                     <li key={pt}>{pt}</li>
                   ))}

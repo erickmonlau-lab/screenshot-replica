@@ -44,6 +44,7 @@ import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
 import { OderaloSection } from "@/components/OderaloSection";
+import { FormaSection } from "@/components/FormaSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import {
   AgentFlow,
@@ -375,6 +376,7 @@ function Index() {
         </section>
 
         <OderaloSection />
+        <FormaSection />
 
         {/* STACK + IA EN ACCIÓN */}
         <section
