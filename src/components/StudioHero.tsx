@@ -9,7 +9,7 @@ import {
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { HangingCard } from "./HangingCard";
-import { RotatingSeal } from "./RotatingSeal";
+import { ScrollMarquee } from "./ScrollMarquee";
 
 export interface HeroProjectPreview {
   id: string;
@@ -47,18 +47,12 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
   const discX = useTransform(sx, (v) => v * -36);
   const discY = useTransform(sy, (v) => v * -22);
   const faceX = useTransform(sx, (v) => v * 16);
-  const wordsX = useTransform(sx, (v) => v * -14);
-  const ticketX = useTransform(sx, (v) => v * 46);
-  const ticketY = useTransform(sy, (v) => v * 30);
 
   const onMove = (e: React.PointerEvent) => {
     if (reduce) return;
     mx.set(e.clientX / window.innerWidth - 0.5);
     my.set(e.clientY / window.innerHeight - 0.5);
   };
-
-  const word =
-    "font-display block font-bold uppercase leading-[0.84] tracking-[-0.055em] text-[13vw] sm:text-[clamp(80px,12.8vh,150px)]";
 
   return (
     <section
@@ -67,6 +61,17 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       onPointerMove={onMove}
       className="t-bg-hero t-ink relative h-[clamp(680px,100svh,1000px)] overflow-hidden"
     >
+      {/* Texto en outline que corre solo y reacciona al scroll */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-[29%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
+      >
+        <ScrollMarquee
+          text="Erick Rodríguez — Marketing · Gestión · Código · IA — "
+          className="text-[15vh] sm:text-[30vh]"
+        />
+      </div>
+
       {/* Disco cobalto con sombra dura: el "podio" del retrato */}
       <motion.div
         aria-hidden="true"
@@ -97,73 +102,20 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         </motion.div>
       </motion.div>
 
-      {/* Titular gigante POR DELANTE del retrato: las letras cruzan el hombro */}
-      <motion.h1
-        style={{ x: wordsX }}
-        initial={reduce ? false : { y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
-        className="pointer-events-none absolute top-[17%] left-4 z-20 select-none sm:top-[52%] sm:left-[3.5%] sm:-translate-y-1/2"
-      >
-        <span className="sr-only">Marketing, gestión, código e IA en Barcelona. </span>
-        <span className={`${word} text-[#09090B] dark:text-white`}>Marketing</span>
-        <span className={`${word} text-[#09090B] dark:text-white`}>Gestión</span>
-        <span
-          className={`${word} text-white [-webkit-text-stroke:3px_#09090B] [paint-order:stroke_fill] [text-shadow:5px_5px_0_#0044FF]`}
-        >
-          Código e IA
-        </span>
-      </motion.h1>
-
-      {/* Sello de texto giratorio */}
-      <motion.div
-        style={{ x: ticketX, y: ticketY }}
-        className="pointer-events-none absolute top-[47%] right-2 z-20 sm:top-[30%] sm:right-auto sm:left-[calc(50%+190px)]"
-      >
-        <motion.div
-          initial={reduce ? false : { scale: 0, rotate: -40 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 140, damping: 13, delay: 0.9 }}
-        >
-          <div className="sm:hidden">
-            <RotatingSeal
-              text="MARKETING · GESTIÓN · IA · "
-              size={118}
-              className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[4px_4px_0_#09090B]"
-            >
-              <span className="font-display text-[26px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
-                ER
-              </span>
-            </RotatingSeal>
-          </div>
-          <div className="hidden sm:block">
-            <RotatingSeal
-              text="MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · "
-              size={190}
-              className="border-[3px] border-[#09090B] bg-[#FFD60A] shadow-[6px_6px_0_#09090B]"
-            >
-              <span className="font-display text-[34px] leading-none font-bold tracking-[-0.05em] text-[#09090B]">
-                ER
-              </span>
-            </RotatingSeal>
-          </div>
-        </motion.div>
-      </motion.div>
-
       {/* Texto y acciones, sin tarjeta */}
       <motion.div
         initial={reduce ? false : { y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.5, ease: EASE }}
-        className="absolute right-4 bottom-5 left-4 z-30 sm:right-[4%] sm:bottom-[11%] sm:left-auto sm:w-[320px] lg:w-[360px]"
+        className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[8%] sm:left-[3.5%] sm:w-[400px]"
       >
-        <p className="font-display hidden text-[28px] leading-[1.1] font-bold tracking-[-0.035em] sm:block lg:text-[32px]">
-          Entiendo tu negocio y construyo la solución.
-        </p>
-        <p className="mt-2 hidden text-[17px] font-semibold text-[#0044FF] sm:block dark:text-[#5b97ff]">
+        <p className="hidden text-[17px] font-bold text-[#0044FF] sm:block dark:text-[#5b97ff]">
           Marketing, gestión y tecnología · Barcelona
         </p>
-        <div className="flex flex-wrap items-center gap-2.5 sm:mt-5">
+        <h1 className="font-display text-[clamp(1.9rem,3vw,2.7rem)] leading-[1.04] font-bold tracking-[-0.045em] sm:mt-2">
+          Entiendo tu negocio y construyo la solución.
+        </h1>
+        <div className="mt-5 flex flex-wrap items-center gap-2.5">
           <button
             type="button"
             onClick={() => onJumpToProjects()}
