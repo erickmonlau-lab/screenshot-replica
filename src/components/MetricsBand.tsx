@@ -82,9 +82,9 @@ function Counter({ metric }: { metric: Metric }) {
 }
 
 const TILES = [
-  { box: "bg-[#0044FF] text-white", sub: "text-white/90", rot: -2.2, lift: "md:mt-0" },
+  { box: "bg-[#0044FF] text-white", sub: "text-white", rot: -2.2, lift: "md:mt-0" },
   { box: "bg-[#09090B] text-white", sub: "text-zinc-300", rot: 1.6, lift: "md:mt-12" },
-  { box: "bg-[#FFD60A] text-[#09090B]", sub: "text-[#09090B]/80", rot: -1.2, lift: "md:mt-4" },
+  { box: "bg-[#FFD60A] text-[#09090B]", sub: "text-[#09090B]", rot: -1.2, lift: "md:mt-4" },
 ] as const;
 
 /** Tres bloques de color inclinados con cifras gigantes y sombra dura. */

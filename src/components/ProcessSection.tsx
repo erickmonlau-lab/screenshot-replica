@@ -126,7 +126,7 @@ export function ProcessSection() {
               <div className="relative mt-7 px-[26px]">
                 <div
                   aria-hidden="true"
-                  className="absolute top-[26px] right-[26px] left-[26px] h-[6px] -translate-y-1/2 rounded-full bg-white/15"
+                  className="absolute top-[26px] right-[26px] left-[26px] h-[6px] -translate-y-1/2 rounded-full bg-[#27272A]"
                 >
                   <div
                     className="h-full rounded-full bg-[#0044FF] transition-[width] duration-300"
@@ -157,7 +157,7 @@ export function ProcessSection() {
                               ? "scale-110 border-[#09090B] bg-white text-[#09090B] shadow-[5px_5px_0_#0044FF]"
                               : done
                                 ? "border-[#09090B] bg-[#0044FF] text-white"
-                                : "border-white/30 bg-[#09090B] text-zinc-400 hover:border-white/60"
+                                : "border-[#52525B] bg-[#09090B] text-zinc-400 hover:border-[#B4B8C2]"
                           }`}
                         >
                           {done ? <Check size={22} strokeWidth={3.5} /> : st.n}

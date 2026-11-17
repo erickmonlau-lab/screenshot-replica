@@ -29,9 +29,9 @@ const THEMES = [
   {
     bg: "bg-[#0044FF]",
     ink: "text-white",
-    sub: "text-white/90",
+    sub: "text-white",
     chip: "bg-white text-[#09090B]",
-    tag: "border-white/60 text-white",
+    tag: "border-white text-white",
     btn: "bg-white text-[#09090B] shadow-[4px_4px_0_#09090B]",
   },
   {
@@ -39,7 +39,7 @@ const THEMES = [
     ink: "text-white",
     sub: "text-zinc-300",
     chip: "bg-[#0044FF] text-white",
-    tag: "border-white/40 text-white",
+    tag: "border-[#B4B8C2] text-white",
     btn: "bg-[#0044FF] text-white shadow-[4px_4px_0_#ffffff]",
   },
   {
@@ -47,7 +47,7 @@ const THEMES = [
     ink: "text-[#09090B]",
     sub: "text-zinc-700",
     chip: "bg-[#0044FF] text-white",
-    tag: "border-[#09090B]/40 text-[#09090B]",
+    tag: "border-[#52525B] text-[#09090B]",
     btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#0044FF]",
   },
   {
@@ -55,7 +55,7 @@ const THEMES = [
     ink: "text-[#09090B]",
     sub: "text-zinc-700",
     chip: "bg-[#0044FF] text-white",
-    tag: "border-[#09090B]/40 text-[#09090B]",
+    tag: "border-[#52525B] text-[#09090B]",
     btn: "bg-[#09090B] text-white shadow-[4px_4px_0_#0044FF]",
   },
 ] as const;

@@ -381,7 +381,7 @@ function Index() {
         {/* STACK + IA EN ACCIÓN */}
         <section
           id="ia"
-          className="section-light t-line relative scroll-mt-[62px] overflow-hidden border-t border-black/10 bg-[#FAF9F6] lg:h-[min(100svh,800px)] lg:min-h-[640px]"
+          className="section-light t-line relative scroll-mt-[62px] overflow-hidden border-t border-[#D4D4D8] bg-[#FAF9F6] lg:h-[min(100svh,800px)] lg:min-h-[640px]"
         >
           <div className="absolute inset-0 hidden lg:block">
             <BrainVisual theme="light" />
@@ -402,7 +402,7 @@ function Index() {
                 Mi segundo cerebro vive en Obsidian: cada nota es un nodo y la IA lo recorre antes
                 de empezar.
               </p>
-              <ol className="mt-8 space-y-6 border-l-2 border-black/15 pl-6">
+              <ol className="mt-8 space-y-6 border-l-2 border-[#D4D4D8] pl-6">
                 {[
                   [
                     "Memoria entre proyectos",
@@ -446,17 +446,17 @@ function Index() {
                 {row.map((t) => (
                   <span
                     key={t.name}
-                    className="mr-4 inline-flex items-center gap-3 rounded-full border-[3px] border-[#09090B] bg-white px-6 py-3 text-[#09090B] shadow-[5px_5px_0_#0044FF]"
+                    className="led-chip mr-4 inline-flex items-center gap-3 rounded-full px-6 py-3"
                   >
                     <span
                       aria-hidden="true"
-                      className="h-3.5 w-3.5 rounded-full border-2 border-[#09090B]"
+                      className="h-3.5 w-3.5 rounded-full border-2 border-white"
                       style={{ backgroundColor: t.color }}
                     />
                     <span className="font-display text-[22px] leading-none font-bold tracking-[-0.03em]">
                       {t.name}
                     </span>
-                    <span className="text-[15px] font-semibold text-[#52525B]">{t.category}</span>
+                    <span className="text-[15px] font-semibold text-[#9DB8FF]">{t.category}</span>
                   </span>
                 ))}
               </VelocityMarqueeRow>

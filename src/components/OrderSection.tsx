@@ -78,18 +78,8 @@ export function OrderSection() {
               className="group relative flex flex-col justify-between rounded-[24px] border-[3px] border-[#09090B] bg-white p-6 sm:p-7 text-[#09090B] shadow-[8px_8px_0_#09090B]"
             >
               <div>
-                {/* Step meta row */}
-                <div className="flex items-center justify-between pb-2.5 border-b-2 border-[#09090B]/10">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400">
-                    Paso 0{i + 1}
-                  </span>
-                  <span className="font-mono text-xs font-bold text-[#0044FF] bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
-                    0{i + 1} / 03
-                  </span>
-                </div>
-
                 {/* Giant Outlined Step Word: ATRAER / ORDENAR / AUTOMATIZAR */}
-                <div className="overflow-hidden pt-3 pb-1">
+                <div className="overflow-hidden pb-1">
                   <span
                     aria-hidden="true"
                     className="font-display block text-[clamp(2.2rem,3.4vw,3.1rem)] leading-[0.92] font-bold tracking-[-0.04em] uppercase select-none text-white [-webkit-text-stroke:2.5px_#09090B] [paint-order:stroke_fill]"
@@ -109,7 +99,7 @@ export function OrderSection() {
 
               {/* Solid Yellow Proof Badge without orphaned units */}
               <div className="mt-6 pt-2">
-                <p className="inline-flex items-center gap-2 rounded-xl border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-2 text-xs sm:text-sm font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
+                <p className="inline-flex items-center gap-2 rounded-xl border-2 border-[#09090B] bg-[#FFD60A] px-3.5 py-2 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
                   <Check size={16} strokeWidth={3} className="shrink-0" />
                   <span className="leading-tight">{s.proof}</span>
                 </p>

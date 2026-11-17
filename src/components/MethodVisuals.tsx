@@ -191,7 +191,7 @@ function ListenStage({ active }: { active: boolean }) {
       }`}
     >
       {/* Header Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+      <div className="flex items-center justify-between border-b border-[#27272A] pb-3">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
@@ -254,7 +254,7 @@ function ListenStage({ active }: { active: boolean }) {
       </div>
 
       {/* Deliverable Banner */}
-      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418]/90 p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
+      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418] p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
         <div className="flex items-center gap-2">
           <CheckCircle2 size={18} className="text-[#10B981]" />
           <div>
@@ -286,7 +286,7 @@ function DesignStage({ active }: { active: boolean }) {
       }`}
     >
       {/* Top Figma Canvas Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+      <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <div className="flex items-center gap-2">
           <div className="flex h-5 w-5 items-center justify-center rounded bg-gradient-to-tr from-purple-600 via-pink-500 to-amber-400 text-[10px] font-black text-white">
             F
@@ -315,7 +315,7 @@ function DesignStage({ active }: { active: boolean }) {
         {/* Left: UI Prototype Mockup */}
         <div className="col-span-8 flex flex-col gap-2 rounded-xl border border-blue-500/20 bg-[#101524] p-3 shadow-md">
           {/* Mockup Header */}
-          <div className="flex items-center justify-between border-b border-white/5 pb-2">
+          <div className="flex items-center justify-between border-b border-[#1C1C20] pb-2">
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-xs text-[#0044FF] tracking-tight">ODERALO</span>
               <div className="flex gap-1.5 text-[10px] text-zinc-400">
@@ -324,7 +324,7 @@ function DesignStage({ active }: { active: boolean }) {
                 <span className="px-1 py-0.5">Clientes</span>
               </div>
             </div>
-            <span className="text-[10px] text-zinc-400 bg-zinc-800/80 px-1.5 py-0.5 rounded border border-white/10 font-mono">⌘K</span>
+            <span className="text-[10px] text-zinc-400 bg-zinc-800 px-1.5 py-0.5 rounded border border-[#27272A] font-mono">⌘K</span>
           </div>
 
           {/* Hero Widget in Prototype */}
@@ -341,14 +341,14 @@ function DesignStage({ active }: { active: boolean }) {
 
           {/* 2 Quick Indicator Cards */}
           <div className="grid grid-cols-2 gap-2">
-            <div className="rounded-lg border border-white/10 bg-[#161D2E] p-2">
+            <div className="rounded-lg border border-[#27272A] bg-[#161D2E] p-2">
               <span className="text-[10px] text-zinc-400 block">Avisos activos</span>
               <span className="font-display text-xs font-bold text-white flex items-center gap-1">
                 <span className="h-2 w-2 rounded-full bg-emerald-400" />
                 38 en curso
               </span>
             </div>
-            <div className="rounded-lg border border-white/10 bg-[#161D2E] p-2">
+            <div className="rounded-lg border border-[#27272A] bg-[#161D2E] p-2">
               <span className="text-[10px] text-zinc-400 block">Facturación hoy</span>
               <span className="font-display text-xs font-bold text-emerald-400">
                 3.160,00 €
@@ -358,7 +358,7 @@ function DesignStage({ active }: { active: boolean }) {
         </div>
 
         {/* Right: Design Tokens */}
-        <div className="col-span-4 flex flex-col justify-between rounded-xl border border-white/10 bg-[#101524] p-3">
+        <div className="col-span-4 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101524] p-3">
           <div>
             <span className="text-[10px] font-extrabold uppercase tracking-wider text-zinc-400 block mb-2">
               ✦ Design Tokens
@@ -383,7 +383,7 @@ function DesignStage({ active }: { active: boolean }) {
             </div>
           </div>
 
-          <div className="mt-2 border-t border-white/10 pt-2 text-[10px] text-zinc-400">
+          <div className="mt-2 border-t border-[#27272A] pt-2 text-[10px] text-zinc-400">
             <p className="font-semibold text-zinc-300">Tipografía: Manrope</p>
             <p>Componentes: 100% Accesibles</p>
           </div>
@@ -417,7 +417,7 @@ function BuildStage({ active }: { active: boolean }) {
       }`}
     >
       {/* IDE Tabs */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-2">
+      <div className="flex items-center justify-between border-b border-[#27272A] pb-2">
         <div className="flex items-center gap-1.5">
           <div className="flex gap-1.5 mr-2">
             <span className="h-3 w-3 rounded-full bg-[#FF5F56]" />
@@ -440,7 +440,7 @@ function BuildStage({ active }: { active: boolean }) {
       </div>
 
       {/* Code Editor Surface */}
-      <div className="my-auto rounded-xl border border-white/10 bg-[#0A0E18] p-3 font-mono text-[11px] sm:text-xs leading-relaxed text-zinc-200 shadow-inner">
+      <div className="my-auto rounded-xl border border-[#27272A] bg-[#0A0E18] p-3 font-mono text-[11px] sm:text-xs leading-relaxed text-zinc-200 shadow-inner">
         <div className="flex gap-2">
           <span className="select-none text-zinc-600">01</span>
           <p>
@@ -513,7 +513,7 @@ function BuildStage({ active }: { active: boolean }) {
           </span>
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-white/5 text-[10px]">
+        <div className="flex items-center justify-between pt-1 border-t border-[#1C1C20] text-[10px]">
           <div className="flex gap-1.5">
             <span className="rounded bg-cyan-500/10 px-2 py-0.5 font-bold text-cyan-300 border border-cyan-500/20">React 19</span>
             <span className="rounded bg-blue-500/10 px-2 py-0.5 font-bold text-blue-300 border border-blue-500/20">TypeScript</span>
@@ -545,7 +545,7 @@ function PublishStage({ active }: { active: boolean }) {
       }`}
     >
       {/* Cloud & Browser Bar */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+      <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-[#0F172A] px-3 py-1 text-xs font-mono text-zinc-200">
             <Lock size={12} className="text-emerald-400" />
@@ -604,7 +604,7 @@ function PublishStage({ active }: { active: boolean }) {
       </div>
 
       {/* Production Deployment Status Banner */}
-      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418]/90 p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
+      <div className="flex items-center justify-between rounded-xl border-2 border-[#10B981] bg-[#072418] p-3 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
         <div className="flex items-center gap-2">
           <span className="flex h-3 w-3 rounded-full bg-emerald-400 animate-ping" />
           <div>
@@ -631,7 +631,7 @@ function GrowStage({ active }: { active: boolean }) {
       }`}
     >
       {/* Top Impact Metric Tags */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+      <div className="flex items-center justify-between border-b border-[#27272A] pb-2.5">
         <span className="rounded-md border border-[#09090B] bg-[#FFD200] px-2.5 py-0.5 text-xs font-extrabold text-[#09090B] shadow-[2px_2px_0_#0044FF] flex items-center gap-1">
           <Star size={12} className="fill-[#09090B]" />
           #1 EN GOOGLE ESPAÑA
@@ -677,7 +677,7 @@ function GrowStage({ active }: { active: boolean }) {
         </div>
 
         {/* Right: n8n AI Autonomous Workflow */}
-        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-white/10 bg-[#101524] p-3">
+        <div className="col-span-6 flex flex-col justify-between rounded-xl border border-[#27272A] bg-[#101524] p-3">
           <div className="flex items-center justify-between">
             <span className="text-[10px] font-extrabold uppercase tracking-wider text-zinc-400 flex items-center gap-1">
               <Workflow size={12} className="text-[#0044FF]" />
@@ -701,7 +701,7 @@ function GrowStage({ active }: { active: boolean }) {
             <div className="pl-3.5 text-blue-400 text-xs font-black">↓</div>
 
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0044FF]/20 text-blue-400 border border-blue-500/40">
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#0A1B5C] text-blue-400 border border-blue-500/40">
                 <Bot size={14} />
               </div>
               <div className="text-[11px]">
@@ -743,7 +743,7 @@ function GrowStage({ active }: { active: boolean }) {
 
 export function ProcessStage({ active }: { active: number }) {
   return (
-    <div className="relative aspect-[640/440] min-h-[380px] w-full overflow-hidden rounded-[24px] border-2 border-white/80 bg-[#090D17] shadow-[8px_8px_0_#0044FF]">
+    <div className="relative aspect-[640/440] min-h-[380px] w-full overflow-hidden rounded-[24px] border-2 border-[#D4D4D8] bg-[#090D17] shadow-[8px_8px_0_#0044FF]">
       {/* Background radial ambient lights for depth */}
       <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-emerald-600/15 blur-3xl" />
