@@ -84,7 +84,7 @@ export function OderaloSection() {
       <motion.div
         aria-hidden="true"
         style={{ x: reduce ? 0 : wordX }}
-        className="font-display pointer-events-none absolute top-[3%] right-[-2%] select-none text-[clamp(6rem,17vw,16rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
+        className="font-display pointer-events-none absolute right-[-2%] bottom-[5%] select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(8rem,12vw,11rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#C6F432]"
       >
         ODERALO
       </motion.div>
@@ -166,7 +166,6 @@ export function OderaloSection() {
                   <span className="h-2.5 w-2.5 rounded-full bg-[#EF4444]" />
                   <span className="h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
                   <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
-                  <span className="ml-2 font-mono text-[13px] text-zinc-300">oderalo.app</span>
                 </div>
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
                   <AutoScroll
