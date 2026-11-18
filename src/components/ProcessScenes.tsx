@@ -174,12 +174,12 @@ function Arquitectura() {
 
 /* ───────── 03 · Desarrollo: un editor que escribe código tipado ───────── */
 const CODE: { t: string; k?: boolean }[][] = [
-  [{ t: "type", k: true }, { t: " Pedido = { id: string; total: number }" }],
+  [{ t: "type", k: true }, { t: " Pedido = { id: string }" }],
   [],
-  [{ t: "async function", k: true }, { t: " crearPedido(p: Pedido) {" }],
-  [{ t: "  await", k: true }, { t: " validar(p)" }],
-  [{ t: "  await", k: true }, { t: " guardar(p)" }],
-  [{ t: "  return", k: true }, { t: " enviarAviso(p.id)" }],
+  [{ t: "function", k: true }, { t: " crear(p: Pedido) {" }],
+  [{ t: "  validar(p)" }],
+  [{ t: "  guardar(p)" }],
+  [{ t: "  return", k: true }, { t: " avisar(p.id)" }],
   [{ t: "}" }],
 ];
 
@@ -222,7 +222,7 @@ function Desarrollo() {
           ))}
         </pre>
       </div>
-      <ul className="flex flex-wrap justify-center gap-2.5">
+      <ul className="hidden flex-wrap justify-center gap-2.5 sm:flex">
         {["React", "TypeScript", "APIs seguras"].map((t, i) => (
           <motion.li
             key={t}
@@ -366,7 +366,7 @@ export function ProcessScenes({ active }: { active: number }) {
           0{active + 1} <span className="text-[#A1A1AA]">/ 05</span>
         </span>
       </div>
-      <div className="relative min-h-[360px] sm:aspect-[16/10] sm:min-h-0">
+      <div className="relative min-h-[300px] lg:h-[clamp(330px,46vh,430px)]">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
