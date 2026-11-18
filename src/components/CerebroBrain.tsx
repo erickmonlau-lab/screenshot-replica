@@ -7,15 +7,38 @@ import { useReducedMotion } from "./motion-pref";
  * Una "ola de lectura" recorre los nodos para mostrar cómo la IA lee las notas.
  */
 
-const CEREBRUM_D =
-  "M55 170 C33 140 45 96 86 70 C116 40 166 30 200 42 C226 22 276 24 298 48 C336 40 372 68 368 108 C392 128 388 168 362 184 C350 196 330 200 312 198 C296 206 270 208 250 214 C238 238 190 246 155 238 C135 232 120 222 118 210 C104 200 78 192 55 170 Z";
-const CEREBELLUM_D =
-  "M262 214 C290 208 340 212 346 238 C350 262 318 282 288 278 C262 274 246 250 262 214 Z";
-const STEM_D =
-  "M212 222 C214 250 222 278 230 298 C236 312 252 316 258 304 C262 288 258 260 256 228 Z";
-const CEREBELLUM_LINES =
-  "M276 226 C300 219 330 225 340 240 M272 242 C300 235 332 241 342 256 M278 258 C298 253 324 259 332 270 M240 250 C242 268 245 284 248 298";
-const SYLVIAN = "M120 208 C160 190 205 190 250 208";
+/* Vista dorsal: dos hemisferios simétricos con contorno lobulado y surco longitudinal */
+function hemiPoints(): number[][] {
+  const pts: number[][] = [];
+  const N = 160;
+  for (let i = 0; i < N; i++) {
+    const th = (i / N) * Math.PI * 2;
+    const c = Math.cos(th);
+    const sn = Math.sin(th);
+    // borde medial casi recto (t -> 1) y lateral redondeado (t -> -1)
+    const t = Math.sign(c) * Math.pow(Math.abs(c), c > 0 ? 0.55 : 1);
+    const lobe = (1 - t) / 2;
+    const rr = 1 + lobe * (0.05 * Math.sin(11 * th + 0.6) + 0.034 * Math.sin(19 * th + 2.1));
+    const front = 0.8 + 0.2 * ((sn + 1) / 2); // más estrecho por delante
+    const x = 199.3 - lobe * 176 * front * rr;
+    const y = 172 + 150 * Math.sign(sn) * Math.pow(Math.abs(sn), 1) * (1 + (rr - 1) * 0.8);
+    pts.push([x, y]);
+  }
+  return pts;
+}
+function smoothPath(pts: number[][], mirror: boolean): Path2D {
+  const q = new Path2D();
+  const p = pts.map(([x, y]) => [mirror ? 400 - x! : x!, y!]);
+  const n = p.length;
+  q.moveTo((p[0]![0]! + p[n - 1]![0]!) / 2, (p[0]![1]! + p[n - 1]![1]!) / 2);
+  for (let i = 0; i < n; i++) {
+    const a = p[i]!;
+    const b = p[(i + 1) % n]!;
+    q.quadraticCurveTo(a[0]!, a[1]!, (a[0]! + b[0]!) / 2, (a[1]! + b[1]!) / 2);
+  }
+  q.closePath();
+  return q;
+}
 
 type Kind = "hub" | "project" | "skill" | "rule" | "note";
 interface GN {
@@ -28,22 +51,22 @@ interface GN {
 
 // Nombres reales de mi vault; las posiciones se reparten por zonas del cerebro
 const NAMED: [string, Kind, number, number][] = [
-  ["MOC-INDEX", "hub", 200, 120],
-  ["AGENTS", "hub", 105, 142],
-  ["PROJECTS", "hub", 255, 82],
-  ["MOC-DESIGN", "hub", 300, 165],
-  ["ORDERALO", "project", 225, 52],
-  ["GESGRAMA", "project", 300, 58],
-  ["BREADPDF", "project", 336, 96],
-  ["DIVERSPLAS", "project", 200, 86],
-  ["SKILL-apple-design", "skill", 346, 148],
-  ["04-COLOR", "skill", 330, 194],
-  ["05-TYPOGRAPHY", "skill", 270, 194],
-  ["02-COMPONENTS", "skill", 238, 150],
-  ["CLAUDE", "rule", 72, 116],
-  ["REGLAS-agente", "rule", 82, 176],
-  ["DECISIONES", "rule", 135, 198],
-  ["06-ACCESSIBILITY", "rule", 150, 100],
+  ["MOC-INDEX", "hub", 200, 172],
+  ["AGENTS", "hub", 108, 150],
+  ["PROJECTS", "hub", 292, 112],
+  ["MOC-DESIGN", "hub", 292, 232],
+  ["ORDERALO", "project", 252, 72],
+  ["GESGRAMA", "project", 336, 92],
+  ["BREADPDF", "project", 346, 156],
+  ["DIVERSPLAS", "project", 238, 132],
+  ["SKILL-apple-design", "skill", 340, 226],
+  ["04-COLOR", "skill", 300, 280],
+  ["05-TYPOGRAPHY", "skill", 244, 240],
+  ["02-COMPONENTS", "skill", 232, 200],
+  ["CLAUDE", "rule", 58, 112],
+  ["REGLAS-agente", "rule", 62, 196],
+  ["DECISIONES", "rule", 122, 252],
+  ["06-ACCESSIBILITY", "rule", 150, 92],
 ];
 const NAMED_LINKS: [string, string][] = [
   ["MOC-INDEX", "AGENTS"],
@@ -99,16 +122,15 @@ export function CerebroBrain() {
     // ───────── geometría en el espacio del dibujo (400 × 330) ─────────
     const probe = document.createElement("canvas").getContext("2d");
     if (!probe) return;
-    const cerebrumP = new Path2D(CEREBRUM_D);
-    const cerebellumP = new Path2D(CEREBELLUM_D);
-    const stemP = new Path2D(STEM_D);
-    const inCerebrum = (x: number, y: number) => probe.isPointInPath(cerebrumP, x, y);
-    const inMargin = (x: number, y: number, m: number) =>
-      inCerebrum(x, y) &&
-      inCerebrum(x - m, y) &&
-      inCerebrum(x + m, y) &&
-      inCerebrum(x, y - m) &&
-      inCerebrum(x, y + m);
+    const hemiPts = hemiPoints();
+    const hemiL = smoothPath(hemiPts, false);
+    const hemiR = smoothPath(hemiPts, true);
+    const inL = (x: number, y: number) => probe.isPointInPath(hemiL, x, y);
+    const inAny = (x: number, y: number) => inL(x, y) || probe.isPointInPath(hemiR, x, y);
+    const around = (f: (x: number, y: number) => boolean, x: number, y: number, m: number) =>
+      f(x, y) && f(x - m, y) && f(x + m, y) && f(x, y - m) && f(x, y + m);
+    const inMargin = (x: number, y: number, m: number) => around(inAny, x, y, m);
+    const inMarginL = (x: number, y: number, m: number) => around(inL, x, y, m);
 
     // ───────── circunvoluciones: gusanos que no se tocan (laberinto) ─────────
     const genWorms = () => {
@@ -118,7 +140,7 @@ export function CerebroBrain() {
       const GH = Math.ceil(330 / CELL);
       const grid = new Int16Array(GW * GH);
       const stepAt = new Int16Array(GW * GH);
-      const RING = 7;
+      const RING = 6;
       const ANG = Array.from({ length: 12 }, (_, i) => (i / 12) * Math.PI * 2);
       const cellOf = (x: number, y: number) => {
         const cx = Math.floor(x / CELL);
@@ -151,10 +173,10 @@ export function CerebroBrain() {
       };
       const worms: number[][][] = [];
       for (let attempt = 0; attempt < 9000; attempt++) {
-        const sx = 30 + rnd() * 350;
-        const sy = 20 + rnd() * 230;
+        const sx = 14 + rnd() * 186;
+        const sy = 24 + rnd() * 290;
         const id = worms.length + 1;
-        if (!inMargin(sx, sy, 8) || !free(sx, sy, id, 0)) continue;
+        if (!inMarginL(sx, sy, 8) || !free(sx, sy, id, 0)) continue;
         const pts: number[][] = [[sx, sy]];
         mark(sx, sy, id, 0);
         let x = sx;
@@ -170,7 +192,7 @@ export function CerebroBrain() {
             const a = ang + turn;
             const nx = x + Math.cos(a) * 3;
             const ny = y + Math.sin(a) * 3;
-            if (inMargin(nx, ny, 8) && free(nx, ny, id, step)) {
+            if (inMarginL(nx, ny, 8) && free(nx, ny, id, step)) {
               x = nx;
               y = ny;
               ang = a;
@@ -195,7 +217,7 @@ export function CerebroBrain() {
       let ny = y;
       for (let i = 0; i < 40 && !inMargin(nx, ny, 12); i++) {
         nx += (200 - nx) * 0.08;
-        ny += (130 - ny) * 0.08;
+        ny += (172 - ny) * 0.08;
       }
       return { name, kind, x: nx, y: ny, adj: [] };
     });
@@ -210,8 +232,8 @@ export function CerebroBrain() {
 
     const rnd2 = rng(5);
     for (let tries = 0; tries < 900 && nodes.length < NAMED.length + 44; tries++) {
-      const x = 34 + rnd2() * 340;
-      const y = 28 + rnd2() * 210;
+      const x = 24 + rnd2() * 352;
+      const y = 34 + rnd2() * 270;
       if (!inMargin(x, y, 12)) continue;
       if (nodes.some((n) => Math.hypot(n.x - x, n.y - y) < 22)) continue;
       const id = nodes.length;
@@ -268,56 +290,43 @@ export function CerebroBrain() {
       c.translate(bx, by);
       c.scale(s, s);
 
-      // cada parte oculta lo que queda tras las que están por delante (sin relleno, no se solapan líneas)
-      const hideOf = (front: Path2D[]) => {
-        const hide = new Path2D();
-        hide.rect(-100, -100, 700, 600);
-        for (const f of front) hide.addPath(f);
-        return hide;
-      };
-      const parts: [Path2D, Path2D[]][] = [
-        [stemP, [cerebellumP, cerebrumP]],
-        [cerebellumP, [cerebrumP]],
-        [cerebrumP, []],
-      ];
-      const strokeParts = (color: string, width: number, dx: number) => {
-        for (const [q, front] of parts) {
-          c.save();
-          if (front.length) c.clip(hideOf(front), "evenodd");
-          c.translate(dx, dx);
-          c.strokeStyle = color;
-          c.lineWidth = width / s;
-          c.stroke(q);
-          c.restore();
-        }
+      const strokeAll = (color: string, width: number, dx: number) => {
+        c.save();
+        c.translate(dx, dx);
+        c.strokeStyle = color;
+        c.lineWidth = width / s;
+        c.stroke(hemiL);
+        c.stroke(hemiR);
+        c.restore();
       };
 
       // sombra dura: el mismo contorno en negro, desplazado
-      strokeParts("#09090B", 6, 7);
+      strokeAll("#09090B", 6, 7);
 
-      // circunvoluciones del cerebro y estrías del cerebelo
-      c.save();
-      c.clip(cerebrumP);
-      c.strokeStyle = "#D2C3FF";
-      c.lineWidth = 2.6 / s;
-      for (const pts of worms) {
-        c.beginPath();
-        c.moveTo(pts[0]![0]!, pts[0]![1]!);
-        for (let i = 1; i < pts.length - 1; i++) {
-          const mx = (pts[i]![0]! + pts[i + 1]![0]!) / 2;
-          const my = (pts[i]![1]! + pts[i + 1]![1]!) / 2;
-          c.quadraticCurveTo(pts[i]![0]!, pts[i]![1]!, mx, my);
+      // circunvoluciones: izquierda y su reflejo en el hemisferio derecho
+      const gyri = (mirror: boolean, clipP: Path2D) => {
+        c.save();
+        c.clip(clipP);
+        c.strokeStyle = "#D2C3FF";
+        c.lineWidth = 3 / s;
+        const X = (x: number) => (mirror ? 400 - x : x);
+        for (const pts of worms) {
+          c.beginPath();
+          c.moveTo(X(pts[0]![0]!), pts[0]![1]!);
+          for (let i = 1; i < pts.length - 1; i++) {
+            const mx = (pts[i]![0]! + pts[i + 1]![0]!) / 2;
+            const my = (pts[i]![1]! + pts[i + 1]![1]!) / 2;
+            c.quadraticCurveTo(X(pts[i]![0]!), pts[i]![1]!, X(mx), my);
+          }
+          c.stroke();
         }
-        c.stroke();
-      }
-      c.restore();
-      c.strokeStyle = "#D2C3FF";
-      c.lineWidth = 2.6 / s;
-      c.stroke(new Path2D(SYLVIAN));
-      c.stroke(new Path2D(CEREBELLUM_LINES));
+        c.restore();
+      };
+      gyri(false, hemiL);
+      gyri(true, hemiR);
 
       // contorno blanco, encima
-      strokeParts("#FFFFFF", 4.5, 0);
+      strokeAll("#FFFFFF", 4.5, 0);
       still = off;
     };
 
