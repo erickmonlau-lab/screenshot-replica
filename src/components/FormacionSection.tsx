@@ -35,7 +35,7 @@ const cards = [
       ["Contabilidad", "Operativa interna"],
     ],
     apply:
-      "Mi ERP nace aquí: en Diset vi cómo una empresa de control de plagas trabaja con su software de gestión y lo uní a lo que estudié.",
+      "Mi ERP nace aquí: en Diset vi cómo una empresa de control de plagas trabaja con su software de gestión y lo uní a lo que estudié.",
   },
 ];
 
@@ -181,12 +181,14 @@ export function FormacionSection({
                     </div>
                   </div>
 
-                  <div className="rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
+                  <div className="flex flex-1 flex-col justify-center rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
                     <p className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.02em]">
                       <Wrench size={20} strokeWidth={2.8} />
                       Cómo lo aplico hoy
                     </p>
-                    <p className="mt-2 text-[19px] leading-snug font-semibold">{c.apply}</p>
+                    <p className="mt-2 text-[19px] leading-snug font-semibold [text-wrap:balance]">
+                      {c.apply}
+                    </p>
                   </div>
 
                   <div className="mt-auto flex items-center gap-4 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] px-4 py-3 text-white">
