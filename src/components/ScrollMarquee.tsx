@@ -21,7 +21,7 @@ function wrap(min: number, max: number, v: number) {
  */
 export function ScrollMarquee({
   text,
-  speed = -3.2,
+  speed = -1.1,
   className = "",
 }: {
   text: string;
@@ -43,7 +43,7 @@ export function ScrollMarquee({
     const b = boost.get();
     if (b < -0.08) dir.current = -1;
     else if (b > 0.08) dir.current = 1;
-    const multiplier = 1 + Math.min(6, Math.abs(b));
+    const multiplier = 1 + Math.min(1.5, Math.abs(b));
     baseX.set(baseX.get() + dir.current * speed * dt * multiplier);
   });
 
