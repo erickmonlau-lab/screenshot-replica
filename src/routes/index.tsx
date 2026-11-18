@@ -282,7 +282,7 @@ function CopyButton({ value, label, dark = false }: { value: string; label: stri
         copied
           ? "bg-[#10B981] text-white"
           : dark
-            ? "border-2 border-[#3D6BFF] bg-[#0B1A52] text-white hover:bg-[#0044FF]"
+            ? "border-2 border-white bg-white text-[#09090B] hover:bg-[#A78BFA]"
             : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
       }`}
     >
@@ -517,21 +517,23 @@ function Index() {
         {/* CONTACTO */}
         <section
           id="contacto"
-          className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-14 text-[#09090B] sm:py-16"
+          className="relative scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16"
         >
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-2.5 rounded-full border-2 border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[16px] font-bold text-white">
-                <span className="led-dot h-2.5 w-2.5 rounded-full" />
+              <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B]">
+                <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
                 Disponible en Barcelona
               </span>
               <Reveal>
                 <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
                   Hablemos
-                  <span className="block text-[#0044FF]">de tu proyecto.</span>
+                  <span className="mt-3 block">
+                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 py-1 text-white">de tu proyecto.</span>
+                  </span>
                 </h2>
               </Reveal>
-              <p className="mt-5 max-w-[44ch] text-lg leading-snug font-medium text-[#3F3F46] sm:text-xl">
+              <p className="mt-5 max-w-[44ch] text-lg leading-snug font-semibold text-[#27272A] sm:text-xl">
                 Cuéntame qué necesitas y te respondo, o te enseño en persona el ERP y cómo automatizar tus procesos.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -540,7 +542,7 @@ function Index() {
                     href={whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-2 border-[#09090B] bg-[#0044FF] px-7 py-3.5 text-base font-semibold text-white shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+                    className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3.5 text-base font-bold text-white shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
                   >
                     <MessageCircle size={18} strokeWidth={2.3} />
                     <span>Escribir por WhatsApp</span>
@@ -550,7 +552,7 @@ function Index() {
                 <a
                   href={cvPdf.url}
                   download="Erick-Rodriguez-CV.pdf"
-                  className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-7 py-3.5 text-base font-semibold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+                  className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
                 >
                   <span>Descargar CV</span>
                   <Download size={16} />
@@ -559,25 +561,25 @@ function Index() {
             </div>
 
             <div className="min-w-0 lg:col-span-5">
-              <div className="led-box min-w-0 p-5 text-white sm:p-6">
-                <div className="flex items-center gap-4 border-b-2 border-[#1B2A66] pb-5">
+              <div className="min-w-0 rounded-[24px] border-[3px] border-[#09090B] bg-[#09090B] p-5 text-white shadow-[12px_12px_0_#6D28D9] sm:p-6">
+                <div className="flex items-center gap-4 border-b-2 border-[#3F3F46] pb-5">
                   <img
                     src="/erick-portrait-studio.png"
                     alt=""
                     aria-hidden="true"
-                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-2 border-[#3D6BFF] bg-[#0044FF] object-cover object-top"
+                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-white bg-[#6D28D9] object-cover object-top"
                   />
                   <div>
                     <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em]">
                       Erick Rodríguez
                     </p>
-                    <p className="mt-1.5 text-[16px] font-semibold text-[#9DB8FF]">
+                    <p className="mt-1.5 text-[16px] font-semibold text-[#A78BFA]">
                       Marketing · Gestión · Tecnología
                     </p>
                   </div>
                 </div>
 
-                <dl className="divide-y-2 divide-[#1B2A66]">
+                <dl className="divide-y-2 divide-[#3F3F46]">
                   {[
                     {
                       icon: Mail,
@@ -586,7 +588,7 @@ function Index() {
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
                             href={`mailto:${email}`}
-                            className="font-display min-w-0 truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#9DB8FF]"
+                            className="font-display min-w-0 truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#A78BFA]"
                           >
                             {email}
                           </a>
@@ -603,7 +605,7 @@ function Index() {
                             href={whatsapp}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#9DB8FF]"
+                            className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#A78BFA]"
                           >
                             {phoneDisplay}
                           </a>
@@ -622,7 +624,7 @@ function Index() {
                     },
                   ].map(({ icon: I, k, node }) => (
                     <div key={k} className="py-4 last:pb-0">
-                      <dt className="mb-1.5 flex items-center gap-2 text-[15px] font-bold tracking-[0.08em] text-[#9DB8FF] uppercase">
+                      <dt className="mb-1.5 flex items-center gap-2 text-[15px] font-bold tracking-[0.08em] text-[#A78BFA] uppercase">
                         <I size={15} />
                         {k}
                       </dt>
