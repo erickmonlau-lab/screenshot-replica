@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-/** Blue halo + ring that follow the pointer (fine pointers only). The halo blends with `screen`, so it only shows on dark areas. */
+/** Violet halo + ring that follow the pointer (fine pointers only). The halo blends with `screen`, so it only shows on dark areas. */
 export function CursorGlow() {
   const halo = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ export function CursorGlow() {
         aria-hidden="true"
         className="pointer-events-none fixed top-0 left-0 z-[55] hidden h-[520px] w-[520px] rounded-full [mix-blend-mode:screen] [@media(hover:hover)_and_(pointer:fine)]:block"
         style={{
-          background: "radial-gradient(circle, rgba(0,68,255,0.38) 0%, rgba(0,68,255,0) 62%)",
+          background: "radial-gradient(circle, rgba(109,40,217,0.45) 0%, rgba(109,40,217,0) 62%)",
           transform: "translate(-999px,-999px)",
         }}
       />

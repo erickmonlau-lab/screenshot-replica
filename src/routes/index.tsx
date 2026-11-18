@@ -465,12 +465,10 @@ function Index() {
         >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-              <h2 className="font-display text-[clamp(2.4rem,5vw,4.4rem)] leading-[1] font-bold tracking-[-0.04em]">
-                Con qué
-                <span className="mt-3 block">
-                  <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
-                    trabajo.
-                  </span>
+              <h2 className="font-display text-[clamp(2.2rem,4.2vw,4rem)] leading-[1] font-bold tracking-[-0.04em] whitespace-nowrap">
+                Con qué{" "}
+                <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
+                  trabajo.
                 </span>
               </h2>
               <p
