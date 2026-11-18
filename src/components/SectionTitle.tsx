@@ -34,7 +34,7 @@ export function SectionTitle({
     >
       <div
         aria-hidden="true"
-        className={`outline-title font-display leading-[0.95] font-bold tracking-[-0.03em] uppercase ${compact ? "text-[clamp(2.4rem,7.4vw,6.4rem)]" : "text-[clamp(2.6rem,11vw,10.5rem)]"}`}
+        className={`outline-title font-display leading-[0.95] font-bold tracking-[-0.03em] uppercase ${compact ? "text-[clamp(2.4rem,5.4vw,5.2rem)]" : "text-[clamp(2.6rem,11vw,10.5rem)]"}`}
       >
         {words.map((w, i) => (
           <span
@@ -58,9 +58,9 @@ export function SectionTitle({
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={inView || reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-          className={`t-ink font-display ${compact ? "mt-3 md:mt-0 md:mb-3 md:text-right" : "mt-5"} max-w-[26ch] text-[clamp(1.7rem,3.4vw,3rem)] leading-[1.05] font-bold tracking-[-0.04em] sm:max-w-[38ch] ${center ? "mx-auto" : ""}`}
+          className={`t-ink font-display ${compact ? "mt-3 md:mt-0 md:mb-3 md:text-right" : "mt-5"} max-w-[26ch] text-[clamp(1.5rem,2.3vw,2.2rem)] leading-[1.05] font-bold tracking-[-0.04em] sm:max-w-[38ch] ${center ? "mx-auto" : ""}`}
         >
-          {sub} {accent ? <span className="text-[#0044FF]">{accent}</span> : null}
+          {sub} {accent ? <span className="text-[#6D28D9]">{accent}</span> : null}
         </motion.p>
       ) : null}
     </div>

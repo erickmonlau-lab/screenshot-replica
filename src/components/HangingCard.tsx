@@ -9,20 +9,22 @@ export function HangingCard({
   width = 250,
   seg = 7,
   bottom = 100,
+  spread = 220,
   className = "",
 }: {
   width?: number;
   seg?: number;
   bottom?: number;
+  spread?: number;
   className?: string;
 }) {
   const SEG = seg; // rope links
   const LINK = 22; // rest length of each link
   const cardH = Math.round(width * 1.66);
-  const [areaW, setAreaW] = useState(width + 220);
+  const [areaW, setAreaW] = useState(width + spread);
   useEffect(() => {
-    setAreaW(Math.min(width + 220, Math.max(width + 20, window.innerWidth - 40)));
-  }, [width]);
+    setAreaW(Math.min(width + spread, Math.max(width + 20, window.innerWidth - 40)));
+  }, [width, spread]);
   const areaH = SEG * LINK + cardH + bottom;
 
   const boxRef = useRef<HTMLDivElement>(null);
@@ -148,7 +150,7 @@ export function HangingCard({
         onPointerCancel={() => {
           ptr.current.down = false;
         }}
-        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-none overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[6px_6px_0_#0044FF] active:cursor-grabbing"
+        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-none overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#6D28D9] active:cursor-grabbing"
         style={{
           width,
           height: cardH,
@@ -160,7 +162,7 @@ export function HangingCard({
         <div className="flex justify-center pt-3">
           <span className="block h-3 w-16 rounded-full border-2 border-[#09090B] bg-[#E4E4E7]" />
         </div>
-        <div className="mx-4 mt-3 overflow-hidden rounded-2xl border-2 border-[#09090B] bg-[#0044FF]">
+        <div className="mx-4 mt-3 overflow-hidden rounded-2xl border-2 border-[#09090B] bg-[#6D28D9]">
           <img
             src="/erick-portrait-studio.png"
             alt="Erick Rodríguez"
@@ -174,8 +176,18 @@ export function HangingCard({
           <p className="font-display text-[24px] leading-none font-bold tracking-[-0.04em] whitespace-nowrap">
             Erick Rodríguez
           </p>
-          <p className="mt-2 text-base font-semibold text-[#0044FF]">Negocio + tecnología</p>
-          <p className="mt-1 text-base font-medium text-[#52525B]">Barcelona</p>
+          <p className="mt-2 text-base font-semibold text-[#6D28D9]">Negocio + tecnología</p>
+          <p className="mt-1 text-base font-medium text-[#52525B]">La Sagrera, Barcelona</p>
+        </div>
+        <div className="mt-4 flex flex-wrap gap-1.5 px-5">
+          {["Marketing", "Gestión", "Tecnología"].map((t) => (
+            <span
+              key={t}
+              className="rounded-full border-2 border-[#09090B] bg-[#09090B] px-2.5 py-1 text-[15px] leading-none font-bold text-white"
+            >
+              {t}
+            </span>
+          ))}
         </div>
       </div>
     </div>

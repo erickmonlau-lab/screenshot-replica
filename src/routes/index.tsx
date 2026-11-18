@@ -34,7 +34,6 @@ import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 import { Navbar } from "@/components/Navbar";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
-import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { CerebroBrain } from "@/components/CerebroBrain";
 import { GrantBand } from "@/components/GrantBand";
@@ -504,17 +503,11 @@ function Index() {
         </section>
 
         {/* TRAYECTORIA — Sobre Mí / About Me */}
-        <section id="trayectoria" className={`${sectionBase} section-light`}>
+        <section
+          id="trayectoria"
+          className="t-bg-page t-ink t-line section-light scroll-mt-[62px] border-t pb-10 sm:pb-12"
+        >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <Reveal className="mb-5 2xl:mb-8">
-              <SectionTitle
-                compact
-                word="Sobre mí"
-                sub="Perfil híbrido."
-                accent="Negocio + tecnología."
-              />
-            </Reveal>
-
             <AboutSection experience={experience} education={education} cvUrl={cvPdf.url} />
           </div>
         </section>
