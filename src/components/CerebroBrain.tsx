@@ -40,10 +40,8 @@ function cerebrumShape(): { path: Path2D; cusps: number[][] } {
   path.closePath();
   return { path, cusps };
 }
-const CEREBELLUM_D =
-  "M262 214 C290 208 340 212 346 238 C350 262 318 282 288 278 C262 274 246 250 262 214 Z";
-const STEM_D =
-  "M212 222 C214 250 222 278 230 298 C236 312 252 316 258 304 C262 288 258 260 256 228 Z";
+const CEREBELLUM_D = "M262 214 C280 204 318 206 326 224 C332 242 312 254 290 252 C268 248 254 230 262 214 Z";
+const STEM_D = "M226 222 C228 238 232 250 236 260 C240 266 250 266 252 258 C252 246 250 234 248 222 Z";
 const CEREBELLUM_LINES =
   "M276 226 C300 219 330 225 340 240 M272 242 C300 235 332 241 342 256 M278 258 C298 253 324 259 332 270 M240 250 C242 268 245 284 248 298";
 const SULCI = [
@@ -278,7 +276,7 @@ export function CerebroBrain() {
       c.restore();
       c.strokeStyle = "#D2C3FF";
       c.lineWidth = 3 / s;
-      c.stroke(new Path2D(CEREBELLUM_LINES));
+      c.stroke(new Path2D("M272 222 C292 214 314 218 322 230 M270 234 C290 228 310 232 318 242"));
 
       // contorno blanco, encima
       strokeParts("#FFFFFF", 4.5, 0);
@@ -308,9 +306,9 @@ export function CerebroBrain() {
       canvas.height = Math.round(H * dpr);
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
-      s = Math.min((W * 0.9) / 400, (H * 0.9) / 330);
-      bx = (W - 400 * s) / 2;
-      by = (H - 330 * s) / 2 - 6;
+      s = Math.min((W * 0.94) / 350, (H * 0.94) / 232);
+      bx = (W - 350 * s) / 2 - 29 * s;
+      by = (H - 232 * s) / 2 - 40 * s;
       renderStill();
       placeNodes();
     };
