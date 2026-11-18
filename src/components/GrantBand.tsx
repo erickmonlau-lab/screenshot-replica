@@ -28,8 +28,8 @@ export function GrantBand() {
           </span>
           <h2 className="font-display mt-7 text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] font-bold tracking-[-0.05em]">
             Contratarme puede abrirle a tu empresa
-            <span className="mt-3 block">
-              <span className="inline-block rounded-lg bg-[#09090B] px-3 py-0.5">
+            <span className="mt-2 block">
+              <span className="rounded-lg bg-[#09090B] px-3 py-1 leading-[1.3] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
                 subvenciones salariales.
               </span>
             </span>
@@ -66,7 +66,7 @@ export function GrantBand() {
 
             <div className="p-6 sm:p-8">
               <p className="font-display text-[clamp(6rem,13vw,10rem)] leading-[0.85] font-bold tracking-[-0.07em]">
-                375<span className="ml-2 text-[0.38em] tracking-[-0.03em] text-[#6D28D9]">h</span>
+                375<span className="ml-1 text-[0.55em] tracking-[-0.03em] text-[#6D28D9]">h</span>
               </p>
               <p className="font-display mt-4 text-[26px] leading-tight font-bold tracking-[-0.03em] sm:text-[30px]">
                 Agente del Cambio Tecnológico
@@ -80,19 +80,19 @@ export function GrantBand() {
                     whileInView={{ scaleY: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + i * 0.04, duration: 0.2 }}
-                    className="h-8 flex-1 rounded-sm border-2 border-[#09090B] bg-[#6D28D9]"
+                    className="h-10 flex-1 rounded-sm border-2 border-[#09090B] bg-[#6D28D9]"
                   />
                 ))}
               </div>
-              <p className="mt-2 text-[15px] font-semibold text-[#52525B]">
-                25 bloques de 15 h, completados
+              <p className="mt-3 text-[18px] leading-snug font-bold text-[#09090B]">
+                25 bloques × 15 h = 375 h completados
               </p>
 
-              <ul className="mt-5 flex flex-wrap gap-2.5">
+              <ul className="mt-5 flex flex-wrap gap-1.5 xl:flex-nowrap">
                 {topics.map((t) => (
                   <li
                     key={t}
-                    className="rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[16px] font-bold text-white"
+                    className="rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-3 py-1.5 text-[15px] font-bold whitespace-nowrap text-white"
                   >
                     {t}
                   </li>

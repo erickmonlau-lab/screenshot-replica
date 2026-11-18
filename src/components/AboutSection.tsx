@@ -24,11 +24,8 @@ const techPoints = [
   "Flujos con n8n y agentes de IA que trabajan solos.",
 ];
 
-/** Lo que construyo por mi cuenta: no depende de la acreditación. */
-const ownProjects = [
-  { name: "Oderalo", what: "ERP propio: stock, facturación y albaranes" },
-  { name: "GYMVITY", what: "App de entrenos: 144 ejercicios, React y Capacitor" },
-];
+/** Temas de la acreditación oficial (solo formación). */
+const accreditationTopics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
 
 /** Perfil híbrido: tres pilares (marketing, gestión, tecnología) con su evidencia real. */
 export function AboutSection({
@@ -150,21 +147,16 @@ export function AboutSection({
                   {i === 2 ? (
                     <div>
                       <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                        <Briefcase size={17} strokeWidth={2.6} />
-                        Lo que construyo
+                        <GraduationCap size={17} strokeWidth={2.6} />
+                        Qué cubre
                       </p>
                       <ul className="mt-2 space-y-2">
-                        {ownProjects.map((o) => (
+                        {accreditationTopics.map((o) => (
                           <li
-                            key={o.name}
-                            className="rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2"
+                            key={o}
+                            className="font-display rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[17px] leading-tight font-bold tracking-[-0.02em]"
                           >
-                            <span className="font-display block text-[18px] leading-tight font-bold tracking-[-0.02em]">
-                              {o.name}
-                            </span>
-                            <span className="text-[15px] leading-snug font-semibold text-[#52525B]">
-                              {o.what}
-                            </span>
+                            {o}
                           </li>
                         ))}
                       </ul>
