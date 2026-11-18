@@ -100,9 +100,9 @@ export function ProcessSection() {
               >
                 Proceso
               </p>
-              <h2 className="font-display max-w-[24ch] text-right text-[clamp(1.3rem,2vw,1.75rem)] leading-[1.15] font-bold tracking-[-0.03em]">
+              <h2 className="font-display max-w-[24ch] text-right text-[clamp(1.3rem,2vw,1.75rem)] leading-[1.5] font-bold tracking-[-0.03em]">
                 Cinco pasos, de la auditoría a un negocio que{" "}
-                <span className="rounded-md bg-[#6D28D9] px-2 py-0.5 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+                <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
                   funciona solo.
                 </span>
               </h2>

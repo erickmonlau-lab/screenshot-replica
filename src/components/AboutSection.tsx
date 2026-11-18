@@ -104,7 +104,7 @@ export function AboutSection({
         />
 
         <p className="t-ink font-display max-w-[52ch] text-[clamp(1.4rem,2vw,1.85rem)] leading-[1.15] font-bold tracking-[-0.035em]">
-          No soy solo programador: vengo del marketing y la gestión, y por eso construyo lo que tu
+          No vengo del código: vengo del marketing y la gestión. Con la IA construyo lo que tu
           negocio necesita de verdad.
         </p>
 

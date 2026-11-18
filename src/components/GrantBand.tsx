@@ -1,12 +1,28 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BadgeCheck, Coins, UserPlus } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-const SEGMENTS = 25; // cada bloque = 15 h → 25 × 15 = 375 h
-const topics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
 
-/** Acreditación de 375 h: ficha blanca con contador, barra segmentada y temas sobre fondo violeta. */
+const steps = [
+  {
+    icon: UserPlus,
+    title: "Me contratas",
+    text: "Sumas un perfil de marketing, gestión y tecnología.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Acreditación oficial",
+    text: "Agente del Cambio Tecnológico, Generalitat de Catalunya.",
+  },
+  {
+    icon: Coins,
+    title: "Subvención salarial directa",
+    text: "Para digitalización e inteligencia artificial.",
+  },
+];
+
+/** Subvención salarial: sección violeta con el camino de la contratación en tres pasos. */
 export function GrantBand() {
   const reduce = useReducedMotion();
   return (
@@ -35,9 +51,9 @@ export function GrantBand() {
             </span>
           </h2>
           <p className="mt-6 max-w-[50ch] text-lg leading-snug font-semibold sm:text-xl">
-            Cuento con 375 h de acreditación oficial de la Generalitat como Agente del Cambio
-            Tecnológico. La empresa que me contrate accede a subvenciones salariales bonificadas
-            para digitalización e inteligencia artificial.
+            Tengo la acreditación oficial de la Generalitat como Agente del Cambio Tecnológico. Por
+            eso, la empresa que me contrate puede acceder a subvenciones salariales directas para
+            digitalización e inteligencia artificial.
           </p>
           <a
             href="#contacto"
@@ -48,59 +64,55 @@ export function GrantBand() {
           </a>
         </motion.div>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10% 0px" }}
-          transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-          className="lg:col-span-6"
-        >
-          <div className="overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[12px_12px_0_#09090B]">
-            <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-b-[3px] border-[#09090B] bg-[#09090B] px-6 py-3 text-white">
-              <span className="flex items-center gap-2.5 text-[15px] font-bold tracking-[0.1em] uppercase">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#6D28D9] ring-2 ring-white" />
-                Acreditación oficial
-              </span>
-              <span className="text-[15px] font-bold">Generalitat de Catalunya</span>
-            </div>
-
-            <div className="p-6 sm:p-8">
-              <p className="font-display text-[clamp(6rem,13vw,10rem)] leading-[0.85] font-bold tracking-[-0.02em]">
-                375<span className="ml-1 text-[0.55em] tracking-[-0.03em] text-[#6D28D9]">h</span>
-              </p>
-              <p className="font-display mt-4 text-[26px] leading-tight font-bold tracking-[-0.03em] sm:text-[30px]">
-                Agente del Cambio Tecnológico
-              </p>
-
-              <div className="mt-6 flex gap-1" role="img" aria-label="375 de 375 horas completadas">
-                {Array.from({ length: SEGMENTS }).map((_, i) => (
-                  <motion.span
-                    key={i}
-                    initial={reduce ? false : { scaleY: 0.15 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.04, duration: 0.2 }}
-                    className="h-10 flex-1 rounded-sm border-2 border-[#09090B] bg-[#6D28D9]"
-                  />
-                ))}
-              </div>
-              <p className="mt-3 text-[18px] leading-snug font-bold text-[#09090B]">
-                25 bloques × 15 h = 375 h completados
-              </p>
-
-              <ul className="mt-5 flex flex-wrap gap-1.5 xl:flex-nowrap">
-                {topics.map((t) => (
-                  <li
-                    key={t}
-                    className="rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-3 py-1.5 text-[15px] font-bold whitespace-nowrap text-white"
+        <div className="lg:col-span-6">
+          <ol className="mx-auto flex max-w-[560px] flex-col items-stretch">
+            {steps.map((s, i) => {
+              const last = i === steps.length - 1;
+              const Icon = s.icon;
+              return (
+                <li key={s.title} className="flex flex-col items-center">
+                  <motion.div
+                    initial={reduce ? false : { opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-10% 0px" }}
+                    transition={{ duration: 0.6, delay: 0.1 + i * 0.2, ease: EASE }}
+                    className={`flex w-full items-center gap-4 rounded-[20px] border-[3px] border-[#09090B] p-4 shadow-[8px_8px_0_#09090B] sm:p-5 ${
+                      last ? "bg-[#09090B] text-white" : "bg-white text-[#09090B]"
+                    }`}
                   >
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.div>
+                    <span
+                      className={`font-display flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-[3px] border-[#09090B] text-[34px] leading-none font-bold ${
+                        last ? "bg-white text-[#09090B]" : "bg-[#6D28D9] text-white"
+                      }`}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="font-display block text-[clamp(1.4rem,2vw,1.8rem)] leading-tight font-bold tracking-[-0.03em]">
+                        {s.title}
+                      </span>
+                      <span
+                        className={`mt-1 block text-[17px] leading-snug font-semibold ${
+                          last ? "text-[#D4D4D8]" : "text-[#3F3F46]"
+                        }`}
+                      >
+                        {s.text}
+                      </span>
+                    </span>
+                    <Icon
+                      size={38}
+                      strokeWidth={2.4}
+                      className={`hidden shrink-0 sm:block ${last ? "text-[#A78BFA]" : "text-[#6D28D9]"}`}
+                    />
+                  </motion.div>
+                  {last ? null : (
+                    <ArrowDown size={34} strokeWidth={3.5} className="my-2.5 text-[#09090B]" />
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </section>
   );

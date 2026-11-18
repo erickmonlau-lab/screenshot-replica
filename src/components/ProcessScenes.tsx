@@ -43,14 +43,14 @@ function Diagnostico() {
             Auditoría de tu negocio
           </p>
         </div>
-        <ul className="mt-4 grid gap-2.5">
+        <ul className="mt-3 grid gap-2">
           {rows.map((r, i) => (
             <motion.li
               key={r}
               initial={reduce ? false : { x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.3, ease: EASE }}
-              className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5 sm:px-4"
+              className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1.5 sm:px-4"
             >
               <span
                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-[#09090B]"
@@ -74,7 +74,7 @@ function Diagnostico() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 + rows.length * 0.3, duration: 0.4 }}
-          className="mt-4 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-3 text-white"
+          className="mt-3 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-2 text-white"
         >
           <span className="text-[17px] font-bold">Fugas detectadas</span>
           <span className="font-display text-[30px] leading-none font-bold">{rows.length}</span>

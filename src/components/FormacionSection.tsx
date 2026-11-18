@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Megaphone, ClipboardList } from "lucide-react";
+import { BookOpen, Briefcase, ClipboardList, GraduationCap, Megaphone, Wrench } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -35,7 +35,7 @@ const cards = [
     level: "Ciclo Medio · CFGM",
     learned: ["Facturación", "Albaranes", "Contabilidad", "Operativa interna de empresa"],
     apply:
-      "Por eso mi ERP gestiona stock, facturación y albaranes: sé cómo se trabaja de verdad en una empresa.",
+      "Mi ERP nace aquí: en Diset vi cómo una empresa de control de plagas trabaja con su software de gestión y lo uní a lo que estudié.",
   },
 ];
 
@@ -51,7 +51,7 @@ export function FormacionSection({
   return (
     <section
       id="formacion"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-10 text-white sm:py-12"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
@@ -61,15 +61,15 @@ export function FormacionSection({
           >
             Formación
           </p>
-          <h2 className="font-display max-w-[28ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.12] font-bold tracking-[-0.03em] sm:text-right">
+          <h2 className="font-display max-w-[28ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             Primero aprendí cómo funciona un negocio por dentro.{" "}
-            <span className="rounded-md bg-[#6D28D9] px-2 py-0.5 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+            <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
               Después, a construirle las herramientas.
             </span>
           </h2>
         </div>
 
-        <div className="mt-9 grid gap-7 md:grid-cols-2 lg:gap-9">
+        <div className="mt-6 grid gap-7 md:grid-cols-2 lg:gap-9">
           {cards.map((c, i) => {
             const course = courses[i];
             const practice = practices[i];
@@ -92,45 +92,47 @@ export function FormacionSection({
                   <span className="rounded-full border-[3px] border-white px-3.5 py-1 text-[15px] font-bold tracking-wide uppercase">
                     {c.level}
                   </span>
-                  <span className="font-display ml-auto text-[22px] leading-none font-bold tracking-[-0.03em]">
-                    Monlau
+                  <span className="ml-auto text-right leading-none">
+                    <span className="block text-[15px] font-bold tracking-[0.1em] uppercase opacity-90">
+                      Centro
+                    </span>
+                    <span className="font-display mt-1 block text-[26px] font-bold tracking-[-0.03em]">
+                      Monlau
+                    </span>
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col gap-5 p-5 sm:p-6">
-                  <div>
-                    <h3 className="font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.05] font-bold tracking-[-0.04em]">
-                      {course?.title.replace(/^CF(GS|GM) en /, "")}
-                    </h3>
-                    <p className="mt-1.5 flex items-center gap-2 text-[16px] font-semibold text-[#52525B]">
-                      <GraduationCap size={18} strokeWidth={2.6} className="text-[#6D28D9]" />
-                      {course?.place}
-                    </p>
-                  </div>
+                <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+                  <h3 className="font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.05] font-bold tracking-[-0.04em]">
+                    {course?.title.replace(/^CF(GS|GM) en /, "")}
+                  </h3>
 
                   <div>
-                    <p className="text-[15px] font-bold tracking-[0.08em] text-[#6D28D9] uppercase">
+                    <p className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.02em]">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#09090B] text-white">
+                        <BookOpen size={16} strokeWidth={2.8} />
+                      </span>
                       Lo que aprendí
                     </p>
-                    <ul className="mt-2 flex flex-wrap gap-2">
+                    <ul className="mt-3 flex flex-wrap gap-2">
                       {c.learned.map((l) => (
                         <li
                           key={l}
-                          className="rounded-full border-[3px] border-[#09090B] bg-[#F4F4F5] px-3.5 py-1 text-[16px] font-bold"
+                          className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-2.5 py-1 text-[16px] font-bold shadow-[3px_3px_0_#09090B]"
                         >
+                          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
                           {l}
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div>
-                    <p className="text-[15px] font-bold tracking-[0.08em] text-[#6D28D9] uppercase">
+                  <div className="rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
+                    <p className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.02em]">
+                      <Wrench size={20} strokeWidth={2.8} />
                       Cómo lo aplico hoy
                     </p>
-                    <p className="mt-1.5 text-[18px] leading-snug font-semibold text-[#27272A]">
-                      {c.apply}
-                    </p>
+                    <p className="mt-2 text-[19px] leading-snug font-semibold">{c.apply}</p>
                   </div>
 
                   <div className="mt-auto flex items-center gap-4 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] px-4 py-3 text-white">
