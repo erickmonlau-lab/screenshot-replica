@@ -49,7 +49,7 @@ export function ScrollMarquee({
 
   const item = (
     <span
-      className={`font-display pr-12 leading-none font-bold tracking-[-0.02em] text-transparent uppercase select-none [-webkit-text-stroke:2.5px_#09090B] dark:[-webkit-text-stroke:2.5px_#FFFFFF] ${className}`}
+      className={`font-display pr-12 leading-none font-bold tracking-[-0.02em] text-[#09090B] uppercase select-none [text-shadow:0.03em_0.03em_0_#6D28D9] dark:text-white ${className}`}
     >
       {text}
     </span>

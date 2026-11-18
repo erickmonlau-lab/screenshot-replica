@@ -66,7 +66,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="pointer-events-none absolute inset-x-0 top-[29%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
-          text="Erick Rodríguez — Marketing · Gestión · Código · IA — "
+          text="Erick Rodríguez — Marketing · Gestión · Tecnología · IA — "
           className="text-[15vh] sm:text-[30vh]"
         />
       </div>
