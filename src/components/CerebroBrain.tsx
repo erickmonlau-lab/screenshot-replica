@@ -7,8 +7,39 @@ import { useReducedMotion } from "./motion-pref";
  * Una "ola de lectura" recorre los nodos para mostrar cómo la IA lee las notas.
  */
 
-const CEREBRUM_D =
-  "M55 170 C33 140 45 96 86 70 C116 40 166 30 200 42 C226 22 276 24 298 48 C336 40 372 68 368 108 C392 128 388 168 362 184 C350 196 330 200 312 198 C296 206 270 208 250 214 C238 238 190 246 155 238 C135 232 120 222 118 210 C104 200 78 192 55 170 Z";
+/* Cerebro lateral estilo icono: contorno de nube con lóbulos en arco y pliegues que parten de cada hendidura */
+function cerebrumShape(): { path: Path2D; cusps: number[][] } {
+  const N = 14;
+  const base: number[][] = [];
+  for (let i = 0; i < N; i++) {
+    const th = Math.PI + (i / N) * Math.PI * 2; // empieza en el lado izquierdo, sentido horario
+    const c = Math.cos(th);
+    const sn = Math.sin(th);
+    const lower = sn > 0;
+    const rx = 170;
+    const ry = lower ? 66 : 100;
+    base.push([204 + c * rx, 150 + sn * ry + (lower ? 4 : 0)]);
+  }
+  const path = new Path2D();
+  const cusps: number[][] = [];
+  path.moveTo(base[0]![0]!, base[0]![1]!);
+  for (let i = 0; i < N; i++) {
+    const a = base[i]!;
+    const b = base[(i + 1) % N]!;
+    const mx = (a[0]! + b[0]!) / 2;
+    const my = (a[1]! + b[1]!) / 2;
+    const nx = mx - 204;
+    const ny = my - 150;
+    const nl = Math.hypot(nx, ny) || 1;
+    const bulge = 30;
+    const cx = mx + (nx / nl) * bulge;
+    const cy = my + (ny / nl) * bulge;
+    path.quadraticCurveTo(cx, cy, b[0]!, b[1]!);
+    if (b[1]! < 190) cusps.push([b[0]!, b[1]!]);
+  }
+  path.closePath();
+  return { path, cusps };
+}
 const CEREBELLUM_D =
   "M262 214 C290 208 340 212 346 238 C350 262 318 282 288 278 C262 274 246 250 262 214 Z";
 const STEM_D =
@@ -106,7 +137,22 @@ export function CerebroBrain() {
     // ───────── geometría en el espacio del dibujo (400 × 330) ─────────
     const probe = document.createElement("canvas").getContext("2d");
     if (!probe) return;
-    const cerebrumP = new Path2D(CEREBRUM_D);
+    const cer = cerebrumShape();
+    const cerebrumP = cer.path;
+    // pliegues: desde cada hendidura hacia el centro, con una curva
+    const foldsP = new Path2D();
+    cer.cusps.forEach(([x, y], i) => {
+      const dx = 204 - x!;
+      const dy = 150 - y!;
+      const len = 0.34 + (i % 3) * 0.07;
+      const sg = i % 2 ? 1 : -1;
+      const mx = x! + dx * len * 0.5 - dy * 0.14 * sg;
+      const my = y! + dy * len * 0.5 + dx * 0.14 * sg;
+      foldsP.moveTo(x!, y!);
+      foldsP.quadraticCurveTo(mx, my, x! + dx * len, y! + dy * len);
+    });
+    foldsP.moveTo(120, 214);
+    foldsP.quadraticCurveTo(176, 188, 240, 214);
     const cerebellumP = new Path2D(CEREBELLUM_D);
     const stemP = new Path2D(STEM_D);
     const inCerebrum = (x: number, y: number) => probe.isPointInPath(cerebrumP, x, y);
@@ -228,7 +274,7 @@ export function CerebroBrain() {
       c.clip(cerebrumP);
       c.strokeStyle = "#D2C3FF";
       c.lineWidth = 3 / s;
-      c.stroke(new Path2D(SULCI));
+      c.stroke(foldsP);
       c.restore();
       c.strokeStyle = "#D2C3FF";
       c.lineWidth = 3 / s;
