@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { animate, motion, useInView } from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Metric {
   id: string;
@@ -84,11 +85,12 @@ function Counter({ metric }: { metric: Metric }) {
 /** Tres tarjetas fondo blanco, texto negro y sombras brutales en morado y negro. */
 export function MetricsBand() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
 
   return (
     <section
       id="metricas"
-      aria-label="Resultados en cifras"
+      aria-label={tr("Resultados en cifras")}
       className="border-t-[3px] border-[#09090B] bg-[#E3E5E9] py-16 text-[#09090B] sm:py-20"
     >
       <div className="mx-auto w-full max-w-[1400px] px-6 sm:px-10 lg:px-12 xl:px-16">
@@ -162,7 +164,7 @@ export function MetricsBand() {
                 transition={{ duration: 0.75, delay: i * 0.18 + 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className="font-display mt-6 text-[23px] sm:text-[26px] leading-[1.12] font-black tracking-[-0.03em] text-[#09090B]"
               >
-                {m.label}
+                {tr(m.label)}
               </motion.p>
 
               <motion.p
@@ -172,7 +174,7 @@ export function MetricsBand() {
                 transition={{ duration: 0.7, delay: i * 0.18 + 0.38, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#52525B]"
               >
-                {m.detail}
+                {tr(m.detail)}
               </motion.p>
             </motion.div>
           ))}

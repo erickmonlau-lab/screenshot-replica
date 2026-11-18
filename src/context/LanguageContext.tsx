@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { DICT } from "@/i18n/dictionary";
 
 export type Locale = "es" | "ca" | "en";
 
@@ -156,7 +157,8 @@ const translations: Record<Locale, Translations> = {
       step2Desc: "Abre el índice y carga solo las notas del proyecto.",
       step3Title: "Trabaja a mi manera",
       step3Desc: "Aplica mis normas sin que se las repita.",
-      dragHint: "Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al leer.",
+      dragHint:
+        "Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al leer.",
     },
     contact: {
       badge: "Contacto",
@@ -241,7 +243,8 @@ const translations: Record<Locale, Translations> = {
       step2Desc: "Obre l'índex i carrega només les notes del projecte.",
       step3Title: "Treballa a la meva manera",
       step3Desc: "Aplica les meves normes sense haver-les de repetir.",
-      dragHint: "Cada punt és una nota. Arrossega'ls: la llum recorre les connexions com la IA en llegir.",
+      dragHint:
+        "Cada punt és una nota. Arrossega'ls: la llum recorre les connexions com la IA en llegir.",
     },
     contact: {
       badge: "Contacte",
@@ -345,12 +348,15 @@ interface LanguageContextType {
   locale: Locale;
   setLocale: (next: Locale) => void;
   t: Translations;
+  /** Traduce una frase escrita en español al idioma activo (si falta, devuelve el español). */
+  tr: (es: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType>({
   locale: "es",
   setLocale: () => {},
   t: translations.es,
+  tr: (es) => es,
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
@@ -380,8 +386,21 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const t = translations[locale];
 
+  const tr = useCallback(
+    (es: string) => {
+      if (locale === "es") return es;
+      const entry = DICT[es.replace(/ /g, " ")];
+      if (!entry) {
+        if (import.meta.env.DEV) console.warn(`[i18n] falta traducción: "${es}"`);
+        return es;
+      }
+      return entry[locale];
+    },
+    [locale],
+  );
+
   return (
-    <LanguageContext.Provider value={{ locale, setLocale, t }}>
+    <LanguageContext.Provider value={{ locale, setLocale, t, tr }}>
       {children}
     </LanguageContext.Provider>
   );

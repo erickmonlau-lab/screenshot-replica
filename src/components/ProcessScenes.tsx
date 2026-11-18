@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
+import { useLanguage } from "@/context/LanguageContext";
 
 const VIOLET = "#6D28D9";
 const INK = "#09090B";
@@ -23,6 +24,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /* ───────── 01 · Diagnóstico: una auditoría que va marcando fugas ───────── */
 function Diagnostico() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   const rows = [
     "Pedidos por WhatsApp",
     "Excel sin sincronizar",
@@ -40,7 +42,7 @@ function Diagnostico() {
             <Search size={22} strokeWidth={3} color="#FFFFFF" />
           </span>
           <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em] text-[#09090B]">
-            Auditoría de tu negocio
+            {tr("Auditoría de tu negocio")}
           </p>
         </div>
         <ul className="mt-3 grid gap-2">
@@ -58,14 +60,14 @@ function Diagnostico() {
               >
                 <X size={18} strokeWidth={4} color="#FFFFFF" />
               </span>
-              <span className="text-[17px] font-bold text-[#09090B] sm:text-[19px]">{r}</span>
+              <span className="text-[17px] font-bold text-[#09090B] sm:text-[19px]">{tr(r)}</span>
               <motion.span
                 initial={reduce ? false : { scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.7 + i * 0.3 }}
                 className="ml-auto hidden rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] font-bold text-white sm:block"
               >
-                Fuga
+                {tr("Fuga")}
               </motion.span>
             </motion.li>
           ))}
@@ -76,7 +78,7 @@ function Diagnostico() {
           transition={{ delay: 0.7 + rows.length * 0.3, duration: 0.4 }}
           className="mt-3 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-2 text-white"
         >
-          <span className="text-[17px] font-bold">Fugas detectadas</span>
+          <span className="text-[17px] font-bold">{tr("Fugas detectadas")}</span>
           <span className="font-display text-[30px] leading-none font-bold">{rows.length}</span>
         </motion.div>
         {reduce ? null : (
@@ -105,6 +107,7 @@ const MAP_NODES = [
 
 function Arquitectura() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   return (
     <div className="absolute inset-0 flex items-center justify-center p-3 sm:p-6">
       <div className="relative w-full max-w-[540px]" style={{ aspectRatio: `${MAP_W} / ${MAP_H}` }}>
@@ -150,7 +153,7 @@ function Arquitectura() {
           >
             <n.icon size={26} strokeWidth={2.6} />
             <span className="font-display text-[17px] leading-tight font-bold tracking-[-0.02em] whitespace-nowrap sm:text-[19px]">
-              {n.label}
+              {tr(n.label)}
             </span>
           </motion.div>
         ))}
@@ -185,6 +188,7 @@ const CODE: { t: string; k?: boolean }[][] = [
 
 function Desarrollo() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-4 sm:p-8">
       <div className="w-full max-w-[540px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] shadow-[8px_8px_0_#FFFFFF]">
@@ -231,7 +235,7 @@ function Desarrollo() {
             transition={{ delay: 2.2 + i * 0.15 }}
             className="rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]"
           >
-            {t}
+            {tr(t)}
           </motion.li>
         ))}
       </ul>
@@ -242,6 +246,7 @@ function Desarrollo() {
 /* ───────── 04 · Producción: del entorno local a la web en línea ───────── */
 function Produccion() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   const stops = ["Local", "Pruebas", "En línea"];
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-4 sm:p-8">
@@ -270,7 +275,7 @@ function Produccion() {
             transition={{ type: "spring", stiffness: 200, damping: 12, delay: 2.2 }}
             className="font-display rounded-xl border-[3px] border-[#09090B] bg-[#09090B] px-5 py-2 text-[30px] leading-none font-bold tracking-[-0.04em] text-white shadow-[4px_4px_0_#6D28D9] sm:text-[38px]"
           >
-            EN LÍNEA
+            {tr("EN LÍNEA")}
           </motion.span>
         </div>
       </div>
@@ -286,7 +291,7 @@ function Produccion() {
           >
             <span className="flex flex-1 items-center justify-center gap-2 rounded-xl border-[3px] border-[#09090B] bg-white px-3 py-2 text-[16px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
               <Check size={18} strokeWidth={3.5} color={VIOLET} />
-              {s}
+              {tr(s)}
             </span>
             {i < stops.length - 1 ? (
               <ArrowRight size={22} strokeWidth={3.5} color={INK} className="shrink-0" />
@@ -301,6 +306,7 @@ function Produccion() {
 /* ───────── 05 · Automatización: del aviso al cobro sin tocar nada ───────── */
 function Automatizacion() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   const chain = [
     { icon: Bell, t: "Aviso", c: "bg-white text-[#09090B]" },
     { icon: Bot, t: "IA", c: "bg-[#09090B] text-white" },
@@ -324,7 +330,7 @@ function Automatizacion() {
             >
               <n.icon size={30} strokeWidth={2.6} />
               <span className="font-display text-[19px] leading-none font-bold tracking-[-0.02em] sm:text-[22px]">
-                {n.t}
+                {tr(n.t)}
               </span>
             </motion.div>
             {i < chain.length - 1 ? (
@@ -336,7 +342,7 @@ function Automatizacion() {
 
       <div className="flex items-center gap-4 rounded-2xl border-[3px] border-[#09090B] bg-white px-5 py-3 shadow-[6px_6px_0_#09090B]">
         <span className="font-display text-[24px] leading-none font-bold tracking-[-0.03em] text-[#09090B] sm:text-[28px]">
-          Sin tareas manuales
+          {tr("Sin tareas manuales")}
         </span>
         <span
           aria-hidden="true"
@@ -354,13 +360,14 @@ const SCENE_LABELS = ["Diagnóstico", "Arquitectura", "Desarrollo", "Producción
 
 /** Pantalla del proceso: una escena por paso, con barra superior que indica en qué paso vas. */
 export function ProcessScenes({ active }: { active: number }) {
+  const { tr } = useLanguage();
   const Scene = SCENES[active] ?? Diagnostico;
   return (
     <div className="w-full overflow-hidden rounded-[24px] border-[3px] border-white bg-[#6D28D9] shadow-[10px_10px_0_#A78BFA]">
       <div className="flex items-center justify-between border-b-[3px] border-white bg-[#09090B] px-4 py-2.5 text-white">
         <span className="flex items-center gap-2 text-[15px] font-bold tracking-[0.08em] uppercase">
           <span className="h-2.5 w-2.5 rounded-full bg-[#A78BFA]" />
-          {SCENE_LABELS[active]}
+          {tr(SCENE_LABELS[active] ?? "")}
         </span>
         <span className="font-display text-[18px] font-bold">
           0{active + 1} <span className="text-[#A1A1AA]">/ 05</span>

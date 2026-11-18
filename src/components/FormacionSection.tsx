@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BookOpen, Briefcase, ClipboardList, Megaphone, Wrench } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
+import { useLanguage } from "@/context/LanguageContext";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -48,6 +49,7 @@ export function FormacionSection({
   practices: Practice[];
 }) {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
   return (
     <section
       id="formacion"
@@ -60,7 +62,7 @@ export function FormacionSection({
               aria-hidden="true"
               className="font-display text-[clamp(3rem,6.4vw,5.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-white uppercase [text-shadow:0.045em_0.045em_0_#6D28D9]"
             >
-              Formación
+              {tr("Formación")}
             </p>
             <motion.svg
               aria-hidden="true"
@@ -112,9 +114,9 @@ export function FormacionSection({
             </motion.svg>
           </div>
           <h2 className="font-display max-w-[34ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
-            Primero aprendí cómo funciona un negocio por dentro.{" "}
+            {tr("Primero aprendí cómo funciona un negocio por dentro.")}{" "}
             <span className="mt-1 inline-block rounded-md bg-[#6D28D9] px-2 py-1 whitespace-nowrap">
-              Después, a construirle las herramientas.
+              {tr("Después, a construirle las herramientas.")}
             </span>
           </h2>
         </div>
@@ -140,11 +142,11 @@ export function FormacionSection({
                     <Icon size={24} strokeWidth={2.6} />
                   </span>
                   <span className="rounded-full border-[3px] border-white px-3.5 py-1 text-[15px] font-bold tracking-wide uppercase">
-                    {c.level}
+                    {tr(c.level)}
                   </span>
                   <span className="ml-auto text-right leading-none">
                     <span className="block text-[15px] font-bold tracking-[0.1em] uppercase opacity-90">
-                      Centro
+                      {tr("Centro")}
                     </span>
                     <span className="font-display mt-1 block text-[26px] font-bold tracking-[-0.03em]">
                       Monlau
@@ -154,7 +156,7 @@ export function FormacionSection({
 
                 <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
                   <h3 className="font-display text-[clamp(1.8rem,2.8vw,2.5rem)] leading-[1.05] font-bold tracking-[-0.04em]">
-                    {course?.title.replace(/^CF(GS|GM) en /, "")}
+                    {tr((course?.title ?? "").replace(/^CF(GS|GM) en /, ""))}
                   </h3>
 
                   <div>
@@ -162,7 +164,7 @@ export function FormacionSection({
                       <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#09090B] text-white">
                         <BookOpen size={16} strokeWidth={2.8} />
                       </span>
-                      Lo que estudié y aprendí
+                      {tr("Lo que estudié y aprendí")}
                     </p>
                     <div className="mt-3 flex flex-col gap-2">
                       {c.learned.map((row) => (
@@ -173,7 +175,7 @@ export function FormacionSection({
                               className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-3 py-1 text-[16px] font-bold whitespace-nowrap shadow-[3px_3px_0_#09090B]"
                             >
                               <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
-                              {l}
+                              {tr(l)}
                             </li>
                           ))}
                         </ul>
@@ -184,17 +186,19 @@ export function FormacionSection({
                   <div className="flex flex-1 flex-col justify-center rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
                     <p className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.02em]">
                       <Wrench size={20} strokeWidth={2.8} />
-                      Cómo lo aplico hoy
+                      {tr("Cómo lo aplico hoy")}
                     </p>
                     <p className="mt-2 text-[19px] leading-snug font-semibold [text-wrap:balance]">
-                      {c.apply}
+                      {tr(c.apply)}
                     </p>
                   </div>
 
                   <div className="mt-auto flex items-center gap-4 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] px-4 py-3 text-white">
                     <Briefcase size={22} strokeWidth={2.6} className="shrink-0 text-[#A78BFA]" />
                     <span className="min-w-0 flex-1 text-[16px] leading-tight font-semibold">
-                      <span className="block font-bold">Prácticas en {practice?.place}</span>
+                      <span className="block font-bold">
+                        {tr("Prácticas en")} {practice?.place}
+                      </span>
                       <span className="text-[#D4D4D8]">{years}</span>
                     </span>
                     {hours ? (

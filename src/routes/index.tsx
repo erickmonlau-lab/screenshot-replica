@@ -271,6 +271,7 @@ function CopyButton({
   dark?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
+  const { tr } = useLanguage();
 
   async function copy() {
     try {
@@ -286,8 +287,8 @@ function CopyButton({
     <button
       type="button"
       onClick={copy}
-      title={`Copiar ${label}`}
-      aria-label={`Copiar ${label}`}
+      title={tr(`Copiar ${label}`)}
+      aria-label={tr(`Copiar ${label}`)}
       className={`inline-flex h-8 items-center justify-center gap-1.5 rounded-full px-3 text-[15px] font-bold transition-all active:scale-95 ${
         copied
           ? "bg-[#10B981] text-white"
@@ -299,12 +300,12 @@ function CopyButton({
       {copied ? (
         <>
           <Check size={13} strokeWidth={2.5} />
-          <span>Copiado</span>
+          <span>{tr("Copiado")}</span>
         </>
       ) : (
         <>
           <Copy size={13} />
-          <span>Copiar</span>
+          <span>{tr("Copiar")}</span>
         </>
       )}
     </button>
@@ -312,10 +313,19 @@ function CopyButton({
 }
 
 const marqueeText =
-  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
+  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · TECNOLOGÍA · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
 
 function Index() {
-  const { locale, t } = useLanguage();
+  const { locale, t, tr } = useLanguage();
+  const cases = projectCases.map((p) => ({
+    ...p,
+    type: tr(p.type),
+    status: tr(p.status),
+    outcome: tr(p.outcome),
+    stack: p.stack.map((x) => tr(x)),
+    description: tr(p.description),
+    ctaLabel: tr(p.ctaLabel),
+  }));
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
   const [activeProjectId, setActiveProjectId] = useState<string>("diversplas");
   const [activeAiPhase, setActiveAiPhase] = useState<string>("memory");
@@ -345,7 +355,7 @@ function Index() {
         <StudioHero
           mode={heroMode}
           activeCaseId={activeProjectId}
-          projects={projectCases}
+          projects={cases}
           onChangeMode={setHeroMode}
           onSelectProject={setActiveProjectId}
           onJumpToProjects={handleJumpToProjects}
@@ -360,7 +370,7 @@ function Index() {
             baseVelocity={-2.2}
             className="font-display text-[15px] leading-none font-bold tracking-[0.08em] sm:text-base"
           >
-            {marqueeText}
+            {tr(marqueeText)}
           </VelocityMarqueeRow>
         </div>
 
@@ -391,7 +401,7 @@ function Index() {
             </Reveal>
             <div className="mt-4 sm:mt-6">
               <ProjectCarousel
-                slides={projectCases}
+                slides={cases}
                 activeId={activeProjectId}
                 onChange={setActiveProjectId}
                 privateSlide={<ErpShowcase />}
@@ -475,20 +485,20 @@ function Index() {
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4">
               <h2 className="font-display text-[clamp(2.2rem,4.2vw,4rem)] leading-[1] font-bold tracking-[-0.04em] whitespace-nowrap">
-                Con qué{" "}
+                {tr("Con qué")}{" "}
                 <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
-                  trabajo.
+                  {tr("trabajo.")}
                 </span>
               </h2>
               <p
                 aria-hidden="true"
                 className="font-display text-[clamp(4.5rem,13vw,11.5rem)] leading-[0.8] font-bold tracking-[-0.04em] text-white uppercase [text-shadow:0.04em_0.04em_0_#6D28D9]"
               >
-                Stack
+                {tr("Stack")}
               </p>
             </div>
           </div>
-          <div className="mt-9 space-y-3" aria-label="Herramientas que uso">
+          <div className="mt-9 space-y-3" aria-label={tr("Herramientas que uso")}>
             {[technicalTools.slice(0, 8), technicalTools.slice(8)].map((row, r) => (
               <VelocityMarqueeRow key={r} baseVelocity={r === 0 ? -1.8 : 1.8}>
                 {row.map((t) => (
@@ -502,9 +512,11 @@ function Index() {
                       style={{ backgroundColor: t.color }}
                     />
                     <span className="font-display text-[22px] leading-none font-bold tracking-[-0.03em]">
-                      {t.name}
+                      {t.name === "Agentes IA" ? tr(t.name) : t.name}
                     </span>
-                    <span className="text-[15px] font-semibold text-[#52525B]">{t.category}</span>
+                    <span className="text-[15px] font-semibold text-[#52525B]">
+                      {tr(t.category)}
+                    </span>
                   </span>
                 ))}
               </VelocityMarqueeRow>
@@ -601,7 +613,7 @@ function Index() {
                   {[
                     {
                       icon: Mail,
-                      k: "Email",
+                      k: tr("Email"),
                       node: (
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
@@ -616,7 +628,7 @@ function Index() {
                     },
                     {
                       icon: MessageCircle,
-                      k: "WhatsApp y teléfono",
+                      k: tr("WhatsApp y teléfono"),
                       node: (
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
@@ -633,10 +645,10 @@ function Index() {
                     },
                     {
                       icon: MapPin,
-                      k: "Ubicación",
+                      k: tr("Ubicación"),
                       node: (
                         <span className="font-display text-[19px] font-bold tracking-[-0.02em]">
-                          La Sagrera, Barcelona · Presencial o remoto
+                          {tr("La Sagrera, Barcelona · Presencial o remoto")}
                         </span>
                       ),
                     },
@@ -663,7 +675,7 @@ function Index() {
         <footer className="section-dark t-line t-muted border-t py-6 text-[15px] font-medium sm:text-base">
           <div className="mx-auto flex max-w-[1380px] flex-wrap items-center justify-between gap-4 px-5 sm:px-8">
             <span>© 2026 Erick Rodríguez · Portfolio</span>
-            <span>Marketing · Gestión · Desarrollo Web · ERP · Automatización IA</span>
+            <span>{tr("Marketing · Gestión · Desarrollo Web · ERP · Automatización IA")}</span>
           </div>
         </footer>
       </main>

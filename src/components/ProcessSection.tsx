@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Bot, Check, Code2, Layers, Rocket, Search } from "lucide-react";
 import { ProcessScenes } from "./ProcessScenes";
+import { useLanguage } from "@/context/LanguageContext";
 
 const STEP_ICONS = [Search, Layers, Code2, Rocket, Bot];
 
@@ -52,6 +53,7 @@ export function ProcessSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [progress, setProgress] = useState(0);
+  const { tr } = useLanguage();
 
   useEffect(() => {
     const update = () => {
@@ -98,12 +100,12 @@ export function ProcessSection() {
                 aria-hidden="true"
                 className="font-display text-[clamp(2.8rem,5.4vw,4.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-white uppercase [text-shadow:0.045em_0.045em_0_#6D28D9]"
               >
-                Proceso
+                {tr("Proceso")}
               </p>
               <h2 className="font-display max-w-[24ch] text-right text-[clamp(1.3rem,2vw,1.75rem)] leading-[1.5] font-bold tracking-[-0.03em]">
-                Cinco pasos, de la auditoría a un negocio que{" "}
+                {tr("Cinco pasos, de la auditoría a un negocio que")}{" "}
                 <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
-                  funciona solo.
+                  {tr("funciona solo.")}
                 </span>
               </h2>
             </div>
@@ -135,19 +137,20 @@ export function ProcessSection() {
                             <Icon size={22} strokeWidth={2.6} />
                           </span>
                           <span className="font-display text-[22px] leading-none font-bold tracking-[-0.03em] uppercase">
-                            {s.label}
+                            {tr(s.label)}
                           </span>
                         </div>
                         <div className="flex flex-1 flex-col justify-center gap-3 p-5">
                           <h3 className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-[1.05] font-bold tracking-[-0.04em]">
-                            {s.titlePrefix} <span className="text-[#6D28D9]">{s.titleSuffix}</span>
+                            {tr(s.titlePrefix)}{" "}
+                            <span className="text-[#6D28D9]">{tr(s.titleSuffix)}</span>
                           </h3>
                           <p className="hidden text-[18px] leading-snug font-medium text-[#3F3F46] sm:block">
-                            {s.text}
+                            {tr(s.text)}
                           </p>
                           <span className="hidden w-fit items-center gap-2 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1.5 text-[15px] font-bold sm:inline-flex">
                             <Check size={16} strokeWidth={3.5} className="text-[#6D28D9]" />
-                            {s.done}
+                            {tr(s.done)}
                           </span>
                         </div>
                       </div>
@@ -174,7 +177,7 @@ export function ProcessSection() {
                       <button
                         type="button"
                         onClick={() => scrollToStep(i)}
-                        aria-label={`Ver paso ${st.n}: ${st.label}`}
+                        aria-label={`${tr("Ver paso")} ${st.n}: ${tr(st.label)}`}
                         className={`flex w-full cursor-pointer flex-col items-center gap-1.5 rounded-2xl border-[3px] px-1.5 py-2.5 transition-all duration-300 sm:flex-row sm:justify-center sm:gap-3 sm:px-4 sm:py-3 ${
                           now
                             ? "-translate-y-1 border-white bg-[#6D28D9] text-white shadow-[5px_5px_0_#A78BFA]"
@@ -200,10 +203,10 @@ export function ProcessSection() {
                         </span>
                         <span className="text-left leading-tight">
                           <span className="hidden text-[15px] font-bold opacity-80 sm:block">
-                            Paso {st.n}
+                            {tr("Paso")} {st.n}
                           </span>
                           <span className="font-display hidden text-[18px] font-bold tracking-[-0.02em] sm:block">
-                            {st.label}
+                            {tr(st.label)}
                           </span>
                           <span className="font-display text-[16px] font-bold sm:hidden">
                             {st.n}

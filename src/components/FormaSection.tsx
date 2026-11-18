@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
+import { useLanguage } from "@/context/LanguageContext";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 // Rojo de GYMVITY (la app es negra y roja): texto blanco sobre él supera 4,5:1
@@ -62,6 +63,7 @@ const facts = [
 /** Web Apps: caso real GYMVITY, app de entrenamiento hecha con tecnología web */
 export function FormaSection() {
   const reduce = useReducedMotion();
+  const { tr } = useLanguage();
 
   return (
     <section
@@ -79,20 +81,24 @@ export function FormaSection() {
           className="px-6 py-14 sm:px-10 lg:py-12 lg:pr-12 lg:pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))]"
         >
           <span className="inline-flex items-center rounded-lg border-[3px] border-[#09090B] bg-white px-3.5 py-1.5 text-[15px] font-black tracking-wider text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]">
-            Web Apps · Caso real GYMVITY
+            {tr("Web Apps · Caso real GYMVITY")}
           </span>
 
           <h2 className="font-display mt-6 text-[clamp(4rem,7.5vw,6.8rem)] leading-[0.88] font-black tracking-[-0.05em] text-white [text-shadow:5px_5px_0_#09090B]">
             Web Apps.
           </h2>
           <p className="font-display mt-4 max-w-[26ch] text-[clamp(1.6rem,2.5vw,2.3rem)] leading-[1.02] font-black tracking-[-0.03em] text-[#09090B]">
-            Apps que se usan desde el móvil, sin pasar por tienda.
+            {tr("Apps que se usan desde el móvil, sin pasar por tienda.")}
           </p>
 
           <p className="mt-4 max-w-[62ch] text-[18px] leading-relaxed font-semibold text-white xl:text-[19px]">
-            Desarrollo aplicaciones web pensadas para el móvil: se abren desde una URL y se sienten
-            como una app. Prueba de ello es <strong>GYMVITY</strong>, mi app de entrenamiento con
-            biblioteca de ejercicios, rutinas de la comunidad y seguimiento de progreso.
+            {tr(
+              "Desarrollo aplicaciones web pensadas para el móvil: se abren desde una URL y se sienten como una app. Prueba de ello es",
+            )}{" "}
+            <strong>GYMVITY</strong>
+            {tr(
+              ", mi app de entrenamiento con biblioteca de ejercicios, rutinas de la comunidad y seguimiento de progreso.",
+            )}
           </p>
 
           <ul className="mt-6 grid gap-4 sm:grid-cols-3">
@@ -100,17 +106,19 @@ export function FormaSection() {
               <li
                 key={f.t}
                 className="rounded-xl border-[3px] border-[#09090B] bg-white p-4 text-[#09090B] shadow-[5px_5px_0_#09090B]"
-                             >
+              >
                 <p
                   className="font-display text-[30px] leading-none font-black tracking-tight"
                   style={{ color: RED }}
                 >
-                  {f.big}
+                  {f.big === "144" ? f.big : tr(f.big)}
                 </p>
                 <p className="font-display mt-1 text-[18px] leading-tight font-black uppercase">
-                  {f.t}
+                  {tr(f.t)}
                 </p>
-                <p className="mt-2 text-[15px] leading-snug font-semibold text-[#3F3F46]">{f.d}</p>
+                <p className="mt-2 text-[15px] leading-snug font-semibold text-[#3F3F46]">
+                  {tr(f.d)}
+                </p>
               </li>
             ))}
           </ul>
@@ -130,7 +138,7 @@ export function FormaSection() {
             href="#contacto"
             className="mt-8 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
           >
-            <span>Pídeme una propuesta de Web App</span>
+            <span>{tr("Pídeme una propuesta de Web App")}</span>
             <ArrowUpRight size={18} strokeWidth={2.5} />
           </a>
         </motion.div>
@@ -147,21 +155,21 @@ export function FormaSection() {
           <div className="flex w-full max-w-[620px] items-end justify-center -space-x-4 sm:-space-x-8">
             <Phone
               src="/forma-ejercicios-v2.png"
-              alt="GYMVITY: biblioteca de 144 ejercicios con filtros"
+              alt={tr("GYMVITY: biblioteca de 144 ejercicios con filtros")}
               rotate={-6}
               delay={0.2}
               className="w-[31%] max-w-[190px] translate-y-3"
             />
             <Phone
               src="/forma-home-v2.png"
-              alt="GYMVITY: pantalla de inicio con rutinas de la comunidad"
+              alt={tr("GYMVITY: pantalla de inicio con rutinas de la comunidad")}
               rotate={0}
               delay={0}
               className="relative z-10 w-[40%] max-w-[250px]"
             />
             <Phone
               src="/forma-progreso-v2.png"
-              alt="GYMVITY: registro de progreso con consistencia y volumen"
+              alt={tr("GYMVITY: registro de progreso con consistencia y volumen")}
               rotate={6}
               delay={0.4}
               className="w-[31%] max-w-[190px] translate-y-3"
