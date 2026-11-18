@@ -65,7 +65,7 @@ export function GrantBand() {
             </div>
 
             <div className="p-6 sm:p-8">
-              <p className="font-display text-[clamp(6rem,13vw,10rem)] leading-[0.85] font-bold tracking-[-0.07em]">
+              <p className="font-display text-[clamp(6rem,13vw,10rem)] leading-[0.85] font-bold tracking-[-0.02em]">
                 375<span className="ml-1 text-[0.55em] tracking-[-0.03em] text-[#6D28D9]">h</span>
               </p>
               <p className="font-display mt-4 text-[26px] leading-tight font-bold tracking-[-0.03em] sm:text-[30px]">
