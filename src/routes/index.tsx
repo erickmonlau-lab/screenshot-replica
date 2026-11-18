@@ -521,6 +521,12 @@ function Index() {
         >
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
+              <p
+                aria-hidden="true"
+                className="font-display mb-5 text-[clamp(3rem,7vw,6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#09090B]"
+              >
+                Contacto
+              </p>
               <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B]">
                 <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
                 Disponible en Barcelona
@@ -529,7 +535,7 @@ function Index() {
                 <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
                   Hablemos
                   <span className="mt-3 block">
-                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 py-1 text-white">de tu proyecto.</span>
+                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 pt-[0.04em] pb-[0.24em] leading-[1] text-white">de tu proyecto.</span>
                   </span>
                 </h2>
               </Reveal>
@@ -574,7 +580,7 @@ function Index() {
                       Erick Rodríguez
                     </p>
                     <p className="mt-2 inline-block rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-3 py-0.5 text-[15px] font-bold">
-                      Marketing · Gestión · Tecnología
+                      Contacto directo
                     </p>
                   </div>
                 </div>
