@@ -1,5 +1,13 @@
 import { motion } from "framer-motion";
-import { Briefcase, Check, Code2, Download, GraduationCap, Megaphone, ClipboardList } from "lucide-react";
+import {
+  Briefcase,
+  Check,
+  Code2,
+  Download,
+  GraduationCap,
+  Megaphone,
+  ClipboardList,
+} from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 import { HangingCard } from "./HangingCard";
 import { SectionTitle } from "./SectionTitle";
@@ -85,7 +93,6 @@ export function AboutSection({
             Español · Catalán · Inglés B2
           </span>
         </div>
-
       </div>
 
       <div className="pt-4 sm:pt-6">
@@ -150,11 +157,11 @@ export function AboutSection({
                         <GraduationCap size={17} strokeWidth={2.6} />
                         Qué cubre
                       </p>
-                      <ul className="mt-2 space-y-2">
+                      <ul className="mt-2 flex flex-wrap gap-1.5">
                         {accreditationTopics.map((o) => (
                           <li
                             key={o}
-                            className="font-display rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[17px] leading-tight font-bold tracking-[-0.02em]"
+                            className="rounded-full border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1 text-[15px] leading-tight font-bold"
                           >
                             {o}
                           </li>
@@ -169,14 +176,16 @@ export function AboutSection({
                         {i === 2 ? "Proyectos" : "Experiencia"}
                       </p>
                       <p className="mt-1 text-[17px] leading-snug font-bold">{p.job.role}</p>
-                      <p className="text-[15px] font-semibold text-[#52525B]">
-                        {p.job.place}
-                        {period ? ` · ${period}` : ""}
-                      </p>
+                      <p className="text-[15px] font-semibold text-[#52525B]">{p.job.place}</p>
+                      {period ? (
+                        <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
+                          {period.replace(/\s*—\s*/, "–")}
+                        </span>
+                      ) : null}
                     </div>
                   ) : null}
                   <ul className="mt-auto space-y-2 border-t-[3px] border-[#09090B] pt-3.5">
-                    {p.points.map((pt) => (
+                    {p.points.slice(0, 2).map((pt) => (
                       <li
                         key={pt}
                         className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A]"
@@ -193,7 +202,6 @@ export function AboutSection({
             );
           })}
         </div>
-
       </div>
     </div>
   );
