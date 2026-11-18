@@ -464,27 +464,40 @@ function Index() {
           className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16"
         >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <h2 className="font-display text-[clamp(2.6rem,6vw,5.2rem)] leading-[0.95] font-bold tracking-[-0.05em]">
-              Con qué <span className="text-[#5b97ff]">trabajo.</span>
-            </h2>
+            <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+              <h2 className="font-display text-[clamp(2.4rem,5vw,4.4rem)] leading-[1] font-bold tracking-[-0.04em]">
+                Con qué
+                <span className="mt-3 block">
+                  <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
+                    trabajo.
+                  </span>
+                </span>
+              </h2>
+              <p
+                aria-hidden="true"
+                className="font-display text-[clamp(4.5rem,13vw,11.5rem)] leading-[0.8] font-bold tracking-[-0.04em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+              >
+                Stack
+              </p>
+            </div>
           </div>
-          <div className="mt-9 space-y-4" aria-label="Herramientas que uso">
+          <div className="mt-9 space-y-3" aria-label="Herramientas que uso">
             {[technicalTools.slice(0, 8), technicalTools.slice(8)].map((row, r) => (
               <VelocityMarqueeRow key={r} baseVelocity={r === 0 ? -1.8 : 1.8}>
                 {row.map((t) => (
                   <span
                     key={t.name}
-                    className="led-chip mr-4 inline-flex items-center gap-3 rounded-full px-6 py-3"
+                    className="mr-5 mb-2 inline-flex items-center gap-3 rounded-full border-[3px] border-[#09090B] bg-white px-6 py-3 text-[#09090B] shadow-[5px_5px_0_#6D28D9]"
                   >
                     <span
                       aria-hidden="true"
-                      className="h-3.5 w-3.5 rounded-full border-2 border-white"
+                      className="h-3.5 w-3.5 rounded-full border-2 border-[#09090B]"
                       style={{ backgroundColor: t.color }}
                     />
                     <span className="font-display text-[22px] leading-none font-bold tracking-[-0.03em]">
                       {t.name}
                     </span>
-                    <span className="text-[15px] font-semibold text-[#9DB8FF]">{t.category}</span>
+                    <span className="text-[15px] font-semibold text-[#52525B]">{t.category}</span>
                   </span>
                 ))}
               </VelocityMarqueeRow>
