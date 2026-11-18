@@ -78,11 +78,11 @@ function rng(seed: number) {
 const KIND_COLOR: Record<Kind, string> = {
   hub: "#09090B",
   project: "#F59E0B",
-  skill: "#6D28D9",
-  rule: "#4C1D95",
-  note: "#A1A1AA",
+  skill: "#FFFFFF",
+  rule: "#DDD6FE",
+  note: "#C4B5FD",
 };
-const KIND_R: Record<Kind, number> = { hub: 9, project: 6.5, skill: 6, rule: 6, note: 3.6 };
+const KIND_R: Record<Kind, number> = { hub: 11, project: 8, skill: 7.5, rule: 7.5, note: 4.4 };
 
 export function CerebroBrain() {
   const wrap = useRef<HTMLDivElement>(null);
@@ -118,7 +118,7 @@ export function CerebroBrain() {
       const GH = Math.ceil(330 / CELL);
       const grid = new Int16Array(GW * GH);
       const stepAt = new Int16Array(GW * GH);
-      const RING = 6;
+      const RING = 7;
       const ANG = Array.from({ length: 12 }, (_, i) => (i / 12) * Math.PI * 2);
       const cellOf = (x: number, y: number) => {
         const cx = Math.floor(x / CELL);
@@ -254,142 +254,8 @@ export function CerebroBrain() {
     const P = nodes.map(() => ({ x: 0, y: 0, vx: 0, vy: 0, ax: 0, ay: 0 }));
     const rest = links.map(() => 0);
 
-    const boxBlur = (src: Float32Array, w: number, h: number, r: number) => {
-      const tmp = new Float32Array(src.length);
-      const out = new Float32Array(src.length);
-      const n = 2 * r + 1;
-      for (let y = 0; y < h; y++) {
-        let sum = 0;
-        for (let x = -r; x <= r; x++) sum += src[y * w + Math.min(w - 1, Math.max(0, x))]!;
-        for (let x = 0; x < w; x++) {
-          tmp[y * w + x] = sum / n;
-          sum += src[y * w + Math.min(w - 1, x + r + 1)]! - src[y * w + Math.max(0, x - r)]!;
-        }
-      }
-      for (let x = 0; x < w; x++) {
-        let sum = 0;
-        for (let y = -r; y <= r; y++) sum += tmp[Math.min(h - 1, Math.max(0, y)) * w + x]!;
-        for (let y = 0; y < h; y++) {
-          out[y * w + x] = sum / n;
-          sum += tmp[Math.min(h - 1, y + r + 1) * w + x]! - tmp[Math.max(0, y - r) * w + x]!;
-        }
-      }
-      return out;
-    };
-
-    /*
-     * Cerebro con relieve real: máscara -> cúpula (blur) + crestas (circunvoluciones)
-     * -> mapa de alturas -> normales -> iluminación difusa/especular + oclusión en los surcos.
-     */
-    const shadePart = (
-      drawMask: (c: CanvasRenderingContext2D) => void,
-      drawRidges: ((c: CanvasRenderingContext2D) => void) | null,
-      domeAmp: number,
-      ridgeAmp: number,
-      dark: [number, number, number],
-      light: [number, number, number],
-    ) => {
-      const w = Math.round(W);
-      const h = Math.round(H);
-      const mk = document.createElement("canvas");
-      mk.width = w;
-      mk.height = h;
-      const mc = mk.getContext("2d")!;
-      mc.translate(bx, by);
-      mc.scale(s, s);
-      mc.fillStyle = "#fff";
-      drawMask(mc);
-      const md = mc.getImageData(0, 0, w, h).data;
-      const mask = new Float32Array(w * h);
-      for (let i = 0; i < w * h; i++) mask[i] = md[i * 4 + 3]! / 255;
-
-      const rd0 = Math.max(4, Math.round(7 * s));
-      let dome = boxBlur(mask, w, h, rd0);
-      dome = boxBlur(dome, w, h, rd0);
-      dome = boxBlur(dome, w, h, rd0);
-
-      let ridge = new Float32Array(w * h);
-      if (drawRidges) {
-        const rk = document.createElement("canvas");
-        rk.width = w;
-        rk.height = h;
-        const rc = rk.getContext("2d")!;
-        rc.fillStyle = "#000";
-        rc.fillRect(0, 0, w, h);
-        rc.translate(bx, by);
-        rc.scale(s, s);
-        rc.lineCap = "round";
-        rc.lineJoin = "round";
-        drawRidges(rc);
-        const rd = rc.getImageData(0, 0, w, h).data;
-        for (let i = 0; i < w * h; i++) ridge[i] = rd[i * 4]! / 255;
-        ridge = boxBlur(boxBlur(ridge, w, h, 1), w, h, 1);
-      }
-
-      const hgt = new Float32Array(w * h);
-      for (let i = 0; i < w * h; i++) {
-        const d = Math.min(1, dome[i]! * 1.35);
-        hgt[i] = Math.pow(d, 0.72) * domeAmp + ridge[i]! * ridgeAmp * Math.min(1, d * 2);
-      }
-
-      const out = mc.createImageData(w, h);
-      const lx0 = -0.55;
-      const ly0 = -0.7;
-      const lz0 = 0.62;
-      const ln = Math.hypot(lx0, ly0, lz0);
-      const lx = lx0 / ln;
-      const ly = ly0 / ln;
-      const lz = lz0 / ln;
-      const hl = Math.hypot(lx, ly, lz + 1);
-      for (let y = 1; y < h - 1; y++) {
-        for (let x = 1; x < w - 1; x++) {
-          const i = y * w + x;
-          const m = mask[i]!;
-          if (m < 0.02) continue;
-          const hx = (hgt[i + 1]! - hgt[i - 1]!) * 0.5;
-          const hy = (hgt[i + w]! - hgt[i - w]!) * 0.5;
-          const nl = Math.hypot(hx, hy, 1);
-          const nx = -hx / nl;
-          const ny = -hy / nl;
-          const nz = 1 / nl;
-          const diff = Math.max(0, nx * lx + ny * ly + nz * lz);
-          const spec = Math.pow(Math.max(0, (nx * lx + ny * ly + nz * (lz + 1)) / hl), 28) * 0.55;
-          const ao = 0.66 + 0.34 * Math.pow(drawRidges ? ridge[i]! : 1, 0.7);
-          const k = Math.min(1, 0.4 + diff * 0.85) * ao;
-          const o = i * 4;
-          out.data[o] = Math.min(255, dark[0] + (light[0] - dark[0]) * k + spec * 255);
-          out.data[o + 1] = Math.min(255, dark[1] + (light[1] - dark[1]) * k + spec * 255);
-          out.data[o + 2] = Math.min(255, dark[2] + (light[2] - dark[2]) * k + spec * 255);
-          out.data[o + 3] = Math.round(Math.min(1, m * 1.5) * 255);
-        }
-      }
-      const res = document.createElement("canvas");
-      res.width = w;
-      res.height = h;
-      res.getContext("2d")!.putImageData(out, 0, 0);
-      return res;
-    };
-
-    const tube = (rc: CanvasRenderingContext2D, paths: number[][][], k: number) => {
-      const widths = [8.2, 6.6, 5.2, 3.9, 2.7, 1.5];
-      const greys = [0.22, 0.42, 0.62, 0.8, 0.93, 1];
-      widths.forEach((wd, wi) => {
-        rc.lineWidth = wd * k;
-        const g = Math.round(greys[wi]! * 255);
-        rc.strokeStyle = `rgb(${g},${g},${g})`;
-        for (const pts of paths) {
-          rc.beginPath();
-          rc.moveTo(pts[0]![0]!, pts[0]![1]!);
-          for (let i = 1; i < pts.length - 1; i++) {
-            const mx = (pts[i]![0]! + pts[i + 1]![0]!) / 2;
-            const my = (pts[i]![1]! + pts[i + 1]![1]!) / 2;
-            rc.quadraticCurveTo(pts[i]![0]!, pts[i]![1]!, mx, my);
-          }
-          rc.stroke();
-        }
-      });
-    };
-
+    // Cerebro como dibujo de líneas (sin relleno): contorno blanco con sombra negra desplazada
+    // y circunvoluciones como trazos finos
     const renderStill = () => {
       const off = document.createElement("canvas");
       off.width = Math.round(W * dpr);
@@ -399,88 +265,59 @@ export function CerebroBrain() {
       c.setTransform(dpr, 0, 0, dpr, 0, 0);
       c.lineJoin = "round";
       c.lineCap = "round";
-
-      // sombra dura
-      c.save();
-      c.translate(bx + 14, by + 14);
+      c.translate(bx, by);
       c.scale(s, s);
-      c.fillStyle = "#09090B";
-      c.fill(stemP);
-      c.fill(cerebellumP);
-      c.fill(cerebrumP);
-      c.restore();
 
-      const outline = (path: Path2D, width: number) => {
-        c.save();
-        c.translate(bx, by);
-        c.scale(s, s);
-        c.strokeStyle = "#09090B";
-        c.lineWidth = width / s;
-        c.stroke(path);
-        c.restore();
+      // cada parte oculta lo que queda tras las que están por delante (sin relleno, no se solapan líneas)
+      const hideOf = (front: Path2D[]) => {
+        const hide = new Path2D();
+        hide.rect(-100, -100, 700, 600);
+        for (const f of front) hide.addPath(f);
+        return hide;
+      };
+      const parts: [Path2D, Path2D[]][] = [
+        [stemP, [cerebellumP, cerebrumP]],
+        [cerebellumP, [cerebrumP]],
+        [cerebrumP, []],
+      ];
+      const strokeParts = (color: string, width: number, dx: number) => {
+        for (const [q, front] of parts) {
+          c.save();
+          if (front.length) c.clip(hideOf(front), "evenodd");
+          c.translate(dx, dx);
+          c.strokeStyle = color;
+          c.lineWidth = width / s;
+          c.stroke(q);
+          c.restore();
+        }
       };
 
-      // tronco y cerebelo (más oscuros) y cerebro (más claro)
-      c.drawImage(
-        shadePart((m) => m.fill(stemP), null, 16, 0, [60, 30, 120], [196, 181, 253]),
-        0,
-        0,
-        W,
-        H,
-      );
-      outline(stemP, 4);
+      // sombra dura: el mismo contorno en negro, desplazado
+      strokeParts("#09090B", 6, 7);
 
-      c.drawImage(
-        shadePart(
-          (m) => m.fill(cerebellumP),
-          (rc) => {
-            rc.clip(cerebellumP);
-            const lines: number[][][] = [];
-            for (let k = 0; k < 9; k++) {
-              const y0 = 218 + k * 7.2;
-              lines.push([
-                [262 + k * 1.5, y0],
-                [292, y0 - 6 + k * 0.4],
-                [322, y0 - 5 + k * 0.8],
-                [346, y0 + 4 + k * 0.4],
-              ]);
-            }
-            tube(rc, lines, 0.62);
-          },
-          20,
-          6,
-          [58, 28, 128],
-          [203, 190, 255],
-        ),
-        0,
-        0,
-        W,
-        H,
-      );
-      outline(cerebellumP, 4);
+      // circunvoluciones del cerebro y estrías del cerebelo
+      c.save();
+      c.clip(cerebrumP);
+      c.strokeStyle = "#D2C3FF";
+      c.lineWidth = 2.6 / s;
+      for (const pts of worms) {
+        c.beginPath();
+        c.moveTo(pts[0]![0]!, pts[0]![1]!);
+        for (let i = 1; i < pts.length - 1; i++) {
+          const mx = (pts[i]![0]! + pts[i + 1]![0]!) / 2;
+          const my = (pts[i]![1]! + pts[i + 1]![1]!) / 2;
+          c.quadraticCurveTo(pts[i]![0]!, pts[i]![1]!, mx, my);
+        }
+        c.stroke();
+      }
+      c.restore();
+      c.strokeStyle = "#D2C3FF";
+      c.lineWidth = 2.6 / s;
+      c.stroke(new Path2D(SYLVIAN));
+      c.stroke(new Path2D(CEREBELLUM_LINES));
 
-      c.drawImage(
-        shadePart(
-          (m) => m.fill(cerebrumP),
-          (rc) => {
-            rc.clip(cerebrumP);
-            tube(rc, worms, 1);
-            // surco de Silvio: una hendidura oscura
-            rc.strokeStyle = "#000";
-            rc.lineWidth = 3.4;
-            rc.stroke(new Path2D(SYLVIAN));
-          },
-          34,
-          4.6,
-          [78, 40, 150],
-          [252, 249, 255],
-        ),
-        0,
-        0,
-        W,
-        H,
-      );
-      outline(cerebrumP, 4.5);
+      // contorno blanco, encima
+      strokeParts("#FFFFFF", 4.5, 0);
       still = off;
     };
 
@@ -636,8 +473,8 @@ export function CerebroBrain() {
         ctx.beginPath();
         ctx.moveTo(pos[a]!.x, pos[a]!.y);
         ctx.lineTo(pos[b]!.x, pos[b]!.y);
-        ctx.strokeStyle = main ? "rgba(9,9,11,0.6)" : "rgba(9,9,11,0.32)";
-        ctx.lineWidth = main ? 2 : 1.2;
+        ctx.strokeStyle = main ? "#FFFFFF" : "#C4B5FD";
+        ctx.lineWidth = main ? 2.2 : 1.3;
         ctx.stroke();
       }
       // enlaces activos (ola de lectura o hover)
@@ -660,9 +497,9 @@ export function CerebroBrain() {
           pos[from]!.x + (pos[to]!.x - pos[from]!.x) * f,
           pos[from]!.y + (pos[to]!.y - pos[from]!.y) * f,
         );
-        ctx.strokeStyle = "#8B5CF6";
+        ctx.strokeStyle = "#F59E0B";
         ctx.globalAlpha = alpha;
-        ctx.lineWidth = 3.2;
+        ctx.lineWidth = 4;
         ctx.stroke();
         ctx.globalAlpha = 1;
       }
@@ -673,22 +510,20 @@ export function CerebroBrain() {
         const a = nbr ? (nbr.has(i) ? 1 : 0) : lit(i);
         const r =
           KIND_R[n.kind] *
-          (n.kind === "note"
-            ? Math.min(1.4, Math.max(1, s * 0.9))
-            : Math.min(1.35, Math.max(0.9, s * 0.8)));
+          Math.min(1.25, Math.max(0.85, s * 0.7));
         if (a > 0.05) {
           ctx.beginPath();
-          ctx.arc(p.x, p.y, r + 7 + a * 5, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(139,92,246,${0.35 * a})`;
+          ctx.arc(p.x, p.y, r + 7 + a * 6, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(245,158,11,${0.45 * a})`;
           ctx.fill();
         }
         ctx.beginPath();
-        ctx.arc(p.x, p.y, r + 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF";
+        ctx.arc(p.x, p.y, r + 3, 0, Math.PI * 2);
+        ctx.fillStyle = n.kind === "hub" ? "#FFFFFF" : "#09090B";
         ctx.fill();
         ctx.beginPath();
         ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
-        ctx.fillStyle = a > 0.5 && n.kind === "note" ? "#6D28D9" : KIND_COLOR[n.kind];
+        ctx.fillStyle = a > 0.5 && n.kind !== "hub" ? "#F59E0B" : KIND_COLOR[n.kind];
         ctx.fill();
       });
 
