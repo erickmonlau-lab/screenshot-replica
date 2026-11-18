@@ -8,17 +8,17 @@ const steps = [
   {
     icon: UserPlus,
     title: "Me contratas",
-    text: "Sumas un perfil de marketing, gestión y tecnología.",
+    text: "Sumas un perfil de marketing, gestión y tecnología.",
   },
   {
     icon: BadgeCheck,
     title: "Acreditación oficial",
-    text: "Agente del Cambio Tecnológico, Generalitat de Catalunya.",
+    text: "Agente del Cambio Tecnológico, Generalitat de Catalunya.",
   },
   {
     icon: Coins,
     title: "Subvención salarial directa",
-    text: "Para digitalización e inteligencia artificial.",
+    text: "Para digitalización e inteligencia artificial.",
   },
 ];
 
@@ -50,7 +50,7 @@ export function GrantBand() {
               </span>
             </span>
           </h2>
-          <p className="mt-6 max-w-[50ch] text-lg leading-snug font-semibold sm:text-xl">
+          <p className="mt-6 max-w-[50ch] text-lg leading-snug font-semibold [text-wrap:balance] sm:text-xl">
             Tengo la acreditación oficial de la Generalitat como Agente del Cambio Tecnológico. Por
             eso, la empresa que me contrate puede acceder a subvenciones salariales directas para
             digitalización e inteligencia artificial.
@@ -92,7 +92,7 @@ export function GrantBand() {
                         {s.title}
                       </span>
                       <span
-                        className={`mt-1 block text-[17px] leading-snug font-semibold ${
+                        className={`mt-1 block text-[17px] leading-snug font-semibold [text-wrap:balance] ${
                           last ? "text-[#D4D4D8]" : "text-[#3F3F46]"
                         }`}
                       >

@@ -55,12 +55,24 @@ export function FormacionSection({
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-          <p
-            aria-hidden="true"
-            className="font-display text-[clamp(3rem,6.4vw,5.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
-          >
-            Formación
-          </p>
+          <div className="flex items-center gap-4 sm:gap-5">
+            <p
+              aria-hidden="true"
+              className="font-display text-[clamp(3rem,6.4vw,5.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+            >
+              Formación
+            </p>
+            <motion.span
+              aria-hidden="true"
+              initial={reduce ? false : { rotate: -24, y: -30, opacity: 0 }}
+              whileInView={{ rotate: -10, y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ type: "spring", stiffness: 160, damping: 11, delay: 0.3 }}
+              className="flex h-[clamp(3.6rem,6vw,5.2rem)] w-[clamp(3.6rem,6vw,5.2rem)] shrink-0 items-center justify-center rounded-2xl border-[3px] border-white bg-[#6D28D9] text-white shadow-[5px_5px_0_#A78BFA]"
+            >
+              <GraduationCap className="h-[58%] w-[58%]" strokeWidth={2.4} />
+            </motion.span>
+          </div>
           <h2 className="font-display max-w-[28ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             Primero aprendí cómo funciona un negocio por dentro.{" "}
             <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
