@@ -96,7 +96,7 @@ export function ProcessSection() {
             <div className="hidden items-end justify-between gap-8 sm:flex">
               <p
                 aria-hidden="true"
-                className="font-display text-[clamp(2.8rem,5.4vw,4.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+                className="font-display text-[clamp(2.8rem,5.4vw,4.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-white uppercase [text-shadow:0.045em_0.045em_0_#6D28D9]"
               >
                 Proceso
               </p>

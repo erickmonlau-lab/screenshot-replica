@@ -34,12 +34,12 @@ export function SectionTitle({
     >
       <div
         aria-hidden="true"
-        className={`outline-title font-display leading-[0.95] font-bold tracking-[-0.03em] uppercase ${compact ? "text-[clamp(2.4rem,5.4vw,5.2rem)]" : "text-[clamp(2.6rem,11vw,10.5rem)]"}`}
+        className={`t-ink font-display leading-[0.95] [text-shadow:0.045em_0.045em_0_#6D28D9] font-bold tracking-[-0.03em] uppercase ${compact ? "text-[clamp(2.4rem,5.4vw,5.2rem)]" : "text-[clamp(2.6rem,11vw,10.5rem)]"}`}
       >
         {words.map((w, i) => (
           <span
             key={`${w}-${i}`}
-            className="inline-block overflow-hidden pt-[0.24em] pb-[0.06em] align-top"
+            className="inline-block overflow-hidden pt-[0.24em] pr-[0.08em] pb-[0.1em] align-top"
           >
             <motion.span
               className="inline-block"

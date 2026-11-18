@@ -414,7 +414,7 @@ function Index() {
               <div className="flex flex-col lg:col-span-5">
                 <p
                   aria-hidden="true"
-                  className="font-display text-[clamp(3.4rem,7.4vw,7.4rem)] leading-[0.85] font-black tracking-[-0.04em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+                  className="font-display text-[clamp(3.4rem,7.4vw,7.4rem)] leading-[0.85] font-black tracking-[-0.04em] text-white uppercase [text-shadow:0.045em_0.045em_0_#09090B]"
                 >
                   {t.cerebro.title}
                 </p>
@@ -482,7 +482,7 @@ function Index() {
               </h2>
               <p
                 aria-hidden="true"
-                className="font-display text-[clamp(4.5rem,13vw,11.5rem)] leading-[0.8] font-bold tracking-[-0.04em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+                className="font-display text-[clamp(4.5rem,13vw,11.5rem)] leading-[0.8] font-bold tracking-[-0.04em] text-white uppercase [text-shadow:0.04em_0.04em_0_#6D28D9]"
               >
                 Stack
               </p>

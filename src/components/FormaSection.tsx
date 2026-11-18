@@ -139,7 +139,7 @@ export function FormaSection() {
         <div className="relative flex flex-col items-center justify-center gap-8 overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] px-6 pt-8 pb-10 lg:border-t-0 lg:border-l-[3px] lg:px-8 lg:pt-10 lg:pb-12">
           <div
             aria-hidden="true"
-            className="font-display leading-none font-black tracking-[-0.05em] text-transparent select-none text-[clamp(5rem,12vw,9.5rem)] lg:text-[clamp(5.5rem,8.5vw,9rem)] [-webkit-text-stroke:3px_#FFFFFF]"
+            className="font-display leading-none font-black tracking-[-0.05em] text-white select-none text-[clamp(5rem,12vw,9.5rem)] lg:text-[clamp(5.5rem,8.5vw,9rem)] [text-shadow:0.04em_0.04em_0_#E3182D]"
           >
             APPS
           </div>

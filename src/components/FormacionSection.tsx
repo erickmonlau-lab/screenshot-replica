@@ -58,7 +58,7 @@ export function FormacionSection({
           <div className="flex items-center gap-4 sm:gap-5">
             <p
               aria-hidden="true"
-              className="font-display text-[clamp(3rem,6.4vw,5.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
+              className="font-display text-[clamp(3rem,6.4vw,5.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-white uppercase [text-shadow:0.045em_0.045em_0_#6D28D9]"
             >
               Formación
             </p>

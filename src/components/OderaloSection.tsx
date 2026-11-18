@@ -81,7 +81,7 @@ export function OderaloSection() {
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
-          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(7rem,10.5vw,9.5rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-transparent [-webkit-text-stroke:3px_#FFFFFF]"
+          className="font-display select-none text-[clamp(4.5rem,19vw,9rem)] lg:text-[clamp(7rem,10.5vw,9.5rem)] leading-none font-black tracking-[-0.05em] whitespace-nowrap text-white [text-shadow:0.04em_0.04em_0_#09090B]"
         >
           ODERALO
         </motion.div>
