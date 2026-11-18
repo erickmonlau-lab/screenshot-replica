@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen, Briefcase, ClipboardList, GraduationCap, Megaphone, Wrench } from "lucide-react";
+import { BookOpen, Briefcase, ClipboardList, Megaphone, Wrench } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -14,6 +14,7 @@ interface Practice {
   place: string;
 }
 
+const SPANS_5 = ["col-span-5", "col-span-2", "col-span-5", "col-span-6", "col-span-6"];
 const cards = [
   {
     icon: Megaphone,
@@ -21,7 +22,7 @@ const cards = [
     level: "Ciclo Superior · CFGS",
     learned: [
       "Estrategia digital",
-      "Posicionamiento SEO",
+      "SEO",
       "Conversión comercial",
       "Diseño de propuestas",
       "Lanzamiento de producto",
@@ -33,7 +34,7 @@ const cards = [
     icon: ClipboardList,
     head: "bg-[#09090B] text-white",
     level: "Ciclo Medio · CFGM",
-    learned: ["Facturación", "Albaranes", "Contabilidad", "Operativa interna de empresa"],
+    learned: ["Facturación", "Albaranes", "Contabilidad", "Operativa interna"],
     apply:
       "Mi ERP nace aquí: en Diset vi cómo una empresa de control de plagas trabaja con su software de gestión y lo uní a lo que estudié.",
   },
@@ -54,7 +55,7 @@ export function FormacionSection({
       className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-10 text-white sm:py-12"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 lg:flex-nowrap">
           <div className="flex items-center gap-4 sm:gap-5">
             <p
               aria-hidden="true"
@@ -62,16 +63,54 @@ export function FormacionSection({
             >
               Formación
             </p>
-            <motion.span
+            <motion.svg
               aria-hidden="true"
-              initial={reduce ? false : { rotate: -24, y: -30, opacity: 0 }}
-              whileInView={{ rotate: -10, y: 0, opacity: 1 }}
+              viewBox="0 0 160 124"
+              initial={reduce ? false : { rotate: -26, y: -40, opacity: 0 }}
+              whileInView={{ rotate: -9, y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ type: "spring", stiffness: 160, damping: 11, delay: 0.3 }}
-              className="flex h-[clamp(3.6rem,6vw,5.2rem)] w-[clamp(3.6rem,6vw,5.2rem)] shrink-0 items-center justify-center rounded-2xl border-[3px] border-white bg-[#6D28D9] text-white shadow-[5px_5px_0_#A78BFA]"
+              transition={{ type: "spring", stiffness: 150, damping: 10, delay: 0.3 }}
+              className="h-[clamp(3.8rem,6vw,5.8rem)] w-auto shrink-0 overflow-visible"
             >
-              <GraduationCap className="h-[58%] w-[58%]" strokeWidth={2.4} />
-            </motion.span>
+              <motion.g
+                animate={reduce ? undefined : { y: [0, -6, 0] }}
+                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <path
+                  d="M42 60 v26 c0 16 76 16 76 0 v-26"
+                  fill="#6D28D9"
+                  stroke="#FFFFFF"
+                  strokeWidth="5"
+                  strokeLinejoin="round"
+                />
+                <polygon
+                  points="80,10 154,44 80,78 6,44"
+                  fill="#FFFFFF"
+                  stroke="#FFFFFF"
+                  strokeWidth="5"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M80 44 L138 60 L138 96"
+                  fill="none"
+                  stroke="#A78BFA"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <rect
+                  x="128"
+                  y="94"
+                  width="20"
+                  height="26"
+                  rx="5"
+                  fill="#A78BFA"
+                  stroke="#FFFFFF"
+                  strokeWidth="4"
+                />
+                <circle cx="80" cy="44" r="6" fill="#09090B" />
+              </motion.g>
+            </motion.svg>
           </div>
           <h2 className="font-display max-w-[28ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             Primero aprendí cómo funciona un negocio por dentro.{" "}
@@ -124,13 +163,17 @@ export function FormacionSection({
                       <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#09090B] text-white">
                         <BookOpen size={16} strokeWidth={2.8} />
                       </span>
-                      Lo que aprendí
+                      Lo que estudié y aprendí
                     </p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {c.learned.map((l) => (
+                    <ul
+                      className={`mt-3 grid gap-2 ${c.learned.length === 5 ? "grid-cols-12" : "grid-cols-2"}`}
+                    >
+                      {c.learned.map((l, k) => (
                         <li
                           key={l}
-                          className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-2.5 py-1 text-[16px] font-bold shadow-[3px_3px_0_#09090B]"
+                          className={`flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-2.5 py-1 text-[16px] font-bold shadow-[3px_3px_0_#09090B] ${
+                            c.learned.length === 5 ? SPANS_5[k] : ""
+                          }`}
                         >
                           <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
                           {l}
