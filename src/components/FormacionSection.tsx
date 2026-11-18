@@ -14,18 +14,14 @@ interface Practice {
   place: string;
 }
 
-const SPANS_5 = ["col-span-5", "col-span-2", "col-span-5", "col-span-6", "col-span-6"];
 const cards = [
   {
     icon: Megaphone,
     head: "bg-[#6D28D9] text-white",
     level: "Ciclo Superior · CFGS",
     learned: [
-      "Estrategia digital",
-      "SEO",
-      "Conversión comercial",
-      "Diseño de propuestas",
-      "Lanzamiento de producto",
+      ["Estrategia digital", "SEO", "Conversión comercial"],
+      ["Diseño de propuestas", "Lanzamiento de producto"],
     ],
     apply:
       "Cada web que hago nace con SEO técnico y pensada para convertir, no solo para verse bien.",
@@ -34,7 +30,10 @@ const cards = [
     icon: ClipboardList,
     head: "bg-[#09090B] text-white",
     level: "Ciclo Medio · CFGM",
-    learned: ["Facturación", "Albaranes", "Contabilidad", "Operativa interna"],
+    learned: [
+      ["Facturación", "Albaranes"],
+      ["Contabilidad", "Operativa interna"],
+    ],
     apply:
       "Mi ERP nace aquí: en Diset vi cómo una empresa de control de plagas trabaja con su software de gestión y lo uní a lo que estudié.",
   },
@@ -55,7 +54,7 @@ export function FormacionSection({
       className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-10 text-white sm:py-12"
     >
       <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-        <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4 lg:flex-nowrap">
+        <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4 lg:flex-nowrap">
           <div className="flex items-center gap-4 sm:gap-5">
             <p
               aria-hidden="true"
@@ -73,8 +72,8 @@ export function FormacionSection({
               className="h-[clamp(3.8rem,6vw,5.8rem)] w-auto shrink-0 overflow-visible"
             >
               <motion.g
-                animate={reduce ? undefined : { y: [0, -6, 0] }}
-                transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+                animate={{ y: reduce ? 0 : [0, -6, 0] }}
+                transition={{ duration: 3.2, repeat: reduce ? 0 : Infinity, ease: "easeInOut" }}
               >
                 <path
                   d="M42 60 v26 c0 16 76 16 76 0 v-26"
@@ -112,9 +111,9 @@ export function FormacionSection({
               </motion.g>
             </motion.svg>
           </div>
-          <h2 className="font-display max-w-[28ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
+          <h2 className="font-display max-w-[34ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             Primero aprendí cómo funciona un negocio por dentro.{" "}
-            <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+            <span className="mt-1 inline-block rounded-md bg-[#6D28D9] px-2 py-1 whitespace-nowrap">
               Después, a construirle las herramientas.
             </span>
           </h2>
@@ -165,21 +164,21 @@ export function FormacionSection({
                       </span>
                       Lo que estudié y aprendí
                     </p>
-                    <ul
-                      className={`mt-3 grid gap-2 ${c.learned.length === 5 ? "grid-cols-12" : "grid-cols-2"}`}
-                    >
-                      {c.learned.map((l, k) => (
-                        <li
-                          key={l}
-                          className={`flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-2.5 py-1 text-[16px] font-bold shadow-[3px_3px_0_#09090B] ${
-                            c.learned.length === 5 ? SPANS_5[k] : ""
-                          }`}
-                        >
-                          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
-                          {l}
-                        </li>
+                    <div className="mt-3 flex flex-col gap-2">
+                      {c.learned.map((row) => (
+                        <ul key={row.join()} className="flex flex-wrap gap-2">
+                          {row.map((l) => (
+                            <li
+                              key={l}
+                              className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-3 py-1 text-[16px] font-bold whitespace-nowrap shadow-[3px_3px_0_#09090B]"
+                            >
+                              <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
+                              {l}
+                            </li>
+                          ))}
+                        </ul>
                       ))}
-                    </ul>
+                    </div>
                   </div>
 
                   <div className="rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
