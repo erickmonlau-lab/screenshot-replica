@@ -282,7 +282,7 @@ function CopyButton({ value, label, dark = false }: { value: string; label: stri
         copied
           ? "bg-[#10B981] text-white"
           : dark
-            ? "border-2 border-white bg-white text-[#09090B] hover:bg-[#A78BFA]"
+            ? "border-[3px] border-[#09090B] bg-[#09090B] text-white hover:bg-[#6D28D9]"
             : "t-line t-bg-card2 t-ink border hover:border-[#0044FF] hover:text-[#0044FF]"
       }`}
     >
@@ -561,25 +561,25 @@ function Index() {
             </div>
 
             <div className="min-w-0 lg:col-span-5">
-              <div className="min-w-0 rounded-[24px] border-[3px] border-[#09090B] bg-[#09090B] p-5 text-white shadow-[12px_12px_0_#6D28D9] sm:p-6">
-                <div className="flex items-center gap-4 border-b-2 border-[#3F3F46] pb-5">
+              <div className="min-w-0 overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[12px_12px_0_#09090B]">
+                <div className="flex items-center gap-4 border-b-[3px] border-[#09090B] bg-[#6D28D9] p-5 text-white">
                   <img
                     src="/erick-portrait-studio.png"
                     alt=""
                     aria-hidden="true"
-                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-white bg-[#6D28D9] object-cover object-top"
+                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-[#09090B] bg-white object-cover object-top"
                   />
                   <div>
-                    <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em]">
+                    <p className="font-display text-[28px] leading-none font-bold tracking-[-0.04em]">
                       Erick Rodríguez
                     </p>
-                    <p className="mt-1.5 text-[16px] font-semibold text-[#A78BFA]">
+                    <p className="mt-2 inline-block rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-3 py-0.5 text-[15px] font-bold">
                       Marketing · Gestión · Tecnología
                     </p>
                   </div>
                 </div>
 
-                <dl className="divide-y-2 divide-[#3F3F46]">
+                <dl className="divide-y-[3px] divide-[#09090B]">
                   {[
                     {
                       icon: Mail,
@@ -588,7 +588,7 @@ function Index() {
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
                             href={`mailto:${email}`}
-                            className="font-display min-w-0 truncate text-[18px] font-bold tracking-[-0.02em] hover:text-[#A78BFA]"
+                            className="font-display min-w-0 truncate text-[19px] font-bold tracking-[-0.02em] hover:text-[#6D28D9]"
                           >
                             {email}
                           </a>
@@ -605,7 +605,7 @@ function Index() {
                             href={whatsapp}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="font-display text-[18px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#A78BFA]"
+                            className="font-display text-[19px] font-bold tracking-[-0.02em] tabular-nums hover:text-[#6D28D9]"
                           >
                             {phoneDisplay}
                           </a>
@@ -617,18 +617,22 @@ function Index() {
                       icon: MapPin,
                       k: "Ubicación",
                       node: (
-                        <span className="font-display text-[18px] font-bold tracking-[-0.02em]">
+                        <span className="font-display text-[19px] font-bold tracking-[-0.02em]">
                           La Sagrera, Barcelona · Presencial o remoto
                         </span>
                       ),
                     },
                   ].map(({ icon: I, k, node }) => (
-                    <div key={k} className="py-4 last:pb-0">
-                      <dt className="mb-1.5 flex items-center gap-2 text-[15px] font-bold tracking-[0.08em] text-[#A78BFA] uppercase">
-                        <I size={15} />
-                        {k}
-                      </dt>
-                      <dd>{node}</dd>
+                    <div key={k} className="flex items-center gap-4 p-5">
+                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] text-[#6D28D9]">
+                        <I size={22} strokeWidth={2.4} />
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <dt className="mb-1 text-[15px] font-bold tracking-[0.08em] text-[#52525B] uppercase">
+                          {k}
+                        </dt>
+                        <dd>{node}</dd>
+                      </div>
                     </div>
                   ))}
                 </dl>
