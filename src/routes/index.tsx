@@ -464,7 +464,7 @@ function Index() {
           className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#09090B] py-14 text-white sm:py-16"
         >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
-            <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+            <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4">
               <h2 className="font-display text-[clamp(2.2rem,4.2vw,4rem)] leading-[1] font-bold tracking-[-0.04em] whitespace-nowrap">
                 Con qué{" "}
                 <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
