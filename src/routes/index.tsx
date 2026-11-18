@@ -38,6 +38,7 @@ import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { CerebroBrain } from "@/components/CerebroBrain";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
+import { FormacionSection } from "@/components/FormacionSection";
 import { CursorGlow } from "@/components/CursorGlow";
 import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
@@ -521,6 +522,8 @@ function Index() {
             <AboutSection experience={experience} education={education} cvUrl={cvPdf.url} />
           </div>
         </section>
+
+        <FormacionSection courses={education} practices={experience} />
 
         <GrantBand />
 
