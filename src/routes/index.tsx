@@ -36,7 +36,7 @@ import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { SectionTitle } from "@/components/SectionTitle";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
-import { BrainVisual } from "@/components/LiveVisuals";
+import { CerebroBrain } from "@/components/CerebroBrain";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
 import { CursorGlow } from "@/components/CursorGlow";
@@ -448,10 +448,10 @@ function Index() {
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
                 <div className="h-[380px] sm:h-[480px] lg:h-[640px]">
-                  <BrainVisual theme="light" />
+                  <CerebroBrain />
                 </div>
                 <p className="mx-auto mt-4 w-fit max-w-full rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-center text-[15px] font-bold text-[#09090B]">
-                  Mi cerebro: cada punto es una nota. Arrastra uno para ver sus conexiones.
+                  Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al leer.
                 </p>
               </div>
             </div>
