@@ -7,46 +7,24 @@ import { useReducedMotion } from "./motion-pref";
  * Una "ola de lectura" recorre los nodos para mostrar cómo la IA lee las notas.
  */
 
-/* Cerebro lateral estilo icono: contorno de nube con lóbulos en arco y pliegues que parten de cada hendidura */
-function cerebrumShape(): { path: Path2D; cusps: number[][] } {
-  const N = 14;
-  const base: number[][] = [];
-  for (let i = 0; i < N; i++) {
-    const th = Math.PI + (i / N) * Math.PI * 2; // empieza en el lado izquierdo, sentido horario
-    const c = Math.cos(th);
-    const sn = Math.sin(th);
-    const lower = sn > 0;
-    const rx = 170;
-    const ry = lower ? 66 : 100;
-    base.push([204 + c * rx, 150 + sn * ry + (lower ? 4 : 0)]);
-  }
-  const path = new Path2D();
-  const cusps: number[][] = [];
-  path.moveTo(base[0]![0]!, base[0]![1]!);
-  for (let i = 0; i < N; i++) {
-    const a = base[i]!;
-    const b = base[(i + 1) % N]!;
-    const mx = (a[0]! + b[0]!) / 2;
-    const my = (a[1]! + b[1]!) / 2;
-    const nx = mx - 204;
-    const ny = my - 150;
-    const nl = Math.hypot(nx, ny) || 1;
-    const bulge = 30;
-    const cx = mx + (nx / nl) * bulge;
-    const cy = my + (ny / nl) * bulge;
-    path.quadraticCurveTo(cx, cy, b[0]!, b[1]!);
-    if (b[1]! < 190) cusps.push([b[0]!, b[1]!]);
-  }
-  path.closePath();
-  return { path, cusps };
-}
+const CEREBRUM_D =
+  "M55 170 C33 140 45 96 86 70 C116 40 166 30 200 42 C226 22 276 24 298 48 C336 40 372 68 368 108 C392 128 388 168 362 184 C350 196 330 200 312 198 C296 206 270 208 250 214 C238 238 190 246 155 238 C135 232 120 222 118 210 C104 200 78 192 55 170 Z";
+const CEREBELLUM_D = "M246 218 C268 204 314 206 330 226 C338 246 316 262 290 260 C264 256 238 238 246 218 Z";
+const STEM_D = "M224 226 C226 242 228 254 232 266 C236 274 250 274 252 264 C252 250 250 236 248 224 Z";
+const CEREBELLUM_LINES = "M262 222 C282 214 308 218 322 230 M258 234 C280 228 306 232 320 244 M262 246 C280 244 298 246 312 252";
 const SULCI = [
   "M215 44 C224 78 206 108 218 140 C226 160 214 178 224 200",
   "M118 208 C160 188 206 190 252 210",
-  "M84 100 C108 84 130 104 152 92 C172 82 186 96 200 88",
-  "M70 150 C96 134 118 156 146 144 C166 136 182 150 196 144",
-  "M246 76 C268 66 288 90 312 80 C332 72 348 84 360 78",
-  "M250 140 C274 128 296 150 322 140 C342 132 356 144 368 138",
+  "M70 70 L76 74 L82 77 L88 76 L94 73 L100 69 L106 65 L112 63 L118 64 L124 68 L130 72 L136 76 L142 77 L148 75 L154 71 L160 67 L166 64 L172 63 L178 66 L184 70 L190 74 L196 77",
+  "M60 104 L66 103 L72 98 L78 92 L84 88 L90 89 L96 94 L102 100 L108 104 L114 103 L120 99 L126 92 L132 88 L138 89 L144 93 L150 99 L156 103 L162 103 L168 99 L174 93 L180 89 L186 89",
+  "M52 130 L58 126 L64 121 L70 117 L76 117 L82 121 L88 126 L94 130 L100 131 L106 129 L112 124 L118 120 L124 117 L130 118 L136 122 L142 127 L148 130 L154 131 L160 128 L166 123 L172 119 L178 117 L184 119 L190 123 L196 128",
+  "M62 157 L68 160 L74 160 L80 157 L86 152 L92 148 L98 145 L104 144 L110 146 L116 151 L122 155 L128 159 L134 160 L140 158 L146 155 L152 150 L158 146 L164 144 L170 145 L176 148 L182 153 L188 157",
+  "M92 184 L98 180 L104 175 L110 172 L116 173 L122 177 L128 182 L134 184 L140 182 L146 178 L152 173 L158 172 L164 175 L170 180 L176 183",
+  "M236 65 L242 68 L248 69 L254 66 L260 61 L266 57 L272 55 L278 57 L284 61 L290 66 L296 69 L302 68 L308 65 L314 60 L320 56 L326 55 L332 58 L338 63 L344 67 L350 69",
+  "M240 97 L246 94 L252 90 L258 85 L264 82 L270 82 L276 85 L282 89 L288 94 L294 97 L300 98 L306 96 L312 92 L318 87 L324 83 L330 82 L336 83 L342 87 L348 92 L354 96 L360 98",
+  "M246 124 L252 125 L258 121 L264 116 L270 112 L276 111 L282 115 L288 120 L294 124 L300 125 L306 122 L312 116 L318 112 L324 111 L330 114 L336 120 L342 124 L348 125 L354 122 L360 117 L366 112 L372 111",
+  "M252 150 L258 145 L264 140 L270 138 L276 139 L282 143 L288 148 L294 152 L300 154 L306 152 L312 148 L318 143 L324 139 L330 138 L336 141 L342 145 L348 150 L354 154 L360 154 L366 150 L372 145",
+  "M262 173 L268 177 L274 178 L280 176 L286 172 L292 168 L298 166 L304 167 L310 170 L316 174 L322 177 L328 178 L334 175 L340 171 L346 167",
 ].join(" ");
 
 type Kind = "hub" | "project" | "skill" | "rule" | "note";
@@ -131,22 +109,9 @@ export function CerebroBrain() {
     // ───────── geometría en el espacio del dibujo (400 × 330) ─────────
     const probe = document.createElement("canvas").getContext("2d");
     if (!probe) return;
-    const cer = cerebrumShape();
-    const cerebrumP = cer.path;
-    // pliegues: desde cada hendidura hacia el centro, con una curva
-    const foldsP = new Path2D();
-    cer.cusps.forEach(([x, y], i) => {
-      const dx = 204 - x!;
-      const dy = 150 - y!;
-      const len = 0.34 + (i % 3) * 0.07;
-      const sg = i % 2 ? 1 : -1;
-      const mx = x! + dx * len * 0.5 - dy * 0.14 * sg;
-      const my = y! + dy * len * 0.5 + dx * 0.14 * sg;
-      foldsP.moveTo(x!, y!);
-      foldsP.quadraticCurveTo(mx, my, x! + dx * len, y! + dy * len);
-    });
-    foldsP.moveTo(120, 214);
-    foldsP.quadraticCurveTo(176, 188, 240, 214);
+    const cerebrumP = new Path2D(CEREBRUM_D);
+    const cerebellumP = new Path2D(CEREBELLUM_D);
+    const stemP = new Path2D(STEM_D);
     const inCerebrum = (x: number, y: number) => probe.isPointInPath(cerebrumP, x, y);
     const inMargin = (x: number, y: number, m: number) =>
       inCerebrum(x, y) &&
@@ -241,7 +206,11 @@ export function CerebroBrain() {
         for (const f of front) hide.addPath(f);
         return hide;
       };
-      const parts: [Path2D, Path2D[]][] = [[cerebrumP, []]];
+      const parts: [Path2D, Path2D[]][] = [
+        [stemP, [cerebellumP, cerebrumP]],
+        [cerebellumP, [cerebrumP]],
+        [cerebrumP, []],
+      ];
       const strokeParts = (color: string, width: number, dx: number) => {
         for (const [q, front] of parts) {
           c.save();
@@ -260,9 +229,12 @@ export function CerebroBrain() {
       c.save();
       c.clip(cerebrumP);
       c.strokeStyle = "#D2C3FF";
-      c.lineWidth = 3 / s;
-      c.stroke(foldsP);
+      c.lineWidth = 2.6 / s;
+      c.stroke(new Path2D(SULCI));
       c.restore();
+      c.strokeStyle = "#D2C3FF";
+      c.lineWidth = 3 / s;
+      c.stroke(new Path2D(CEREBELLUM_LINES));
 
       // contorno blanco, encima
       strokeParts("#FFFFFF", 4.5, 0);
@@ -292,9 +264,9 @@ export function CerebroBrain() {
       canvas.height = Math.round(H * dpr);
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
-      s = Math.min((W * 0.94) / 350, (H * 0.94) / 215);
-      bx = (W - 350 * s) / 2 - 29 * s;
-      by = (H - 215 * s) / 2 - 48 * s;
+      s = Math.min((W * 0.9) / 400, (H * 0.9) / 330);
+      bx = (W - 400 * s) / 2;
+      by = (H - 330 * s) / 2 - 6;
       renderStill();
       placeNodes();
     };

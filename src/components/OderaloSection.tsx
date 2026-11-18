@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Play } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
+import { useLanguage } from "@/context/LanguageContext";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIOLET = "#6D28D9";
@@ -28,7 +29,28 @@ const flow = [
 
 /** ERP Oderalo: caso real. Pantalla grande cruzando el título gigante, sobre el morado de la marca. */
 export function OderaloSection() {
+  const { locale, t } = useLanguage();
   const reduce = useReducedMotion();
+
+  const flowData = {
+    es: [
+      { n: "1", t: "Cita", d: "Se agenda y se asigna al técnico con su ruta." },
+      { n: "2", t: "Parte", d: "El técnico lo rellena en el sitio y el cliente firma en pantalla." },
+      { n: "3", t: "Factura", d: "Sale de los datos del parte, sin volver a escribir nada." },
+    ],
+    ca: [
+      { n: "1", t: "Cita", d: "S'agenda i s'assigna al tècnic amb la seva ruta." },
+      { n: "2", t: "Comunicat", d: "El tècnic l'omple in situ i el client signa en pantalla." },
+      { n: "3", t: "Factura", d: "Surt de les dades del comunicat, sense tornar a escriure res." },
+    ],
+    en: [
+      { n: "1", t: "Booking", d: "Scheduled and assigned to technician with route." },
+      { n: "2", t: "Job Slip", d: "Filled on site by technician, signed on mobile screen." },
+      { n: "3", t: "Invoice", d: "Generated directly from job slip, zero duplicate entry." },
+    ],
+  };
+
+  const currentFlow = flowData[locale] || flowData.es;
   const px = useMotionValue(0);
   const py = useMotionValue(0);
   const sx = useSpring(px, { stiffness: 65, damping: 16 });
@@ -90,22 +112,29 @@ export function OderaloSection() {
               className="inline-flex items-center rounded-lg border-[3px] border-[#09090B] px-3.5 py-1.5 text-[15px] font-black tracking-wider text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]"
               style={{ background: WHITE }}
             >
-              Caso real · en producción
+              {t.erp.badge}
             </span>
 
             <h2 className="font-display mt-7 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
-              Del aviso a la factura,
-              <br />
-              <span className="mt-1 inline-block whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">sin papeles.</span>
+              {t.erp.headline.split(",")[0] ? (
+                <>
+                  {t.erp.headline.split(",")[0]},
+                  <br />
+                  <span className="mt-1 inline-block whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">
+                    {t.erp.headline.split(",")[1]?.trim() || ""}
+                  </span>
+                </>
+              ) : (
+                t.erp.headline
+              )}
             </h2>
 
             <p className="mt-6 max-w-[46ch] text-[18px] leading-relaxed font-medium text-white xl:text-[19px]">
-              <strong>Oderalo</strong> es el ERP que desarrollé a medida para empresas de servicios
-              en campo: citas, rutas, parte firmado y facturación en un único flujo.
+              {t.erp.description}
             </p>
 
             <ol className="mt-8 grid max-w-[540px] gap-3.5">
-              {flow.map((f) => (
+              {currentFlow.map((f) => (
                 <li
                   key={f.n}
                   className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-white p-2"
@@ -131,7 +160,7 @@ export function OderaloSection() {
               className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
             >
               <Play size={18} strokeWidth={2.5} fill="currentColor" />
-              <span>Ver vídeo demostración</span>
+              <span>{t.erp.ctaDemo}</span>
             </a>
           </motion.div>
 

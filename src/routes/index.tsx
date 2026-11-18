@@ -32,6 +32,7 @@ import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 import gesgrama from "@/assets/gesgrama.com.png.asset.json";
 
 import { Navbar } from "@/components/Navbar";
+import { useLanguage } from "@/context/LanguageContext";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
@@ -314,6 +315,7 @@ const marqueeText =
   "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · CÓDIGO · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
 
 function Index() {
+  const { locale, t } = useLanguage();
   const [heroMode, setHeroMode] = useState<"studio" | "preview">("studio");
   const [activeProjectId, setActiveProjectId] = useState<string>("diversplas");
   const [activeAiPhase, setActiveAiPhase] = useState<string>("memory");
@@ -372,19 +374,18 @@ function Index() {
             <Reveal className="mb-6 sm:mb-10">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <span className="font-mono text-xs font-black uppercase tracking-wider text-[#6D28D9] dark:text-[#A78BFA] block mb-2">
-                    [ Casos reales en producción ]
+                  <span className="inline-block rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-[3px_3px_0_#09090B] mb-3">
+                    {t.projects.kicker}
                   </span>
                   <h2 className="font-display text-[clamp(2.4rem,5.2vw,4.5rem)] leading-[0.98] font-black tracking-[-0.04em] text-zinc-950 dark:text-white">
-                    Proyectos.{" "}
+                    {t.projects.title}{" "}
                     <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
-                      Webs reales y aplicaciones en producción.
+                      {t.projects.titleHighlight}
                     </span>
                   </h2>
                 </div>
-                <p className="font-medium text-zinc-600 dark:text-zinc-300 max-w-[34ch] text-base sm:text-lg leading-snug shrink-0">
-                  Software a medida pensado para captar clientes, gestionar operaciones y
-                  automatizar tareas.
+                <p className="font-bold text-zinc-800 dark:text-zinc-200 max-w-[38ch] text-lg sm:text-xl md:text-2xl leading-snug shrink-0">
+                  {t.projects.subtitle}
                 </p>
               </div>
             </Reveal>
@@ -415,29 +416,28 @@ function Index() {
                   aria-hidden="true"
                   className="font-display text-[clamp(3.4rem,7.4vw,7.4rem)] leading-[0.85] font-black tracking-[-0.04em] text-transparent uppercase [-webkit-text-stroke:3px_#FFFFFF]"
                 >
-                  Cerebro
+                  {t.cerebro.title}
                 </p>
                 <h2 className="font-display mt-6 text-[clamp(2.1rem,3.4vw,3.2rem)] leading-[1.02] font-bold tracking-[-0.04em]">
-                  La IA ya sabe
+                  {t.cerebro.headline}
                   <span className="mt-3 block">
                     <span className="inline-block rounded-lg bg-[#09090B] px-3 py-0.5">
-                      cómo trabajo.
+                      {t.cerebro.howIWork}
                     </span>
                   </span>
                 </h2>
                 <p className="mt-5 max-w-[46ch] text-[18px] leading-relaxed font-semibold">
-                  Guardo mis decisiones, reglas y datos de cada proyecto en notas enlazadas en
-                  Obsidian. Antes de empezar, la IA lee las que necesita.
+                  {t.cerebro.description}
                 </p>
 
                 <ol className="mt-7 grid gap-3.5">
                   {[
-                    ["Escribo", "Cada decisión, regla o cliente es una nota enlazada."],
-                    ["La IA lee", "Abre el índice y carga solo las notas del proyecto."],
-                    ["Trabaja a mi manera", "Aplica mis normas sin que se las repita."],
-                  ].map(([t, d], i) => (
+                    [t.cerebro.step1Title, t.cerebro.step1Desc],
+                    [t.cerebro.step2Title, t.cerebro.step2Desc],
+                    [t.cerebro.step3Title, t.cerebro.step3Desc],
+                  ].map(([title, desc], i) => (
                     <li
-                      key={t}
+                      key={title}
                       className="flex items-center gap-4 rounded-xl border-[3px] border-[#09090B] bg-white p-3 text-[#09090B]"
                     >
                       <span className="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] bg-[#6D28D9] text-[22px] font-black text-white">
@@ -445,9 +445,9 @@ function Index() {
                       </span>
                       <p className="text-[16px] leading-snug font-semibold text-[#52525B]">
                         <span className="font-display block text-[20px] font-bold text-[#09090B]">
-                          {t}
+                          {title}
                         </span>
-                        {d}
+                        {desc}
                       </p>
                     </li>
                   ))}
@@ -460,8 +460,7 @@ function Index() {
                   <CerebroBrain />
                 </div>
                 <p className="mx-auto mt-4 w-fit max-w-full rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-center text-[15px] font-bold text-[#09090B]">
-                  Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al
-                  leer.
+                  {t.cerebro.dragHint}
                 </p>
               </div>
             </div>
@@ -536,26 +535,25 @@ function Index() {
             <div className="lg:col-span-7">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="inline-flex items-center rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[16px] font-bold tracking-[0.08em] text-white uppercase">
-                  Contacto
+                  {t.contact.badge}
                 </span>
                 <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B]">
                   <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
-                  Disponible en Barcelona
+                  Barcelona
                 </span>
               </div>
               <Reveal>
                 <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
-                  Hablemos
+                  {t.contact.title}
                   <span className="mt-3 block">
                     <span className="inline-block rounded-xl bg-[#6D28D9] px-4 pt-[0.04em] pb-[0.24em] leading-[1] text-white">
-                      de tu proyecto.
+                      {t.contact.titleHighlight}
                     </span>
                   </span>
                 </h2>
               </Reveal>
               <p className="mt-5 max-w-[44ch] text-lg leading-snug font-semibold text-[#27272A] sm:text-xl">
-                Cuéntame qué necesitas y te respondo, o te enseño en persona el ERP y cómo
-                automatizar tus procesos.
+                {t.contact.subtitle}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Magnetic strength={0.1}>
@@ -566,7 +564,7 @@ function Index() {
                     className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3.5 text-base font-bold text-white shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
                   >
                     <MessageCircle size={18} strokeWidth={2.3} />
-                    <span>Escribir por WhatsApp</span>
+                    <span>{t.contact.whatsapp}</span>
                     <ArrowUpRight size={16} strokeWidth={2.5} />
                   </a>
                 </Magnetic>
@@ -575,7 +573,7 @@ function Index() {
                   download="Erick-Rodriguez-CV.pdf"
                   className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
                 >
-                  <span>Descargar CV</span>
+                  <span>{t.contact.downloadCv}</span>
                   <Download size={16} />
                 </a>
               </div>
@@ -585,17 +583,16 @@ function Index() {
               <div className="min-w-0 overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[12px_12px_0_#09090B]">
                 <div className="flex items-center gap-4 border-b-[3px] border-[#09090B] bg-[#6D28D9] p-5 text-white">
                   <img
-                    src="/erick-portrait-studio.png"
-                    alt=""
-                    aria-hidden="true"
-                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-[#09090B] bg-white object-cover object-top"
+                    src="/erick-avatar-hd.png"
+                    alt="Erick Rodríguez"
+                    className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-[#09090B] bg-white object-cover shadow-[3px_3px_0_#09090B]"
                   />
                   <div>
                     <p className="font-display text-[28px] leading-none font-bold tracking-[-0.04em]">
                       Erick Rodríguez
                     </p>
                     <p className="mt-2 inline-block rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-3 py-0.5 text-[15px] font-bold">
-                      Contacto directo
+                      {t.contact.direct}
                     </p>
                   </div>
                 </div>

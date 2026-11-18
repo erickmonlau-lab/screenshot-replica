@@ -9,6 +9,7 @@ import {
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { ScrollMarquee } from "./ScrollMarquee";
+import { useLanguage } from "@/context/LanguageContext";
 
 export interface HeroProjectPreview {
   id: string;
@@ -33,6 +34,7 @@ interface StudioHeroProps {
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
+  const { t } = useLanguage();
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -94,9 +96,9 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="absolute right-4 bottom-5 left-4 z-30 sm:right-auto sm:bottom-[8%] sm:left-[3.5%] sm:max-w-[460px] xl:max-w-[500px]"
       >
         <h1 className="font-display text-[clamp(2.3rem,4.1vw,3.6rem)] leading-[1.04] font-bold tracking-[-0.055em] text-[#09090B] dark:text-white">
-          Entiendo tu negocio.{" "}
+          {t.hero.title}{" "}
           <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
-            Construyo la solución.
+            {t.hero.titleHighlight}
           </span>
         </h1>
 
@@ -106,7 +108,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             onClick={() => onJumpToProjects()}
             className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#6D28D9] sm:shadow-[5px_5px_0_#6D28D9] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#6D28D9] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#6D28D9]"
           >
-            <span>Ver proyectos</span>
+            <span>{t.hero.ctaProjects}</span>
             <ArrowDown size={17} strokeWidth={2.5} />
           </button>
           <button
@@ -114,7 +116,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             onClick={() => onJumpToProjects("private-erp")}
             className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[15px] sm:text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] sm:shadow-[5px_5px_0_#09090B] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] dark:border-white dark:bg-[#18181B] dark:text-white dark:shadow-[4px_4px_0_#ffffff]"
           >
-            <span>Ver el ERP</span>
+            <span>{t.hero.ctaErp}</span>
             <ArrowUpRight size={17} strokeWidth={2.5} />
           </button>
         </div>
