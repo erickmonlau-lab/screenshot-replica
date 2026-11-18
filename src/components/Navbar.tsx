@@ -1,19 +1,5 @@
-import { useEffect, useState, type MouseEvent } from "react";
-import {
-  ArrowUpRight,
-  BrainCircuit,
-  Briefcase,
-  Cpu,
-  Download,
-  Layers,
-  Menu,
-  MessageCircle,
-  Moon,
-  Sparkles,
-  Sun,
-  Workflow,
-  X,
-} from "lucide-react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { ArrowUpRight, Download, Menu, Moon, Sun, X } from "lucide-react";
 import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 import { useLanguage, type Locale } from "@/context/LanguageContext";
 
@@ -22,31 +8,45 @@ interface NavbarProps {
   onChangeMode?: (next: "studio" | "preview") => void;
 }
 
-const observedIds = [
-  "hero",
-  "metricas",
-  "proceso",
-  "proyectos",
-  "erp",
-  "ia",
-  "trayectoria",
-  "contacto",
+/** Secciones de la página en orden → elemento del menú que se marca como activo. */
+const SECTION_TO_NAV: [string, string][] = [
+  ["hero", "hero"],
+  ["metricas", "hero"],
+  ["proceso", "proceso"],
+  ["proyectos", "proyectos"],
+  ["erp", "erp"],
+  ["web-apps", "erp"],
+  ["ia", "ia"],
+  ["stack", "ia"],
+  ["trayectoria", "trayectoria"],
+  ["formacion", "trayectoria"],
+  ["subvencion", "trayectoria"],
+  ["contacto", "contacto"],
 ];
+
+const HEADER_OFFSET = 84;
 
 export function Navbar({ onChangeMode }: NavbarProps) {
   const { locale, setLocale, t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dark, setDark] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   const navItems = [
-    { id: "hero", label: t.nav.home, icon: Sparkles },
-    { id: "proceso", label: t.nav.process, icon: Workflow },
-    { id: "proyectos", label: t.nav.projects, icon: Layers },
-    { id: "erp", label: t.nav.erp, icon: Cpu },
-    { id: "ia", label: t.nav.brain, icon: BrainCircuit },
-    { id: "trayectoria", label: t.nav.experience, icon: Briefcase },
-    { id: "contacto", label: t.nav.contact, icon: MessageCircle },
+    { id: "hero", label: t.nav.home },
+    { id: "proceso", label: t.nav.process },
+    { id: "proyectos", label: t.nav.projects },
+    { id: "erp", label: t.nav.erp },
+    { id: "ia", label: t.nav.brain },
+    { id: "trayectoria", label: t.nav.experience },
+    { id: "contacto", label: t.nav.contact },
+  ];
+
+  const languages: { code: Locale; label: string; name: string }[] = [
+    { code: "es", label: "ES", name: "Español" },
+    { code: "ca", label: "CA", name: "Català" },
+    { code: "en", label: "EN", name: "English" },
   ];
 
   useEffect(() => {
@@ -61,20 +61,18 @@ export function Navbar({ onChangeMode }: NavbarProps) {
     }
   }, []);
 
+  /* Sección visible → elemento activo del menú */
   useEffect(() => {
-    const sections = observedIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
-    if (!sections.length) return;
     const update = () => {
-      let current = sections[0]!.id;
       const line = Math.min(window.innerHeight * 0.35, 320);
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= line) current = section.id;
+      let current = "hero";
+      for (const [sectionId, navId] of SECTION_TO_NAV) {
+        const el = document.getElementById(sectionId);
+        if (el && el.getBoundingClientRect().top <= line) current = navId;
       }
       const atBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
-      if (atBottom) current = sections[sections.length - 1]!.id;
+      if (atBottom) current = "contacto";
       setActiveId(current);
     };
     update();
@@ -85,6 +83,28 @@ export function Navbar({ onChangeMode }: NavbarProps) {
       window.removeEventListener("resize", update);
     };
   }, []);
+
+  /* Menú móvil: Escape o clic fuera lo cierran; al pasar a escritorio se cierra solo */
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) setMobileOpen(false);
+    };
+    const onResize = () => {
+      if (window.innerWidth >= 1340) setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [mobileOpen]);
 
   function toggleTheme(e: MouseEvent<HTMLButtonElement>) {
     const next = !dark;
@@ -107,7 +127,8 @@ export function Navbar({ onChangeMode }: NavbarProps) {
     const doc = document as Document & {
       startViewTransition?: (cb: () => void) => { ready: Promise<void> };
     };
-    if (!doc.startViewTransition) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!doc.startViewTransition || reduce) {
       apply();
       return;
     }
@@ -134,110 +155,83 @@ export function Navbar({ onChangeMode }: NavbarProps) {
     }
     const target = document.getElementById(id);
     if (!target) return;
-    const top = target.getBoundingClientRect().top + window.scrollY - 78;
+    const top = target.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET + 18;
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
   }
 
-  const languages: { code: Locale; label: string }[] = [
-    { code: "es", label: "ES" },
-    { code: "ca", label: "CA" },
-    { code: "en", label: "EN" },
-  ];
+  const focusRing =
+    "focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090B]";
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 sm:px-6">
-      <div className="relative pointer-events-auto mx-auto flex h-[62px] sm:h-[68px] max-w-[1340px] items-center justify-between gap-2 sm:gap-3 rounded-full border border-white/12 bg-[#09090B]/92 px-3 sm:px-4 xl:px-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.65),inset_0_1px_1px_0_rgba(255,255,255,0.18)] backdrop-blur-2xl">
-        {/* Subtle Top Specular Sheen */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-12 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/30 to-transparent"
-        />
-
-        {/* Brand / Logo (Visual Squircle Avatar + Status) */}
+    <header ref={headerRef} className="pointer-events-none fixed inset-x-0 top-3 z-50 px-3 sm:px-6">
+      <div className="pointer-events-auto relative mx-auto flex h-[62px] max-w-[1340px] items-center justify-between gap-3 rounded-full border-[3px] border-white bg-[#09090B] px-3 text-white shadow-[6px_6px_0_#6D28D9] sm:h-[66px] sm:px-4 xl:px-5">
+        {/* Marca */}
         <button
           type="button"
           onClick={() => scrollToSection("hero")}
-          className="group flex shrink-0 items-center gap-2.5 transition-transform hover:scale-[1.02]"
           aria-label="Ir al inicio"
+          className={`group flex shrink-0 items-center gap-2.5 rounded-full pr-1 ${focusRing}`}
         >
-          <div className="relative flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#6D28D9] via-[#8B5CF6] to-zinc-800 p-[1.5px] shadow-[0_4px_14px_rgba(109,40,217,0.45)]">
+          <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[3px] border-[#6D28D9] bg-[#18181B]">
             <img
               src="/erick-avatar-hd.png"
-              alt="Erick Rodríguez"
-              className="h-full w-full rounded-[14px] bg-[#09090B] object-cover"
+              alt=""
+              className="h-full w-full rounded-full object-cover"
             />
-            {/* Live Green Online Dot */}
             <span
-              className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3 items-center justify-center rounded-full bg-[#09090B]"
+              className="absolute -right-0.5 -bottom-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#09090B] bg-[#34D399]"
               title="Disponible para proyectos"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399]" />
-            </span>
-          </div>
-
-          <div className="flex flex-col text-left">
-            <span className="font-display text-[14px] sm:text-[15px] font-black tracking-[0.06em] text-white uppercase leading-none">
-              Erick Rodríguez
-            </span>
-            <span className="mt-1 hidden sm:flex items-center gap-1.5 text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#6D28D9]" />
-              Full-Stack &amp; IA
-            </span>
-          </div>
+            />
+          </span>
+          <span className="font-display hidden text-[16px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[460px]:inline">
+            Erick Rodríguez
+          </span>
         </button>
 
-        {/* Central Navigation Tabs with Visual Micro-Icons */}
+        {/* Navegación principal (escritorio) */}
         <nav
           aria-label="Navegación principal"
-          className="hidden items-center gap-0.5 rounded-full border border-white/6 bg-white/[0.03] p-1 shadow-inner lg:flex"
+          className="hidden items-center gap-1 min-[1340px]:flex"
         >
           {navItems.map((item) => {
-            const Icon = item.icon;
             const isActive = activeId === item.id;
             return (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => scrollToSection(item.id)}
-                className={`group relative flex items-center gap-1 rounded-full px-2 xl:px-2.5 2xl:px-3.5 py-1 text-[11px] xl:text-[11.5px] 2xl:text-[13px] font-bold tracking-[0.04em] uppercase whitespace-nowrap transition-all duration-200 ${
+                aria-current={isActive ? "true" : undefined}
+                className={`rounded-full border-2 px-3.5 py-1.5 text-[15px] leading-none font-bold whitespace-nowrap transition-colors duration-150 ${focusRing} ${
                   isActive
-                    ? "bg-gradient-to-b from-white/20 to-white/5 text-white font-extrabold shadow-[0_2px_12px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.25)] border border-white/15"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
+                    ? "border-white bg-[#6D28D9] text-white"
+                    : "border-transparent text-[#D4D4D8] hover:border-[#52525B] hover:text-white"
                 }`}
               >
-                <Icon
-                  size={13}
-                  strokeWidth={isActive ? 2.5 : 2}
-                  className={`hidden 2xl:inline-block transition-colors ${
-                    isActive ? "text-[#A78BFA]" : "text-zinc-400 group-hover:text-zinc-200"
-                  }`}
-                />
-                <span>{item.label}</span>
+                {item.label}
               </button>
             );
           })}
         </nav>
 
-        {/* Right Action Tools */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          {/* Functional 3-Language Segmented Control [ ES | CA | EN ] */}
+        {/* Herramientas */}
+        <div className="flex shrink-0 items-center gap-2">
           <div
-            className="flex items-center rounded-full border border-white/10 bg-[#121217] p-1 shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)]"
+            className="hidden items-center gap-0.5 rounded-full border-2 border-[#52525B] bg-[#18181B] p-0.5 sm:flex"
             role="group"
-            aria-label="Selector de idioma"
+            aria-label="Idioma"
           >
             {languages.map((lang) => {
-              const isSelected = locale === lang.code;
+              const selected = locale === lang.code;
               return (
                 <button
                   key={lang.code}
                   type="button"
                   onClick={() => setLocale(lang.code)}
-                  aria-pressed={isSelected}
-                  className={`rounded-full px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-black tracking-wider transition-all duration-150 ${
-                    isSelected
-                      ? "bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] text-white shadow-[0_2px_10px_rgba(109,40,217,0.6),inset_0_1px_0_rgba(255,255,255,0.3)] scale-100"
-                      : "text-zinc-400 hover:text-white hover:bg-white/5"
+                  aria-pressed={selected}
+                  aria-label={lang.name}
+                  title={lang.name}
+                  className={`rounded-full px-2.5 py-1 text-[15px] leading-none font-bold transition-colors duration-150 ${focusRing} ${
+                    selected ? "bg-white text-[#09090B]" : "text-[#D4D4D8] hover:text-white"
                   }`}
                 >
                   {lang.label}
@@ -246,107 +240,110 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             })}
           </div>
 
-          {/* Theme Toggle Button */}
           <button
             type="button"
             onClick={toggleTheme}
             aria-label={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-            className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-[#121217] text-zinc-300 shadow-sm transition-all hover:border-violet-500/40 hover:bg-white/5 hover:text-white"
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#52525B] bg-[#18181B] text-[#D4D4D8] transition-colors hover:border-white hover:text-white ${focusRing}`}
           >
-            {dark ? <Sun size={14} /> : <Moon size={14} />}
+            {dark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          {/* Download CV */}
           <a
             href={cvPdf.url}
             download="Erick-Rodriguez-CV.pdf"
-            className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-[#121217] px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-zinc-200 shadow-sm transition-all hover:border-white/20 hover:text-white 2xl:inline-flex"
+            className={`hidden items-center gap-1.5 rounded-full border-2 border-[#52525B] bg-[#18181B] px-3.5 py-2 text-[15px] leading-none font-bold text-white transition-colors hover:border-white min-[1440px]:inline-flex ${focusRing}`}
           >
-            <Download size={12} strokeWidth={2.3} />
+            <Download size={16} strokeWidth={2.6} />
             <span>{t.nav.downloadCv}</span>
           </a>
 
-          {/* High-Impact CTA Button (Visual Glow + Shimmer Sheen) */}
           <button
             type="button"
             onClick={() => scrollToSection("contacto")}
-            className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full bg-gradient-to-r from-[#6D28D9] via-[#7C3AED] to-[#6D28D9] bg-[length:200%_auto] px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-[12.5px] font-black uppercase tracking-wider text-white shadow-[0_4px_16px_rgba(109,40,217,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] transition-all duration-300 hover:bg-right hover:shadow-[0_6px_22px_rgba(109,40,217,0.75)] active:scale-95 shrink-0"
+            className={`hidden items-center gap-1.5 rounded-full border-2 border-white bg-[#6D28D9] px-4 py-2 text-[15px] leading-none font-bold whitespace-nowrap text-white transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-0 sm:inline-flex ${focusRing}`}
           >
             <span>{t.nav.talk}</span>
-            <ArrowUpRight
-              size={14}
-              strokeWidth={2.8}
-              className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+            <ArrowUpRight size={16} strokeWidth={2.8} />
           </button>
 
-          {/* Mobile Hamburger Button */}
           <button
             type="button"
             onClick={() => setMobileOpen((p) => !p)}
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={mobileOpen}
-            className="inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border border-white/10 bg-[#121217] text-white lg:hidden"
+            aria-controls="menu-movil"
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#52525B] bg-[#18181B] text-white min-[1340px]:hidden ${focusRing}`}
           >
-            {mobileOpen ? <X size={15} /> : <Menu size={15} />}
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer (Visual Glass Card) */}
+      {/* Menú móvil */}
       {mobileOpen ? (
-        <div className="pointer-events-auto mx-auto mt-2 max-w-[1340px] rounded-3xl border border-white/12 bg-[#09090B]/98 p-4 text-white shadow-2xl backdrop-blur-2xl lg:hidden animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col gap-1.5">
+        <div
+          id="menu-movil"
+          className="pointer-events-auto mx-auto mt-3 max-w-[1340px] rounded-3xl border-[3px] border-white bg-[#09090B] p-4 text-white shadow-[6px_6px_0_#6D28D9] min-[1340px]:hidden"
+        >
+          <nav aria-label="Navegación móvil" className="flex flex-col gap-1.5">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const isActive = activeId === item.id;
               return (
                 <button
                   key={item.id}
                   type="button"
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-left text-sm font-bold tracking-[0.08em] uppercase transition-all ${
+                  aria-current={isActive ? "true" : undefined}
+                  className={`rounded-2xl border-2 px-4 py-3 text-left text-[17px] leading-none font-bold ${focusRing} ${
                     isActive
-                      ? "bg-gradient-to-r from-[#6D28D9] to-[#8B5CF6] text-white font-extrabold shadow-lg"
-                      : "text-zinc-300 hover:bg-white/5 hover:text-white"
+                      ? "border-white bg-[#6D28D9] text-white"
+                      : "border-transparent text-[#D4D4D8] hover:border-[#52525B] hover:text-white"
                   }`}
                 >
-                  <Icon size={17} className={isActive ? "text-white" : "text-[#A78BFA]"} />
-                  <span>{item.label}</span>
+                  {item.label}
                 </button>
               );
             })}
+          </nav>
 
-            <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs font-bold text-zinc-400 mr-1 uppercase tracking-wider">
-                  Idioma:
-                </span>
-                {languages.map((lang) => (
-                  <button
-                    key={lang.code}
-                    type="button"
-                    onClick={() => setLocale(lang.code)}
-                    className={`rounded-full px-3 py-1 text-xs font-black uppercase transition-all ${
-                      locale === lang.code
-                        ? "bg-[#6D28D9] text-white shadow-md"
-                        : "bg-zinc-900 text-zinc-400 hover:text-white"
-                    }`}
-                  >
-                    {lang.label}
-                  </button>
-                ))}
-              </div>
+          <button
+            type="button"
+            onClick={() => scrollToSection("contacto")}
+            className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-white bg-[#6D28D9] px-4 py-3 text-[17px] leading-none font-bold text-white sm:hidden ${focusRing}`}
+          >
+            <span>{t.nav.talk}</span>
+            <ArrowUpRight size={18} strokeWidth={2.8} />
+          </button>
 
-              <a
-                href={cvPdf.url}
-                download="Erick-Rodriguez-CV.pdf"
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-white"
-              >
-                <Download size={13} />
-                <span>CV</span>
-              </a>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t-2 border-[#27272A] pt-4">
+            <div className="flex items-center gap-1.5 sm:hidden" role="group" aria-label="Idioma">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  type="button"
+                  onClick={() => setLocale(lang.code)}
+                  aria-pressed={locale === lang.code}
+                  aria-label={lang.name}
+                  className={`rounded-full border-2 px-3.5 py-2 text-[15px] leading-none font-bold ${focusRing} ${
+                    locale === lang.code
+                      ? "border-white bg-white text-[#09090B]"
+                      : "border-[#52525B] text-[#D4D4D8]"
+                  }`}
+                >
+                  {lang.label}
+                </button>
+              ))}
             </div>
+
+            <a
+              href={cvPdf.url}
+              download="Erick-Rodriguez-CV.pdf"
+              className={`inline-flex items-center gap-2 rounded-full border-2 border-white px-4 py-2 text-[15px] leading-none font-bold text-white ${focusRing}`}
+            >
+              <Download size={16} strokeWidth={2.6} />
+              <span>{t.nav.downloadCv}</span>
+            </a>
           </div>
         </div>
       ) : null}

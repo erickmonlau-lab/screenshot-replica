@@ -73,7 +73,7 @@ function Counter({ metric }: { metric: Metric }) {
         {fmt.format(metric.to)}
       </span>
       {metric.suffix && (
-        <span className="text-[0.62em] font-black tracking-normal ml-1.5 text-[#6D28D9]">
+        <span className="ml-[0.22em] text-[0.62em] font-black tracking-normal text-[#6D28D9]">
           {metric.suffix.trim()}
         </span>
       )}
