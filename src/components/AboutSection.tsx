@@ -188,7 +188,7 @@ export function AboutSection({
                     {p.points.slice(0, 2).map((pt) => (
                       <li
                         key={pt}
-                        className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A]"
+                        className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty]"
                       >
                         <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
                           <Check size={12} strokeWidth={4} />

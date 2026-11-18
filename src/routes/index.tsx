@@ -193,7 +193,7 @@ const experience = [
     place: "Diset Control de Plagas",
     points: [
       "Gestión integral de e-commerce en Shopify y WordPress.",
-      "Atención comercial digital y cierre de ventas por WhatsApp Business.",
+      "Atención comercial digital y cierre de ventas por WhatsApp Business.",
       "Diseño visual y prototipado de piezas y pantallas en Figma y Canva.",
     ],
   },
