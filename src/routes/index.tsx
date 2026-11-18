@@ -259,7 +259,15 @@ const coreStackPills = [
   "Canva",
 ];
 
-function CopyButton({ value, label, dark = false }: { value: string; label: string; dark?: boolean }) {
+function CopyButton({
+  value,
+  label,
+  dark = false,
+}: {
+  value: string;
+  label: string;
+  dark?: boolean;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function copy() {
@@ -374,7 +382,8 @@ function Index() {
                   </h2>
                 </div>
                 <p className="font-medium text-zinc-600 dark:text-zinc-300 max-w-[34ch] text-base sm:text-lg leading-snug shrink-0">
-                  Software a medida pensado para captar clientes, gestionar operaciones y automatizar tareas.
+                  Software a medida pensado para captar clientes, gestionar operaciones y
+                  automatizar tareas.
                 </p>
               </div>
             </Reveal>
@@ -450,7 +459,8 @@ function Index() {
                   <CerebroBrain />
                 </div>
                 <p className="mx-auto mt-4 w-fit max-w-full rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-center text-[15px] font-bold text-[#09090B]">
-                  Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al leer.
+                  Cada punto es una nota. Arrástralos: la luz recorre las conexiones, como la IA al
+                  leer.
                 </p>
               </div>
             </div>
@@ -521,26 +531,28 @@ function Index() {
         >
           <div className="mx-auto grid w-full max-w-[1380px] items-center gap-10 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
-              <p
-                aria-hidden="true"
-                className="font-display mb-5 text-[clamp(3rem,7vw,6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-transparent uppercase [-webkit-text-stroke:3px_#09090B]"
-              >
-                Contacto
-              </p>
-              <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B]">
-                <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
-                Disponible en Barcelona
-              </span>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[16px] font-bold tracking-[0.08em] text-white uppercase">
+                  Contacto
+                </span>
+                <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B]">
+                  <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
+                  Disponible en Barcelona
+                </span>
+              </div>
               <Reveal>
                 <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
                   Hablemos
                   <span className="mt-3 block">
-                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 pt-[0.04em] pb-[0.24em] leading-[1] text-white">de tu proyecto.</span>
+                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 pt-[0.04em] pb-[0.24em] leading-[1] text-white">
+                      de tu proyecto.
+                    </span>
                   </span>
                 </h2>
               </Reveal>
               <p className="mt-5 max-w-[44ch] text-lg leading-snug font-semibold text-[#27272A] sm:text-xl">
-                Cuéntame qué necesitas y te respondo, o te enseño en persona el ERP y cómo automatizar tus procesos.
+                Cuéntame qué necesitas y te respondo, o te enseño en persona el ERP y cómo
+                automatizar tus procesos.
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Magnetic strength={0.1}>
