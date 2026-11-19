@@ -101,7 +101,7 @@ const projectCases: ProjectCase[] = [
     outcome: "Web a medida para empresa, recién lanzada y posicionándose en Google",
     stack: ["Arquitectura Web", "SEO On-Page", "En producción"],
     href: "https://gesgrama.com",
-    image: gesgrama.url,
+    image: "/gesgrama-preview.png",
     description:
       "Web a medida para empresa, recién lanzada a producción y posicionándose en Google para captación orgánica de clientes.",
     ctaLabel: "Visitar web",
