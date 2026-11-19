@@ -63,7 +63,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const email = "hola.erickmartinezz@gmail.com";
+const email = "hola.erickrodriguez@gmail.com";
 const phoneDisplay = "+34 640 63 0459";
 const whatsapp = "https://wa.me/34640630459";
 
