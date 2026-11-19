@@ -116,6 +116,15 @@ function Panel({
           >
             {privateSlide}
           </div>
+        ) : !slide.image ? (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#6D28D9] p-6 text-center text-white">
+            <span className="font-display text-[clamp(1.8rem,4vw,3rem)] leading-none font-bold tracking-[-0.04em]">
+              {slide.name}
+            </span>
+            <span className="rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1 text-[16px] font-bold text-[#09090B]">
+              {slide.status}
+            </span>
+          </div>
         ) : (
           <img
             src={slide.image}

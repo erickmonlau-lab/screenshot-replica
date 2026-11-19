@@ -121,6 +121,19 @@ const projectCases: ProjectCase[] = [
       "Plataforma propia para trabajar con PDF directamente en el navegador, ya indexada en Google con múltiples páginas operativas.",
     ctaLabel: "Probar plataforma",
   },
+  {
+    id: "cubikos",
+    index: "04",
+    name: "cubikos.cat",
+    domain: "cubikos.cat",
+    type: "Web a medida",
+    status: "Próximamente",
+    outcome: "Nueva web a medida, en preparación",
+    stack: ["Web a medida", "Próximamente"],
+    href: "https://cubikos.cat",
+    description: "Nueva web a medida, en preparación. Disponible próximamente en cubikos.cat.",
+    ctaLabel: "Visitar web",
+  },
 ];
 
 const technicalTools = [
