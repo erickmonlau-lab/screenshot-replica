@@ -128,10 +128,12 @@ const projectCases: ProjectCase[] = [
     domain: "cubikos.cat",
     type: "Web a medida",
     status: "Próximamente",
-    outcome: "Nueva web a medida, en preparación",
+    outcome: "Web a medida para una empresa de montaje de cocinas",
     stack: ["Web a medida", "Próximamente"],
     href: "https://cubikos.cat",
-    description: "Nueva web a medida, en preparación. Disponible próximamente en cubikos.cat.",
+    image: "/cubikos-preview.png",
+    description:
+      "Web a medida para una empresa de montaje profesional de cocinas en Cataluña, con presupuesto por WhatsApp. Disponible próximamente en cubikos.cat.",
     ctaLabel: "Visitar web",
   },
 ];
