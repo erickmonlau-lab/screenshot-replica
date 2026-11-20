@@ -4,6 +4,7 @@ import {
   Check,
   BadgeCheck,
   Download,
+  Globe,
   GraduationCap,
   Megaphone,
   ClipboardList,
@@ -30,6 +31,41 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** Temas de la acreditación oficial (solo formación). */
 const accreditationTopics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
+
+function Flag({ code }: { code: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 30 20"
+      className="h-[26px] w-[39px] rounded-[4px] border-2 border-[#09090B]"
+    >
+      {code === "es" ? (
+        <>
+          <rect width="30" height="20" fill="#C8102E" />
+          <rect y="5" width="30" height="10" fill="#FCD116" />
+        </>
+      ) : code === "ca" ? (
+        <>
+          <rect width="30" height="20" fill="#FCD116" />
+          <g fill="#C8102E">
+            <rect y="2.22" width="30" height="2.22" />
+            <rect y="6.67" width="30" height="2.22" />
+            <rect y="11.11" width="30" height="2.22" />
+            <rect y="15.56" width="30" height="2.22" />
+          </g>
+        </>
+      ) : (
+        <>
+          <rect width="30" height="20" fill="#1F3A8A" />
+          <path d="M0 0L30 20M30 0L0 20" stroke="#fff" strokeWidth="3.4" />
+          <path d="M0 0L30 20M30 0L0 20" stroke="#C8102E" strokeWidth="1.2" />
+          <path d="M15 0V20M0 10H30" stroke="#fff" strokeWidth="6" />
+          <path d="M15 0V20M0 10H30" stroke="#C8102E" strokeWidth="3.4" />
+        </>
+      )}
+    </svg>
+  );
+}
 
 /** Perfil híbrido: tres pilares (marketing, gestión, tecnología) con su evidencia real. */
 export function AboutSection({
@@ -86,9 +122,30 @@ export function AboutSection({
             <span>{tr("Descargar CV completo")}</span>
             <Download size={18} />
           </a>
-          <span className="rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-[16px] font-bold text-[#09090B]">
-            {tr("Español y Català: nativos · English")}
-          </span>
+          <div className="w-full">
+            <p className="mb-2 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
+              <Globe size={17} strokeWidth={2.6} />
+              {tr("Idiomas")}
+            </p>
+            <ul className="grid grid-cols-3 gap-2.5">
+              {[
+                { name: "Español", flag: "es" },
+                { name: "Català", flag: "ca" },
+                { name: "English", flag: "en" },
+              ].map((l) => (
+                <li
+                  key={l.name}
+                  className="flex flex-col items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-1 py-2 shadow-[3px_3px_0_#09090B]"
+                >
+                  <Flag code={l.flag} />
+                  <span className="text-[15px] leading-none font-bold">{l.name}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-[15px] font-semibold text-[#52525B]">
+              {tr("Español y Català: nativos")}
+            </p>
+          </div>
         </div>
       </div>
 
