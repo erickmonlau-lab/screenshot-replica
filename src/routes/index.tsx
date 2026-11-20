@@ -38,6 +38,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
+import { SectionTitle } from "@/components/SectionTitle";
 import { CerebroBrain } from "@/components/CerebroBrain";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
@@ -414,22 +415,24 @@ function Index() {
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-6 sm:mb-10">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <span className="inline-block rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-xs sm:text-sm font-black uppercase tracking-wider text-white shadow-[3px_3px_0_#09090B] mb-3">
-                    {t.projects.kicker}
-                  </span>
-                  <h2 className="font-display text-[clamp(2.4rem,5.2vw,4.5rem)] leading-[0.98] font-black tracking-[-0.04em] text-zinc-950 dark:text-white">
-                    {t.projects.title}{" "}
-                    <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
-                      {t.projects.titleHighlight}
-                    </span>
-                  </h2>
-                </div>
-                <p className="font-bold text-zinc-800 dark:text-zinc-200 max-w-[38ch] text-lg sm:text-xl md:text-2xl leading-snug shrink-0">
-                  {t.projects.subtitle}
-                </p>
-              </div>
+              <span className="mb-4 inline-block rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-xs font-black tracking-wider text-white uppercase shadow-[3px_3px_0_#09090B] sm:text-sm">
+                {t.projects.kicker}
+              </span>
+              {(() => {
+                const w = t.projects.titleHighlight.split(" ");
+                return (
+                  <SectionTitle
+                    compact
+                    word={t.projects.title.replace(/\.$/, "")}
+                    sub={w.slice(0, -2).join(" ")}
+                    accent={w.slice(-2).join(" ")}
+                    className="!mb-4"
+                  />
+                );
+              })()}
+              <p className="max-w-[60ch] text-lg leading-snug font-semibold text-zinc-800 sm:text-xl dark:text-zinc-200">
+                {t.projects.subtitle}
+              </p>
             </Reveal>
             <div className="mt-4 sm:mt-6">
               <ProjectCarousel
