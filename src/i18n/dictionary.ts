@@ -21,6 +21,11 @@ export const DICT: Record<string, Entry> = {
     ca: "Acreditació oficial de la Generalitat de Catalunya.",
     en: "Official accreditation from the Generalitat de Catalunya.",
   },
+  "en un solo perfil": { ca: "en un sol perfil", en: "in one profile" },
+  "Marketing digital, gestión administrativa y desarrollo con IA.": {
+    ca: "Màrqueting digital, gestió administrativa i desenvolupament amb IA.",
+    en: "Digital marketing, administration and AI development.",
+  },
   "para trabajar contigo": { ca: "per treballar amb tu", en: "to work with you" },
   "Español y catalán nativos, e inglés.": {
     ca: "Castellà i català natius, i anglès.",

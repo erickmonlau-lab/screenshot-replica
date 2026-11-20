@@ -35,9 +35,9 @@ const metrics: Metric[] = [
     id: "seo",
     from: 0,
     to: 3,
-    suffix: " idiomas",
-    label: "para trabajar contigo",
-    detail: "Español y catalán nativos, e inglés.",
+    suffix: " áreas",
+    label: "en un solo perfil",
+    detail: "Marketing digital, gestión administrativa y desarrollo con IA.",
   },
 ];
 
@@ -155,7 +155,7 @@ export function MetricsBand() {
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.18 + 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display text-[clamp(3.6rem,7.5vw,5.4rem)] leading-[0.88] font-black tracking-[-0.06em] text-[#09090B] whitespace-nowrap"
+                className="font-display text-[clamp(3.6rem,7.5vw,5.4rem)] leading-[0.88] font-black tracking-[-0.03em] text-[#09090B] whitespace-nowrap"
               >
                 <Counter metric={m} />
               </motion.p>
@@ -175,7 +175,7 @@ export function MetricsBand() {
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.18 + 0.38, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#52525B]"
+                className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#52525B] [text-wrap:balance]"
               >
                 {tr(m.detail)}
               </motion.p>

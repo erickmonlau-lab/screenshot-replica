@@ -57,13 +57,23 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       {/* Texto en outline que corre solo y reacciona al scroll */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[29%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
+        className="pointer-events-none absolute inset-x-0 top-[29%] z-0 hidden overflow-hidden sm:top-[46%] sm:block sm:-translate-y-1/2"
       >
         <ScrollMarquee
           text="Erick Rodríguez — Marketing · Gestión · IA — "
           className="text-[15vh] sm:text-[30vh]"
         />
       </div>
+
+      {/* Móvil: el nombre completo, fijo y a todo el ancho (el rótulo que corre se corta) */}
+      <p
+        aria-hidden="true"
+        className="font-display pointer-events-none absolute inset-x-0 top-[22%] z-0 px-4 text-[15.5vw] leading-[0.88] font-bold tracking-[-0.03em] text-[#09090B] uppercase [text-shadow:0.045em_0.045em_0_#6D28D9] sm:hidden"
+      >
+        Erick
+        <br />
+        Rodríguez
+      </p>
 
       <motion.div
         style={{ y: portraitY }}
