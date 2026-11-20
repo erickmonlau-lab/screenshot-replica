@@ -22,7 +22,7 @@ export function HangingCard({
   const { tr } = useLanguage();
   const SEG = seg; // rope links
   const LINK = 22; // rest length of each link
-  const cardH = Math.round(width * 1.66);
+  const cardH = Math.round(width * 1.86);
   const [areaW, setAreaW] = useState(width + spread);
   useEffect(() => {
     setAreaW(Math.min(width + spread, Math.max(width + 20, window.innerWidth - 40)));
@@ -181,10 +181,15 @@ export function HangingCard({
           <p className="mt-2 text-base font-semibold text-[#6D28D9]">{tr("Negocio + IA")}</p>
           <p className="mt-1 text-base font-medium text-[#52525B]">La Sagrera, Barcelona</p>
         </div>
-        <div className="mt-4 px-5">
-          <span className="inline-block rounded-full bg-[#09090B] px-4 py-2 text-[15px] leading-none font-bold whitespace-nowrap text-white">
-            {["Marketing", "Gestión", "IA"].map((t) => tr(t)).join(" · ")}
-          </span>
+        <div className="mt-3 flex flex-col items-start gap-1.5 px-5">
+          {["Marketing digital", "Gestión administrativa", "Desarrollo con IA"].map((t) => (
+            <span
+              key={t}
+              className="rounded-full bg-[#09090B] px-3.5 py-1.5 text-[15px] leading-none font-bold whitespace-nowrap text-white"
+            >
+              {tr(t)}
+            </span>
+          ))}
         </div>
       </div>
     </div>

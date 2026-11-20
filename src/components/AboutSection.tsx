@@ -163,7 +163,7 @@ export function AboutSection({
           )}
         </p>
 
-        <div className="mt-6 grid gap-5 min-[1300px]:grid-cols-3">
+        <div className="mt-6 grid gap-5 min-[1150px]:grid-cols-3">
           {pillars.map((p, i) => {
             const Icon = icons[i]!;
             const hoursSrc = `${p.job?.period ?? ""} ${p.study?.title ?? ""}`;
@@ -177,10 +177,10 @@ export function AboutSection({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-5% 0px" }}
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
-                className="flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
+                className="@container flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
               >
                 <div
-                  className={`flex flex-wrap items-center justify-between gap-x-2 gap-y-2 px-4 py-3 ${heads[i]}`}
+                  className={`flex flex-col items-start gap-2 px-4 py-3 @[280px]:flex-row @[280px]:items-center @[280px]:justify-between ${heads[i]}`}
                 >
                   <h3 className="font-display flex shrink-0 items-center gap-2 text-[22px] leading-none font-bold tracking-[-0.04em]">
                     <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
@@ -189,7 +189,7 @@ export function AboutSection({
                     {tr(p.name)}
                   </h3>
                   {hours ? (
-                    <span className="ml-auto shrink-0 text-right leading-none">
+                    <span className="shrink-0 leading-none @[280px]:text-right">
                       <span className="font-display block text-[26px] font-bold tracking-[-0.04em]">
                         {hours} h
                       </span>
