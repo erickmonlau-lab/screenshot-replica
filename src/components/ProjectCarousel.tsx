@@ -148,13 +148,13 @@ function Panel({
       <motion.p
         aria-hidden="true"
         style={{ x: nameX }}
-        className="font-display px-5 pt-5 text-[clamp(40px,13vw,96px)] leading-[0.85] font-bold tracking-[-0.055em] uppercase select-none lg:absolute lg:top-3 lg:left-8 lg:p-0 lg:text-[clamp(110px,13vw,200px)]"
+        className="font-display pointer-events-none relative z-10 px-5 pt-5 text-[clamp(40px,13vw,96px)] leading-[0.85] font-bold tracking-[-0.055em] uppercase select-none lg:absolute lg:top-3 lg:left-8 lg:p-0 lg:text-[clamp(100px,11.5vw,172px)]"
       >
         {shortName(slide)}
       </motion.p>
 
       <div
-        className="relative mx-5 my-5 lg:absolute lg:right-8 lg:bottom-9 lg:m-0 lg:w-[64%]"
+        className="relative mx-5 my-5 lg:absolute lg:right-8 lg:bottom-9 lg:m-0 lg:w-[55%]"
         style={{ perspective: 1400 }}
       >
         <motion.div style={{ rotateY: rotY, rotateX: rotX, rotate: reduce ? 0 : -2 }}>
@@ -174,16 +174,18 @@ function Panel({
         </motion.div>
       </div>
 
-      <div className="px-5 pb-6 lg:absolute lg:bottom-9 lg:left-8 lg:w-[30%] lg:p-0">
+      <div className="px-5 pb-6 lg:absolute lg:bottom-9 lg:left-8 lg:w-[35%] lg:p-0">
         <div className="flex flex-wrap items-center gap-3">
-          <span className="font-display text-[28px] leading-none font-bold tracking-[-0.04em] tabular-nums">
+          <span className="font-display flex h-16 min-w-16 items-center justify-center rounded-2xl border-[3px] border-[#09090B] bg-white px-3 text-[36px] leading-none font-bold tracking-[-0.04em] text-[#09090B] tabular-nums shadow-[4px_4px_0_#09090B]">
             {slide.index}
           </span>
-          <span className={`${t.chip} rounded-full px-3.5 py-1 text-[15px] font-semibold`}>
+          <span
+            className={`${t.chip} rounded-full border-[3px] border-[#09090B] px-4 py-1.5 text-[16px] font-bold`}
+          >
             {slide.status}
           </span>
         </div>
-        <p className="font-display mt-3 text-[22px] leading-[1.15] font-bold tracking-[-0.03em] lg:text-[26px]">
+        <p className="font-display mt-3 text-[22px] leading-[1.15] font-bold tracking-[-0.03em] lg:text-[26px] [text-wrap:balance]">
           {slide.outcome ?? slide.description}
         </p>
         <ul className="mt-4 flex flex-wrap gap-2">
