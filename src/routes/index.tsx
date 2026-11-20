@@ -498,9 +498,30 @@ function Index() {
 
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
-                <div className="h-[380px] sm:h-[480px] lg:h-[560px]">
+                <div className="h-[380px] sm:h-[480px] lg:h-[520px]">
                   <CerebroBrain />
                 </div>
+                <ul className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                  {(
+                    [
+                      ["#09090B", "Índice"],
+                      ["#F59E0B", "Proyecto"],
+                      ["#FFFFFF", "Skill"],
+                      ["#C4B5FD", "Regla o nota"],
+                    ] as const
+                  ).map(([c, name]) => (
+                    <li
+                      key={name}
+                      className="flex items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-3 py-1 text-[15px] font-bold text-[#09090B]"
+                    >
+                      <span
+                        className="h-3.5 w-3.5 rounded-full border-[2.5px] border-[#09090B]"
+                        style={{ background: c }}
+                      />
+                      {tr(name)}
+                    </li>
+                  ))}
+                </ul>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-3">
                   {(
                     [
