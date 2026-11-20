@@ -44,8 +44,8 @@ export function OderaloVideoModal({ open, onClose }: { open: boolean; onClose: (
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[1040px] rounded-[22px] border-[3px] border-white bg-[#09090B] p-2 shadow-[10px_10px_0_#6D28D9] sm:p-3"
-        style={vertical ? { maxWidth: "min(92vw, 62vh)" } : undefined}
+        className="relative w-full max-w-[min(1280px,calc((100vh_-_7rem)*1.7778))] rounded-[22px] border-[3px] border-white bg-[#09090B] p-2 shadow-[10px_10px_0_#6D28D9] sm:p-3"
+        style={vertical ? { maxWidth: "min(92vw, calc((100vh - 7rem) * 0.8))" } : undefined}
         onClick={(e) => e.stopPropagation()}
       >
         <button
