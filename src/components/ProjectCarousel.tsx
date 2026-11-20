@@ -148,13 +148,13 @@ function Panel({
       <motion.p
         aria-hidden="true"
         style={{ x: nameX }}
-        className="font-display pointer-events-none relative z-10 px-5 pt-5 text-[clamp(40px,13vw,96px)] leading-[0.85] font-bold tracking-[-0.055em] uppercase select-none lg:absolute lg:top-3 lg:left-8 lg:p-0 lg:text-[clamp(100px,11.5vw,172px)]"
+        className="font-display pointer-events-none relative z-10 px-5 pt-5 text-[clamp(40px,13vw,96px)] leading-[0.85] font-bold tracking-[-0.055em] uppercase select-none lg:absolute lg:top-3 lg:left-8 lg:p-0 lg:text-[clamp(96px,10.5vw,150px)]"
       >
         {shortName(slide)}
       </motion.p>
 
       <div
-        className="relative mx-5 my-5 lg:absolute lg:right-8 lg:bottom-9 lg:m-0 lg:w-[55%]"
+        className="relative mx-5 my-5 lg:absolute lg:right-8 lg:bottom-9 lg:m-0 lg:w-[min(52%,calc((100svh_-_360px)*1.55))]"
         style={{ perspective: 1400 }}
       >
         <motion.div style={{ rotateY: rotY, rotateX: rotX, rotate: reduce ? 0 : -2 }}>
@@ -192,7 +192,7 @@ function Panel({
           {slide.stack.map((tag) => (
             <li
               key={tag}
-              className={`${t.tag} rounded-full border-2 px-3 py-1 text-[15px] font-semibold`}
+              className={`${t.tag} flex-auto rounded-full border-2 px-3 py-1 text-center text-[15px] font-semibold`}
             >
               {tag}
             </li>
