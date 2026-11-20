@@ -415,9 +415,6 @@ function Index() {
         <section id="proyectos" className={`${sectionBase} section-light`}>
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <Reveal className="mb-6 sm:mb-10">
-              <span className="mb-4 inline-block rounded-lg border-2 border-[#09090B] bg-[#6D28D9] px-3.5 py-1 text-xs font-black tracking-wider text-white uppercase shadow-[3px_3px_0_#09090B] sm:text-sm">
-                {t.projects.kicker}
-              </span>
               {(() => {
                 const w = t.projects.titleHighlight.split(" ");
                 return (
@@ -430,7 +427,7 @@ function Index() {
                   />
                 );
               })()}
-              <p className="max-w-[60ch] text-lg leading-snug font-semibold text-zinc-800 sm:text-xl dark:text-zinc-200">
+              <p className="max-w-[60ch] text-lg leading-snug font-semibold [text-wrap:balance] text-zinc-800 sm:text-xl dark:text-zinc-200">
                 {t.projects.subtitle}
               </p>
             </Reveal>

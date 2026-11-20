@@ -101,14 +101,7 @@ export function OderaloSection() {
             transition={{ duration: 0.8, ease: EASE }}
             className="lg:col-span-5"
           >
-            <span
-              className="inline-flex items-center rounded-lg border-[3px] border-[#09090B] px-3.5 py-1.5 text-[15px] font-black tracking-wider text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]"
-              style={{ background: WHITE }}
-            >
-              {t.erp.badge}
-            </span>
-
-            <h2 className="font-display mt-7 text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
+            <h2 className="font-display text-[clamp(2.4rem,4vw,3.7rem)] leading-[1] font-black tracking-[-0.045em] text-white">
               {t.erp.headline.split(",")[0] ? (
                 <>
                   {t.erp.headline.split(",")[0]},

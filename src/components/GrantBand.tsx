@@ -40,11 +40,7 @@ export function GrantBand() {
           transition={{ duration: 0.8, ease: EASE }}
           className="lg:col-span-6"
         >
-          <span className="inline-flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[15px] font-bold tracking-[0.08em] text-[#09090B] uppercase shadow-[4px_4px_0_#09090B]">
-            <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
-            {tr("Subvenciones salariales directas")}
-          </span>
-          <h2 className="font-display mt-7 text-[clamp(2.2rem,3.6vw,3.4rem)] leading-[1.04] font-bold tracking-[-0.05em]">
+          <h2 className="font-display text-[clamp(2.2rem,3.6vw,3.4rem)] leading-[1.04] font-bold tracking-[-0.05em]">
             {tr("Contratarme puede abrirle a tu empresa")}
             <span className="mt-2 block">
               <span className="rounded-lg bg-[#09090B] px-3 pt-1 pb-1.5 leading-[1.3] lg:whitespace-nowrap [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
