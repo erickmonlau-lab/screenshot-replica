@@ -1,5 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Play } from "lucide-react";
+import { useState } from "react";
+import { ArrowUpRight, Play } from "lucide-react";
+import { OderaloVideoModal } from "./OderaloVideoModal";
 import { useReducedMotion } from "./motion-pref";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -29,7 +31,8 @@ const flow = [
 
 /** ERP Oderalo: caso real. Pantalla grande cruzando el título gigante, sobre el morado de la marca. */
 export function OderaloSection() {
-  const { locale, t } = useLanguage();
+  const { locale, t, tr } = useLanguage();
+  const [videoOpen, setVideoOpen] = useState(false);
   const reduce = useReducedMotion();
 
   const flowData = {
@@ -141,13 +144,24 @@ export function OderaloSection() {
               ))}
             </ol>
 
-            <a
-              href="#contacto"
-              className="mt-9 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
-            >
-              <Play size={18} strokeWidth={2.5} fill="currentColor" />
-              <span>{t.erp.ctaDemo}</span>
-            </a>
+            <div className="mt-9 flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                onClick={() => setVideoOpen(true)}
+                className="inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
+              >
+                <Play size={18} strokeWidth={2.5} fill="currentColor" />
+                <span>{tr("Ver el vídeo")}</span>
+              </button>
+              <a
+                href="#contacto"
+                className="inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3 text-base font-bold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]"
+              >
+                <span>{t.erp.ctaDemo}</span>
+                <ArrowUpRight size={18} strokeWidth={2.5} />
+              </a>
+            </div>
+            <OderaloVideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
           </motion.div>
 
           {/* Pantallas reales */}

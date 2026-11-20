@@ -486,6 +486,9 @@ export const DICT: Record<string, Entry> = {
   Email: { ca: "Correu", en: "Email" },
   "WhatsApp y teléfono": { ca: "WhatsApp i telèfon", en: "WhatsApp & phone" },
   Ubicación: { ca: "Ubicació", en: "Location" },
+  "Ver el vídeo": { ca: "Veure el vídeo", en: "Watch the video" },
+  "Cerrar vídeo": { ca: "Tancar el vídeo", en: "Close video" },
+  "Vídeo de Oderalo": { ca: "Vídeo d'Oderalo", en: "Oderalo video" },
   "Presencial, híbrido o remoto": {
     ca: "Presencial, híbrid o en remot",
     en: "On-site, hybrid or remote",
