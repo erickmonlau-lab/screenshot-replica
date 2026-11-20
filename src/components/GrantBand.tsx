@@ -9,7 +9,7 @@ const steps = [
   {
     icon: UserPlus,
     title: "Me contratas",
-    text: "Sumas un perfil de marketing, gestión y tecnología.",
+    text: "Sumas un perfil de marketing, gestión e IA.",
   },
   {
     icon: BadgeCheck,

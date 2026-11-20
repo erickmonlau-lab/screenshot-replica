@@ -328,7 +328,7 @@ function CopyButton({
 }
 
 const marqueeText =
-  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · TECNOLOGÍA · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
+  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ";
 
 function Index() {
   const { locale, t, tr } = useLanguage();

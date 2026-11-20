@@ -179,12 +179,12 @@ export function HangingCard({
             Erick Rodríguez
           </p>
           <p className="mt-2 text-base font-semibold text-[#6D28D9]">
-            {tr("Negocio + tecnología")}
+            {tr("Negocio + IA")}
           </p>
           <p className="mt-1 text-base font-medium text-[#52525B]">La Sagrera, Barcelona</p>
         </div>
         <div className="mt-4 flex flex-wrap gap-1 px-3">
-          {["Marketing", "Gestión", "Tecnología"].map((t) => (
+          {["Marketing", "Gestión", "IA"].map((t) => (
             <span
               key={t}
               className="rounded-full border-2 border-[#09090B] bg-[#09090B] px-1.5 py-1 text-[15px] leading-none font-bold text-white"

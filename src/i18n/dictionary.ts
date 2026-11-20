@@ -272,7 +272,7 @@ export const DICT: Record<string, Entry> = {
   /* ───────── Sobre mí ───────── */
   "Sobre mí": { ca: "Sobre mi", en: "About me" },
   "Perfil híbrido.": { ca: "Perfil híbrid.", en: "Hybrid profile." },
-  "Negocio + tecnología.": { ca: "Negoci + tecnologia.", en: "Business + technology." },
+  "Negocio + IA.": { ca: "Negoci + IA.", en: "Business + AI." },
   "No vengo del código: vengo del marketing y la gestión. Con la IA construyo lo que tu negocio necesita de verdad.":
     {
       ca: "No vinc del codi: vinc del màrqueting i la gestió. Amb la IA construeixo el que el teu negoci necessita de debò.",
@@ -280,7 +280,6 @@ export const DICT: Record<string, Entry> = {
     },
   Marketing: { ca: "Màrqueting", en: "Marketing" },
   Gestión: { ca: "Gestió", en: "Management" },
-  Tecnología: { ca: "Tecnologia", en: "Technology" },
   prácticas: { ca: "pràctiques", en: "internship" },
   formación: { ca: "formació", en: "training" },
   Formación: { ca: "Formació", en: "Education" },
@@ -364,7 +363,7 @@ export const DICT: Record<string, Entry> = {
     ca: "Castellà · Català · Anglès B2",
     en: "Spanish · Catalan · English B2",
   },
-  "Negocio + tecnología": { ca: "Negoci + tecnologia", en: "Business + technology" },
+  "Negocio + IA": { ca: "Negoci + IA", en: "Business + AI" },
   "La Sagrera, Barcelona": { ca: "La Sagrera, Barcelona", en: "La Sagrera, Barcelona" },
 
   /* ───────── Formación ───────── */
@@ -423,9 +422,9 @@ export const DICT: Record<string, Entry> = {
     },
   "Consultar contratación": { ca: "Consultar contractació", en: "Ask about hiring" },
   "Me contratas": { ca: "Em contractes", en: "You hire me" },
-  "Sumas un perfil de marketing, gestión y tecnología.": {
-    ca: "Suma un perfil de màrqueting, gestió i tecnologia.",
-    en: "You add a marketing, management and technology profile.",
+  "Sumas un perfil de marketing, gestión e IA.": {
+    ca: "Suma un perfil de màrqueting, gestió i IA.",
+    en: "You add a marketing, management and AI profile.",
   },
   "Acreditación oficial": { ca: "Acreditació oficial", en: "Official accreditation" },
   "Agente del Cambio Tecnológico, Generalitat de Catalunya.": {
@@ -454,13 +453,13 @@ export const DICT: Record<string, Entry> = {
     ca: "Màrqueting · Gestió · Desenvolupament Web · ERP · Automatització IA",
     en: "Marketing · Management · Web Development · ERP · AI Automation",
   },
-  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · TECNOLOGÍA · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ":
+  "ERICK RODRÍGUEZ · MARKETING · GESTIÓN · IA · BARCELONA · DISPONIBLE PARA CONTRATACIÓN · 375 H AGENTE DEL CAMBIO · ":
     {
-      ca: "ERICK RODRÍGUEZ · MÀRQUETING · GESTIÓ · TECNOLOGIA · IA · BARCELONA · DISPONIBLE PER A CONTRACTACIÓ · 375 H AGENT DEL CANVI · ",
-      en: "ERICK RODRÍGUEZ · MARKETING · MANAGEMENT · TECHNOLOGY · AI · BARCELONA · AVAILABLE FOR HIRE · 375 H CHANGE AGENT · ",
+      ca: "ERICK RODRÍGUEZ · MÀRQUETING · GESTIÓ · IA · BARCELONA · DISPONIBLE PER A CONTRACTACIÓ · 375 H AGENT DEL CANVI · ",
+      en: "ERICK RODRÍGUEZ · MARKETING · MANAGEMENT · AI · BARCELONA · AVAILABLE FOR HIRE · 375 H CHANGE AGENT · ",
     },
-  "Erick Rodríguez — Marketing · Gestión · Tecnología · IA — ": {
-    ca: "Erick Rodríguez — Màrqueting · Gestió · Tecnologia · IA — ",
-    en: "Erick Rodríguez — Marketing · Management · Technology · AI — ",
+  "Erick Rodríguez — Marketing · Gestión · IA — ": {
+    ca: "Erick Rodríguez — Màrqueting · Gestió · IA — ",
+    en: "Erick Rodríguez — Marketing · Management · AI — ",
   },
 };

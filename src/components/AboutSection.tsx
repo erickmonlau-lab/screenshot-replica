@@ -63,7 +63,7 @@ export function AboutSection({
       points: experience[1]?.points ?? [],
     },
     {
-      name: "Tecnología",
+      name: "IA",
       study: education[2],
       job: undefined,
       points: techPoints,
@@ -102,7 +102,7 @@ export function AboutSection({
           compact
           word={tr("Sobre mí")}
           sub={tr("Perfil híbrido.")}
-          accent={tr("Negocio + tecnología.")}
+          accent={tr("Negocio + IA.")}
         />
 
         <p className="t-ink font-display max-w-[52ch] text-[clamp(1.4rem,2vw,1.85rem)] leading-[1.15] font-bold tracking-[-0.035em]">
