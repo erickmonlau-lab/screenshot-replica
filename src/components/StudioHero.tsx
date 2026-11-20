@@ -1,11 +1,5 @@
 import { useRef } from "react";
-import {
-  motion,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import { useReducedMotion } from "./motion-pref";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { ScrollMarquee } from "./ScrollMarquee";
@@ -66,11 +60,10 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="pointer-events-none absolute inset-x-0 top-[29%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
-          text="Erick Rodríguez — Marketing · Gestión · Tecnología · IA — "
+          text="Erick Rodríguez — Marketing · Gestión · IA — "
           className="text-[15vh] sm:text-[30vh]"
         />
       </div>
-
 
       <motion.div
         style={{ y: portraitY }}
@@ -97,9 +90,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       >
         <h1 className="font-display text-[clamp(2.3rem,4.1vw,3.6rem)] leading-[1.04] font-bold tracking-[-0.055em] text-[#09090B] dark:text-white">
           {t.hero.title}{" "}
-          <span className="block text-[#6D28D9] dark:text-[#A78BFA]">
-            {t.hero.titleHighlight}
-          </span>
+          <span className="block text-[#6D28D9] dark:text-[#A78BFA]">{t.hero.titleHighlight}</span>
         </h1>
 
         <div className="mt-6 flex flex-wrap items-center gap-3">
