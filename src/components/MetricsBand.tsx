@@ -35,8 +35,9 @@ const metrics: Metric[] = [
     id: "seo",
     from: 0,
     to: 3,
-    label: "proyectos online",
-    detail: "diversplas.es, gesgrama.com y breadpdf.com, en producción.",
+    suffix: " webs",
+    label: "online y en producción",
+    detail: "diversplas.es, gesgrama.com y breadpdf.com.",
   },
 ];
 

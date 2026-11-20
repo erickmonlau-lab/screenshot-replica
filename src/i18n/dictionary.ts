@@ -21,6 +21,11 @@ export const DICT: Record<string, Entry> = {
     ca: "Acreditació oficial de la Generalitat de Catalunya.",
     en: "Official accreditation from the Generalitat de Catalunya.",
   },
+  "online y en producción": { ca: "en línia i en producció", en: "online and live" },
+  "diversplas.es, gesgrama.com y breadpdf.com.": {
+    ca: "diversplas.es, gesgrama.com i breadpdf.com.",
+    en: "diversplas.es, gesgrama.com and breadpdf.com.",
+  },
   "proyectos online": { ca: "projectes en línia", en: "online projects" },
   "diversplas.es, gesgrama.com y breadpdf.com, en producción.": {
     ca: "diversplas.es, gesgrama.com i breadpdf.com, en producció.",
