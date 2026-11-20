@@ -196,13 +196,11 @@ export function AboutSection({
                     <CardLabel icon={last ? GraduationCap : ListChecks} className="mb-2">
                       {tr(last ? "Qué cubre" : "Qué hice")}
                     </CardLabel>
-                    <ul
-                      className={`flex flex-1 flex-col ${last ? "justify-around text-[17px]" : "gap-1.5"}`}
-                    >
+                    <ul className="flex flex-1 flex-col justify-around gap-1.5">
                       {p.points.slice(0, last ? 3 : 2).map((pt) => (
                         <li
                           key={pt}
-                          className="flex items-start gap-2.5 text-[16px] leading-snug font-semibold text-[#09090B] [text-wrap:pretty]"
+                          className={`flex items-start gap-2.5 ${last ? "text-[17px]" : "text-[16px]"} leading-snug font-semibold text-[#09090B] [text-wrap:pretty]`}
                         >
                           <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
                             <Check size={12} strokeWidth={4} />
