@@ -3,7 +3,7 @@ export function Flag({ code }: { code: string }) {
     <svg
       aria-hidden="true"
       viewBox="0 0 30 20"
-      className="h-[18px] w-[27px] shrink-0 rounded-[3px] border-[1.5px] border-[#09090B]"
+      className="h-[22px] w-[33px] shrink-0 rounded-[3px] border-[1.5px] border-[#09090B]"
     >
       {code === "es" ? (
         <>

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   Briefcase,
   Check,
+  ListChecks,
   BadgeCheck,
   Download,
   GraduationCap,
@@ -89,15 +90,15 @@ export function AboutSection({
   const heads = [
     "border-b-[3px] border-[#09090B] bg-[#6D28D9] text-white",
     "border-b-[3px] border-[#09090B] bg-[#09090B] text-white",
-    "border-b-[3px] border-[#09090B] bg-[#A78BFA] text-[#09090B]",
+    "border-b-[3px] border-[#09090B] bg-[#4C1D95] text-white",
   ];
 
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-8">
       {/* Tarjeta colgante: cuelga del borde superior de la sección */}
-      <div className="flex flex-col items-center lg:items-start">
+      <div className="flex flex-col items-center">
         <HangingCard width={250} seg={5} bottom={24} spread={70} />
-        <div className="mt-2 flex flex-col items-start gap-3">
+        <div className="mt-2 flex flex-col items-center gap-3">
           <a
             href={cvUrl}
             download="Erick-Rodriguez-CV.pdf"
@@ -166,18 +167,25 @@ export function AboutSection({
                   </p>
                 </div>
                 {p.job ? (
-                  <div className="px-5 pt-4 pb-4">
+                  <div className="flex flex-col px-5 pt-4 pb-4">
                     <CardLabel icon={Briefcase}>{tr("Experiencia")}</CardLabel>
-                    <p className="mt-1 text-[17px] leading-snug font-bold">{tr(p.job.role)}</p>
-                    <p className="text-[15px] font-semibold text-[#09090B]">{tr(p.job.place)}</p>
+                    <p className="mt-1 text-[17px] leading-snug font-bold">
+                      {tr(p.job.role).replace(
+                        /^(Prácticas (en|de)|Pràctiques (en|de)|Internship in) /i,
+                        "",
+                      )}
+                    </p>
+                    <p className="mb-2 text-[15px] font-semibold text-[#09090B]">
+                      {tr(p.job.place)}
+                    </p>
                     {period ? (
-                      <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
+                      <span className="mt-auto inline-block w-fit rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
                         {period.replace(/\s*—\s*/, "–")}
                       </span>
                     ) : null}
                   </div>
                 ) : (
-                  <div className="px-5 pt-4 pb-4">
+                  <div className="flex flex-col px-5 pt-4 pb-4">
                     <CardLabel icon={BadgeCheck}>{tr("Reconocimiento")}</CardLabel>
                     <p className="mt-1 text-[17px] leading-snug font-bold">
                       {tr("Acreditación oficial")}
@@ -185,7 +193,7 @@ export function AboutSection({
                     <p className="text-[15px] font-semibold text-[#09090B]">
                       {tr("Generalitat de Catalunya")}
                     </p>
-                    <span className="mt-1.5 flex flex-wrap gap-1.5">
+                    <span className="mt-auto flex flex-wrap gap-1.5 pt-1.5">
                       {["2025–2026", tr("375 horas")].map((c) => (
                         <span
                           key={c}
@@ -199,11 +207,9 @@ export function AboutSection({
                 )}
                 <div className="px-5 pb-5">
                   <div className="border-t-[3px] border-[#09090B] pt-3.5">
-                    {last ? (
-                      <CardLabel icon={GraduationCap} className="mb-2">
-                        {tr("Qué cubre")}
-                      </CardLabel>
-                    ) : null}
+                    <CardLabel icon={last ? GraduationCap : ListChecks} className="mb-2">
+                      {tr(last ? "Qué cubre" : "Qué hice")}
+                    </CardLabel>
                     <ul className="space-y-2">
                       {p.points.slice(0, last ? 3 : 2).map((pt) => (
                         <li

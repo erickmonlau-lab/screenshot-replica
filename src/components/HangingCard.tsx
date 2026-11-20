@@ -179,7 +179,9 @@ export function HangingCard({
           <p className="font-display text-[24px] leading-none font-bold tracking-[-0.04em] whitespace-nowrap">
             Erick Rodríguez
           </p>
-          <p className="mt-2 text-base font-semibold text-[#6D28D9]">{tr("Negocio + IA")}</p>
+          <p className="mt-2 text-[19px] leading-none font-extrabold text-[#6D28D9]">
+            {tr("Negocio + IA")}
+          </p>
           <p className="mt-1 text-base font-medium text-[#52525B]">La Sagrera, Barcelona</p>
         </div>
         <div className="mt-3 flex flex-col items-start gap-1.5 px-5">
@@ -201,14 +203,14 @@ export function HangingCard({
             ].map(([f, c]) => (
               <span
                 key={c}
-                className="flex items-center gap-1 rounded-lg border-2 border-[#09090B] bg-white px-1 py-1 text-[15px] leading-none font-bold text-[#09090B]"
+                className="flex items-center rounded-lg border-2 border-[#09090B] bg-white px-2.5 py-1.5 text-[15px] leading-none font-bold text-[#09090B]"
               >
                 <Flag code={f!} />
-                {c}
+                <span className="sr-only">{c}</span>
               </span>
             ))}
           </div>
-          <p className="mt-1.5 text-[15px] leading-tight font-semibold text-[#09090B]">
+          <p className="mt-3 text-[15px] leading-tight font-semibold text-[#09090B]">
             {tr("Español y Català: nativos")}
           </p>
         </div>
