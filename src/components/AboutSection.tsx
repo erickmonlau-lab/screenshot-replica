@@ -1,11 +1,9 @@
+import type { ComponentType, ReactNode } from "react";
 import { motion } from "framer-motion";
 import {
-  Bot,
   Briefcase,
   Check,
   BadgeCheck,
-  Layers,
-  Workflow,
   Download,
   Globe,
   GraduationCap,
@@ -70,6 +68,25 @@ function Flag({ code }: { code: string }) {
   );
 }
 
+function CardLabel({
+  icon: I,
+  children,
+  className = "",
+}: {
+  icon: ComponentType<{ size?: number; strokeWidth?: number }>;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <p
+      className={`flex items-center gap-1.5 text-[16px] font-extrabold tracking-[0.05em] text-[#6D28D9] uppercase ${className}`}
+    >
+      <I size={18} strokeWidth={2.8} />
+      {children}
+    </p>
+  );
+}
+
 /** Perfil híbrido: tres pilares (marketing, gestión, tecnología) con su evidencia real. */
 export function AboutSection({
   experience,
@@ -85,13 +102,13 @@ export function AboutSection({
   const { tr } = useLanguage();
   const pillars = [
     {
-      name: "Marketing",
+      name: "Marketing digital",
       study: education[0],
       job: experience[0],
       points: experience[0]?.points ?? [],
     },
     {
-      name: "Gestión",
+      name: "Gestión administrativa",
       study: education[1],
       job: experience[1],
       points: experience[1]?.points ?? [],
@@ -126,7 +143,7 @@ export function AboutSection({
             <Download size={18} />
           </a>
           <div className="w-full max-w-[290px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[5px_5px_0_#09090B]">
-            <p className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#6D28D9] px-3.5 py-2 text-[16px] font-bold tracking-[0.06em] text-white uppercase">
+            <p className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#6D28D9] px-3.5 py-2 text-[16px] font-extrabold tracking-[0.05em] text-white uppercase">
               <Globe size={18} strokeWidth={2.6} />
               {tr("Idiomas")}
             </p>
@@ -142,7 +159,7 @@ export function AboutSection({
                 </li>
               ))}
             </ul>
-            <p className="border-t-[3px] border-[#09090B] bg-[#F4F4F5] px-3.5 py-2 text-[15px] font-semibold text-[#27272A]">
+            <p className="border-t-[3px] border-[#09090B] bg-[#F4F4F5] px-3.5 py-2 text-[15px] font-semibold text-[#09090B]">
               {tr("Español y Català: nativos")}
             </p>
           </div>
@@ -163,13 +180,14 @@ export function AboutSection({
           )}
         </p>
 
-        <div className="mt-6 grid gap-5 min-[1150px]:grid-cols-3">
+        <div className="mt-9 grid gap-5 min-[1150px]:grid-cols-3">
           {pillars.map((p, i) => {
             const Icon = icons[i]!;
             const hoursSrc = `${p.job?.period ?? ""} ${p.study?.title ?? ""}`;
             const hours = /(\d+)\s*h/.exec(hoursSrc)?.[1];
             const studyTitle = (p.study?.title ?? "").replace(/\s*\(\d+\s*h\)/, "");
             const period = (p.job?.period ?? "").replace(/\s*·\s*\d+\s*h/, "");
+            const last = i === 2;
             return (
               <motion.article
                 key={p.name}
@@ -177,116 +195,76 @@ export function AboutSection({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-5% 0px" }}
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
-                className="@container flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
+                className="flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
               >
-                <div
-                  className={`flex flex-col items-start gap-2 px-4 py-3 @[280px]:flex-row @[280px]:items-center @[280px]:justify-between ${heads[i]}`}
-                >
-                  <h3 className="font-display flex shrink-0 items-center gap-2 text-[22px] leading-none font-bold tracking-[-0.04em]">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
-                      <Icon size={20} strokeWidth={2.6} />
+                <div className={`flex flex-col gap-1.5 px-3.5 py-3 ${heads[i]}`}>
+                  <h3 className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.03em] whitespace-nowrap">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] bg-white text-[#09090B]">
+                      <Icon size={18} strokeWidth={2.6} />
                     </span>
                     {tr(p.name)}
                   </h3>
                   {hours ? (
-                    <span className="shrink-0 leading-none @[280px]:text-right">
-                      <span className="font-display block text-[26px] font-bold tracking-[-0.04em]">
+                    <p className="flex items-baseline gap-2 leading-none">
+                      <span className="font-display text-[28px] font-bold tracking-[-0.04em]">
                         {hours} h
                       </span>
-                      <span className="text-[15px] font-semibold opacity-90">
-                        {tr(i === 2 ? "formación" : "prácticas")}
+                      <span className="text-[16px] font-bold">
+                        {tr(last ? "formación" : "prácticas")}
                       </span>
-                    </span>
+                    </p>
                   ) : null}
                 </div>
-                <div className="flex flex-1 flex-col gap-3.5 p-5">
-                  {i === 2 ? (
-                    <div className="flex items-center gap-3 rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] p-3.5 text-white shadow-[4px_4px_0_#09090B]">
-                      <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#6D28D9]">
-                        <BadgeCheck size={30} strokeWidth={2.4} />
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-display text-[19px] leading-tight font-bold tracking-[-0.02em]">
-                          {tr(studyTitle)}
-                        </p>
-                        <p className="mt-0.5 text-[15px] font-semibold text-[#EDE9FE]">
-                          {tr(p.study?.place ?? "")}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                        <GraduationCap size={17} strokeWidth={2.6} />
-                        {tr("Formación")}
-                      </p>
-                      <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
-                      <p className="text-[15px] font-semibold text-[#52525B]">
-                        {tr(p.study?.place ?? "")}
-                      </p>
-                    </div>
-                  )}
+                <div className="flex flex-1 flex-col gap-4 p-5">
+                  <div>
+                    <CardLabel icon={GraduationCap}>{tr("Formación")}</CardLabel>
+                    <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
+                    <p className="text-[15px] font-semibold text-[#09090B]">
+                      {tr(p.study?.place ?? "")}
+                    </p>
+                  </div>
                   {p.job ? (
                     <div>
-                      <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                        <Briefcase size={17} strokeWidth={2.6} />
-                        {tr("Experiencia")}
-                      </p>
+                      <CardLabel icon={Briefcase}>{tr("Experiencia")}</CardLabel>
                       <p className="mt-1 text-[17px] leading-snug font-bold">{tr(p.job.role)}</p>
-                      <p className="text-[15px] font-semibold text-[#52525B]">{tr(p.job.place)}</p>
+                      <p className="text-[15px] font-semibold text-[#09090B]">{tr(p.job.place)}</p>
                       {period ? (
                         <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
                           {period.replace(/\s*—\s*/, "–")}
                         </span>
                       ) : null}
                     </div>
-                  ) : null}
-                  {i === 2 ? (
-                    <div className="flex flex-1 flex-col">
-                      <p className="mb-2.5 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                        <GraduationCap size={17} strokeWidth={2.6} />
-                        {tr("Qué cubre")}
-                      </p>
-                      <ul className="flex flex-1 flex-col gap-2.5">
-                        {p.points.map((pt, k) => {
-                          const RowIcon = [Layers, Workflow, Bot][k] ?? Check;
-                          return (
-                            <li
-                              key={pt}
-                              className="font-display flex flex-1 items-center gap-2.5 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[18px] leading-tight font-bold tracking-[-0.02em] shadow-[3px_3px_0_#09090B]"
-                            >
-                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] bg-[#6D28D9] text-white">
-                                <RowIcon size={19} strokeWidth={2.6} />
-                              </span>
-                              {tr(pt)}
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
                   ) : (
-                    <div className="mt-auto border-t-[3px] border-[#09090B] pt-3.5">
-                      {i === 2 ? (
-                        <p className="mb-2 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                          <GraduationCap size={17} strokeWidth={2.6} />
-                          {tr("Qué cubre")}
-                        </p>
-                      ) : null}
-                      <ul className="space-y-2">
-                        {p.points.slice(0, i === 2 ? 3 : 2).map((pt) => (
-                          <li
-                            key={pt}
-                            className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty]"
-                          >
-                            <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
-                              <Check size={12} strokeWidth={4} />
-                            </span>
-                            {tr(pt)}
-                          </li>
-                        ))}
-                      </ul>
+                    <div>
+                      <CardLabel icon={BadgeCheck}>{tr("Reconocimiento")}</CardLabel>
+                      <p className="mt-1 text-[17px] leading-snug font-bold">
+                        {tr("Acreditación oficial")}
+                      </p>
+                      <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
+                        {tr("375 horas")}
+                      </span>
                     </div>
                   )}
+                  <div className="mt-auto border-t-[3px] border-[#09090B] pt-3.5">
+                    {last ? (
+                      <CardLabel icon={GraduationCap} className="mb-2">
+                        {tr("Qué cubre")}
+                      </CardLabel>
+                    ) : null}
+                    <ul className="space-y-2">
+                      {p.points.slice(0, last ? 3 : 2).map((pt) => (
+                        <li
+                          key={pt}
+                          className="flex items-start gap-2.5 text-[16px] leading-snug font-semibold text-[#09090B] [text-wrap:pretty]"
+                        >
+                          <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
+                            <Check size={12} strokeWidth={4} />
+                          </span>
+                          {tr(pt)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </motion.article>
             );

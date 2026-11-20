@@ -115,6 +115,8 @@ export const DICT: Record<string, Entry> = {
   "Marketing digital": { ca: "Màrqueting digital", en: "Digital marketing" },
   "Gestión administrativa": { ca: "Gestió administrativa", en: "Administrative management" },
   "Desarrollo con IA": { ca: "Desenvolupament amb IA", en: "Development with AI" },
+  Reconocimiento: { ca: "Reconeixement", en: "Recognition" },
+  "375 horas": { ca: "375 hores", en: "375 hours" },
   Acreditación: { ca: "Acreditació", en: "Accreditation" },
   Factura: { ca: "Factura", en: "Invoice" },
   Cobro: { ca: "Cobrament", en: "Payment" },
