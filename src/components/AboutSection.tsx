@@ -163,7 +163,7 @@ export function AboutSection({
           )}
         </p>
 
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
+        <div className="mt-6 grid gap-5 min-[1300px]:grid-cols-3">
           {pillars.map((p, i) => {
             const Icon = icons[i]!;
             const hoursSrc = `${p.job?.period ?? ""} ${p.study?.title ?? ""}`;
@@ -179,16 +179,18 @@ export function AboutSection({
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
                 className="flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
               >
-                <div className={`flex items-center justify-between gap-3 px-4 py-3 ${heads[i]}`}>
-                  <h3 className="font-display flex min-w-0 items-center gap-2 text-[24px] leading-none font-bold tracking-[-0.04em]">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
+                <div
+                  className={`flex flex-wrap items-center justify-between gap-x-2 gap-y-2 px-4 py-3 ${heads[i]}`}
+                >
+                  <h3 className="font-display flex shrink-0 items-center gap-2 text-[22px] leading-none font-bold tracking-[-0.04em]">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
                       <Icon size={20} strokeWidth={2.6} />
                     </span>
                     {tr(p.name)}
                   </h3>
                   {hours ? (
-                    <span className="shrink-0 text-right leading-none">
-                      <span className="font-display block text-[28px] font-bold tracking-[-0.04em]">
+                    <span className="ml-auto shrink-0 text-right leading-none">
+                      <span className="font-display block text-[26px] font-bold tracking-[-0.04em]">
                         {hours} h
                       </span>
                       <span className="text-[15px] font-semibold opacity-90">
