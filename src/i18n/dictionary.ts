@@ -318,9 +318,9 @@ export const DICT: Record<string, Entry> = {
     ca: "Gestió integral d'e-commerce a Shopify i WordPress.",
     en: "End-to-end e-commerce management on Shopify and WordPress.",
   },
-  "Atención comercial digital y cierre de ventas por WhatsApp Business.": {
-    ca: "Atenció comercial digital i tancament de vendes per WhatsApp Business.",
-    en: "Digital sales support and deal closing via WhatsApp Business.",
+  "Atención al cliente por WhatsApp Business, derivando a comerciales.": {
+    ca: "Atenció al client per WhatsApp Business, derivant a comercials.",
+    en: "Customer service via WhatsApp Business, handing leads to the sales team.",
   },
   "Diseño visual y prototipado de piezas y pantallas en Figma y Canva.": {
     ca: "Disseny visual i prototipatge de peces i pantalles a Figma i Canva.",
