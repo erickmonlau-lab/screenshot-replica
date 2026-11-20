@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import {
+  Bot,
   Briefcase,
   Check,
   BadgeCheck,
+  Layers,
+  Workflow,
   Download,
   Globe,
   GraduationCap,
@@ -37,7 +40,7 @@ function Flag({ code }: { code: string }) {
     <svg
       aria-hidden="true"
       viewBox="0 0 30 20"
-      className="h-[26px] w-[39px] rounded-[4px] border-2 border-[#09090B]"
+      className="h-[28px] w-[42px] rounded-[4px] border-2 border-[#09090B]"
     >
       {code === "es" ? (
         <>
@@ -105,7 +108,7 @@ export function AboutSection({
   const heads = [
     "border-b-[3px] border-[#09090B] bg-[#6D28D9] text-white",
     "border-b-[3px] border-[#09090B] bg-[#09090B] text-white",
-    "border-b-[3px] border-[#09090B] bg-white text-[#09090B]",
+    "border-b-[3px] border-[#09090B] bg-[#A78BFA] text-[#09090B]",
   ];
 
   return (
@@ -122,27 +125,24 @@ export function AboutSection({
             <span>{tr("Descargar CV completo")}</span>
             <Download size={18} />
           </a>
-          <div className="w-full">
-            <p className="mb-2 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-              <Globe size={17} strokeWidth={2.6} />
+          <div className="w-full max-w-[290px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[5px_5px_0_#09090B]">
+            <p className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#6D28D9] px-3.5 py-2 text-[16px] font-bold tracking-[0.06em] text-white uppercase">
+              <Globe size={18} strokeWidth={2.6} />
               {tr("Idiomas")}
             </p>
-            <ul className="grid grid-cols-3 gap-2.5">
+            <ul className="grid grid-cols-3 divide-x-[3px] divide-[#09090B]">
               {[
                 { name: "Español", flag: "es" },
                 { name: "Català", flag: "ca" },
                 { name: "English", flag: "en" },
               ].map((l) => (
-                <li
-                  key={l.name}
-                  className="flex flex-col items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-1 py-2 shadow-[3px_3px_0_#09090B]"
-                >
+                <li key={l.name} className="flex flex-col items-center gap-2 px-1 py-3">
                   <Flag code={l.flag} />
                   <span className="text-[15px] leading-none font-bold">{l.name}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-[15px] font-semibold text-[#52525B]">
+            <p className="border-t-[3px] border-[#09090B] bg-[#F4F4F5] px-3.5 py-2 text-[15px] font-semibold text-[#27272A]">
               {tr("Español y Català: nativos")}
             </p>
           </div>
@@ -200,16 +200,32 @@ export function AboutSection({
                   ) : null}
                 </div>
                 <div className="flex flex-1 flex-col gap-3.5 p-5">
-                  <div>
-                    <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                      <GraduationCap size={17} strokeWidth={2.6} />
-                      {tr("Formación")}
-                    </p>
-                    <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
-                    <p className="text-[15px] font-semibold text-[#52525B]">
-                      {tr(p.study?.place ?? "")}
-                    </p>
-                  </div>
+                  {i === 2 ? (
+                    <div className="flex items-center gap-3 rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] p-3.5 text-white shadow-[4px_4px_0_#09090B]">
+                      <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#6D28D9]">
+                        <BadgeCheck size={30} strokeWidth={2.4} />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-display text-[19px] leading-tight font-bold tracking-[-0.02em]">
+                          {tr(studyTitle)}
+                        </p>
+                        <p className="mt-0.5 text-[15px] font-semibold text-[#EDE9FE]">
+                          {tr(p.study?.place ?? "")}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
+                        <GraduationCap size={17} strokeWidth={2.6} />
+                        {tr("Formación")}
+                      </p>
+                      <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
+                      <p className="text-[15px] font-semibold text-[#52525B]">
+                        {tr(p.study?.place ?? "")}
+                      </p>
+                    </div>
+                  )}
                   {p.job ? (
                     <div>
                       <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
@@ -232,17 +248,20 @@ export function AboutSection({
                         {tr("Qué cubre")}
                       </p>
                       <ul className="flex flex-1 flex-col gap-2.5">
-                        {p.points.map((pt) => (
-                          <li
-                            key={pt}
-                            className="font-display flex flex-1 items-center gap-2.5 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[18px] leading-tight font-bold tracking-[-0.02em] shadow-[3px_3px_0_#09090B]"
-                          >
-                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
-                              <Check size={15} strokeWidth={4} />
-                            </span>
-                            {tr(pt)}
-                          </li>
-                        ))}
+                        {p.points.map((pt, k) => {
+                          const RowIcon = [Layers, Workflow, Bot][k] ?? Check;
+                          return (
+                            <li
+                              key={pt}
+                              className="font-display flex flex-1 items-center gap-2.5 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[18px] leading-tight font-bold tracking-[-0.02em] shadow-[3px_3px_0_#09090B]"
+                            >
+                              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-[3px] border-[#09090B] bg-[#6D28D9] text-white">
+                                <RowIcon size={19} strokeWidth={2.6} />
+                              </span>
+                              {tr(pt)}
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   ) : (
