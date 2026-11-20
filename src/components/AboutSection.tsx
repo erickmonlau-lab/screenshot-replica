@@ -5,7 +5,6 @@ import {
   Check,
   BadgeCheck,
   Download,
-  Globe,
   GraduationCap,
   Megaphone,
   ClipboardList,
@@ -32,41 +31,6 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** Temas de la acreditación oficial (solo formación). */
 const accreditationTopics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
-
-function Flag({ code }: { code: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 30 20"
-      className="h-[28px] w-[42px] rounded-[4px] border-2 border-[#09090B]"
-    >
-      {code === "es" ? (
-        <>
-          <rect width="30" height="20" fill="#C8102E" />
-          <rect y="5" width="30" height="10" fill="#FCD116" />
-        </>
-      ) : code === "ca" ? (
-        <>
-          <rect width="30" height="20" fill="#FCD116" />
-          <g fill="#C8102E">
-            <rect y="2.22" width="30" height="2.22" />
-            <rect y="6.67" width="30" height="2.22" />
-            <rect y="11.11" width="30" height="2.22" />
-            <rect y="15.56" width="30" height="2.22" />
-          </g>
-        </>
-      ) : (
-        <>
-          <rect width="30" height="20" fill="#1F3A8A" />
-          <path d="M0 0L30 20M30 0L0 20" stroke="#fff" strokeWidth="3.4" />
-          <path d="M0 0L30 20M30 0L0 20" stroke="#C8102E" strokeWidth="1.2" />
-          <path d="M15 0V20M0 10H30" stroke="#fff" strokeWidth="6" />
-          <path d="M15 0V20M0 10H30" stroke="#C8102E" strokeWidth="3.4" />
-        </>
-      )}
-    </svg>
-  );
-}
 
 function CardLabel({
   icon: I,
@@ -142,27 +106,6 @@ export function AboutSection({
             <span>{tr("Descargar CV completo")}</span>
             <Download size={18} />
           </a>
-          <div className="w-full max-w-[290px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[5px_5px_0_#09090B]">
-            <p className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#6D28D9] px-3.5 py-2 text-[16px] font-extrabold tracking-[0.05em] text-white uppercase">
-              <Globe size={18} strokeWidth={2.6} />
-              {tr("Idiomas")}
-            </p>
-            <ul className="grid grid-cols-3 divide-x-[3px] divide-[#09090B]">
-              {[
-                { name: "Español", flag: "es" },
-                { name: "Català", flag: "ca" },
-                { name: "English", flag: "en" },
-              ].map((l) => (
-                <li key={l.name} className="flex flex-col items-center gap-2 px-1 py-3">
-                  <Flag code={l.flag} />
-                  <span className="text-[15px] leading-none font-bold">{l.name}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="border-t-[3px] border-[#09090B] bg-[#F4F4F5] px-3.5 py-2 text-[15px] font-semibold text-[#09090B]">
-              {tr("Español y Català: nativos")}
-            </p>
-          </div>
         </div>
       </div>
 
@@ -180,7 +123,7 @@ export function AboutSection({
           )}
         </p>
 
-        <div className="mt-9 grid gap-5 min-[1150px]:grid-cols-3">
+        <div className="mt-9 grid grid-rows-[repeat(4,auto)] gap-x-5 gap-y-0 min-[1150px]:grid-cols-3 max-[1149px]:gap-y-5">
           {pillars.map((p, i) => {
             const Icon = icons[i]!;
             const hoursSrc = `${p.job?.period ?? ""} ${p.study?.title ?? ""}`;
@@ -195,7 +138,7 @@ export function AboutSection({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-5% 0px" }}
                 transition={{ duration: 0.7, delay: i * 0.1, ease: EASE }}
-                className="flex flex-col overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
+                className="row-span-4 grid grid-rows-subgrid overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#09090B]"
               >
                 <div className={`flex flex-col gap-1.5 px-3.5 py-3 ${heads[i]}`}>
                   <h3 className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.03em] whitespace-nowrap">
@@ -215,37 +158,47 @@ export function AboutSection({
                     </p>
                   ) : null}
                 </div>
-                <div className="flex flex-1 flex-col gap-4 p-5">
-                  <div>
-                    <CardLabel icon={GraduationCap}>{tr("Formación")}</CardLabel>
-                    <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
-                    <p className="text-[15px] font-semibold text-[#09090B]">
-                      {tr(p.study?.place ?? "")}
-                    </p>
-                  </div>
-                  {p.job ? (
-                    <div>
-                      <CardLabel icon={Briefcase}>{tr("Experiencia")}</CardLabel>
-                      <p className="mt-1 text-[17px] leading-snug font-bold">{tr(p.job.role)}</p>
-                      <p className="text-[15px] font-semibold text-[#09090B]">{tr(p.job.place)}</p>
-                      {period ? (
-                        <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
-                          {period.replace(/\s*—\s*/, "–")}
-                        </span>
-                      ) : null}
-                    </div>
-                  ) : (
-                    <div>
-                      <CardLabel icon={BadgeCheck}>{tr("Reconocimiento")}</CardLabel>
-                      <p className="mt-1 text-[17px] leading-snug font-bold">
-                        {tr("Acreditación oficial")}
-                      </p>
+                <div className="px-5 pt-5">
+                  <CardLabel icon={GraduationCap}>{tr("Formación")}</CardLabel>
+                  <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
+                  <p className="text-[15px] font-semibold text-[#09090B]">
+                    {tr(p.study?.place ?? "")}
+                  </p>
+                </div>
+                {p.job ? (
+                  <div className="px-5 pt-4 pb-4">
+                    <CardLabel icon={Briefcase}>{tr("Experiencia")}</CardLabel>
+                    <p className="mt-1 text-[17px] leading-snug font-bold">{tr(p.job.role)}</p>
+                    <p className="text-[15px] font-semibold text-[#09090B]">{tr(p.job.place)}</p>
+                    {period ? (
                       <span className="mt-1.5 inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
-                        {tr("375 horas")}
+                        {period.replace(/\s*—\s*/, "–")}
                       </span>
-                    </div>
-                  )}
-                  <div className="mt-auto border-t-[3px] border-[#09090B] pt-3.5">
+                    ) : null}
+                  </div>
+                ) : (
+                  <div className="px-5 pt-4 pb-4">
+                    <CardLabel icon={BadgeCheck}>{tr("Reconocimiento")}</CardLabel>
+                    <p className="mt-1 text-[17px] leading-snug font-bold">
+                      {tr("Acreditación oficial")}
+                    </p>
+                    <p className="text-[15px] font-semibold text-[#09090B]">
+                      {tr("Generalitat de Catalunya")}
+                    </p>
+                    <span className="mt-1.5 flex flex-wrap gap-1.5">
+                      {["2025–2026", tr("375 horas")].map((c) => (
+                        <span
+                          key={c}
+                          className="inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]"
+                        >
+                          {c}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                )}
+                <div className="px-5 pb-5">
+                  <div className="border-t-[3px] border-[#09090B] pt-3.5">
                     {last ? (
                       <CardLabel icon={GraduationCap} className="mb-2">
                         {tr("Qué cubre")}

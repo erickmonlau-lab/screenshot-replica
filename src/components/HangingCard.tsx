@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createLanyard } from "./rope-physics";
+import { Flag } from "./Flag";
 import { useLanguage } from "@/context/LanguageContext";
 
 /**
@@ -22,7 +23,7 @@ export function HangingCard({
   const { tr } = useLanguage();
   const SEG = seg; // rope links
   const LINK = 22; // rest length of each link
-  const cardH = Math.round(width * 1.86);
+  const cardH = Math.round(width * 2.12);
   const [areaW, setAreaW] = useState(width + spread);
   useEffect(() => {
     setAreaW(Math.min(width + spread, Math.max(width + 20, window.innerWidth - 40)));
@@ -190,6 +191,26 @@ export function HangingCard({
               {tr(t)}
             </span>
           ))}
+        </div>
+        <div className="mt-3 px-4">
+          <div className="flex gap-1">
+            {[
+              ["es", "ES"],
+              ["ca", "CA"],
+              ["en", "EN"],
+            ].map(([f, c]) => (
+              <span
+                key={c}
+                className="flex items-center gap-1 rounded-lg border-2 border-[#09090B] bg-white px-1 py-1 text-[15px] leading-none font-bold text-[#09090B]"
+              >
+                <Flag code={f!} />
+                {c}
+              </span>
+            ))}
+          </div>
+          <p className="mt-1.5 text-[15px] leading-tight font-semibold text-[#09090B]">
+            {tr("Español y Català: nativos")}
+          </p>
         </div>
       </div>
     </div>
