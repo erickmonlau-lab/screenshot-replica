@@ -191,12 +191,14 @@ export function AboutSection({
                     </p>
                   </div>
                 )}
-                <div className="px-5 pb-4">
-                  <div className="border-t-[3px] border-[#09090B] pt-3">
+                <div className="flex flex-col px-5 pb-4">
+                  <div className="flex flex-1 flex-col border-t-[3px] border-[#09090B] pt-3">
                     <CardLabel icon={last ? GraduationCap : ListChecks} className="mb-2">
                       {tr(last ? "Qué cubre" : "Qué hice")}
                     </CardLabel>
-                    <ul className="space-y-1.5">
+                    <ul
+                      className={`flex flex-1 flex-col ${last ? "justify-around text-[17px]" : "gap-1.5"}`}
+                    >
                       {p.points.slice(0, last ? 3 : 2).map((pt) => (
                         <li
                           key={pt}
