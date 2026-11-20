@@ -34,10 +34,10 @@ const metrics: Metric[] = [
   {
     id: "seo",
     from: 0,
-    to: 4,
-    suffix: " proyectos",
-    label: "3 webs y un ERP, en producción",
-    detail: "diversplas.es, gesgrama.com, breadpdf.com y Oderalo.",
+    to: 3,
+    suffix: " idiomas",
+    label: "para trabajar contigo",
+    detail: "Español y catalán nativos, e inglés.",
   },
 ];
 
