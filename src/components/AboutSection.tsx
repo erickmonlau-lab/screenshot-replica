@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import {
   Briefcase,
   Check,
-  Code2,
+  BadgeCheck,
   Download,
   GraduationCap,
   Megaphone,
@@ -27,11 +27,6 @@ interface Study {
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
-
-const techPoints = [
-  "Webs a medida en React y TypeScript, con SEO técnico.",
-  "Flujos con n8n y agentes de IA que trabajan solos.",
-];
 
 /** Temas de la acreditación oficial (solo formación). */
 const accreditationTopics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
@@ -63,14 +58,14 @@ export function AboutSection({
       points: experience[1]?.points ?? [],
     },
     {
-      name: "IA",
+      name: "Acreditación",
       study: education[2],
       job: undefined,
-      points: techPoints,
+      points: accreditationTopics,
     },
   ];
 
-  const icons = [Megaphone, ClipboardList, Code2];
+  const icons = [Megaphone, ClipboardList, BadgeCheck];
   const heads = [
     "border-b-[3px] border-[#09090B] bg-[#6D28D9] text-white",
     "border-b-[3px] border-[#09090B] bg-[#09090B] text-white",
@@ -156,29 +151,11 @@ export function AboutSection({
                       {tr(p.study?.place ?? "")}
                     </p>
                   </div>
-                  {i === 2 ? (
-                    <div>
-                      <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
-                        <GraduationCap size={17} strokeWidth={2.6} />
-                        {tr("Qué cubre")}
-                      </p>
-                      <ul className="mt-2 flex flex-wrap gap-1.5">
-                        {accreditationTopics.map((o) => (
-                          <li
-                            key={o}
-                            className="rounded-full border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1 text-[15px] leading-tight font-bold"
-                          >
-                            {tr(o)}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : null}
                   {p.job ? (
                     <div>
                       <p className="flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
                         <Briefcase size={17} strokeWidth={2.6} />
-                        {tr(i === 2 ? "Proyectos" : "Experiencia")}
+                        {tr("Experiencia")}
                       </p>
                       <p className="mt-1 text-[17px] leading-snug font-bold">{tr(p.job.role)}</p>
                       <p className="text-[15px] font-semibold text-[#52525B]">{tr(p.job.place)}</p>
@@ -189,19 +166,49 @@ export function AboutSection({
                       ) : null}
                     </div>
                   ) : null}
-                  <ul className="mt-auto space-y-2 border-t-[3px] border-[#09090B] pt-3.5">
-                    {p.points.slice(0, 2).map((pt) => (
-                      <li
-                        key={pt}
-                        className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty]"
-                      >
-                        <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
-                          <Check size={12} strokeWidth={4} />
-                        </span>
-                        {tr(pt)}
-                      </li>
-                    ))}
-                  </ul>
+                  {i === 2 ? (
+                    <div className="flex flex-1 flex-col">
+                      <p className="mb-2.5 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
+                        <GraduationCap size={17} strokeWidth={2.6} />
+                        {tr("Qué cubre")}
+                      </p>
+                      <ul className="flex flex-1 flex-col gap-2.5">
+                        {p.points.map((pt) => (
+                          <li
+                            key={pt}
+                            className="font-display flex flex-1 items-center gap-2.5 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2 text-[18px] leading-tight font-bold tracking-[-0.02em] shadow-[3px_3px_0_#09090B]"
+                          >
+                            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
+                              <Check size={15} strokeWidth={4} />
+                            </span>
+                            {tr(pt)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <div className="mt-auto border-t-[3px] border-[#09090B] pt-3.5">
+                      {i === 2 ? (
+                        <p className="mb-2 flex items-center gap-1.5 text-[15px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
+                          <GraduationCap size={17} strokeWidth={2.6} />
+                          {tr("Qué cubre")}
+                        </p>
+                      ) : null}
+                      <ul className="space-y-2">
+                        {p.points.slice(0, i === 2 ? 3 : 2).map((pt) => (
+                          <li
+                            key={pt}
+                            className="flex items-start gap-2.5 text-[15px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty]"
+                          >
+                            <span className="mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[#6D28D9] text-white">
+                              <Check size={12} strokeWidth={4} />
+                            </span>
+                            {tr(pt)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </motion.article>
             );

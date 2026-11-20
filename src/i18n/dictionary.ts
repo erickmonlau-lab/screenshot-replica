@@ -110,6 +110,7 @@ export const DICT: Record<string, Entry> = {
   "En línea": { ca: "En línia", en: "Live" },
   Aviso: { ca: "Avís", en: "Alert" },
   IA: { ca: "IA", en: "AI" },
+  Acreditación: { ca: "Acreditació", en: "Accreditation" },
   Factura: { ca: "Factura", en: "Invoice" },
   Cobro: { ca: "Cobrament", en: "Payment" },
   "Sin tareas manuales": { ca: "Sense tasques manuals", en: "No manual tasks" },
