@@ -205,7 +205,7 @@ const aiPhases = [
 const experience = [
   {
     period: "2025 — 2026 · 516 h",
-    role: "Prácticas en Marketing y Gestión Comercial",
+    role: "Prácticas en Marketing Digital",
     place: "Diset Control de Plagas",
     points: [
       "Gestión integral de e-commerce en Shopify y WordPress.",

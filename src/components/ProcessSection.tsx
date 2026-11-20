@@ -93,7 +93,7 @@ export function ProcessSection() {
     >
       <div ref={ref} className="relative h-[340vh]">
         <div className="sticky top-0 flex h-screen min-h-[640px] items-center overflow-hidden">
-          <div className="mx-auto w-full max-w-[1380px] px-5 pt-20 pb-4 sm:px-8">
+          <div className="mx-auto w-full max-w-[1380px] px-5 pt-[4.4rem] pb-4 sm:px-8">
             {/* Título fijo de la sección */}
             <div className="hidden items-end justify-between gap-8 sm:flex">
               <p
@@ -110,7 +110,7 @@ export function ProcessSection() {
               </h2>
             </div>
 
-            <div className="grid items-stretch gap-5 sm:mt-5 lg:grid-cols-12 lg:gap-6">
+            <div className="grid items-stretch gap-5 sm:mt-9 lg:grid-cols-12 lg:gap-6">
               {/* Tarjeta del paso */}
               <div className="relative lg:col-span-4">
                 <div className="relative h-full min-h-[13.5rem] sm:min-h-[22rem]">

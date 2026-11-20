@@ -305,9 +305,9 @@ export const DICT: Record<string, Entry> = {
   },
   "Monlau, Barcelona": { ca: "Monlau, Barcelona", en: "Monlau, Barcelona" },
   "Generalitat de Catalunya": { ca: "Generalitat de Catalunya", en: "Generalitat de Catalunya" },
-  "Prácticas en Marketing y Gestión Comercial": {
-    ca: "Pràctiques en Màrqueting i Gestió Comercial",
-    en: "Internship in Marketing & Sales Management",
+  "Prácticas en Marketing Digital": {
+    ca: "Pràctiques en Màrqueting Digital",
+    en: "Internship in Digital Marketing",
   },
   "Prácticas de Gestión Administrativa y Logística": {
     ca: "Pràctiques de Gestió Administrativa i Logística",
