@@ -188,7 +188,7 @@ export function HangingCard({
           {["Marketing digital", "Gestión administrativa", "Desarrollo con IA"].map((t) => (
             <span
               key={t}
-              className="rounded-full bg-[#09090B] px-3.5 py-1.5 text-[15px] leading-none font-bold whitespace-nowrap text-white"
+              className="max-w-full rounded-2xl bg-[#09090B] px-3.5 py-1.5 text-[15px] leading-tight font-bold text-white"
             >
               {tr(t)}
             </span>
