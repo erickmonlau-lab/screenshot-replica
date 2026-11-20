@@ -14,8 +14,8 @@ const SECTION_TO_NAV: [string, string][] = [
   ["metricas", "hero"],
   ["proceso", "proceso"],
   ["proyectos", "proyectos"],
-  ["erp", "erp"],
-  ["web-apps", "erp"],
+  ["erp", "proyectos"],
+  ["web-apps", "proyectos"],
   ["ia", "ia"],
   ["stack", "ia"],
   ["trayectoria", "trayectoria"],
@@ -34,10 +34,8 @@ export function Navbar({ onChangeMode }: NavbarProps) {
   const headerRef = useRef<HTMLElement>(null);
 
   const navItems = [
-    { id: "hero", label: t.nav.home },
     { id: "proceso", label: t.nav.process },
     { id: "proyectos", label: t.nav.projects },
-    { id: "erp", label: t.nav.erp },
     { id: "ia", label: t.nav.brain },
     { id: "trayectoria", label: t.nav.experience },
     { id: "contacto", label: t.nav.contact },
@@ -252,10 +250,11 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           <a
             href={cvPdf.url}
             download="Erick-Rodriguez-CV.pdf"
-            className={`hidden items-center gap-1.5 rounded-full border-2 border-[#52525B] bg-[#18181B] px-3.5 py-2 text-[15px] leading-none font-bold text-white transition-colors hover:border-white min-[1440px]:inline-flex ${focusRing}`}
+            aria-label={t.nav.downloadCv}
+            title={t.nav.downloadCv}
+            className={`hidden h-10 w-10 items-center justify-center rounded-full border-2 border-[#52525B] bg-[#18181B] text-[#D4D4D8] transition-colors hover:border-white hover:text-white min-[1340px]:inline-flex ${focusRing}`}
           >
-            <Download size={16} strokeWidth={2.6} />
-            <span>{t.nav.downloadCv}</span>
+            <Download size={18} strokeWidth={2.6} />
           </a>
 
           <button
