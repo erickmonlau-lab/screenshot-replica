@@ -102,6 +102,9 @@ export const DICT: Record<string, Entry> = {
   "Tus herramientas": { ca: "Les teves eines", en: "Your tools" },
   "APIs seguras": { ca: "APIs segures", en: "Secure APIs" },
   "EN LÍNEA": { ca: "EN LÍNIA", en: "LIVE" },
+  "Publicado en la nube": { ca: "Publicat al núvol", en: "Published in the cloud" },
+  "Core Web Vitals cuidados": { ca: "Core Web Vitals cuidats", en: "Core Web Vitals taken care of" },
+  "Vigilado en producción": { ca: "Vigilat en producció", en: "Monitored in production" },
   Local: { ca: "Local", en: "Local" },
   Pruebas: { ca: "Proves", en: "Testing" },
   "En línea": { ca: "En línia", en: "Live" },
@@ -441,9 +444,9 @@ export const DICT: Record<string, Entry> = {
   Email: { ca: "Correu", en: "Email" },
   "WhatsApp y teléfono": { ca: "WhatsApp i telèfon", en: "WhatsApp & phone" },
   Ubicación: { ca: "Ubicació", en: "Location" },
-  "La Sagrera, Barcelona · Presencial o remoto": {
-    ca: "La Sagrera, Barcelona · Presencial o en remot",
-    en: "La Sagrera, Barcelona · On-site or remote",
+  "Presencial, híbrido o remoto": {
+    ca: "Presencial, híbrid o en remot",
+    en: "On-site, hybrid or remote",
   },
   Copiar: { ca: "Copiar", en: "Copy" },
   Copiado: { ca: "Copiat", en: "Copied" },

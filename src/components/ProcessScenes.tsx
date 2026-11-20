@@ -247,9 +247,9 @@ function Desarrollo() {
 function Produccion() {
   const reduce = useReducedMotion();
   const { tr } = useLanguage();
-  const stops = ["Local", "Pruebas", "En línea"];
+  const rows = ["Publicado en la nube", "Core Web Vitals cuidados", "Vigilado en producción"];
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-4 sm:p-8">
+    <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
       <div className="w-full max-w-[520px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[8px_8px_0_#09090B]">
         <div className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5">
           <span className="h-3 w-3 rounded-full border-2 border-[#09090B] bg-white" />
@@ -258,47 +258,36 @@ function Produccion() {
           <span className="ml-2 rounded-full border-2 border-[#09090B] bg-white px-3 py-0.5 text-[15px] font-bold text-[#09090B]">
             tu-negocio.com
           </span>
-        </div>
-        <div className="flex items-center justify-center gap-4 px-4 py-7 sm:py-9">
-          <motion.span
-            initial={reduce ? false : { rotate: -30, scale: 0.5 }}
-            animate={{ rotate: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 180, damping: 11, delay: 1.9 }}
-            className="flex h-14 w-14 items-center justify-center rounded-xl border-[3px] border-[#09090B]"
-            style={{ background: VIOLET }}
-          >
-            <Rocket size={28} strokeWidth={2.6} color="#FFFFFF" />
-          </motion.span>
           <motion.span
             initial={reduce ? false : { scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 12, delay: 2.2 }}
-            className="font-display rounded-xl border-[3px] border-[#09090B] bg-[#09090B] px-5 py-2 text-[30px] leading-none font-bold tracking-[-0.04em] text-white shadow-[4px_4px_0_#6D28D9] sm:text-[38px]"
+            transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
+            className="font-display ml-auto flex items-center gap-1.5 rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] leading-none font-bold text-white"
           >
+            <Rocket size={15} strokeWidth={2.8} color="#A78BFA" />
             {tr("EN LÍNEA")}
           </motion.span>
         </div>
+        <ul className="grid gap-2.5 p-4 sm:p-5">
+          {rows.map((r, i) => (
+            <motion.li
+              key={r}
+              initial={reduce ? false : { x: -24, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.15 + i * 0.12, ease: EASE }}
+              className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5"
+            >
+              <span
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-[#09090B]"
+                style={{ background: VIOLET }}
+              >
+                <Check size={18} strokeWidth={4} color="#FFFFFF" />
+              </span>
+              <span className="text-[17px] font-bold text-[#09090B] sm:text-[19px]">{tr(r)}</span>
+            </motion.li>
+          ))}
+        </ul>
       </div>
-
-      <ol className="flex w-full max-w-[520px] items-center justify-between gap-2">
-        {stops.map((s, i) => (
-          <motion.li
-            key={s}
-            initial={reduce ? false : { opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + i * 0.7 }}
-            className="flex flex-1 items-center gap-2"
-          >
-            <span className="flex flex-1 items-center justify-center gap-2 rounded-xl border-[3px] border-[#09090B] bg-white px-3 py-2 text-[16px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]">
-              <Check size={18} strokeWidth={3.5} color={VIOLET} />
-              {tr(s)}
-            </span>
-            {i < stops.length - 1 ? (
-              <ArrowRight size={22} strokeWidth={3.5} color={INK} className="shrink-0" />
-            ) : null}
-          </motion.li>
-        ))}
-      </ol>
     </div>
   );
 }

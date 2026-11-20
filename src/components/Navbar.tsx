@@ -174,9 +174,9 @@ export function Navbar({ onChangeMode }: NavbarProps) {
         >
           <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[3px] border-[#6D28D9] bg-[#18181B]">
             <img
-              src="/erick-avatar-hd.png"
+              src="/erick-avatar-hq.png"
               alt=""
-              className="h-full w-full rounded-full object-cover"
+              className="h-full w-full rounded-full bg-[#6D28D9] object-cover object-[50%_20%]"
             />
             <span
               className="absolute -right-0.5 -bottom-0.5 h-3.5 w-3.5 rounded-full border-2 border-[#09090B] bg-[#34D399]"
