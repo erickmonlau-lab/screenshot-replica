@@ -693,7 +693,7 @@ function Index() {
                         <I size={22} strokeWidth={2.4} />
                       </span>
                       <div className="min-w-0 flex-1">
-                        <dt className="mb-1 text-[15px] font-bold tracking-[0.08em] text-[#52525B] uppercase">
+                        <dt className="mb-1 text-[17px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
                           {k}
                         </dt>
                         <dd>{node}</dd>
