@@ -92,7 +92,7 @@ export function AboutSection({
             <Download size={18} />
           </a>
           <span className="rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-[16px] font-bold text-[#09090B]">
-            {tr("Español · Catalán · Inglés B2")}
+            {tr("Español y Català: nativos · English")}
           </span>
         </div>
       </div>

@@ -359,9 +359,9 @@ export const DICT: Record<string, Entry> = {
     en: "n8n workflows and AI agents that work on their own.",
   },
   "Descargar CV completo": { ca: "Descarregar CV complet", en: "Download full CV" },
-  "Español · Catalán · Inglés B2": {
-    ca: "Castellà · Català · Anglès B2",
-    en: "Spanish · Catalan · English B2",
+  "Español y Català: nativos · English": {
+    ca: "Castellà i català: natius · English",
+    en: "Spanish and Catalan: native · English",
   },
   "Negocio + IA": { ca: "Negoci + IA", en: "Business + AI" },
   "La Sagrera, Barcelona": { ca: "La Sagrera, Barcelona", en: "La Sagrera, Barcelona" },

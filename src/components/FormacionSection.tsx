@@ -115,7 +115,7 @@ export function FormacionSection({
           </div>
           <h2 className="font-display max-w-[34ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             {tr("Primero aprendí cómo funciona un negocio por dentro.")}{" "}
-            <span className="mt-1 inline-block rounded-md bg-[#6D28D9] px-2 py-1 whitespace-nowrap">
+            <span className="mt-1 inline-block rounded-md bg-[#6D28D9] px-2 py-1 sm:whitespace-nowrap">
               {tr("Después, a construirle las herramientas.")}
             </span>
           </h2>
@@ -141,7 +141,7 @@ export function FormacionSection({
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
                     <Icon size={24} strokeWidth={2.6} />
                   </span>
-                  <span className="rounded-full border-[3px] border-white px-3.5 py-1 text-[15px] font-bold tracking-wide uppercase">
+                  <span className="rounded-full border-[3px] border-white px-3 py-1 text-[15px] leading-tight font-bold tracking-wide whitespace-nowrap uppercase max-[420px]:hidden">
                     {tr(c.level)}
                   </span>
                   <span className="ml-auto text-right leading-none">
