@@ -114,7 +114,7 @@ export function AboutSection({
         </div>
       </div>
 
-      <div className="pt-2 sm:pt-2">
+      <div className="pt-6 sm:pt-10">
         <SectionTitle
           compact
           word={tr("Sobre mí")}

@@ -603,7 +603,7 @@ function Index() {
         {/* TRAYECTORIA — Sobre Mí / About Me */}
         <section
           id="trayectoria"
-          className="t-bg-page t-ink t-line section-light scroll-mt-[62px] border-t pb-10 sm:pb-12"
+          className="t-bg-page t-ink t-line section-light scroll-mt-[62px] border-t pb-16 sm:pb-20"
         >
           <div className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
             <AboutSection experience={experience} education={education} cvUrl={cvPdf.url} />
