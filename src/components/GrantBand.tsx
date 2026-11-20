@@ -32,7 +32,7 @@ export function GrantBand() {
       id="subvencion"
       className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-[#6D28D9] py-14 text-white sm:py-16"
     >
-      <div className="mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-12">
+      <div className="mx-auto grid w-full max-w-[1380px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-14">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,10 +44,10 @@ export function GrantBand() {
             <span className="h-2.5 w-2.5 rounded-full border-2 border-[#09090B] bg-[#6D28D9]" />
             {tr("Subvenciones salariales directas")}
           </span>
-          <h2 className="font-display mt-7 text-[clamp(2.4rem,4.8vw,4.4rem)] leading-[1.02] font-bold tracking-[-0.05em]">
+          <h2 className="font-display mt-7 text-[clamp(2.2rem,3.6vw,3.4rem)] leading-[1.04] font-bold tracking-[-0.05em]">
             {tr("Contratarme puede abrirle a tu empresa")}
             <span className="mt-2 block">
-              <span className="rounded-lg bg-[#09090B] px-3 py-1 leading-[1.3] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
+              <span className="rounded-lg bg-[#09090B] px-3 pt-1 pb-1.5 leading-[1.3] lg:whitespace-nowrap [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
                 {tr("subvenciones salariales.")}
               </span>
             </span>
@@ -67,7 +67,7 @@ export function GrantBand() {
         </motion.div>
 
         <div className="lg:col-span-6">
-          <ol className="mx-auto flex max-w-[560px] flex-col items-stretch">
+          <ol className="mx-auto flex max-w-[600px] flex-col items-stretch">
             {steps.map((s, i) => {
               const last = i === steps.length - 1;
               const Icon = s.icon;
@@ -78,37 +78,37 @@ export function GrantBand() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-10% 0px" }}
                     transition={{ duration: 0.6, delay: 0.1 + i * 0.2, ease: EASE }}
-                    className={`flex w-full items-center gap-4 rounded-[20px] border-[3px] border-[#09090B] p-4 shadow-[8px_8px_0_#09090B] sm:p-5 ${
-                      last ? "bg-[#09090B] text-white" : "bg-white text-[#09090B]"
+                    className={`flex w-full items-center gap-4 rounded-[20px] border-[3px] border-[#09090B] p-5 shadow-[8px_8px_0_#09090B] sm:p-6 ${
+                      last ? "bg-[#F59E0B] text-[#09090B]" : "bg-white text-[#09090B]"
                     }`}
                   >
                     <span
-                      className={`font-display flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border-[3px] border-[#09090B] text-[34px] leading-none font-bold ${
-                        last ? "bg-white text-[#09090B]" : "bg-[#6D28D9] text-white"
+                      className={`font-display flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center rounded-2xl border-[3px] border-[#09090B] text-[34px] leading-none font-bold ${
+                        last ? "bg-[#09090B] text-white" : "bg-[#6D28D9] text-white"
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="font-display block text-[clamp(1.4rem,2vw,1.8rem)] leading-tight font-bold tracking-[-0.03em]">
+                      <span className="font-display block text-[clamp(1.4rem,1.9vw,1.8rem)] leading-tight font-bold tracking-[-0.03em]">
                         {tr(s.title)}
                       </span>
                       <span
-                        className={`mt-1 block text-[17px] leading-snug font-semibold [text-wrap:balance] ${
-                          last ? "text-[#D4D4D8]" : "text-[#3F3F46]"
+                        className={`mt-1 block text-[18px] leading-snug font-semibold [text-wrap:balance] ${
+                          last ? "text-[#09090B]" : "text-[#3F3F46]"
                         }`}
                       >
                         {tr(s.text)}
                       </span>
                     </span>
                     <Icon
-                      size={38}
+                      size={44}
                       strokeWidth={2.4}
-                      className={`hidden shrink-0 sm:block ${last ? "text-[#A78BFA]" : "text-[#6D28D9]"}`}
+                      className={`hidden shrink-0 sm:block ${last ? "text-[#09090B]" : "text-[#6D28D9]"}`}
                     />
                   </motion.div>
                   {last ? null : (
-                    <ArrowDown size={34} strokeWidth={3.5} className="my-2.5 text-[#09090B]" />
+                    <ArrowDown size={40} strokeWidth={3.5} className="my-2 text-[#09090B]" />
                   )}
                 </li>
               );
