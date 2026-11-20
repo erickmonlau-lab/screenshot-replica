@@ -168,11 +168,14 @@ export function FormacionSection({
                     </p>
                     <div className="mt-3 flex flex-col gap-2">
                       {c.learned.map((row) => (
-                        <ul key={row.join()} className="flex flex-wrap gap-2">
+                        <ul
+                        key={row.join()}
+                        className="flex gap-2.5"
+                      >
                           {row.map((l) => (
                             <li
                               key={l}
-                              className="flex items-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-3 py-1 text-[16px] font-bold whitespace-nowrap shadow-[3px_3px_0_#09090B]"
+                              className="flex flex-auto items-center justify-center gap-1.5 rounded-xl border-[3px] border-[#09090B] bg-white px-2 py-1 text-[16px] font-bold whitespace-nowrap shadow-[3px_3px_0_#09090B]"
                             >
                               <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6D28D9]" />
                               {tr(l)}
@@ -204,7 +207,7 @@ export function FormacionSection({
                     {hours ? (
                       <span className="font-display text-[34px] leading-none font-bold tracking-[-0.04em]">
                         {hours}
-                        <span className="ml-1 text-[20px] text-[#A78BFA]">h</span>
+                        <span className="ml-2.5 text-[20px] text-[#A78BFA]">h</span>
                       </span>
                     ) : null}
                   </div>
