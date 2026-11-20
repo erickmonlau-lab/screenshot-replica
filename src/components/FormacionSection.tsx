@@ -168,10 +168,7 @@ export function FormacionSection({
                     </p>
                     <div className="mt-3 flex flex-col gap-2">
                       {c.learned.map((row) => (
-                        <ul
-                        key={row.join()}
-                        className="flex gap-2.5"
-                      >
+                        <ul key={row.join()} className="flex gap-2.5">
                           {row.map((l) => (
                             <li
                               key={l}
@@ -186,7 +183,7 @@ export function FormacionSection({
                     </div>
                   </div>
 
-                  <div className="flex flex-1 flex-col justify-center rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
+                  <div className="flex flex-1 flex-col justify-start rounded-2xl border-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3.5 text-white shadow-[4px_4px_0_#09090B]">
                     <p className="font-display flex items-center gap-2 text-[20px] leading-none font-bold tracking-[-0.02em]">
                       <Wrench size={20} strokeWidth={2.8} />
                       {tr("Cómo lo aplico hoy")}

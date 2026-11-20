@@ -516,7 +516,7 @@ function Index() {
             <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4">
               <h2 className="font-display text-[clamp(2.2rem,4.2vw,4rem)] leading-[1] font-bold tracking-[-0.04em] whitespace-nowrap">
                 {tr("Con qué")}{" "}
-                <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 py-0.5">
+                <span className="inline-block rounded-lg border-[3px] border-white bg-[#6D28D9] px-3 pt-0.5 pb-2 leading-[1.15]">
                   {tr("trabajo.")}
                 </span>
               </h2>

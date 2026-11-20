@@ -31,7 +31,11 @@ interface Study {
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** Temas de la acreditación oficial (solo formación). */
-const accreditationTopics = ["Transformación digital", "Automatización de procesos", "IA aplicada"];
+const accreditationTopics = [
+  "Transformación digital",
+  "Automatización de procesos",
+  "IA aplicada a la empresa",
+];
 
 function CardLabel({
   icon: I,

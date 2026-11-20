@@ -300,6 +300,7 @@ export const DICT: Record<string, Entry> = {
   "Transformación digital": { ca: "Transformació digital", en: "Digital transformation" },
   "Automatización de procesos": { ca: "Automatització de processos", en: "Process automation" },
   "IA aplicada": { ca: "IA aplicada", en: "Applied AI" },
+  "IA aplicada a la empresa": { ca: "IA aplicada a l'empresa", en: "AI applied to the business" },
   "CFGS en Marketing y Publicidad": {
     ca: "CFGS en Màrqueting i Publicitat",
     en: "Higher Vocational Degree in Marketing & Advertising",
