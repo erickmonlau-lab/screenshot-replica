@@ -34,10 +34,10 @@ const metrics: Metric[] = [
   {
     id: "seo",
     from: 0,
-    to: 3,
-    suffix: " webs",
-    label: "online y en producción",
-    detail: "diversplas.es, gesgrama.com y breadpdf.com.",
+    to: 4,
+    suffix: " proyectos",
+    label: "3 webs y un ERP, en producción",
+    detail: "diversplas.es, gesgrama.com, breadpdf.com y Oderalo.",
   },
 ];
 
@@ -75,7 +75,9 @@ function Counter({ metric }: { metric: Metric }) {
         {fmt.format(metric.to)}
       </span>
       {metric.suffix && (
-        <span className="ml-[0.22em] text-[0.62em] font-black tracking-normal text-[#6D28D9]">
+        <span
+          className={`ml-[0.22em] font-black tracking-normal text-[#6D28D9] ${metric.suffix.trim().length > 2 ? "text-[0.46em]" : "text-[0.62em]"}`}
+        >
           {metric.suffix.trim()}
         </span>
       )}
@@ -163,7 +165,7 @@ export function MetricsBand() {
                 whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.75, delay: i * 0.18 + 0.28, ease: [0.16, 1, 0.3, 1] }}
-                className="font-display mt-6 text-[23px] sm:text-[26px] leading-[1.12] font-black tracking-[-0.03em] text-[#09090B]"
+                className="font-display mt-6 text-[23px] sm:text-[26px] leading-[1.12] font-black tracking-[-0.03em] text-[#09090B] [text-wrap:balance]"
               >
                 {tr(m.label)}
               </motion.p>
