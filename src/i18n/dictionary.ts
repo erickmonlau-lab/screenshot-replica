@@ -300,6 +300,12 @@ export const DICT: Record<string, Entry> = {
   "Transformación digital": { ca: "Transformació digital", en: "Digital transformation" },
   "Automatización de procesos": { ca: "Automatització de processos", en: "Process automation" },
   "IA aplicada": { ca: "IA aplicada", en: "Applied AI" },
+  "Un punto, una nota": { ca: "Un punt, una nota", en: "One dot, one note" },
+  "Decisión, regla o cliente.": { ca: "Decisió, regla o client.", en: "Decision, rule or client." },
+  "Arrástralos": { ca: "Arrossega'ls", en: "Drag them" },
+  "Arrastran a sus vecinos.": { ca: "Arrosseguen els veïns.", en: "They pull their neighbours." },
+  "La luz es la IA": { ca: "La llum és la IA", en: "The light is the AI" },
+  "Lee siguiendo los enlaces.": { ca: "Llegeix seguint els enllaços.", en: "It reads by following links." },
   "IA aplicada a la empresa": { ca: "IA aplicada a l'empresa", en: "AI applied to the business" },
   "CFGS en Marketing y Publicidad": {
     ca: "CFGS en Màrqueting i Publicitat",

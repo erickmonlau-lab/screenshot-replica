@@ -9,9 +9,12 @@ import { useReducedMotion } from "./motion-pref";
 
 const CEREBRUM_D =
   "M55 170 C33 140 45 96 86 70 C116 40 166 30 200 42 C226 22 276 24 298 48 C336 40 372 68 368 108 C392 128 388 168 362 184 C350 196 330 200 312 198 C296 206 270 208 250 214 C238 238 190 246 155 238 C135 232 120 222 118 210 C104 200 78 192 55 170 Z";
-const CEREBELLUM_D = "M246 218 C268 204 314 206 330 226 C338 246 316 262 290 260 C264 256 238 238 246 218 Z";
-const STEM_D = "M224 226 C226 242 228 254 232 266 C236 274 250 274 252 264 C252 250 250 236 248 224 Z";
-const CEREBELLUM_LINES = "M262 222 C282 214 308 218 322 230 M258 234 C280 228 306 232 320 244 M262 246 C280 244 298 246 312 252";
+const CEREBELLUM_D =
+  "M246 218 C268 204 314 206 330 226 C338 246 316 262 290 260 C264 256 238 238 246 218 Z";
+const STEM_D =
+  "M224 226 C226 242 228 254 232 266 C236 274 250 274 252 264 C252 250 250 236 248 224 Z";
+const CEREBELLUM_LINES =
+  "M262 222 C282 214 308 218 322 230 M258 234 C280 228 306 232 320 244 M262 246 C280 244 298 246 312 252";
 const SULCI = [
   "M215 44 C224 78 206 108 218 140 C226 160 214 178 224 200",
   "M118 208 C160 188 206 190 252 210",
@@ -264,9 +267,10 @@ export function CerebroBrain() {
       canvas.height = Math.round(H * dpr);
       canvas.style.width = `${W}px`;
       canvas.style.height = `${H}px`;
-      s = Math.min((W * 0.9) / 400, (H * 0.9) / 330);
-      bx = (W - 400 * s) / 2;
-      by = (H - 330 * s) / 2 - 6;
+      // encuadre ajustado al dibujo (x 32–396, y 22–276) para que llene el espacio
+      s = Math.min((W * 0.97) / 364, (H * 0.97) / 254);
+      bx = (W - 364 * s) / 2 - 32 * s;
+      by = (H - 254 * s) / 2 - 22 * s;
       renderStill();
       placeNodes();
     };
@@ -428,9 +432,7 @@ export function CerebroBrain() {
       nodes.forEach((n, i) => {
         const p = pos[i]!;
         const a = nbr ? (nbr.has(i) ? 1 : 0) : lit(i);
-        const r =
-          KIND_R[n.kind] *
-          Math.min(1.25, Math.max(0.85, s * 0.7));
+        const r = KIND_R[n.kind] * Math.min(1.25, Math.max(0.85, s * 0.7));
         if (a > 0.05) {
           ctx.beginPath();
           ctx.arc(p.x, p.y, r + 7 + a * 6, 0, Math.PI * 2);

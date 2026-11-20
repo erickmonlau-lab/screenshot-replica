@@ -15,6 +15,7 @@ import {
   FolderGit2,
   Globe,
   GraduationCap,
+  Hand,
   Layers,
   Mail,
   MapPin,
@@ -24,6 +25,7 @@ import {
   Sparkles,
   Workflow,
   Wrench,
+  Zap,
 } from "lucide-react";
 
 import breadpdf from "@/assets/breadpdf.com.png.asset.json";
@@ -496,12 +498,35 @@ function Index() {
 
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
-                <div className="h-[380px] sm:h-[480px] lg:h-[640px]">
+                <div className="h-[380px] sm:h-[480px] lg:h-[560px]">
                   <CerebroBrain />
                 </div>
-                <p className="mx-auto mt-4 w-fit max-w-full rounded-full border-[3px] border-[#09090B] bg-white px-5 py-2.5 text-center text-[15px] font-bold text-[#09090B]">
-                  {t.cerebro.dragHint}
-                </p>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {(
+                    [
+                      [Layers, "Un punto, una nota", "Decisión, regla o cliente."],
+                      [Hand, "Arrástralos", "Arrastran a sus vecinos."],
+                      [Zap, "La luz es la IA", "Lee siguiendo los enlaces."],
+                    ] as const
+                  ).map(([Icon, title, text]) => (
+                    <li
+                      key={title}
+                      className="flex items-start gap-3 rounded-2xl border-[3px] border-[#09090B] bg-white p-3 text-[#09090B] shadow-[4px_4px_0_#09090B]"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-[#F59E0B]">
+                        <Icon size={20} strokeWidth={2.8} />
+                      </span>
+                      <span className="block leading-tight">
+                        <span className="font-display block text-[17px] font-bold">
+                          {tr(title)}
+                        </span>
+                        <span className="mt-0.5 block text-[15px] font-semibold text-[#3F3F46]">
+                          {tr(text)}
+                        </span>
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
