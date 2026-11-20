@@ -111,7 +111,7 @@ export const DICT: Record<string, Entry> = {
   Aviso: { ca: "Avís", en: "Alert" },
   IA: { ca: "IA", en: "AI" },
   Idiomas: { ca: "Idiomes", en: "Languages" },
-  "Español y Català: nativos": { ca: "Castellà i català: natius", en: "Spanish and Catalan: native" },
+  "Español y Catalán: nativos": { ca: "Castellà i català: natius", en: "Spanish and Catalan: native" },
   "Marketing digital": { ca: "Màrqueting digital", en: "Digital marketing" },
   "Gestión administrativa": { ca: "Gestió administrativa", en: "Administrative management" },
   "Desarrollo con IA": { ca: "Desenvolupament amb IA", en: "Development with AI" },

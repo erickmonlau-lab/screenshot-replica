@@ -110,7 +110,7 @@ export function AboutSection({
         </div>
       </div>
 
-      <div className="pt-4 sm:pt-6">
+      <div className="pt-2 sm:pt-2">
         <SectionTitle
           compact
           word={tr("Sobre mí")}
@@ -118,13 +118,13 @@ export function AboutSection({
           accent={tr("Negocio + IA.")}
         />
 
-        <p className="t-ink font-display max-w-[52ch] text-[clamp(1.4rem,2vw,1.85rem)] leading-[1.15] font-bold tracking-[-0.035em]">
+        <p className="t-ink font-display max-w-[52ch] text-[clamp(1.35rem,1.8vw,1.65rem)] leading-[1.15] font-bold tracking-[-0.035em]">
           {tr(
             "No vengo del código: vengo del marketing y la gestión. Con la IA construyo lo que tu negocio necesita de verdad.",
           )}
         </p>
 
-        <div className="mt-9 grid grid-rows-[repeat(4,auto)] gap-x-5 gap-y-0 min-[1150px]:grid-cols-3 max-[1149px]:gap-y-5">
+        <div className="mt-5 grid grid-rows-[repeat(4,auto)] gap-x-5 gap-y-0 min-[1150px]:grid-cols-3 max-[1149px]:gap-y-5">
           {pillars.map((p, i) => {
             const Icon = icons[i]!;
             const hoursSrc = `${p.job?.period ?? ""} ${p.study?.title ?? ""}`;
@@ -149,17 +149,20 @@ export function AboutSection({
                     {tr(p.name)}
                   </h3>
                   {hours ? (
-                    <p className="flex items-baseline gap-2 leading-none">
-                      <span className="font-display text-[28px] font-bold tracking-[-0.04em]">
+                    <p className="flex items-center gap-2.5 leading-none">
+                      <span className="font-display text-[30px] font-bold tracking-[-0.04em]">
                         {hours} h
                       </span>
-                      <span className="text-[16px] font-bold">
-                        {tr(last ? "formación" : "prácticas")}
+                      <span className="flex flex-col gap-1 text-[15px] leading-none font-bold">
+                        <span>{tr(last ? "formación" : "prácticas")}</span>
+                        <span className="opacity-90">
+                          {(last ? "2025–2026" : period).replace(/\s*—\s*/, "–")}
+                        </span>
                       </span>
                     </p>
                   ) : null}
                 </div>
-                <div className="px-5 pt-5">
+                <div className="px-5 pt-3">
                   <CardLabel icon={GraduationCap}>{tr("Formación")}</CardLabel>
                   <p className="mt-1 text-[17px] leading-snug font-bold">{tr(studyTitle)}</p>
                   <p className="text-[15px] font-semibold text-[#09090B]">
@@ -167,7 +170,7 @@ export function AboutSection({
                   </p>
                 </div>
                 {p.job ? (
-                  <div className="flex flex-col px-5 pt-4 pb-4">
+                  <div className="flex flex-col px-5 pt-3 pb-3">
                     <CardLabel icon={Briefcase}>{tr("Experiencia")}</CardLabel>
                     <p className="mt-1 text-[17px] leading-snug font-bold">
                       {tr(p.job.role).replace(
@@ -175,17 +178,10 @@ export function AboutSection({
                         "",
                       )}
                     </p>
-                    <p className="mb-2 text-[15px] font-semibold text-[#09090B]">
-                      {tr(p.job.place)}
-                    </p>
-                    {period ? (
-                      <span className="mt-auto inline-block w-fit rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]">
-                        {period.replace(/\s*—\s*/, "–")}
-                      </span>
-                    ) : null}
+                    <p className="text-[15px] font-semibold text-[#09090B]">{tr(p.job.place)}</p>
                   </div>
                 ) : (
-                  <div className="flex flex-col px-5 pt-4 pb-4">
+                  <div className="flex flex-col px-5 pt-3 pb-3">
                     <CardLabel icon={BadgeCheck}>{tr("Reconocimiento")}</CardLabel>
                     <p className="mt-1 text-[17px] leading-snug font-bold">
                       {tr("Acreditación oficial")}
@@ -193,24 +189,14 @@ export function AboutSection({
                     <p className="text-[15px] font-semibold text-[#09090B]">
                       {tr("Generalitat de Catalunya")}
                     </p>
-                    <span className="mt-auto flex flex-wrap gap-1.5 pt-1.5">
-                      {["2025–2026", tr("375 horas")].map((c) => (
-                        <span
-                          key={c}
-                          className="inline-block rounded-md border-2 border-[#09090B] bg-[#F4F4F5] px-2 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B]"
-                        >
-                          {c}
-                        </span>
-                      ))}
-                    </span>
                   </div>
                 )}
-                <div className="px-5 pb-5">
-                  <div className="border-t-[3px] border-[#09090B] pt-3.5">
+                <div className="px-5 pb-4">
+                  <div className="border-t-[3px] border-[#09090B] pt-3">
                     <CardLabel icon={last ? GraduationCap : ListChecks} className="mb-2">
                       {tr(last ? "Qué cubre" : "Qué hice")}
                     </CardLabel>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1.5">
                       {p.points.slice(0, last ? 3 : 2).map((pt) => (
                         <li
                           key={pt}
