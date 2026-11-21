@@ -81,7 +81,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
           <motion.img
             src="/erick-portrait-studio-600.webp"
             srcSet="/erick-portrait-studio-450.webp 450w, /erick-portrait-studio-600.webp 600w"
-            sizes="(min-width: 1280px) 450px, 330px"
+            sizes="(min-width: 1280px) 450px, (min-width: 640px) 380px, calc((100vh - 485px) * 0.76)"
             width={450}
             height={592}
             fetchPriority="high"

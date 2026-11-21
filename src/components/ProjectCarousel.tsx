@@ -142,7 +142,7 @@ function Panel({
           <img
             src={webpSrc(slide.image)}
             srcSet={webpSrcSet(slide.image)}
-            sizes="(min-width: 1024px) 560px, 90vw"
+            sizes="(min-width: 1024px) 560px, 78vw"
             width={1440}
             height={900}
             alt={`Captura de ${slide.name}`}
