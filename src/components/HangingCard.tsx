@@ -153,7 +153,7 @@ export function HangingCard({
         onPointerCancel={() => {
           ptr.current.down = false;
         }}
-        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-none overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#6D28D9] active:cursor-grabbing"
+        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-pan-y overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#6D28D9] active:cursor-grabbing"
         style={{
           width,
           height: cardH,
@@ -162,8 +162,8 @@ export function HangingCard({
           willChange: "transform",
         }}
       >
-        <div className="flex justify-center pt-3">
-          <span className="block h-3 w-16 rounded-full border-2 border-[#09090B] bg-[#E4E4E7]" />
+        <div className="flex touch-none justify-center pt-1 pb-1">
+          <span className="mx-8 mt-2 mb-1 block h-3 w-16 rounded-full border-2 border-[#09090B] bg-[#E4E4E7]" />
         </div>
         <div className="mx-4 mt-3 overflow-hidden rounded-2xl border-2 border-[#09090B] bg-[#6D28D9]">
           <img

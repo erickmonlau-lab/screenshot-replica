@@ -420,3 +420,15 @@ body {
 .led-seg-off {
   background: #1b2a66;
 }
+
+/* Móvil: sin palabras sueltas al final de párrafos, listas y títulos de tarjeta */
+@media (max-width: 639px) {
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+  h3 {
+    text-wrap: balance;
+  }
+}

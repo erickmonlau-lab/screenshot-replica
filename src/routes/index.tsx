@@ -40,6 +40,7 @@ import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { SectionTitle } from "@/components/SectionTitle";
 import { CerebroBrain } from "@/components/CerebroBrain";
+import { SiteFooter } from "@/components/SiteFooter";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
 import { FormacionSection } from "@/components/FormacionSection";
@@ -755,13 +756,7 @@ function Index() {
           </div>
         </section>
 
-        {/* Footer en contraste sólido oscuro */}
-        <footer className="section-dark t-line t-muted border-t py-6 text-[15px] font-medium sm:text-base">
-          <div className="mx-auto flex max-w-[1380px] flex-wrap items-center justify-between gap-4 px-5 sm:px-8">
-            <span>© 2026 Erick Rodríguez · Portfolio</span>
-            <span>{tr("Marketing · Gestión · Desarrollo Web · ERP · Automatización IA")}</span>
-          </div>
-        </footer>
+        <SiteFooter email={email} />
       </main>
     </div>
   );

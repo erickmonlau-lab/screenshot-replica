@@ -86,7 +86,7 @@ export function GrantBand() {
                       {i + 1}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="font-display block text-[clamp(1.4rem,1.9vw,1.8rem)] leading-tight font-bold tracking-[-0.03em]">
+                      <span className="font-display block text-[clamp(1.4rem,1.9vw,1.8rem)] leading-tight font-bold [text-wrap:balance] tracking-[-0.03em]">
                         {tr(s.title)}
                       </span>
                       <span

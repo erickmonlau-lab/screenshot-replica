@@ -134,7 +134,7 @@ export function OderaloSection() {
                   >
                     {f.n}
                   </span>
-                  <p className="text-[15px] leading-snug font-semibold text-[#52525B]">
+                  <p className="text-[15px] leading-snug font-semibold text-[#52525B] [text-wrap:balance]">
                     <span className="font-display block text-[19px] font-black text-[#09090B]">
                       {f.t}
                     </span>

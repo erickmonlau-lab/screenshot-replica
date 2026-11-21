@@ -16,12 +16,11 @@ interface Metric {
 const metrics: Metric[] = [
   {
     id: "horas",
-    prefix: "+",
     from: 0,
-    to: 1000,
+    to: 932,
     suffix: " h",
-    label: "de experiencia real",
-    detail: "Marketing, gestión y desarrollo web en proyectos en producción.",
+    label: "de prácticas en empresas reales",
+    detail: "516 h de marketing digital y 416 h de gestión administrativa.",
   },
   {
     id: "acreditacion",

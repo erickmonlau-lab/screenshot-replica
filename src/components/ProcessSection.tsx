@@ -26,8 +26,8 @@ const steps = [
   {
     n: "03",
     label: "Desarrollo",
-    titlePrefix: "Lo construyo pieza a pieza,",
-    titleSuffix: "con código tipado.",
+    titlePrefix: "Lo construyo con IA,",
+    titleSuffix: "pieza a pieza y revisado.",
     text: "React y TypeScript, APIs seguras e integraciones con tus herramientas, pieza a pieza.",
     done: "Código tipado y mantenible",
   },
