@@ -60,7 +60,7 @@ export function SectionTitle({
           transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
           className={`t-ink font-display ${compact ? "mt-3 md:mt-0 md:mb-3 md:text-right" : "mt-5"} max-w-[26ch] text-[clamp(1.5rem,2.3vw,2.2rem)] leading-[1.05] font-bold tracking-[-0.04em] sm:max-w-[38ch] ${center ? "mx-auto" : ""}`}
         >
-          {sub} {accent ? <span className="text-[#6D28D9]">{accent}</span> : null}
+          {sub} {accent ? <span className="whitespace-nowrap text-[#6D28D9]">{accent}</span> : null}
         </motion.p>
       ) : null}
     </div>

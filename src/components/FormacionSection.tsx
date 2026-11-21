@@ -115,8 +115,9 @@ export function FormacionSection({
           </div>
           <h2 className="font-display max-w-[34ch] text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.5] font-bold tracking-[-0.03em] sm:text-right">
             {tr("Primero aprendí cómo funciona un negocio por dentro.")}{" "}
+            <br className="sm:hidden" />
             <span className="rounded-md bg-[#6D28D9] px-2 py-0.5 leading-[1.6] [-webkit-box-decoration-break:clone] [box-decoration-break:clone] sm:mt-1 sm:inline-block sm:py-1 sm:whitespace-nowrap">
-              {tr("Después, a construirle las herramientas.")}
+              {tr("Después, a construirle las herramientas.").replace(/\s(\S+)\s(\S+)$/, " $1 $2")}
             </span>
           </h2>
         </div>
