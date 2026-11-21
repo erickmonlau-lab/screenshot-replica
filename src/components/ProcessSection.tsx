@@ -152,7 +152,7 @@ export function ProcessSection() {
             <div className="mt-6 grid items-stretch gap-4 sm:mt-9 sm:gap-5 lg:grid-cols-12 lg:gap-6">
               {/* Tarjeta del paso */}
               <div className="relative lg:col-span-4">
-                <div className="relative h-full min-h-[9rem] sm:min-h-[22rem]">
+                <div className="relative h-full min-h-[11rem] sm:min-h-[22rem]">
                   {steps.map((s, i) => {
                     const Icon = STEP_ICONS[i]!;
                     return (
@@ -179,8 +179,8 @@ export function ProcessSection() {
                             {tr(s.label)}
                           </span>
                         </div>
-                        <div className="flex flex-1 flex-col justify-center gap-3 p-4 sm:p-5">
-                          <h3 className="font-display text-[1.6rem] leading-[1.05] sm:text-[clamp(1.9rem,2.8vw,2.6rem)] font-bold tracking-[-0.04em]">
+                        <div className="flex flex-1 flex-col justify-center gap-3 px-4 py-5 sm:p-5">
+                          <h3 className="font-display text-[1.55rem] leading-[1.18] sm:leading-[1.05] sm:text-[clamp(1.9rem,2.8vw,2.6rem)] font-bold tracking-[-0.04em]">
                             {tr(s.titlePrefix)}{" "}
                             <span className="text-[#6D28D9]">{tr(s.titleSuffix)}</span>
                           </h3>

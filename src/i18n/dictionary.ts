@@ -326,6 +326,7 @@ export const DICT: Record<string, Entry> = {
   "Regla": { ca: "Regla", en: "Rule" },
   "Nota": { ca: "Nota", en: "Note" },
   "Regla o nota": { ca: "Regla o nota", en: "Rule or note" },
+  "Toca y arrastra los puntos": { ca: "Toca i arrossega els punts", en: "Tap and drag the dots" },
   "Un punto, una nota": { ca: "Un punt, una nota", en: "One dot, one note" },
   "Decisión, regla o cliente.": { ca: "Decisió, regla o client.", en: "Decision, rule or client." },
   "Arrástralos": { ca: "Arrossega'ls", en: "Drag them" },

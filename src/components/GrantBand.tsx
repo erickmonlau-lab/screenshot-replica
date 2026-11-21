@@ -104,7 +104,7 @@ export function GrantBand() {
                     />
                   </motion.div>
                   {last ? null : (
-                    <ArrowDown size={40} strokeWidth={3.5} className="my-2 text-[#09090B]" />
+                    <ArrowDown size={40} strokeWidth={3.5} className="my-2 text-white" />
                   )}
                 </li>
               );

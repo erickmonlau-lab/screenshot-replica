@@ -57,7 +57,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       {/* Texto en outline que corre solo y reacciona al scroll */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[24%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
+        className="pointer-events-none absolute inset-x-0 top-[17%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
           text="Erick Rodríguez — Marketing · Gestión · IA — "
@@ -67,7 +67,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
 
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 top-[96px] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
+        className="pointer-events-none absolute inset-x-0 top-[250px] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
@@ -76,7 +76,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             initial={reduce ? false : { y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 1.1, ease: EASE }}
-            className="h-full w-auto max-w-[92vw] object-contain object-bottom select-none sm:max-w-none"
+            className="h-full w-auto max-w-[88vw] -translate-x-[4%] object-contain object-bottom select-none sm:max-w-none sm:translate-x-0"
           />
         </motion.div>
       </motion.div>

@@ -501,7 +501,10 @@ function Index() {
                 <div className="h-[330px] sm:h-[480px] lg:h-[520px]">
                   <CerebroBrain />
                 </div>
-                <ul className="mt-3 flex flex-wrap items-center justify-center gap-2">
+                <p className="pointer-events-none mx-auto mt-1 w-fit rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B] sm:hidden">
+                  {tr("Toca y arrastra los puntos")}
+                </p>
+                <ul className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center">
                   {(
                     [
                       ["#09090B", "Índice"],
@@ -512,7 +515,7 @@ function Index() {
                   ).map(([c, name]) => (
                     <li
                       key={name}
-                      className="flex items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-3 py-1 text-[15px] font-bold text-[#09090B]"
+                      className="flex items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-3 py-1 text-[15px] font-bold whitespace-nowrap text-[#09090B] sm:justify-start"
                     >
                       <span
                         className="h-3.5 w-3.5 rounded-full border-[2.5px] border-[#09090B]"
