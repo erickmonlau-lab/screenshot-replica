@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ChevronDown, Download, Menu, X } from "lucide-react";
 import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
+import { Flag } from "./Flag";
 import { useLanguage, type Locale } from "@/context/LanguageContext";
 
 interface NavbarProps {
@@ -160,7 +161,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               title="Disponible para proyectos"
             />
           </span>
-          <span className="font-display text-[17px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[1340px]:text-[16px]">
+          <span className="font-display text-[15px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[390px]:text-[17px] min-[1340px]:text-[16px]">
             Erick Rodríguez
           </span>
         </button>
@@ -191,7 +192,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
         </nav>
 
         {/* Herramientas */}
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <div
             className="hidden items-center gap-0.5 rounded-full border-2 border-[#52525B] bg-[#18181B] p-0.5 sm:flex"
             role="group"
@@ -223,7 +224,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               onClick={() => setLangOpen((o) => !o)}
               aria-label="Idioma"
               aria-expanded={langOpen}
-              className={`inline-flex h-10 items-center gap-1 rounded-full border-2 border-[#52525B] bg-[#18181B] pr-2 pl-3 text-[15px] leading-none font-bold text-white ${focusRing}`}
+              className={`inline-flex h-10 items-center gap-1 rounded-full border-2 border-[#52525B] bg-[#18181B] pr-1.5 pl-2.5 text-[15px] leading-none font-bold text-white ${focusRing}`}
             >
               {locale.toUpperCase()}
               <ChevronDown
@@ -233,7 +234,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               />
             </button>
             {langOpen ? (
-              <ul className="absolute top-full right-0 z-10 mt-3 w-[168px] rounded-2xl border-[3px] border-white bg-[#09090B] p-1.5 shadow-[4px_4px_0_#6D28D9]">
+              <ul className="absolute top-full right-0 z-10 mt-3 w-[204px] rounded-2xl border-[3px] border-white bg-[#09090B] p-1.5 shadow-[4px_4px_0_#6D28D9]">
                 {languages.map((lang) => {
                   const selected = locale === lang.code;
                   return (
@@ -249,8 +250,9 @@ export function Navbar({ onChangeMode }: NavbarProps) {
                           selected ? "bg-[#6D28D9] text-white" : "text-[#D4D4D8] hover:text-white"
                         }`}
                       >
-                        <span className="font-display w-6 text-[15px]">{lang.label}</span>
-                        {lang.name}
+                        <Flag code={lang.code} />
+                        <span className="flex-1">{lang.name}</span>
+                        <span className="font-display text-[14px] opacity-70">{lang.label}</span>
                       </button>
                     </li>
                   );
