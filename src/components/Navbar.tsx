@@ -350,7 +350,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             <a
               href={cvPdf.url}
               download="Erick-Rodriguez-CV.pdf"
-              className={`inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-2xl border-[3px] border-[#09090B] bg-white px-3 text-[16px] leading-none font-bold text-[#09090B] active:translate-y-[2px] sm:flex-none sm:px-6 ${focusRing}`}
+              className={`inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-2xl border-[3px] border-[#09090B] bg-white px-3 text-[16px] leading-none font-bold text-[#09090B] active:translate-y-[2px] sm:flex-none sm:px-6 ${focusRing} transition-colors hover:bg-[#F4F4F5]`}
             >
               <Download size={17} strokeWidth={2.6} />
               <span>{t.nav.downloadCv}</span>

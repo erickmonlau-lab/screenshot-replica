@@ -219,7 +219,7 @@ function Panel({
         <a
           href={slide.href}
           {...(slide.isPrivate ? {} : { target: "_blank", rel: "noopener noreferrer" })}
-          className={`${t.btn} mt-5 inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] px-6 py-3 text-base font-semibold transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]`}
+          className={`${t.btn} mt-5 inline-flex items-center gap-2 rounded-full border-2 border-[#09090B] px-6 py-3 text-base font-semibold transition-all duration-150 hover:-translate-y-0.5 active:translate-x-[2px] active:translate-y-[2px]`}
         >
           <span>{slide.ctaLabel}</span>
           <ArrowUpRight size={17} strokeWidth={2.4} />

@@ -205,7 +205,7 @@ export function ProcessSection() {
             </div>
 
             {/* Selector de pasos */}
-            <div className="mt-4 sm:mt-6">
+            <div className="mt-8 sm:mt-6">
               <ol className="grid grid-cols-5 gap-2 sm:gap-3">
                 {steps.map((st, i) => {
                   const done = i < active;

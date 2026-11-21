@@ -106,7 +106,7 @@ export function AboutSection({
           <a
             href={cvUrl}
             download="Erick-Rodriguez-CV.pdf"
-            className="inline-flex items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+            className="inline-flex items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] hover:-translate-y-0.5 hover:bg-[#5B21B6]"
           >
             <span>{tr("Descargar CV completo")}</span>
             <Download size={18} />

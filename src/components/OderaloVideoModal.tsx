@@ -55,7 +55,7 @@ export function OderaloVideoModal({ open, onClose }: { open: boolean; onClose: (
           type="button"
           onClick={onClose}
           aria-label={tr("Cerrar vídeo")}
-          className="absolute -top-3 -right-3 z-10 sm:-top-4 sm:-right-4 inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[3px_3px_0_#6D28D9] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none"
+          className="absolute -top-3 -right-3 z-10 sm:-top-4 sm:-right-4 inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[3px_3px_0_#6D28D9] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none transition-transform hover:scale-105 hover:bg-[#F4F4F5]"
         >
           <X size={20} strokeWidth={3} />
         </button>

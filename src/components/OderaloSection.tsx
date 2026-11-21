@@ -152,14 +152,14 @@ export function OderaloSection() {
               <button
                 type="button"
                 onClick={() => setVideoOpen(true)}
-                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3 text-base font-bold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:bg-[#09090B] sm:text-white sm:shadow-[5px_5px_0_#FFFFFF] sm:hover:bg-white sm:hover:text-[#09090B]"
+                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3 text-base font-bold text-[#09090B] hover:-translate-y-0.5 max-sm:hover:bg-[#F4F4F5] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:bg-[#09090B] sm:text-white sm:shadow-[5px_5px_0_#FFFFFF] sm:hover:bg-white sm:hover:text-[#09090B]"
               >
                 <Play size={18} strokeWidth={2.5} fill="currentColor" />
                 <span>{tr("Ver el vídeo")}</span>
               </button>
               <a
                 href="#contacto"
-                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-white bg-transparent px-7 py-3 text-base font-bold text-white transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:border-[#09090B] sm:bg-white sm:text-[#09090B] sm:shadow-[5px_5px_0_#09090B]"
+                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-white bg-transparent px-7 py-3 text-base font-bold text-white hover:-translate-y-0.5 max-sm:hover:bg-white max-sm:hover:text-[#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:border-[#09090B] sm:bg-white sm:text-[#09090B] sm:shadow-[5px_5px_0_#09090B]"
               >
                 <span>{t.erp.ctaDemo}</span>
                 <ArrowUpRight size={18} strokeWidth={2.5} />

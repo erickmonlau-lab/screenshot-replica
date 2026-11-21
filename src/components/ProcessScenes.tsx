@@ -362,11 +362,11 @@ export function ProcessScenes({ active }: { active: number }) {
           0{active + 1} <span className="text-[#A1A1AA]">/ 05</span>
         </span>
       </div>
-      <div className="relative lg:min-h-[300px] lg:h-[clamp(330px,46vh,430px)]">
+      <div className="relative h-[384px] lg:min-h-[300px] lg:h-[clamp(330px,46vh,430px)]">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            className="relative flex min-h-[352px] items-center lg:absolute lg:inset-0 lg:min-h-0"
+            className="relative flex h-full items-center lg:absolute lg:inset-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

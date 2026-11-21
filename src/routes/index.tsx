@@ -658,7 +658,7 @@ function Index() {
                     href={whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3.5 text-base font-bold text-white shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+                    className="inline-flex min-h-[54px] items-center justify-center gap-2.5 rounded-full border-[3px] border-[#09090B] bg-[#6D28D9] px-7 py-3.5 text-base font-bold text-white shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] hover:-translate-y-0.5 hover:bg-[#5B21B6]"
                   >
                     <WhatsAppIcon size={20} />
                     <span>{t.contact.whatsapp}</span>
@@ -668,7 +668,7 @@ function Index() {
                 <a
                   href={cvPdf.url}
                   download="Erick-Rodriguez-CV.pdf"
-                  className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+                  className="inline-flex min-h-[54px] items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] hover:-translate-y-0.5 hover:bg-[#F4F4F5]"
                 >
                   <span>{t.contact.downloadCv}</span>
                   <Download size={16} />

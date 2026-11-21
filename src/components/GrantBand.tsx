@@ -55,7 +55,7 @@ export function GrantBand() {
           </p>
           <a
             href="#contacto"
-            className="mt-8 inline-flex min-h-[54px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-8 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B]"
+            className="mt-8 inline-flex min-h-[54px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-8 py-3.5 text-base font-bold text-[#09090B] shadow-[6px_6px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] hover:-translate-y-0.5 hover:bg-[#F4F4F5]"
           >
             <span>{tr("Consultar contratación")}</span>
             <ArrowUpRight size={18} strokeWidth={2.8} />
