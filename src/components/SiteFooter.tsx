@@ -74,13 +74,10 @@ export function SiteFooter({ email }: { email: string }) {
       </div>
 
       {/* Marca de agua: el nombre en grande */}
-      <p
+      <div
         aria-hidden="true"
-        className="font-display pointer-events-none relative z-0 -mt-2 px-3 text-center text-[17.5vw] leading-[0.82] font-bold tracking-[-0.05em] whitespace-nowrap text-[#26262B] uppercase select-none sm:text-[11.5vw]"
-      >
-        <span className="block sm:inline">Erick</span>{" "}
-        <span className="block sm:inline">Rodríguez</span>
-      </p>
+        className="footer-mark font-display pointer-events-none relative z-0 -mt-2 px-3 text-center text-[17.5vw] leading-[0.82] font-bold tracking-[-0.05em] whitespace-nowrap text-[#26262B] uppercase select-none sm:text-[11.5vw]"
+      />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-4 text-[15px] font-semibold text-[#A1A1AA] sm:px-8">
         <span>© 2026 Erick Rodríguez</span>

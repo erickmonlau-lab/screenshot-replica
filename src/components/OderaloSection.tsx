@@ -1,9 +1,13 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
-import { OderaloVideoModal } from "./OderaloVideoModal";
+import { lazy, Suspense, useState } from "react";
+
 import { useReducedMotion } from "./motion-pref";
 import { useLanguage } from "@/context/LanguageContext";
+
+const OderaloVideoModal = lazy(() =>
+  import("./OderaloVideoModal").then((m) => ({ default: m.OderaloVideoModal })),
+);
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const VIOLET = "#6D28D9";
@@ -161,7 +165,11 @@ export function OderaloSection() {
                 <ArrowUpRight size={18} strokeWidth={2.5} />
               </a>
             </div>
-            <OderaloVideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
+            {videoOpen ? (
+              <Suspense fallback={null}>
+                <OderaloVideoModal open={videoOpen} onClose={() => setVideoOpen(false)} />
+              </Suspense>
+            ) : null}
           </motion.div>
 
           {/* Pantallas reales */}

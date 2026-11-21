@@ -432,3 +432,22 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Marca de agua del pie: contenido decorativo en CSS */
+.footer-mark::before {
+  content: "Erick";
+  display: block;
+}
+.footer-mark::after {
+  content: "Rodríguez";
+  display: block;
+}
+@media (min-width: 640px) {
+  .footer-mark::before,
+  .footer-mark::after {
+    display: inline;
+  }
+  .footer-mark::after {
+    margin-left: 0.25em;
+  }
+}

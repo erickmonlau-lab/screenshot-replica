@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -39,7 +39,6 @@ import { StudioHero, type HeroProjectPreview } from "@/components/StudioHero";
 import { BigHeading, SectionHeading } from "@/components/SectionHeading";
 import { ProjectCarousel } from "@/components/ProjectCarousel";
 import { SectionTitle } from "@/components/SectionTitle";
-import { CerebroBrain } from "@/components/CerebroBrain";
 import { SiteFooter } from "@/components/SiteFooter";
 import { GrantBand } from "@/components/GrantBand";
 import { AboutSection } from "@/components/AboutSection";
@@ -62,6 +61,10 @@ import {
   ScrollProgressRail,
   VelocityMarqueeRow,
 } from "@/components/portfolio-motion";
+
+const CerebroBrain = lazy(() =>
+  import("@/components/CerebroBrain").then((m) => ({ default: m.CerebroBrain })),
+);
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -500,7 +503,9 @@ function Index() {
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
                 <div className="h-[330px] sm:h-[480px] lg:h-[520px]">
-                  <CerebroBrain />
+                  <Suspense fallback={<div className="h-full w-full" />}>
+                    <CerebroBrain />
+                  </Suspense>
                 </div>
                 <p className="pointer-events-none mx-auto mt-1 w-fit rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[15px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B] sm:hidden">
                   {tr("Toca y arrastra los puntos")}
@@ -675,9 +680,9 @@ function Index() {
               <div className="min-w-0 overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[12px_12px_0_#09090B]">
                 <div className="flex items-center gap-4 border-b-[3px] border-[#09090B] bg-[#6D28D9] p-5 text-white">
                   <img
-                    src="/erick-avatar-168.webp"
-                    width={168}
-                    height={168}
+                    src="/erick-avatar-120.webp"
+                    width={84}
+                    height={84}
                     loading="lazy"
                     alt="Erick Rodríguez"
                     className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-[#09090B] bg-[#A78BFA] object-cover object-[50%_20%] shadow-[3px_3px_0_#09090B]"

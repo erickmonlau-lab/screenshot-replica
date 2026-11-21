@@ -172,9 +172,9 @@ export function Navbar({ onChangeMode }: NavbarProps) {
         >
           <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-[3px] border-[#6D28D9] bg-[#18181B]">
             <img
-              src="/erick-avatar-168.webp"
-              width={168}
-              height={168}
+              src="/erick-avatar-120.webp"
+              width={60}
+              height={60}
               alt=""
               className="h-full w-full rounded-full bg-[#6D28D9] object-cover object-[50%_20%]"
             />

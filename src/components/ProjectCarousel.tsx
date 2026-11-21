@@ -61,17 +61,17 @@ const THEMES = [
   },
 ] as const;
 
-/** /xxx-preview.png → variantes WebP /xxx-preview-560.webp y -1120.webp */
+/** /xxx-preview.png → variantes WebP /xxx-preview-560.webp y -840.webp */
 function webpBase(src: string) {
   return /\/[a-z]+-preview\.png$/.test(src) ? src.replace(/\.png$/, "") : null;
 }
 function webpSrc(src: string) {
   const b = webpBase(src);
-  return b ? `${b}-1120.webp` : src;
+  return b ? `${b}-840.webp` : src;
 }
 function webpSrcSet(src: string) {
   const b = webpBase(src);
-  return b ? `${b}-560.webp 560w, ${b}-1120.webp 1120w` : undefined;
+  return b ? `${b}-560.webp 560w, ${b}-840.webp 840w` : undefined;
 }
 
 function shortName(slide: CarouselSlide) {

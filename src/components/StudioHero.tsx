@@ -79,11 +79,11 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
-            src="/erick-portrait-studio-780.webp"
-            srcSet="/erick-portrait-studio-450.webp 450w, /erick-portrait-studio-780.webp 779w"
+            src="/erick-portrait-studio-600.webp"
+            srcSet="/erick-portrait-studio-450.webp 450w, /erick-portrait-studio-600.webp 600w"
             sizes="(min-width: 1280px) 450px, 330px"
-            width={779}
-            height={1024}
+            width={450}
+            height={592}
             fetchPriority="high"
             decoding="async"
             alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
