@@ -51,7 +51,7 @@ function Diagnostico() {
               key={r}
               initial={reduce ? false : { x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.3, ease: EASE }}
+              transition={{ duration: 0.3, delay: 0.05 + i * 0.12, ease: EASE }}
               className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1 sm:px-4 sm:py-1.5"
             >
               <span
@@ -64,7 +64,7 @@ function Diagnostico() {
               <motion.span
                 initial={reduce ? false : { scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.7 + i * 0.3 }}
+                transition={{ type: "spring", stiffness: 320, damping: 16, delay: 0.3 + i * 0.12 }}
                 className="ml-auto hidden rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] font-bold text-white sm:block"
               >
                 {tr("Fuga")}
@@ -75,7 +75,7 @@ function Diagnostico() {
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 + rows.length * 0.3, duration: 0.4 }}
+          transition={{ delay: 0.3 + rows.length * 0.12, duration: 0.25 }}
           className="mt-2 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-1.5 text-white sm:mt-3 sm:py-2"
         >
           <span className="text-[17px] font-bold">{tr("Fugas detectadas")}</span>
@@ -87,7 +87,7 @@ function Diagnostico() {
             className="pointer-events-none absolute right-0 left-0 h-1.5 bg-[#6D28D9]"
             style={{ top: 70 }}
             animate={{ y: [0, 230, 0] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
           />
         )}
       </div>
@@ -135,7 +135,7 @@ function Arquitectura() {
                   strokeWidth={3}
                   initial={{ cx: CENTER.x, cy: CENTER.y }}
                   animate={{ cx: [CENTER.x, n.x], cy: [CENTER.y, n.y] }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: "linear", delay: i * 0.45 }}
+                  transition={{ duration: 0.9, repeat: Infinity, ease: "linear", delay: i * 0.3 }}
                 />
               )}
             </g>
@@ -147,7 +147,7 @@ function Arquitectura() {
             key={n.label}
             initial={reduce ? false : { scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 200, damping: 16, delay: 0.2 + i * 0.2 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.05 + i * 0.1 }}
             className={`absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-2xl border-[3px] border-[#09090B] px-3 py-2.5 shadow-[5px_5px_0_#09090B] sm:px-4 ${n.c}`}
             style={{ left: `${(n.x / MAP_W) * 100}%`, top: `${(n.y / MAP_H) * 100}%` }}
           >
@@ -161,7 +161,7 @@ function Arquitectura() {
         <motion.div
           initial={reduce ? false : { scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 14, delay: 0.1 }}
+          transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.05 }}
           className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] px-5 py-3 text-white shadow-[5px_5px_0_#FFFFFF]"
           style={{ left: `${(CENTER.x / MAP_W) * 100}%`, top: `${(CENTER.y / MAP_H) * 100}%` }}
         >
@@ -206,7 +206,7 @@ function Desarrollo() {
               key={i}
               initial={reduce ? false : { opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 + i * 0.28 }}
+              transition={{ duration: 0.2, delay: 0.05 + i * 0.09 }}
               className="min-h-[1.7em] whitespace-pre"
             >
               {line.map((tok, j) => (
@@ -232,7 +232,7 @@ function Desarrollo() {
             key={t}
             initial={reduce ? false : { y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 2.2 + i * 0.15 }}
+            transition={{ delay: 0.8 + i * 0.1 }}
             className="rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]"
           >
             {tr(t)}
@@ -274,7 +274,7 @@ function Produccion() {
               key={r}
               initial={reduce ? false : { x: -24, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.15 + i * 0.12, ease: EASE }}
+              transition={{ duration: 0.25, delay: 0.08 + i * 0.07, ease: EASE }}
               className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5"
             >
               <span
@@ -311,9 +311,9 @@ function Automatizacion() {
               initial={reduce ? false : { y: 30, opacity: 0 }}
               animate={reduce ? { y: 0, opacity: 1 } : { y: 0, opacity: 1, scale: [1, 1.1, 1] }}
               transition={{
-                y: { duration: 0.5, delay: 0.1 + i * 0.2, ease: EASE },
-                opacity: { duration: 0.4, delay: 0.1 + i * 0.2 },
-                scale: { duration: 0.7, delay: 1 + i * 0.6, repeat: Infinity, repeatDelay: 2.4 },
+                y: { duration: 0.35, delay: 0.05 + i * 0.12, ease: EASE },
+                opacity: { duration: 0.3, delay: 0.05 + i * 0.12 },
+                scale: { duration: 0.6, delay: 0.6 + i * 0.4, repeat: Infinity, repeatDelay: 1.4 },
               }}
               className={`flex w-[82px] flex-col items-center gap-2 rounded-2xl border-[3px] border-[#09090B] py-4 shadow-[5px_5px_0_#09090B] sm:w-[112px] ${n.c}`}
             >
@@ -370,7 +370,7 @@ export function ProcessScenes({ active }: { active: number }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.15 }}
           >
             <Scene />
           </motion.div>

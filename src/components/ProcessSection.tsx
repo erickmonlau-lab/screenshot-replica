@@ -105,7 +105,7 @@ export function ProcessSection() {
 
   useEffect(() => {
     if (!staticMode || !inView || reduce) return;
-    const id = window.setTimeout(() => setActive((a) => (a + 1) % steps.length), 5500);
+    const id = window.setTimeout(() => setActive((a) => (a + 1) % steps.length), 4000);
     return () => window.clearTimeout(id);
   }, [staticMode, inView, reduce, active]);
 
@@ -164,7 +164,7 @@ export function ProcessSection() {
                           transform: `translateY(${i === active ? 0 : i < active ? -28 : 28}px)`,
                           pointerEvents: i === active ? "auto" : "none",
                           transition:
-                            "opacity 500ms cubic-bezier(0.22,1,0.36,1), transform 500ms cubic-bezier(0.22,1,0.36,1)",
+                            "opacity 300ms cubic-bezier(0.22,1,0.36,1), transform 300ms cubic-bezier(0.22,1,0.36,1)",
                         }}
                         className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[8px_8px_0_#6D28D9]"
                       >
