@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Play } from "lucide-react";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 import { useReducedMotion } from "./motion-pref";
 import { useLanguage } from "@/context/LanguageContext";
@@ -37,6 +37,14 @@ const flow = [
 export function OderaloSection() {
   const { locale, t, tr } = useLanguage();
   const [videoOpen, setVideoOpen] = useState(false);
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const apply = () => setWide(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
   const reduce = useReducedMotion();
 
   const flowData = {
@@ -174,10 +182,12 @@ export function OderaloSection() {
 
           {/* Pantallas reales */}
           <div
-            className="relative pb-[calc(clamp(4.5rem,19vw,9rem)+3.5rem)] lg:col-span-7 lg:pt-2 lg:pb-[calc(clamp(7rem,10.5vw,9.5rem)+3.5rem)]"
+            className="relative pb-[calc(clamp(4.5rem,19vw,9rem)+4rem)] sm:pb-[calc(clamp(4.5rem,19vw,9rem)+3.5rem)] lg:col-span-7 lg:pt-2 lg:pb-[calc(clamp(7rem,10.5vw,9.5rem)+3.5rem)]"
             style={{ perspective: 1600 }}
           >
-            <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>
+            <motion.div
+              style={{ rotateY: reduce || !wide ? 0 : rotY, rotateX: reduce || !wide ? 0 : rotX }}
+            >
               <div className="relative overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] p-2 shadow-[10px_10px_0_#09090B] sm:p-2.5">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-black">
                   <Screen
@@ -188,8 +198,8 @@ export function OderaloSection() {
               </div>
 
               <motion.div
-                style={{ x: reduce ? 0 : phoneX }}
-                className="absolute -bottom-2 -left-2 z-20 w-[32%] max-w-[200px] min-w-[120px] sm:-left-6 lg:-bottom-6 lg:left-0"
+                style={{ x: reduce || !wide ? 0 : phoneX }}
+                className="absolute top-10 right-2 z-20 sm:top-auto w-[30%] max-w-[200px] min-w-[104px] sm:-bottom-2 sm:right-auto sm:-left-6 sm:w-[32%] sm:min-w-[120px] lg:-bottom-6 lg:left-0"
               >
                 <div
                   className="overflow-hidden rounded-[26px] border-[3px] border-[#09090B] bg-[#09090B] p-1.5 shadow-[6px_6px_0_#09090B]"

@@ -119,10 +119,17 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
           </button>
           <button
             type="button"
-            onClick={() => onJumpToProjects("private-erp")}
+            onClick={() => {
+              const el = document.getElementById("trayectoria");
+              if (el)
+                window.scrollTo({
+                  top: el.getBoundingClientRect().top + window.scrollY - 78,
+                  behavior: "smooth",
+                });
+            }}
             className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-4 py-3 sm:px-6 text-[15px] sm:text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] sm:shadow-[5px_5px_0_#09090B] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] dark:border-white dark:bg-[#18181B] dark:text-white dark:shadow-[4px_4px_0_#ffffff]"
           >
-            <span>{t.hero.ctaErp}</span>
+            <span>{t.nav.experience}</span>
             <ArrowUpRight size={17} strokeWidth={2.5} />
           </button>
         </div>

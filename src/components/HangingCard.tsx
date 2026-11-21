@@ -23,7 +23,7 @@ export function HangingCard({
   const { tr } = useLanguage();
   const SEG = seg; // rope links
   const LINK = 22; // rest length of each link
-  const cardH = Math.round(width * 2.2);
+  const cardH = Math.round(width * 2.28);
   const [areaW, setAreaW] = useState(width + spread);
   useEffect(() => {
     setAreaW(Math.min(width + spread, Math.max(width + 20, window.innerWidth - 40)));
@@ -215,6 +215,8 @@ export function HangingCard({
           </div>
           <p className="mt-3 text-[15px] leading-tight font-semibold text-[#09090B]">
             {tr("Español y Catalán: nativos")}
+            <br />
+            {tr("Italiano: lectura")}
           </p>
         </div>
       </div>

@@ -349,6 +349,7 @@ export const DICT: Record<string, Entry> = {
     ca: "En mòbil, amb 100 en accessibilitat, bones pràctiques i SEO, a les meves webs en producció.",
     en: "On mobile, with 100 in accessibility, best practices and SEO, on my live websites.",
   },
+  "Italiano: lectura": { ca: "Italià: lectura", en: "Italian: reading" },
   "Un punto, una nota": { ca: "Un punt, una nota", en: "One dot, one note" },
   "Decisión, regla o cliente.": { ca: "Decisió, regla o client.", en: "Decision, rule or client." },
   "Arrástralos": { ca: "Arrossega'ls", en: "Drag them" },
