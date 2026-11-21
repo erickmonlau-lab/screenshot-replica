@@ -350,19 +350,23 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             <a
               href={cvPdf.url}
               download="Erick-Rodriguez-CV.pdf"
-              className={`inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-2xl border-[3px] border-[#09090B] bg-white px-3 text-[16px] leading-none font-bold text-[#09090B] active:translate-y-[2px] sm:flex-none sm:px-6 ${focusRing} transition-colors hover:bg-[#F4F4F5]`}
+              className={`inline-flex min-h-[52px] shrink-0 items-center justify-center gap-2 rounded-2xl border-[3px] border-[#09090B] bg-white px-4 text-[16px] whitespace-nowrap leading-none font-bold text-[#09090B] active:translate-y-[2px] sm:flex-none sm:px-6 ${focusRing} transition-colors hover:bg-[#F4F4F5]`}
             >
-              <Download size={17} strokeWidth={2.6} />
+              <Download size={17} strokeWidth={2.6} className="hidden min-[390px]:block" />
               <span>{t.nav.downloadCv}</span>
             </a>
           </div>
 
-          <div className="mt-3 flex items-center justify-between gap-3 border-t-2 border-[#27272A] pt-3">
+          <div className="mt-3 flex items-center justify-between gap-3 border-t-2 border-[#27272A] px-2.5 pt-3 pb-1">
             <a
               href="mailto:hola.erickrodriguez@gmail.com"
-              className={`inline-flex min-w-0 items-center gap-2.5 rounded-full text-[15px] font-semibold text-[#D4D4D8] hover:text-white ${focusRing}`}
+              className={`inline-flex min-w-0 items-center gap-2 rounded-full text-[13px] font-semibold text-[#D4D4D8] min-[390px]:text-[14px] hover:text-white ${focusRing}`}
             >
-              <Mail size={18} strokeWidth={2.4} className="shrink-0 text-[#A78BFA]" />
+              <Mail
+                size={18}
+                strokeWidth={2.4}
+                className="hidden shrink-0 text-[#A78BFA] min-[390px]:block"
+              />
               <span className="truncate">hola.erickrodriguez@gmail.com</span>
             </a>
             <a
