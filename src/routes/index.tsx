@@ -498,7 +498,7 @@ function Index() {
 
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
-                <div className="h-[270px] sm:h-[480px] lg:h-[520px]">
+                <div className="h-[330px] sm:h-[480px] lg:h-[520px]">
                   <CerebroBrain />
                 </div>
                 <ul className="mt-3 flex flex-wrap items-center justify-center gap-2">

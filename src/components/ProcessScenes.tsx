@@ -252,17 +252,17 @@ function Produccion() {
     <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
       <div className="w-full max-w-[520px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[8px_8px_0_#09090B]">
         <div className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5">
-          <span className="h-3 w-3 rounded-full border-2 border-[#09090B] bg-white" />
-          <span className="h-3 w-3 rounded-full border-2 border-[#09090B] bg-white" />
-          <span className="h-3 w-3 rounded-full border-2 border-[#09090B] bg-white" />
-          <span className="ml-2 rounded-full border-2 border-[#09090B] bg-white px-3 py-0.5 text-[15px] font-bold text-[#09090B]">
+          <span className="hidden h-3 w-3 rounded-full border-2 border-[#09090B] bg-white sm:block" />
+          <span className="hidden h-3 w-3 rounded-full border-2 border-[#09090B] bg-white sm:block" />
+          <span className="hidden h-3 w-3 rounded-full border-2 border-[#09090B] bg-white sm:block" />
+          <span className="rounded-full border-2 border-[#09090B] bg-white px-3 py-0.5 text-[15px] font-bold whitespace-nowrap text-[#09090B] sm:ml-2">
             tu-negocio.com
           </span>
           <motion.span
             initial={reduce ? false : { scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
-            className="font-display ml-auto flex items-center gap-1.5 rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] leading-none font-bold text-white"
+            className="font-display ml-auto flex items-center gap-1.5 rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] leading-none font-bold whitespace-nowrap text-white"
           >
             <Rocket size={15} strokeWidth={2.8} color="#A78BFA" />
             {tr("EN LÍNEA")}

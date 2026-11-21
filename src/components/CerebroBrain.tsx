@@ -306,9 +306,11 @@ export function CerebroBrain() {
         canvas.style.cursor = hover >= 0 ? "grab" : "default";
       }
     };
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    const GRAB = coarse ? 46 : 28;
     const onDown = (e: PointerEvent) => {
       local(e);
-      const i = nearest(28);
+      const i = nearest(GRAB);
       if (i >= 0) {
         drag = i;
         hover = i;
@@ -328,6 +330,20 @@ export function CerebroBrain() {
     canvas.addEventListener("pointerup", onUp);
     canvas.addEventListener("pointercancel", onUp);
     canvas.addEventListener("pointerleave", onLeave);
+    // En táctil: si el dedo cae sobre una nota, el gesto es para arrastrarla y no para hacer scroll
+    const onTouchStart = (e: TouchEvent) => {
+      const t = e.touches[0];
+      if (!t) return;
+      const r = canvas.getBoundingClientRect();
+      pt.x = t.clientX - r.left;
+      pt.y = t.clientY - r.top;
+      if (nearest(GRAB) >= 0) e.preventDefault();
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      if (drag >= 0) e.preventDefault();
+    };
+    canvas.addEventListener("touchstart", onTouchStart, { passive: false });
+    canvas.addEventListener("touchmove", onTouchMove, { passive: false });
 
     // ───────── animación: ola de lectura + física ─────────
     const HOP = 430;
@@ -510,6 +526,8 @@ export function CerebroBrain() {
       canvas.removeEventListener("pointerup", onUp);
       canvas.removeEventListener("pointercancel", onUp);
       canvas.removeEventListener("pointerleave", onLeave);
+      canvas.removeEventListener("touchstart", onTouchStart);
+      canvas.removeEventListener("touchmove", onTouchMove);
     };
   }, [reduce]);
 

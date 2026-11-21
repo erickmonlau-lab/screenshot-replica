@@ -77,7 +77,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
 
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 bottom-[235px] z-10 flex h-[40%] justify-center sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
+        className="pointer-events-none absolute inset-x-0 top-[28%] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img

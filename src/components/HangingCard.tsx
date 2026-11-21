@@ -153,7 +153,7 @@ export function HangingCard({
         onPointerCancel={() => {
           ptr.current.down = false;
         }}
-        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-none overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#6D28D9] active:cursor-grabbing"
+        className="pointer-events-auto absolute top-0 left-0 cursor-grab touch-pan-y overflow-hidden rounded-[22px] border-2 border-[#09090B] bg-white text-[#09090B] shadow-[7px_7px_0_#6D28D9] active:cursor-grabbing"
         style={{
           width,
           height: cardH,

@@ -181,7 +181,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               title="Disponible para proyectos"
             />
           </span>
-          <span className="font-display hidden text-[16px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[460px]:inline">
+          <span className="font-display text-[15px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[460px]:text-[16px]">
             Erick Rodríguez
           </span>
         </button>
@@ -286,7 +286,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           className="pointer-events-auto mx-auto mt-3 max-w-[1340px] rounded-3xl border-[3px] border-white bg-[#09090B] p-4 text-white shadow-[6px_6px_0_#6D28D9] min-[1340px]:hidden"
         >
           <nav aria-label="Navegación móvil" className="flex flex-col gap-1.5">
-            {navItems.map((item) => {
+            {navItems.map((item, idx) => {
               const isActive = activeId === item.id;
               return (
                 <button
@@ -294,13 +294,19 @@ export function Navbar({ onChangeMode }: NavbarProps) {
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`rounded-2xl border-2 px-4 py-3 text-left text-[17px] leading-none font-bold ${focusRing} ${
+                  className={`flex min-h-[56px] items-center gap-4 rounded-2xl border-2 px-4 py-3 text-left text-[18px] leading-none font-bold ${focusRing} ${
                     isActive
                       ? "border-white bg-[#6D28D9] text-white"
                       : "border-transparent text-[#D4D4D8] hover:border-[#52525B] hover:text-white"
                   }`}
                 >
-                  {item.label}
+                  <span
+                    className={`font-display w-7 text-[15px] ${isActive ? "text-white" : "text-[#A78BFA]"}`}
+                  >
+                    0{idx + 1}
+                  </span>
+                  <span className="flex-1">{item.label}</span>
+                  <ArrowUpRight size={18} strokeWidth={2.6} className="shrink-0 opacity-70" />
                 </button>
               );
             })}

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Bot, Check, Code2, Layers, Rocket, Search } from "lucide-react";
 import { ProcessScenes } from "./ProcessScenes";
+import { useReducedMotion } from "./motion-pref";
 import { useLanguage } from "@/context/LanguageContext";
 
 const STEP_ICONS = [Search, Layers, Code2, Rocket, Bot];
@@ -55,7 +56,21 @@ export function ProcessSection() {
   const [progress, setProgress] = useState(0);
   const { tr } = useLanguage();
 
+  const [staticMode, setStaticMode] = useState(false);
+  const [inView, setInView] = useState(false);
+  const reduce = useReducedMotion();
+
+  // En pantallas pequeñas no se fija la sección: es un bloque normal con selector y avance automático
   useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const apply = () => setStaticMode(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    if (staticMode) return;
     const update = () => {
       const el = ref.current;
       if (!el) return;
@@ -72,9 +87,33 @@ export function ProcessSection() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
+  }, [staticMode]);
+
+  useEffect(() => {
+    if (staticMode) setProgress(active / (steps.length - 1));
+  }, [staticMode, active]);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(!!e?.isIntersecting), {
+      threshold: 0.4,
+    });
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!staticMode || !inView || reduce) return;
+    const id = window.setTimeout(() => setActive((a) => (a + 1) % steps.length), 5500);
+    return () => window.clearTimeout(id);
+  }, [staticMode, inView, reduce, active]);
+
   const scrollToStep = (index: number) => {
+    if (staticMode) {
+      setActive(index);
+      return;
+    }
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -91,18 +130,18 @@ export function ProcessSection() {
       id="proceso"
       className="scroll-mt-[62px] border-t-[3px] border-[#09090B] bg-[#09090B] text-white"
     >
-      <div ref={ref} className="relative h-[340vh]">
-        <div className="sticky top-0 flex h-[100svh] min-h-[640px] lg:h-screen items-center overflow-hidden">
-          <div className="mx-auto w-full max-w-[1380px] px-5 pt-[4.4rem] pb-4 sm:px-8">
+      <div ref={ref} className="relative lg:h-[340vh]">
+        <div className="relative flex items-center overflow-hidden lg:sticky lg:top-0 lg:h-screen lg:min-h-[640px]">
+          <div className="mx-auto w-full max-w-[1380px] px-5 py-12 sm:px-8 lg:pt-[4.4rem] lg:pb-4">
             {/* Título fijo de la sección */}
-            <div className="hidden items-end justify-between gap-8 sm:flex">
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
               <p
                 aria-hidden="true"
                 className="font-display text-[clamp(2.8rem,5.4vw,4.6rem)] leading-[0.85] font-bold tracking-[-0.03em] text-white uppercase [text-shadow:0.045em_0.045em_0_#6D28D9]"
               >
                 {tr("Proceso")}
               </p>
-              <h2 className="font-display max-w-[24ch] text-right text-[clamp(1.3rem,2vw,1.75rem)] leading-[1.5] font-bold tracking-[-0.03em]">
+              <h2 className="font-display max-w-[24ch] text-left sm:text-right text-[clamp(1.3rem,2vw,1.75rem)] leading-[1.5] font-bold tracking-[-0.03em]">
                 {tr("Cinco pasos, de la auditoría a un negocio que")}{" "}
                 <span className="rounded-md bg-[#6D28D9] px-2 py-1 [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
                   {tr("funciona solo.")}
@@ -110,7 +149,7 @@ export function ProcessSection() {
               </h2>
             </div>
 
-            <div className="grid items-stretch gap-4 sm:mt-9 sm:gap-5 lg:grid-cols-12 lg:gap-6">
+            <div className="mt-6 grid items-stretch gap-4 sm:mt-9 sm:gap-5 lg:grid-cols-12 lg:gap-6">
               {/* Tarjeta del paso */}
               <div className="relative lg:col-span-4">
                 <div className="relative h-full min-h-[12rem] sm:min-h-[22rem]">
