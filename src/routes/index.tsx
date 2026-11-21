@@ -675,7 +675,10 @@ function Index() {
               <div className="min-w-0 overflow-hidden rounded-[24px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[12px_12px_0_#09090B]">
                 <div className="flex items-center gap-4 border-b-[3px] border-[#09090B] bg-[#6D28D9] p-5 text-white">
                   <img
-                    src="/erick-avatar-hq.png"
+                    src="/erick-avatar-168.webp"
+                    width={168}
+                    height={168}
+                    loading="lazy"
                     alt="Erick Rodríguez"
                     className="h-[84px] w-[84px] shrink-0 rounded-2xl border-[3px] border-[#09090B] bg-[#A78BFA] object-cover object-[50%_20%] shadow-[3px_3px_0_#09090B]"
                   />
@@ -689,7 +692,7 @@ function Index() {
                   </div>
                 </div>
 
-                <dl className="divide-y-[3px] divide-[#09090B]">
+                <ul className="divide-y-[3px] divide-[#09090B]">
                   {[
                     {
                       icon: Mail,
@@ -738,19 +741,19 @@ function Index() {
                       ),
                     },
                   ].map(({ icon: I, k, node }) => (
-                    <div key={k} className="flex items-center gap-3 p-4 sm:gap-4 sm:p-5">
+                    <li key={k} className="flex items-center gap-3 p-4 sm:gap-4 sm:p-5">
                       <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] text-[#6D28D9] sm:flex sm:h-12 sm:w-12">
                         <I size={22} strokeWidth={2.4} />
                       </span>
                       <div className="min-w-0 flex-1">
-                        <dt className="mb-1 text-[17px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
+                        <p className="mb-1 text-[17px] font-bold tracking-[0.06em] text-[#6D28D9] uppercase">
                           {k}
-                        </dt>
-                        <dd>{node}</dd>
+                        </p>
+                        <div>{node}</div>
                       </div>
-                    </div>
+                    </li>
                   ))}
-                </dl>
+                </ul>
               </div>
             </div>
           </div>

@@ -344,6 +344,11 @@ export const DICT: Record<string, Entry> = {
   },
   "Secciones": { ca: "Seccions", en: "Sections" },
   "Hecho en Barcelona": { ca: "Fet a Barcelona", en: "Made in Barcelona" },
+  "en PageSpeed Insights": { ca: "a PageSpeed Insights", en: "on PageSpeed Insights" },
+  "En móvil, con 100 en accesibilidad, buenas prácticas y SEO, en mis webs en producción.": {
+    ca: "En mòbil, amb 100 en accessibilitat, bones pràctiques i SEO, a les meves webs en producció.",
+    en: "On mobile, with 100 in accessibility, best practices and SEO, on my live websites.",
+  },
   "Un punto, una nota": { ca: "Un punt, una nota", en: "One dot, one note" },
   "Decisión, regla o cliente.": { ca: "Decisió, regla o client.", en: "Decision, rule or client." },
   "Arrástralos": { ca: "Arrossega'ls", en: "Drag them" },

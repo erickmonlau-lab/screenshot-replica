@@ -33,10 +33,11 @@ const metrics: Metric[] = [
   {
     id: "seo",
     from: 0,
-    to: 3,
-    suffix: " áreas",
-    label: "en un solo perfil",
-    detail: "Marketing digital, gestión administrativa y desarrollo con IA.",
+    to: 97,
+    suffix: "+",
+    label: "en PageSpeed Insights",
+    detail:
+      "En móvil, con 100 en accesibilidad, buenas prácticas y SEO, en mis webs en producción.",
   },
 ];
 
@@ -176,7 +177,7 @@ export function MetricsBand() {
                 transition={{ duration: 0.7, delay: i * 0.18 + 0.38, ease: [0.16, 1, 0.3, 1] }}
                 className="mt-3 text-[15px] sm:text-[16px] leading-relaxed font-medium text-[#52525B] [text-wrap:balance]"
               >
-                {tr(m.detail)}
+                {tr(m.detail).replace(/(\d) h/g, "$1 h")}
               </motion.p>
             </motion.div>
           ))}

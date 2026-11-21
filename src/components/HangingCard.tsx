@@ -167,9 +167,12 @@ export function HangingCard({
         </div>
         <div className="mx-4 mt-3 overflow-hidden rounded-2xl border-2 border-[#09090B] bg-[#6D28D9]">
           <img
-            src="/erick-portrait-studio.png"
+            src="/erick-portrait-studio-450.webp"
             alt="Erick Rodríguez"
+            width={450}
+            height={592}
             loading="lazy"
+            decoding="async"
             draggable={false}
             className="w-full object-cover object-top"
             style={{ height: Math.round(width * 0.74) }}

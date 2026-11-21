@@ -69,7 +69,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       >
         <ScrollMarquee
           text="Erick Rodríguez — Marketing · Gestión · IA — "
-          className="text-[15vh] sm:text-[30vh]"
+          className="text-[15vw] sm:text-[30vh]"
         />
       </div>
 
@@ -79,7 +79,13 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
-            src="/erick-portrait-studio.png"
+            src="/erick-portrait-studio-780.webp"
+            srcSet="/erick-portrait-studio-450.webp 450w, /erick-portrait-studio-780.webp 779w"
+            sizes="(min-width: 1280px) 450px, 330px"
+            width={779}
+            height={1024}
+            fetchPriority="high"
+            decoding="async"
             alt="Erick Rodríguez — Desarrollador Web y Automatización IA en Barcelona"
             initial={reduce ? false : { y: 100 }}
             animate={{ y: 0 }}

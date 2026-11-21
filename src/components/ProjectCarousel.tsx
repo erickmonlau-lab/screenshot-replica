@@ -61,6 +61,19 @@ const THEMES = [
   },
 ] as const;
 
+/** /xxx-preview.png → variantes WebP /xxx-preview-560.webp y -1120.webp */
+function webpBase(src: string) {
+  return /\/[a-z]+-preview\.png$/.test(src) ? src.replace(/\.png$/, "") : null;
+}
+function webpSrc(src: string) {
+  const b = webpBase(src);
+  return b ? `${b}-1120.webp` : src;
+}
+function webpSrcSet(src: string) {
+  const b = webpBase(src);
+  return b ? `${b}-560.webp 560w, ${b}-1120.webp 1120w` : undefined;
+}
+
 function shortName(slide: CarouselSlide) {
   return slide.isPrivate ? "ERP + APP" : slide.name.split(".")[0]!;
 }
@@ -127,9 +140,14 @@ function Panel({
           </div>
         ) : (
           <img
-            src={slide.image}
+            src={webpSrc(slide.image)}
+            srcSet={webpSrcSet(slide.image)}
+            sizes="(min-width: 1024px) 560px, 90vw"
+            width={1440}
+            height={900}
             alt={`Captura de ${slide.name}`}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover object-top"
           />
         )}
