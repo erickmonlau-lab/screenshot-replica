@@ -20,8 +20,11 @@ export function SiteFooter({ email }: { email: string }) {
           <p className="font-display text-[26px] leading-none font-bold tracking-[-0.03em]">
             Erick Rodríguez
           </p>
-          <p className="mt-3 max-w-[30ch] text-[17px] leading-snug font-semibold text-[#D4D4D8]">
-            {tr("Marketing digital, gestión e IA aplicada al negocio.")}
+          <p className="mt-3 max-w-[30ch] text-[17px] leading-snug font-semibold text-[#D4D4D8] [text-wrap:balance]">
+            {tr("Marketing digital, gestión e IA aplicada al negocio.").replace(
+              / (\S+) (\S+)\.?$/,
+              (m) => m.replace(/ /g, " "),
+            )}
           </p>
         </div>
 

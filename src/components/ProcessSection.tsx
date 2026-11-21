@@ -105,7 +105,7 @@ export function ProcessSection() {
 
   useEffect(() => {
     if (!staticMode || !inView || reduce) return;
-    const id = window.setTimeout(() => setActive((a) => (a + 1) % steps.length), 4000);
+    const id = window.setTimeout(() => setActive((a) => (a + 1) % steps.length), 3200);
     return () => window.clearTimeout(id);
   }, [staticMode, inView, reduce, active]);
 

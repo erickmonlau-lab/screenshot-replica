@@ -51,7 +51,7 @@ function Diagnostico() {
               key={r}
               initial={reduce ? false : { x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.3, delay: 0.05 + i * 0.12, ease: EASE }}
+              transition={{ duration: 0.3, delay: 0.013 + i * 0.06, ease: EASE }}
               className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1 sm:px-4 sm:py-1.5"
             >
               <span
@@ -64,7 +64,12 @@ function Diagnostico() {
               <motion.span
                 initial={reduce ? false : { scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 320, damping: 16, delay: 0.3 + i * 0.12 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 320,
+                  damping: 16,
+                  delay: 0.075 + i * 0.06,
+                }}
                 className="ml-auto hidden rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] font-bold text-white sm:block"
               >
                 {tr("Fuga")}
@@ -75,7 +80,7 @@ function Diagnostico() {
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 + rows.length * 0.12, duration: 0.25 }}
+          transition={{ delay: 0.075 + rows.length * 0.06, duration: 0.25 }}
           className="mt-2 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-1.5 text-white sm:mt-3 sm:py-2"
         >
           <span className="text-[17px] font-bold">{tr("Fugas detectadas")}</span>
@@ -147,7 +152,7 @@ function Arquitectura() {
             key={n.label}
             initial={reduce ? false : { scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.05 + i * 0.1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.013 + i * 0.05 }}
             className={`absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-2xl border-[3px] border-[#09090B] px-3 py-2.5 shadow-[5px_5px_0_#09090B] sm:px-4 ${n.c}`}
             style={{ left: `${(n.x / MAP_W) * 100}%`, top: `${(n.y / MAP_H) * 100}%` }}
           >
@@ -161,7 +166,7 @@ function Arquitectura() {
         <motion.div
           initial={reduce ? false : { scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.05 }}
+          transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.025 }}
           className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5 rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] px-5 py-3 text-white shadow-[5px_5px_0_#FFFFFF]"
           style={{ left: `${(CENTER.x / MAP_W) * 100}%`, top: `${(CENTER.y / MAP_H) * 100}%` }}
         >
@@ -206,7 +211,7 @@ function Desarrollo() {
               key={i}
               initial={reduce ? false : { opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.2, delay: 0.05 + i * 0.09 }}
+              transition={{ duration: 0.2, delay: 0.013 + i * 0.045 }}
               className="min-h-[1.7em] whitespace-pre"
             >
               {line.map((tok, j) => (
@@ -232,7 +237,7 @@ function Desarrollo() {
             key={t}
             initial={reduce ? false : { y: 16, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8 + i * 0.1 }}
+            transition={{ delay: 0.2 + i * 0.05 }}
             className="rounded-full border-[3px] border-[#09090B] bg-white px-4 py-1.5 text-[16px] font-bold text-[#09090B] shadow-[3px_3px_0_#09090B]"
           >
             {tr(t)}
@@ -261,7 +266,7 @@ function Produccion() {
           <motion.span
             initial={reduce ? false : { scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 14, delay: 0.05 }}
             className="font-display ml-auto flex items-center gap-1.5 rounded-lg bg-[#09090B] px-2.5 py-1 text-[15px] leading-none font-bold whitespace-nowrap text-white"
           >
             <Rocket size={15} strokeWidth={2.8} color="#A78BFA" />
@@ -274,7 +279,7 @@ function Produccion() {
               key={r}
               initial={reduce ? false : { x: -24, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.25, delay: 0.08 + i * 0.07, ease: EASE }}
+              transition={{ duration: 0.25, delay: 0.02 + i * 0.035, ease: EASE }}
               className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5"
             >
               <span
@@ -311,9 +316,9 @@ function Automatizacion() {
               initial={reduce ? false : { y: 30, opacity: 0 }}
               animate={reduce ? { y: 0, opacity: 1 } : { y: 0, opacity: 1, scale: [1, 1.1, 1] }}
               transition={{
-                y: { duration: 0.35, delay: 0.05 + i * 0.12, ease: EASE },
-                opacity: { duration: 0.3, delay: 0.05 + i * 0.12 },
-                scale: { duration: 0.6, delay: 0.6 + i * 0.4, repeat: Infinity, repeatDelay: 1.4 },
+                y: { duration: 0.35, delay: 0.013 + i * 0.06, ease: EASE },
+                opacity: { duration: 0.3, delay: 0.013 + i * 0.06 },
+                scale: { duration: 0.6, delay: 0.15 + i * 0.2, repeat: Infinity, repeatDelay: 1.4 },
               }}
               className={`flex w-[82px] flex-col items-center gap-2 rounded-2xl border-[3px] border-[#09090B] py-4 shadow-[5px_5px_0_#09090B] sm:w-[112px] ${n.c}`}
             >
