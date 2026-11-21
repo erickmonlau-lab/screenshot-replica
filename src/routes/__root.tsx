@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import appCss from "../styles.css?url";
+import appCss from "../styles.css?inline";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LanguageProvider } from "../context/LanguageContext";
 
@@ -137,12 +137,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         }),
       },
     ],
+    styles: [{ children: appCss }],
     links: [
       { rel: "canonical", href: "https://erickrodriguez.es/" },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
