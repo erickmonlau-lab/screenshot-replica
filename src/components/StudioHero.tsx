@@ -69,7 +69,8 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       >
         <ScrollMarquee
           text="Erick Rodríguez — Marketing · Gestión · IA — "
-          className="text-[15vw] sm:text-[30vh]"
+          speed={wide ? -1.1 : -1.7}
+          className="text-[19vw] sm:text-[30vh]"
         />
       </div>
 
