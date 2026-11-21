@@ -57,7 +57,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
       {/* Texto en outline que corre solo y reacciona al scroll */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-[29%] z-0 hidden overflow-hidden sm:top-[46%] sm:block sm:-translate-y-1/2"
+        className="pointer-events-none absolute inset-x-0 top-[24%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
           text="Erick Rodríguez — Marketing · Gestión · IA — "
@@ -65,19 +65,9 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         />
       </div>
 
-      {/* Móvil: el nombre completo, fijo y a todo el ancho (el rótulo que corre se corta) */}
-      <p
-        aria-hidden="true"
-        className="font-display pointer-events-none absolute inset-x-0 top-[22%] z-0 px-4 text-[15.5vw] leading-[0.88] font-bold tracking-[-0.03em] text-[#09090B] uppercase [text-shadow:0.045em_0.045em_0_#6D28D9] sm:hidden"
-      >
-        Erick
-        <br />
-        Rodríguez
-      </p>
-
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 top-[28%] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
+        className="pointer-events-none absolute inset-x-0 top-[96px] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
@@ -86,7 +76,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             initial={reduce ? false : { y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 1.1, ease: EASE }}
-            className="h-full w-auto max-w-none object-contain object-bottom select-none"
+            className="h-full w-auto max-w-[92vw] object-contain object-bottom select-none sm:max-w-none"
           />
         </motion.div>
       </motion.div>

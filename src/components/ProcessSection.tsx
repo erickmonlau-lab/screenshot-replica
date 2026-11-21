@@ -132,7 +132,7 @@ export function ProcessSection() {
     >
       <div ref={ref} className="relative lg:h-[340vh]">
         <div className="relative flex items-center overflow-hidden lg:sticky lg:top-0 lg:h-screen lg:min-h-[640px]">
-          <div className="mx-auto w-full max-w-[1380px] px-5 py-12 sm:px-8 lg:pt-[4.4rem] lg:pb-4">
+          <div className="mx-auto w-full max-w-[1380px] px-5 py-8 sm:px-8 sm:py-12 lg:pt-[4.4rem] lg:pb-4">
             {/* Título fijo de la sección */}
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
               <p
@@ -152,7 +152,7 @@ export function ProcessSection() {
             <div className="mt-6 grid items-stretch gap-4 sm:mt-9 sm:gap-5 lg:grid-cols-12 lg:gap-6">
               {/* Tarjeta del paso */}
               <div className="relative lg:col-span-4">
-                <div className="relative h-full min-h-[12rem] sm:min-h-[22rem]">
+                <div className="relative h-full min-h-[9rem] sm:min-h-[22rem]">
                   {steps.map((s, i) => {
                     const Icon = STEP_ICONS[i]!;
                     return (
@@ -169,7 +169,7 @@ export function ProcessSection() {
                         className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[8px_8px_0_#6D28D9]"
                       >
                         <div className="flex items-center gap-3 border-b-[3px] border-[#09090B] bg-[#6D28D9] px-4 py-3 text-white">
-                          <span className="font-display text-[clamp(2.6rem,4vw,3.6rem)] leading-none font-bold tracking-[-0.04em]">
+                          <span className="font-display text-[2.2rem] leading-none font-bold tracking-[-0.04em] sm:text-[clamp(2.6rem,4vw,3.6rem)]">
                             {s.n}
                           </span>
                           <span className="flex h-11 w-11 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
@@ -179,8 +179,8 @@ export function ProcessSection() {
                             {tr(s.label)}
                           </span>
                         </div>
-                        <div className="flex flex-1 flex-col justify-center gap-3 p-5">
-                          <h3 className="font-display text-[clamp(1.9rem,2.8vw,2.6rem)] leading-[1.05] font-bold tracking-[-0.04em]">
+                        <div className="flex flex-1 flex-col justify-center gap-3 p-4 sm:p-5">
+                          <h3 className="font-display text-[1.6rem] leading-[1.05] sm:text-[clamp(1.9rem,2.8vw,2.6rem)] font-bold tracking-[-0.04em]">
                             {tr(s.titlePrefix)}{" "}
                             <span className="text-[#6D28D9]">{tr(s.titleSuffix)}</span>
                           </h3>
