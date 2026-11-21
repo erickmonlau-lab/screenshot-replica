@@ -109,7 +109,7 @@ export function OderaloSection() {
                 <>
                   {t.erp.headline.split(",")[0]},
                   <br />
-                  <span className="mt-1 inline-block whitespace-nowrap rounded-lg bg-[#09090B] px-2.5 text-white">
+                  <span className="mt-5 inline-block rounded-lg bg-[#09090B] px-2.5 pb-1 text-white">
                     {t.erp.headline.split(",")[1]?.trim() || ""}
                   </span>
                 </>

@@ -634,7 +634,7 @@ function Index() {
                 <h2 className="font-display mt-6 text-[clamp(3rem,6.7vw,6.6rem)] leading-[0.9] font-bold tracking-[-0.06em]">
                   {t.contact.title}
                   <span className="mt-3 block">
-                    <span className="inline-block rounded-xl bg-[#6D28D9] px-4 pt-[0.04em] pb-[0.24em] leading-[1] text-white">
+                    <span className="rounded-xl bg-[#6D28D9] px-4 py-[0.02em] leading-[1.3] text-white [-webkit-box-decoration-break:clone] [box-decoration-break:clone]">
                       {t.contact.titleHighlight}
                     </span>
                   </span>
