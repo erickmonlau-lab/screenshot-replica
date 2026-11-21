@@ -264,6 +264,10 @@ export const DICT: Record<string, Entry> = {
     ca: "Rutines d'altres atletes a l'app.",
     en: "Other athletes' routines in the app.",
   },
+  "Hablemos de tu Web App": {
+    ca: "Parlem de la teva Web App",
+    en: "Let's talk about your Web App",
+  },
   "Pídeme una propuesta de Web App": {
     ca: "Demana'm una proposta de Web App",
     en: "Ask me for a Web App proposal",

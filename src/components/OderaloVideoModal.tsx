@@ -40,12 +40,14 @@ export function OderaloVideoModal({ open, onClose }: { open: boolean; onClose: (
       role="dialog"
       aria-modal="true"
       aria-label={tr("Vídeo de Oderalo")}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#09090B] p-4 sm:p-8"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#09090B] p-6 sm:p-8"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[min(1280px,calc((100vh_-_7rem)*1.7778))] rounded-[22px] border-[3px] border-white bg-[#09090B] p-2 shadow-[10px_10px_0_#6D28D9] sm:p-3"
-        style={vertical ? { maxWidth: "min(92vw, calc((100vh - 7rem) * 0.8))" } : undefined}
+        className="relative w-full max-w-[min(1280px,calc((100vh_-_7rem)*1.7778))] rounded-[22px] border-[3px] border-white bg-[#09090B] p-2 shadow-[6px_6px_0_#6D28D9] sm:p-3 sm:shadow-[10px_10px_0_#6D28D9]"
+        style={
+          vertical ? { maxWidth: "min(calc(100vw - 4rem), calc((100vh - 7rem) * 0.8))" } : undefined
+        }
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -53,7 +55,7 @@ export function OderaloVideoModal({ open, onClose }: { open: boolean; onClose: (
           type="button"
           onClick={onClose}
           aria-label={tr("Cerrar vídeo")}
-          className="absolute -top-4 -right-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[3px_3px_0_#6D28D9] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none"
+          className="absolute -top-3 -right-3 z-10 sm:-top-4 sm:-right-4 inline-flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[3px_3px_0_#6D28D9] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none"
         >
           <X size={20} strokeWidth={3} />
         </button>

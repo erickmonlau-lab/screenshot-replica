@@ -84,7 +84,7 @@ export function OderaloSection() {
       {/* Palabra gigante en contorno: las pantallas la cruzan */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-[5%] mx-auto flex w-full max-w-[1720px] justify-end px-6 sm:px-10"
+        className="pointer-events-none absolute inset-x-0 bottom-[5%] mx-auto flex w-full max-w-[1720px] justify-center px-6 sm:px-10 lg:justify-end"
       >
         <motion.div
           style={{ x: reduce ? 0 : wordX }}
@@ -144,18 +144,18 @@ export function OderaloSection() {
               ))}
             </ol>
 
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => setVideoOpen(true)}
-                className="inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
+                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3 text-base font-bold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:bg-[#09090B] sm:text-white sm:shadow-[5px_5px_0_#FFFFFF] sm:hover:bg-white sm:hover:text-[#09090B]"
               >
                 <Play size={18} strokeWidth={2.5} fill="currentColor" />
                 <span>{tr("Ver el vídeo")}</span>
               </button>
               <a
                 href="#contacto"
-                className="inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-white px-7 py-3 text-base font-bold text-[#09090B] shadow-[5px_5px_0_#09090B] transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px]"
+                className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border-[3px] border-white bg-transparent px-7 py-3 text-base font-bold text-white transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] sm:w-auto sm:justify-start sm:border-[#09090B] sm:bg-white sm:text-[#09090B] sm:shadow-[5px_5px_0_#09090B]"
               >
                 <span>{t.erp.ctaDemo}</span>
                 <ArrowUpRight size={18} strokeWidth={2.5} />

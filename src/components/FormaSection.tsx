@@ -138,7 +138,7 @@ export function FormaSection() {
             href="#contacto"
             className="mt-8 inline-flex min-h-[52px] items-center gap-2 rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-7 py-3 text-base font-bold text-white shadow-[5px_5px_0_#FFFFFF] transition-all duration-150 hover:bg-white hover:text-[#09090B] active:translate-x-[2px] active:translate-y-[2px]"
           >
-            <span>{tr("Pídeme una propuesta de Web App")}</span>
+            <span>{tr("Hablemos de tu Web App")}</span>
             <ArrowUpRight size={18} strokeWidth={2.5} />
           </a>
         </motion.div>
