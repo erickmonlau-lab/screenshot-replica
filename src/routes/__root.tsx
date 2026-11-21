@@ -82,21 +82,63 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Erick Rodríguez — Desarrollo web e IA" },
+      { title: "Erick Rodríguez — Marketing digital, gestión e IA en Barcelona" },
       {
         name: "description",
-        content: "Desarrollo web, apps y automatización con IA desde Barcelona.",
+        content:
+          "Técnico en marketing digital y gestión administrativa, con acreditación oficial en transformación digital. Diseño y construyo herramientas a medida con IA. Barcelona.",
       },
       { name: "author", content: "Erick Rodríguez" },
-      { property: "og:title", content: "Erick Rodríguez — Desarrollo web e IA" },
+      {
+        property: "og:title",
+        content: "Erick Rodríguez — Marketing digital, gestión e IA en Barcelona",
+      },
       {
         property: "og:description",
-        content: "Soluciones digitales completas, desde la idea hasta producción.",
+        content:
+          "Marketing digital, gestión administrativa y desarrollo con IA aplicada al negocio. Casos reales en producción.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://erickrodriguez.es/" },
+      { property: "og:site_name", content: "Erick Rodríguez" },
+      { property: "og:locale", content: "es_ES" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "@id": "https://erickrodriguez.es/#persona",
+          name: "Erick Rodríguez",
+          alternateName: "Erick Rodríguez Martínez",
+          url: "https://erickrodriguez.es/",
+          jobTitle: "Técnico en Marketing Digital y Gestión Administrativa",
+          description:
+            "Técnico en marketing digital y gestión administrativa, con acreditación oficial en transformación digital. Diseña y construye herramientas a medida con IA.",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Barcelona",
+            addressCountry: "ES",
+          },
+          alumniOf: { "@type": "EducationalOrganization", name: "Monlau Formación Profesional" },
+          knowsLanguage: ["es", "ca", "en"],
+          knowsAbout: [
+            "Marketing digital",
+            "SEO",
+            "Gestión administrativa",
+            "Transformación digital",
+            "Automatización de procesos",
+            "Inteligencia artificial aplicada",
+            "ERP",
+          ],
+          sameAs: ["https://www.linkedin.com/in/erick-rodriguez-martinez"],
+        }),
+      },
+    ],
     links: [
+      { rel: "canonical", href: "https://erickrodriguez.es/" },
       {
         rel: "preconnect",
         href: "https://fonts.googleapis.com",

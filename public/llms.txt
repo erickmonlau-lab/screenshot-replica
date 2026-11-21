@@ -1,0 +1,17 @@
+# Erick Rodríguez
+
+> Técnico en marketing digital y gestión administrativa en Barcelona, con acreditación oficial de la Generalitat de Catalunya en transformación digital (375 h). Diseña y construye herramientas a medida con IA.
+
+## Perfil
+- Formación: CFGS en Marketing y Publicidad y CFGM en Gestión Administrativa (Monlau Formación Profesional, Barcelona).
+- Experiencia: prácticas en marketing digital (516 h) y en gestión administrativa y logística (416 h).
+- Idiomas: español y catalán (nativos) e inglés.
+- Ubicación: Barcelona (presencial, híbrido o remoto).
+
+## Trabajos
+- Oderalo: ERP para empresas de servicios, de la cita a la factura sin papeles. Diseñado por Erick y construido con IA.
+- diversplas.es, gesgrama.com y breadpdf.com: webs en producción.
+
+## Enlaces
+- Web: https://erickrodriguez.es/
+- LinkedIn: https://www.linkedin.com/in/erick-rodriguez-martinez
