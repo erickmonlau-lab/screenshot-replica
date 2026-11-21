@@ -28,7 +28,7 @@ interface StudioHeroProps {
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
-  const { t } = useLanguage();
+  const { t, tr } = useLanguage();
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -68,7 +68,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="pointer-events-none absolute inset-x-0 top-[17%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
-          text="Erick Rodríguez · Marketing · Gestión · IA · "
+          text={`Erick Rodríguez · ${tr("Marketing")} · ${tr("Gestión")} · ${tr("IA")} · `}
           speed={wide ? -1.1 : -1.7}
           className="text-[19vw] sm:text-[30vh]"
         />
