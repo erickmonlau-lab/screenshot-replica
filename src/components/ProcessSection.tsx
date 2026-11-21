@@ -92,7 +92,7 @@ export function ProcessSection() {
       className="scroll-mt-[62px] border-t-[3px] border-[#09090B] bg-[#09090B] text-white"
     >
       <div ref={ref} className="relative h-[340vh]">
-        <div className="sticky top-0 flex h-screen min-h-[640px] items-center overflow-hidden">
+        <div className="sticky top-0 flex h-[100svh] min-h-[640px] lg:h-screen items-center overflow-hidden">
           <div className="mx-auto w-full max-w-[1380px] px-5 pt-[4.4rem] pb-4 sm:px-8">
             {/* Título fijo de la sección */}
             <div className="hidden items-end justify-between gap-8 sm:flex">
@@ -110,10 +110,10 @@ export function ProcessSection() {
               </h2>
             </div>
 
-            <div className="grid items-stretch gap-5 sm:mt-9 lg:grid-cols-12 lg:gap-6">
+            <div className="grid items-stretch gap-4 sm:mt-9 sm:gap-5 lg:grid-cols-12 lg:gap-6">
               {/* Tarjeta del paso */}
               <div className="relative lg:col-span-4">
-                <div className="relative h-full min-h-[13.5rem] sm:min-h-[22rem]">
+                <div className="relative h-full min-h-[12rem] sm:min-h-[22rem]">
                   {steps.map((s, i) => {
                     const Icon = STEP_ICONS[i]!;
                     return (
@@ -166,7 +166,7 @@ export function ProcessSection() {
             </div>
 
             {/* Selector de pasos */}
-            <div className="mt-6">
+            <div className="mt-4 sm:mt-6">
               <ol className="grid grid-cols-5 gap-2 sm:gap-3">
                 {steps.map((st, i) => {
                   const done = i < active;

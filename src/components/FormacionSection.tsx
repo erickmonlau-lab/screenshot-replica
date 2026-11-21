@@ -168,7 +168,7 @@ export function FormacionSection({
                     </p>
                     <div className="mt-3 flex flex-col gap-2">
                       {c.learned.map((row) => (
-                        <ul key={row.join()} className="flex gap-2.5">
+                        <ul key={row.join()} className="flex flex-wrap gap-2.5 lg:flex-nowrap">
                           {row.map((l) => (
                             <li
                               key={l}

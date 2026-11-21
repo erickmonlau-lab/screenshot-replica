@@ -77,7 +77,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
 
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 bottom-[150px] z-10 flex h-[48%] justify-center sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
+        className="pointer-events-none absolute inset-x-0 bottom-[235px] z-10 flex h-[40%] justify-center sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
@@ -107,7 +107,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
           <button
             type="button"
             onClick={() => onJumpToProjects()}
-            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-6 py-3 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#6D28D9] sm:shadow-[5px_5px_0_#6D28D9] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#6D28D9] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#6D28D9]"
+            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-[#09090B] px-4 py-3 sm:px-6 text-[15px] sm:text-[16px] font-bold text-white shadow-[4px_4px_0_#6D28D9] sm:shadow-[5px_5px_0_#6D28D9] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#6D28D9] dark:border-white dark:bg-white dark:text-[#09090B] dark:shadow-[4px_4px_0_#6D28D9]"
           >
             <span>{t.hero.ctaProjects}</span>
             <ArrowDown size={17} strokeWidth={2.5} />
@@ -115,7 +115,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
           <button
             type="button"
             onClick={() => onJumpToProjects("private-erp")}
-            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-6 py-3 text-[15px] sm:text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] sm:shadow-[5px_5px_0_#09090B] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] dark:border-white dark:bg-[#18181B] dark:text-white dark:shadow-[4px_4px_0_#ffffff]"
+            className="group inline-flex min-h-[50px] items-center gap-2 rounded-full border-2 border-[#09090B] bg-white px-4 py-3 sm:px-6 text-[15px] sm:text-[16px] font-bold text-[#09090B] shadow-[4px_4px_0_#09090B] sm:shadow-[5px_5px_0_#09090B] transition-all duration-150 hover:scale-[1.02] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[2px_2px_0_#09090B] dark:border-white dark:bg-[#18181B] dark:text-white dark:shadow-[4px_4px_0_#ffffff]"
           >
             <span>{t.hero.ctaErp}</span>
             <ArrowUpRight size={17} strokeWidth={2.5} />

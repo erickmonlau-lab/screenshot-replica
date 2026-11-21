@@ -33,7 +33,7 @@ function Diagnostico() {
   ];
   return (
     <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8">
-      <div className="relative w-full max-w-[560px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white p-4 shadow-[8px_8px_0_#09090B] sm:p-5">
+      <div className="relative w-full max-w-[560px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white p-3 shadow-[8px_8px_0_#09090B] sm:p-5">
         <div className="flex items-center gap-3">
           <span
             className="flex h-11 w-11 items-center justify-center rounded-xl border-[3px] border-[#09090B]"
@@ -41,21 +41,21 @@ function Diagnostico() {
           >
             <Search size={22} strokeWidth={3} color="#FFFFFF" />
           </span>
-          <p className="font-display text-[26px] leading-none font-bold tracking-[-0.04em] text-[#09090B]">
+          <p className="font-display text-[22px] leading-none font-bold tracking-[-0.04em] text-[#09090B] sm:text-[26px]">
             {tr("Auditoría de tu negocio")}
           </p>
         </div>
-        <ul className="mt-3 grid gap-2">
+        <ul className="mt-2.5 grid gap-1.5 sm:mt-3 sm:gap-2">
           {rows.map((r, i) => (
             <motion.li
               key={r}
               initial={reduce ? false : { x: -40, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 + i * 0.3, ease: EASE }}
-              className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1.5 sm:px-4"
+              className="flex items-center gap-3 rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-1 sm:px-4 sm:py-1.5"
             >
               <span
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-[#09090B]"
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border-2 border-[#09090B] sm:h-8 sm:w-8"
                 style={{ background: VIOLET }}
               >
                 <X size={18} strokeWidth={4} color="#FFFFFF" />
@@ -76,7 +76,7 @@ function Diagnostico() {
           initial={reduce ? false : { opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 + rows.length * 0.3, duration: 0.4 }}
-          className="mt-3 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-2 text-white"
+          className="mt-2 flex items-center justify-between rounded-xl bg-[#09090B] px-4 py-1.5 text-white sm:mt-3 sm:py-2"
         >
           <span className="text-[17px] font-bold">{tr("Fugas detectadas")}</span>
           <span className="font-display text-[30px] leading-none font-bold">{rows.length}</span>
@@ -362,7 +362,7 @@ export function ProcessScenes({ active }: { active: number }) {
           0{active + 1} <span className="text-[#A1A1AA]">/ 05</span>
         </span>
       </div>
-      <div className="relative min-h-[300px] lg:h-[clamp(330px,46vh,430px)]">
+      <div className="relative min-h-[350px] lg:min-h-[300px] lg:h-[clamp(330px,46vh,430px)]">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}

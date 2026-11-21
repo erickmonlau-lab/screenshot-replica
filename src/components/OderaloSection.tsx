@@ -166,7 +166,7 @@ export function OderaloSection() {
 
           {/* Pantallas reales */}
           <div
-            className="relative pb-10 lg:col-span-7 lg:pt-2 lg:pb-[calc(clamp(7rem,10.5vw,9.5rem)+3.5rem)]"
+            className="relative pb-[calc(clamp(4.5rem,19vw,9rem)+3.5rem)] lg:col-span-7 lg:pt-2 lg:pb-[calc(clamp(7rem,10.5vw,9.5rem)+3.5rem)]"
             style={{ perspective: 1600 }}
           >
             <motion.div style={{ rotateY: reduce ? 0 : rotY, rotateX: reduce ? 0 : rotX }}>

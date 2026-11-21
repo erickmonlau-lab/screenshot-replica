@@ -498,7 +498,7 @@ function Index() {
 
               {/* Mi cerebro: cada punto es una nota */}
               <div className="lg:col-span-7">
-                <div className="h-[380px] sm:h-[480px] lg:h-[520px]">
+                <div className="h-[270px] sm:h-[480px] lg:h-[520px]">
                   <CerebroBrain />
                 </div>
                 <ul className="mt-3 flex flex-wrap items-center justify-center gap-2">
@@ -694,7 +694,7 @@ function Index() {
                         <div className="flex min-w-0 items-center justify-between gap-3">
                           <a
                             href={`mailto:${email}`}
-                            className="font-display min-w-0 text-[clamp(16px,1.5vw,19px)] font-bold tracking-[-0.02em] break-all hover:text-[#6D28D9]"
+                            className="font-display min-w-0 text-[clamp(15px,4.1vw,19px)] font-bold tracking-[-0.02em] break-all sm:text-[clamp(16px,1.5vw,19px)] hover:text-[#6D28D9]"
                           >
                             {email}
                           </a>
@@ -734,8 +734,8 @@ function Index() {
                       ),
                     },
                   ].map(({ icon: I, k, node }) => (
-                    <div key={k} className="flex items-center gap-4 p-5">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] text-[#6D28D9]">
+                    <div key={k} className="flex items-center gap-3 p-4 sm:gap-4 sm:p-5">
+                      <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-[#F4F4F5] text-[#6D28D9] sm:flex sm:h-12 sm:w-12">
                         <I size={22} strokeWidth={2.4} />
                       </span>
                       <div className="min-w-0 flex-1">

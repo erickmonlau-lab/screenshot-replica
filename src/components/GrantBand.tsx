@@ -74,12 +74,12 @@ export function GrantBand() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-10% 0px" }}
                     transition={{ duration: 0.6, delay: 0.1 + i * 0.2, ease: EASE }}
-                    className={`flex w-full items-center gap-4 rounded-[20px] border-[3px] border-[#09090B] p-5 shadow-[8px_8px_0_#09090B] sm:p-6 ${
+                    className={`flex w-full items-center gap-4 rounded-[20px] border-[3px] border-[#09090B] p-4 shadow-[8px_8px_0_#09090B] sm:p-6 ${
                       last ? "bg-[#F59E0B] text-[#09090B]" : "bg-white text-[#09090B]"
                     }`}
                   >
                     <span
-                      className={`font-display flex h-[4.25rem] w-[4.25rem] shrink-0 items-center justify-center rounded-2xl border-[3px] border-[#09090B] text-[34px] leading-none font-bold ${
+                      className={`font-display flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-[3px] border-[#09090B] text-[28px] sm:h-[4.25rem] sm:w-[4.25rem] sm:text-[34px] leading-none font-bold ${
                         last ? "bg-[#09090B] text-white" : "bg-[#6D28D9] text-white"
                       }`}
                     >
@@ -90,7 +90,7 @@ export function GrantBand() {
                         {tr(s.title)}
                       </span>
                       <span
-                        className={`mt-1 block text-[18px] leading-snug font-semibold [text-wrap:balance] ${
+                        className={`mt-1 block text-[18px] leading-snug font-semibold sm:[text-wrap:balance] ${
                           last ? "text-[#09090B]" : "text-[#3F3F46]"
                         }`}
                       >
