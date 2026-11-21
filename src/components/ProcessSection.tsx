@@ -132,7 +132,7 @@ export function ProcessSection() {
     >
       <div ref={ref} className="relative lg:h-[340vh]">
         <div className="relative flex items-center overflow-hidden lg:sticky lg:top-0 lg:h-screen lg:min-h-[640px]">
-          <div className="mx-auto w-full max-w-[1380px] px-5 py-8 sm:px-8 sm:py-12 lg:pt-[4.4rem] lg:pb-4">
+          <div className="mx-auto w-full max-w-[1380px] px-5 py-6 sm:px-8 sm:py-12 lg:pt-[4.4rem] lg:pb-4">
             {/* Título fijo de la sección */}
             <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
               <p

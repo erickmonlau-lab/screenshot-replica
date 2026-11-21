@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, ChevronDown, Download, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Download, Linkedin, Mail, Menu, X } from "lucide-react";
 import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 import { Flag } from "./Flag";
 import { useLanguage, type Locale } from "@/context/LanguageContext";
@@ -297,9 +297,9 @@ export function Navbar({ onChangeMode }: NavbarProps) {
       {mobileOpen ? (
         <div
           id="menu-movil"
-          className="pointer-events-auto mx-auto mt-3 max-w-[1340px] rounded-3xl border-[3px] border-white bg-[#09090B] p-4 text-white shadow-[6px_6px_0_#6D28D9] min-[1340px]:hidden"
+          className="pointer-events-auto mx-auto mt-3 max-h-[calc(100svh-96px)] max-w-[1340px] overflow-y-auto rounded-[28px] border-[3px] border-white bg-[#09090B] p-3 text-white shadow-[6px_6px_0_#6D28D9] min-[1340px]:hidden"
         >
-          <nav aria-label="Navegación móvil" className="flex flex-col gap-1.5">
+          <nav aria-label="Navegación móvil" className="grid gap-2">
             {navItems.map((item, idx) => {
               const isActive = activeId === item.id;
               return (
@@ -308,41 +308,71 @@ export function Navbar({ onChangeMode }: NavbarProps) {
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={isActive ? "true" : undefined}
-                  className={`flex min-h-[56px] items-center gap-4 rounded-2xl border-2 px-4 py-3 text-left text-[18px] leading-none font-bold ${focusRing} ${
+                  className={`flex min-h-[58px] items-center gap-3 rounded-2xl border-[3px] px-2.5 text-left transition-all duration-150 active:translate-x-[2px] active:translate-y-[2px] ${focusRing} ${
                     isActive
-                      ? "border-white bg-[#6D28D9] text-white"
-                      : "border-transparent text-[#D4D4D8] hover:border-[#52525B] hover:text-white"
+                      ? "border-white bg-[#6D28D9] shadow-[4px_4px_0_#A78BFA]"
+                      : "border-[#3F3F46] bg-[#18181B] hover:border-white"
                   }`}
                 >
                   <span
-                    className={`font-display w-7 text-[15px] ${isActive ? "text-white" : "text-[#A78BFA]"}`}
+                    className={`font-display flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-2 text-[15px] leading-none font-bold ${
+                      isActive
+                        ? "border-[#09090B] bg-white text-[#6D28D9]"
+                        : "border-[#3F3F46] bg-[#09090B] text-[#A78BFA]"
+                    }`}
                   >
                     0{idx + 1}
                   </span>
-                  <span className="flex-1">{item.label}</span>
-                  <ArrowUpRight size={18} strokeWidth={2.6} className="shrink-0 opacity-70" />
+                  <span className="font-display flex-1 text-[21px] leading-none font-bold tracking-[-0.02em]">
+                    {item.label}
+                  </span>
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 ${
+                      isActive ? "border-white" : "border-[#52525B] text-[#A1A1AA]"
+                    }`}
+                  >
+                    <ArrowUpRight size={16} strokeWidth={2.8} />
+                  </span>
                 </button>
               );
             })}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => scrollToSection("contacto")}
-            className={`mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-white bg-[#6D28D9] px-4 py-3 text-[17px] leading-none font-bold text-white sm:hidden ${focusRing}`}
-          >
-            <span>{t.nav.talk}</span>
-            <ArrowUpRight size={18} strokeWidth={2.8} />
-          </button>
-
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t-2 border-[#27272A] pt-4">
+          <div className="mt-3 flex gap-2">
+            <button
+              type="button"
+              onClick={() => scrollToSection("contacto")}
+              className={`inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-2xl border-[3px] border-white bg-[#6D28D9] px-3 text-[16px] leading-none font-bold text-white active:translate-y-[2px] sm:hidden ${focusRing}`}
+            >
+              <span>{t.nav.talk}</span>
+              <ArrowUpRight size={17} strokeWidth={2.8} />
+            </button>
             <a
               href={cvPdf.url}
               download="Erick-Rodriguez-CV.pdf"
-              className={`inline-flex items-center gap-2 rounded-full border-2 border-white px-4 py-2 text-[15px] leading-none font-bold text-white ${focusRing}`}
+              className={`inline-flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-2xl border-[3px] border-[#09090B] bg-white px-3 text-[16px] leading-none font-bold text-[#09090B] active:translate-y-[2px] sm:flex-none sm:px-6 ${focusRing}`}
             >
-              <Download size={16} strokeWidth={2.6} />
+              <Download size={17} strokeWidth={2.6} />
               <span>{t.nav.downloadCv}</span>
+            </a>
+          </div>
+
+          <div className="mt-3 flex items-center justify-between gap-3 border-t-2 border-[#27272A] pt-3">
+            <a
+              href="mailto:hola.erickrodriguez@gmail.com"
+              className={`inline-flex min-w-0 items-center gap-2.5 rounded-full text-[15px] font-semibold text-[#D4D4D8] hover:text-white ${focusRing}`}
+            >
+              <Mail size={18} strokeWidth={2.4} className="shrink-0 text-[#A78BFA]" />
+              <span className="truncate">hola.erickrodriguez@gmail.com</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/erick-rodriguez-martinez"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className={`inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-[#52525B] text-white hover:border-white ${focusRing}`}
+            >
+              <Linkedin size={18} strokeWidth={2.4} />
             </a>
           </div>
         </div>

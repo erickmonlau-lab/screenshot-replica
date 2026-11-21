@@ -32,7 +32,7 @@ function Diagnostico() {
     "Avisos que se pierden",
   ];
   return (
-    <div className="relative flex lg:absolute lg:inset-0 items-center justify-center p-3 sm:p-8">
+    <div className="relative flex w-full lg:absolute lg:inset-0 items-center justify-center p-3 sm:p-8">
       <div className="relative w-full max-w-[560px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white p-3 shadow-[8px_8px_0_#09090B] sm:p-5">
         <div className="flex items-center gap-3">
           <span
@@ -109,7 +109,7 @@ function Arquitectura() {
   const reduce = useReducedMotion();
   const { tr } = useLanguage();
   return (
-    <div className="relative flex lg:absolute lg:inset-0 items-center justify-center p-3 sm:p-6">
+    <div className="relative flex w-full lg:absolute lg:inset-0 items-center justify-center p-3 sm:p-6">
       <div className="relative w-full max-w-[540px]" style={{ aspectRatio: `${MAP_W} / ${MAP_H}` }}>
         <svg
           aria-hidden="true"
@@ -190,7 +190,7 @@ function Desarrollo() {
   const reduce = useReducedMotion();
   const { tr } = useLanguage();
   return (
-    <div className="relative flex lg:absolute lg:inset-0 flex-col items-center justify-center gap-4 p-4 sm:p-8">
+    <div className="relative flex w-full lg:absolute lg:inset-0 flex-col items-center justify-center gap-4 p-4 sm:p-8">
       <div className="w-full max-w-[540px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-[#09090B] shadow-[8px_8px_0_#FFFFFF]">
         <div className="flex items-center gap-2 border-b-[3px] border-[#3F3F46] px-3 py-2.5">
           <span className="h-3 w-3 rounded-full bg-[#6D28D9]" />
@@ -249,7 +249,7 @@ function Produccion() {
   const { tr } = useLanguage();
   const rows = ["Publicado en la nube", "Core Web Vitals cuidados", "Vigilado en producción"];
   return (
-    <div className="relative flex lg:absolute lg:inset-0 items-center justify-center p-4 sm:p-8">
+    <div className="relative flex w-full lg:absolute lg:inset-0 items-center justify-center p-4 sm:p-8">
       <div className="w-full max-w-[520px] overflow-hidden rounded-2xl border-[3px] border-[#09090B] bg-white shadow-[8px_8px_0_#09090B]">
         <div className="flex items-center gap-2 border-b-[3px] border-[#09090B] bg-[#F4F4F5] px-3 py-2.5">
           <span className="hidden h-3 w-3 rounded-full border-2 border-[#09090B] bg-white sm:block" />
@@ -303,7 +303,7 @@ function Automatizacion() {
     { icon: Banknote, t: "Cobro", c: "bg-white text-[#09090B]" },
   ];
   return (
-    <div className="relative flex lg:absolute lg:inset-0 flex-col items-center justify-center gap-7 p-4 sm:p-8">
+    <div className="relative flex w-full lg:absolute lg:inset-0 flex-col items-center justify-center gap-7 p-4 sm:p-8">
       <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
         {chain.map((n, i) => (
           <div key={n.t} className="flex items-center gap-2 sm:gap-3">
@@ -366,7 +366,7 @@ export function ProcessScenes({ active }: { active: number }) {
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            className="relative lg:absolute lg:inset-0"
+            className="relative flex min-h-[352px] items-center lg:absolute lg:inset-0 lg:min-h-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
