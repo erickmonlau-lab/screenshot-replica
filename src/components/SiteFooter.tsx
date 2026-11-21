@@ -76,7 +76,7 @@ export function SiteFooter({ email }: { email: string }) {
       {/* Marca de agua: el nombre en grande */}
       <div
         aria-hidden="true"
-        className="footer-mark font-display pointer-events-none relative z-0 -mt-2 px-3 text-center text-[17.5vw] leading-[0.82] font-bold tracking-[-0.05em] whitespace-nowrap text-[#26262B] uppercase select-none sm:text-[11.5vw]"
+        className="footer-mark font-display pointer-events-none relative z-0 -mt-2 px-3 text-center text-[17.5vw] leading-[1] font-bold sm:leading-[0.82] tracking-[-0.05em] whitespace-nowrap text-[#26262B] uppercase select-none sm:text-[11.5vw]"
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1380px] flex-wrap items-center justify-between gap-x-6 gap-y-1 px-5 py-4 text-[15px] font-semibold text-[#A1A1AA] sm:px-8">

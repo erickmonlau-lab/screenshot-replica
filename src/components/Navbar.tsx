@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, type MouseEvent } from "react";
-import { ArrowUpRight, Download, Menu, Moon, Sun, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, ChevronDown, Download, Menu, X } from "lucide-react";
 import cvPdf from "@/assets/erick-rodriguez-cv.pdf.asset.json";
 import { useLanguage, type Locale } from "@/context/LanguageContext";
 
@@ -30,7 +30,8 @@ export function Navbar({ onChangeMode }: NavbarProps) {
   const { locale, setLocale, t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dark, setDark] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
   const navItems = [
@@ -47,17 +48,32 @@ export function Navbar({ onChangeMode }: NavbarProps) {
     { code: "en", label: "EN", name: "English" },
   ];
 
+  /* El modo oscuro se retiró: se limpia cualquier preferencia guardada */
   useEffect(() => {
-    setDark(document.documentElement.classList.contains("dark"));
+    document.documentElement.classList.remove("dark");
     try {
-      if (localStorage.getItem("theme") === "dark") {
-        document.documentElement.classList.add("dark");
-        setDark(true);
-      }
+      localStorage.removeItem("theme");
     } catch {
       // storage unavailable
     }
   }, []);
+
+  /* Selector de idioma móvil: Escape o clic fuera lo cierran */
+  useEffect(() => {
+    if (!langOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLangOpen(false);
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [langOpen]);
 
   /* Sección visible → elemento activo del menú */
   useEffect(() => {
@@ -103,45 +119,6 @@ export function Navbar({ onChangeMode }: NavbarProps) {
       window.removeEventListener("resize", onResize);
     };
   }, [mobileOpen]);
-
-  function toggleTheme(e: MouseEvent<HTMLButtonElement>) {
-    const next = !dark;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const radius = Math.hypot(
-      Math.max(x, window.innerWidth - x),
-      Math.max(y, window.innerHeight - y),
-    );
-    const apply = () => {
-      document.documentElement.classList.toggle("dark", next);
-      setDark(next);
-      try {
-        localStorage.setItem("theme", next ? "dark" : "light");
-      } catch {
-        // storage unavailable
-      }
-    };
-    const doc = document as Document & {
-      startViewTransition?: (cb: () => void) => { ready: Promise<void> };
-    };
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!doc.startViewTransition || reduce) {
-      apply();
-      return;
-    }
-    const transition = doc.startViewTransition(apply);
-    transition.ready.then(() => {
-      document.documentElement.animate(
-        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-        {
-          duration: 650,
-          easing: "cubic-bezier(0.65, 0, 0.35, 1)",
-          pseudoElement: "::view-transition-new(root)",
-        },
-      );
-    });
-  }
 
   function scrollToSection(id: string) {
     setMobileOpen(false);
@@ -240,14 +217,47 @@ export function Navbar({ onChangeMode }: NavbarProps) {
             })}
           </div>
 
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label={dark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-            className={`inline-flex h-10 w-10 items-center justify-center rounded-full border-2 border-[#52525B] bg-[#18181B] text-[#D4D4D8] transition-colors hover:border-white hover:text-white ${focusRing}`}
-          >
-            {dark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
+          <div ref={langRef} className="relative sm:hidden">
+            <button
+              type="button"
+              onClick={() => setLangOpen((o) => !o)}
+              aria-label="Idioma"
+              aria-expanded={langOpen}
+              className={`inline-flex h-10 items-center gap-1 rounded-full border-2 border-[#52525B] bg-[#18181B] pr-2 pl-3 text-[15px] leading-none font-bold text-white ${focusRing}`}
+            >
+              {locale.toUpperCase()}
+              <ChevronDown
+                size={15}
+                strokeWidth={2.8}
+                className={`transition-transform ${langOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            {langOpen ? (
+              <ul className="absolute top-full right-0 z-10 mt-3 w-[168px] rounded-2xl border-[3px] border-white bg-[#09090B] p-1.5 shadow-[4px_4px_0_#6D28D9]">
+                {languages.map((lang) => {
+                  const selected = locale === lang.code;
+                  return (
+                    <li key={lang.code}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLocale(lang.code);
+                          setLangOpen(false);
+                        }}
+                        aria-pressed={selected}
+                        className={`flex min-h-[44px] w-full items-center gap-3 rounded-xl px-3 text-left text-[16px] leading-none font-bold ${focusRing} ${
+                          selected ? "bg-[#6D28D9] text-white" : "text-[#D4D4D8] hover:text-white"
+                        }`}
+                      >
+                        <span className="font-display w-6 text-[15px]">{lang.label}</span>
+                        {lang.name}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : null}
+          </div>
 
           <a
             href={cvPdf.url}
@@ -324,25 +334,6 @@ export function Navbar({ onChangeMode }: NavbarProps) {
           </button>
 
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t-2 border-[#27272A] pt-4">
-            <div className="flex items-center gap-1.5 sm:hidden" role="group" aria-label="Idioma">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  type="button"
-                  onClick={() => setLocale(lang.code)}
-                  aria-pressed={locale === lang.code}
-                  aria-label={lang.name}
-                  className={`rounded-full border-2 px-3.5 py-2 text-[15px] leading-none font-bold ${focusRing} ${
-                    locale === lang.code
-                      ? "border-white bg-white text-[#09090B]"
-                      : "border-[#52525B] text-[#D4D4D8]"
-                  }`}
-                >
-                  {lang.label}
-                </button>
-              ))}
-            </div>
-
             <a
               href={cvPdf.url}
               download="Erick-Rodriguez-CV.pdf"
