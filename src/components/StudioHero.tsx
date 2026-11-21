@@ -68,7 +68,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
         className="pointer-events-none absolute inset-x-0 top-[17%] z-0 overflow-hidden sm:top-[46%] sm:-translate-y-1/2"
       >
         <ScrollMarquee
-          text="Erick Rodríguez — Marketing · Gestión · IA — "
+          text="Erick Rodríguez · Marketing · Gestión · IA · "
           speed={wide ? -1.1 : -1.7}
           className="text-[19vw] sm:text-[30vh]"
         />
@@ -76,13 +76,13 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
 
       <motion.div
         style={{ y: portraitY }}
-        className="pointer-events-none absolute inset-x-0 top-[250px] bottom-[235px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
+        className="pointer-events-none absolute inset-x-0 top-[215px] bottom-[205px] z-10 flex justify-center sm:top-auto sm:bottom-0 sm:h-[50%] md:h-[54%] lg:h-[64%] xl:h-[72%]"
       >
         <motion.div style={{ x: faceX }} className="h-full">
           <motion.img
             src="/erick-portrait-studio-600.webp"
             srcSet="/erick-portrait-studio-450.webp 450w, /erick-portrait-studio-600.webp 600w"
-            sizes="(min-width: 1280px) 450px, (min-width: 640px) 380px, calc((100vh - 485px) * 0.76)"
+            sizes="(min-width: 1280px) 450px, (min-width: 640px) 380px, calc((100vh - 420px) * 0.76)"
             width={450}
             height={592}
             fetchPriority="high"
@@ -91,7 +91,7 @@ export function StudioHero({ onJumpToProjects }: StudioHeroProps) {
             initial={reduce ? false : { y: 100 }}
             animate={{ y: 0 }}
             transition={{ duration: 1.1, ease: EASE }}
-            className="h-full w-auto max-w-[88vw] -translate-x-[4%] object-contain object-bottom select-none sm:max-w-none sm:translate-x-0"
+            className="h-full w-auto max-w-[92vw] -translate-x-[4%] object-contain object-bottom select-none max-sm:[-webkit-mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] max-sm:[mask-image:linear-gradient(to_bottom,#000_80%,transparent_100%)] sm:max-w-none sm:translate-x-0"
           />
         </motion.div>
       </motion.div>

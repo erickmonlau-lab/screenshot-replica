@@ -183,7 +183,7 @@ export function Navbar({ onChangeMode }: NavbarProps) {
               title="Disponible para proyectos"
             />
           </span>
-          <span className="font-display text-[15px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[460px]:text-[16px]">
+          <span className="font-display text-[17px] leading-none font-bold tracking-[-0.01em] whitespace-nowrap uppercase min-[1340px]:text-[16px]">
             Erick Rodríguez
           </span>
         </button>
