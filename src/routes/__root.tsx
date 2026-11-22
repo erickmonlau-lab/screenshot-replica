@@ -140,7 +140,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     styles: [{ children: appCss }],
     links: [
       { rel: "canonical", href: "https://erickrodriguez.es/" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico?v=2", sizes: "any" },
+      { rel: "icon", href: "/favicon-32.png?v=2", type: "image/png", sizes: "32x32" },
+      { rel: "icon", href: "/icon-192.png?v=2", type: "image/png", sizes: "192x192" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2" },
     ],
   }),
   shellComponent: RootShell,
