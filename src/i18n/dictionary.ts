@@ -183,22 +183,13 @@ export const DICT: Record<string, Entry> = {
       ca: "Plataforma pròpia per treballar amb PDF directament al navegador, ja indexada a Google amb múltiples pàgines operatives.",
       en: "Own platform to work with PDFs right in the browser, already indexed on Google with many working pages.",
     },
-  Próximamente: { ca: "Properament", en: "Coming soon" },
   "Web a medida para una empresa de montaje de cocinas": {
     ca: "Web a mida per a una empresa de muntatge de cuines",
     en: "Custom website for a kitchen-installation company",
   },
-  "Web a medida para una empresa de montaje profesional de cocinas en Cataluña, con presupuesto por WhatsApp. Disponible próximamente en cubikos.cat.": {
-    ca: "Web a mida per a una empresa de muntatge professional de cuines a Catalunya, amb pressupost per WhatsApp. Disponible properament a cubikos.cat.",
-    en: "Custom website for a professional kitchen-installation company in Catalonia, with quotes via WhatsApp. Coming soon at cubikos.cat.",
-  },
-  "Nueva web a medida, en preparación": {
-    ca: "Nova web a mida, en preparació",
-    en: "New custom website, in the works",
-  },
-  "Nueva web a medida, en preparación. Disponible próximamente en cubikos.cat.": {
-    ca: "Nova web a mida, en preparació. Disponible properament a cubikos.cat.",
-    en: "New custom website, in the works. Coming soon at cubikos.cat.",
+  "Web a medida para una empresa de montaje profesional de cocinas en Cataluña, con presupuesto por WhatsApp.": {
+    ca: "Web a mida per a una empresa de muntatge professional de cuines a Catalunya, amb pressupost per WhatsApp.",
+    en: "Custom website for a professional kitchen-installation company in Catalonia, with quotes via WhatsApp.",
   },
   "Visitar web": { ca: "Visitar web", en: "Visit site" },
   "Probar plataforma": { ca: "Provar plataforma", en: "Try the platform" },
