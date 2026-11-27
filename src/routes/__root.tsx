@@ -109,6 +109,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Erick Rodríguez",
+          url: "https://erickrodriguez.es/",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
           "@type": "Person",
           "@id": "https://erickrodriguez.es/#persona",
           name: "Erick Rodríguez",
@@ -140,10 +149,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     styles: [{ children: appCss }],
     links: [
       { rel: "canonical", href: "https://erickrodriguez.es/" },
-      { rel: "icon", href: "/favicon.ico?v=2", sizes: "any" },
-      { rel: "icon", href: "/favicon-32.png?v=2", type: "image/png", sizes: "32x32" },
-      { rel: "icon", href: "/icon-192.png?v=2", type: "image/png", sizes: "192x192" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=2" },
+      // URLs sin parámetros: Google pide que la del favicon sea estable y cuadrada en múltiplos de 48 px
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", href: "/favicon-48.png", type: "image/png", sizes: "48x48" },
+      { rel: "icon", href: "/favicon-96.png", type: "image/png", sizes: "96x96" },
+      { rel: "icon", href: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png", sizes: "180x180" },
     ],
   }),
   shellComponent: RootShell,
