@@ -19,7 +19,7 @@ const cards = [
   {
     icon: Megaphone,
     head: "bg-[#6D28D9] text-white",
-    level: "Ciclo Superior · CFGS",
+    level: "Grado Superior",
     learned: [
       ["Estrategia digital", "SEO", "Conversión comercial"],
       ["Diseño de propuestas", "Lanzamiento de producto"],
@@ -30,7 +30,7 @@ const cards = [
   {
     icon: ClipboardList,
     head: "bg-[#09090B] text-white",
-    level: "Ciclo Medio · CFGM",
+    level: "Grado Medio",
     learned: [
       ["Facturación", "Albaranes"],
       ["Contabilidad", "Operativa interna"],
@@ -138,18 +138,25 @@ export function FormacionSection({
                 transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
                 className="flex flex-col overflow-hidden rounded-[22px] border-[3px] border-white bg-white text-[#09090B] shadow-[9px_9px_0_#6D28D9]"
               >
-                <div className={`flex items-center gap-3 px-5 py-4 ${c.head}`}>
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B]">
+                <div
+                  className={`flex items-center gap-3 px-5 py-4 max-[420px]:flex-col max-[420px]:items-start ${c.head}`}
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] bg-white text-[#09090B] max-[420px]:hidden">
                     <Icon size={24} strokeWidth={2.6} />
                   </span>
-                  <span className="rounded-full border-[3px] border-white px-3 py-1 text-[15px] leading-tight font-bold tracking-wide whitespace-nowrap uppercase max-[420px]:hidden">
-                    {tr(c.level)}
-                  </span>
-                  <span className="ml-auto text-right leading-none">
+                  <p className="min-w-0 leading-none whitespace-nowrap">
+                    <span className="block text-[15px] leading-tight font-bold tracking-[0.04em] uppercase">
+                      {tr("Formación Profesional")}
+                    </span>
+                    <span className="font-display mt-1 block text-[26px] font-bold tracking-[-0.03em]">
+                      {tr(c.level)}
+                    </span>
+                  </p>
+                  <span className="ml-auto text-right leading-none max-[420px]:ml-0 max-[420px]:flex max-[420px]:items-baseline max-[420px]:gap-2 max-[420px]:text-left">
                     <span className="block text-[15px] font-bold tracking-[0.1em] uppercase opacity-90">
                       {tr("Centro")}
                     </span>
-                    <span className="font-display mt-1 block text-[26px] font-bold tracking-[-0.03em]">
+                    <span className="font-display mt-1 block text-[26px] font-bold tracking-[-0.03em] max-[420px]:mt-0 max-[420px]:text-[20px]">
                       Monlau
                     </span>
                   </span>
