@@ -48,6 +48,7 @@ import { ErpShowcase } from "@/components/ErpShowcase";
 import { MetricsBand } from "@/components/MetricsBand";
 import { OrderSection } from "@/components/OrderSection";
 import { OderaloSection } from "@/components/OderaloSection";
+import { SocialAgentsSection } from "@/components/SocialAgentsSection";
 import { FormaSection } from "@/components/FormaSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import {
@@ -447,6 +448,7 @@ function Index() {
         </section>
 
         <OderaloSection />
+        <SocialAgentsSection />
         <FormaSection />
 
         {/* CEREBRO: segundo cerebro en Obsidian que la IA lee antes de trabajar */}
