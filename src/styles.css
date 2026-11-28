@@ -488,9 +488,9 @@ body {
 @media (min-width: 1280px) {
   .redes-marcas {
     --h: clamp(
-      290px,
+      270px,
       min(
-        calc(100svh / var(--escala, 1) - 372px),
+        calc(100svh / var(--escala, 1) - 472px),
         calc((min(100vw / var(--escala, 1), 1380px) - 112px) / 2.725 - 12px)
       ),
       460px

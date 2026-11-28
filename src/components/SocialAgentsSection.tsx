@@ -49,7 +49,7 @@ export function SocialAgentsSection() {
   return (
     <section
       id="redes"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[calc(96px*var(--escala,1))] xl:pb-8"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[calc(112px*var(--escala,1))] xl:pb-[calc(80px*var(--escala,1))]"
     >
       <div ref={ref} className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <motion.div
@@ -71,7 +71,7 @@ export function SocialAgentsSection() {
           </div>
 
           {/* Los cuatro pasos en una sola línea ligera */}
-          <ol className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:flex lg:items-center lg:justify-between lg:gap-3">
+          <ol className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:flex lg:items-center lg:justify-between lg:gap-3">
             {steps.map((s, i) => {
               const on = step === i;
               const Icon = s.icon;
@@ -113,7 +113,7 @@ export function SocialAgentsSection() {
           </ol>
         </motion.div>
 
-        <div className="redes-marcas mt-7 grid gap-12 xl:grid-cols-2 xl:gap-12">
+        <div className="redes-marcas mt-11 grid gap-12 xl:grid-cols-2 xl:gap-12">
           {brands.map((brand) => (
             <article key={brand.id} className="flex flex-col items-center">
               <h3 className="mb-3 text-center leading-tight">
