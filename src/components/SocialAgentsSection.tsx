@@ -105,7 +105,7 @@ export function SocialAgentsSection() {
             </p>
           </div>
 
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-9">
+          <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-16">
             {steps.map((s, i) => {
               const on = state.step === i;
               const Icon = s.icon;
@@ -143,7 +143,7 @@ export function SocialAgentsSection() {
                   {i < steps.length - 1 ? (
                     <span
                       aria-hidden="true"
-                      className={`absolute top-[calc(50%-14px)] -right-[34px] z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-[#09090B] transition-colors duration-300 lg:flex ${
+                      className={`absolute top-[calc(50%-14px)] -right-[51px] z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-[#09090B] transition-colors duration-300 xl:flex ${
                         state.step > i ? "bg-[#6D28D9] text-white" : "bg-white text-[#09090B]"
                       }`}
                     >
@@ -152,7 +152,7 @@ export function SocialAgentsSection() {
                   ) : null}
                   <span
                     aria-hidden="true"
-                    className="mt-4 hidden h-3.5 overflow-hidden rounded-full border-[3px] border-[#09090B] bg-white lg:block"
+                    className="mt-4 hidden h-3.5 overflow-hidden rounded-full border-[3px] border-[#09090B] bg-white xl:block"
                   >
                     <span
                       className={`block h-full bg-[#6D28D9] transition-[width] ease-linear ${
