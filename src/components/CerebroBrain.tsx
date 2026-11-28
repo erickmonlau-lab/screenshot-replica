@@ -532,7 +532,7 @@ export function CerebroBrain() {
   }, [reduce]);
 
   return (
-    <div ref={wrap} className="relative h-full w-full">
+    <div ref={wrap} className="sin-escala relative h-full w-full">
       <canvas
         ref={cv}
         role="img"

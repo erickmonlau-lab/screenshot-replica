@@ -1,6 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, CalendarClock, CalendarDays, PenTool, ShieldCheck } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  CalendarClock,
+  CalendarDays,
+  PenTool,
+  ShieldCheck,
+} from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -17,14 +24,14 @@ const steps = [
 const brands = [
   {
     id: "oderalo",
-    name: "Oderalo · ERP para servicios",
+    name: "ERP para servicios",
     handle: "oderalo.erp",
     posts: "/social/post-0",
     highlights: ["Demo", "Sectores", "Proceso", "Dudas"],
   },
   {
     id: "diversplas",
-    name: "Diversplas · Extraescolares",
+    name: "Extraescolares",
     handle: "diversplas_extraescolares",
     posts: "/social/diversplas-0",
     highlights: ["Actividades", "AFAs", "Casales", "Zonas"],
@@ -58,7 +65,7 @@ export function SocialAgentsSection() {
   return (
     <section
       id="redes"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[96px] xl:pb-10"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[calc(96px*var(--escala,1))] xl:pb-10"
     >
       <div ref={ref} className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <motion.div
@@ -133,7 +140,7 @@ export function SocialAgentsSection() {
         </motion.div>
 
         {/* Vista de Instagram de cada marca: perfil con publicaciones y, al lado, sus historias */}
-        <div className="mt-8 grid gap-12 [--w:clamp(280px,calc(80svh_-_392px),340px)] xl:grid-cols-2 xl:gap-12">
+        <div className="mt-8 grid gap-12 [--w:clamp(312px,calc(80svh/var(--escala,1)_-_392px),340px)] xl:grid-cols-2 xl:gap-12">
           {brands.map((brand) => (
             <div
               key={brand.id}
@@ -150,7 +157,9 @@ export function SocialAgentsSection() {
                     className="h-12 w-12 shrink-0 rounded-full border-2 border-[#09090B] object-cover"
                   />
                   <h3 className="min-w-0 leading-tight">
-                    <span className="block truncate text-[16px] font-bold">{brand.handle}</span>
+                    <span className="block truncate text-[15px] font-bold tracking-[-0.01em]">
+                      {brand.handle}
+                    </span>
                     <span className="block truncate text-[15px] font-normal text-[#3F3F46]">
                       {brand.name}
                     </span>
@@ -184,7 +193,7 @@ export function SocialAgentsSection() {
                             className="block h-10 w-10 rounded-full object-cover"
                           />
                         </span>
-                        <span className="w-full truncate text-center text-[12px] leading-tight tracking-[-0.01em] font-semibold">
+                        <span className="w-full truncate text-center text-[11.5px] leading-tight tracking-[-0.02em] font-semibold">
                           {tr(label)}
                         </span>
                       </button>
@@ -214,35 +223,66 @@ export function SocialAgentsSection() {
                 </ul>
               </div>
 
-              <figure className="relative aspect-[9/16] w-[230px] shrink-0 overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-[#09090B] shadow-[7px_7px_0_#09090B] md:w-[calc(var(--w)*0.68)]">
-                {Array.from({ length: STORIES }, (_, i) => (
-                  <img
-                    key={i}
-                    src={`/social/ig/${brand.id}-historia-${i + 1}.webp`}
-                    alt={`${tr("Historia de Instagram")} ${i + 1} · ${brand.handle}`}
-                    aria-hidden={story !== i}
-                    width={432}
-                    height={768}
-                    loading="lazy"
-                    decoding="async"
-                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
-                      story === i ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-                ))}
-                <span aria-hidden="true" className="absolute inset-x-2 top-1.5 flex gap-1">
+              <div className="flex shrink-0 flex-col items-center gap-4">
+                <figure className="relative aspect-[9/16] w-[230px] shrink-0 overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-[#09090B] shadow-[7px_7px_0_#09090B] md:w-[calc(var(--w)*0.68)]">
                   {Array.from({ length: STORIES }, (_, i) => (
-                    <span key={i} className="h-1 flex-1 overflow-hidden rounded-full bg-[#A1A1AA]">
-                      <span
-                        className="block h-full bg-[#6D28D9] transition-[width] duration-700 ease-linear"
-                        style={{
-                          width: i < story ? "100%" : i === story ? `${(step + 1) * 25}%` : "0%",
-                        }}
-                      />
-                    </span>
+                    <img
+                      key={i}
+                      src={`/social/ig/${brand.id}-historia-${i + 1}.webp`}
+                      alt={`${tr("Historia de Instagram")} ${i + 1} · ${brand.handle}`}
+                      aria-hidden={story !== i}
+                      width={432}
+                      height={768}
+                      loading="lazy"
+                      decoding="async"
+                      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+                        story === i ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
                   ))}
-                </span>
-              </figure>
+                  <span aria-hidden="true" className="absolute inset-x-2 top-1.5 flex gap-1">
+                    {Array.from({ length: STORIES }, (_, i) => (
+                      <span
+                        key={i}
+                        className="h-1 flex-1 overflow-hidden rounded-full bg-[#A1A1AA]"
+                      >
+                        <span
+                          className="block h-full bg-[#6D28D9] transition-[width] duration-700 ease-linear"
+                          style={{
+                            width: i < story ? "100%" : i === story ? `${(step + 1) * 25}%` : "0%",
+                          }}
+                        />
+                      </span>
+                    ))}
+                  </span>
+                </figure>
+                <div className="flex items-center gap-3">
+                  {[-1, 1].map((dir) => (
+                    <button
+                      key={dir}
+                      type="button"
+                      aria-label={`${tr(dir < 0 ? "Historia anterior" : "Historia siguiente")} · ${brand.handle}`}
+                      onClick={() => {
+                        setPaused(true);
+                        const target = (story + dir + STORIES) % STORIES;
+                        setTick(target * steps.length + steps.length - 1);
+                      }}
+                      className={`flex h-11 w-11 items-center justify-center rounded-full border-[3px] border-[#09090B] bg-white text-[#09090B] shadow-[3px_3px_0_#09090B] transition-transform hover:-translate-y-0.5 hover:bg-[#F4F4F5] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none ${
+                        dir < 0 ? "order-first" : "order-last"
+                      }`}
+                    >
+                      {dir < 0 ? (
+                        <ArrowLeft size={18} strokeWidth={3} />
+                      ) : (
+                        <ArrowRight size={18} strokeWidth={3} />
+                      )}
+                    </button>
+                  ))}
+                  <span className="min-w-[52px] text-center text-[15px] font-bold tabular-nums">
+                    {story + 1} / {STORIES}
+                  </span>
+                </div>
+              </div>
             </div>
           ))}
         </div>

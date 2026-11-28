@@ -216,6 +216,8 @@ export const DICT: Record<string, Entry> = {
   "AFAs": { ca: "AFAs", en: "PTAs" },
   "Casales": { ca: "Casals", en: "Camps" },
   "Zonas": { ca: "Zones", en: "Areas" },
+  "Historia anterior": { ca: "Història anterior", en: "Previous story" },
+  "Historia siguiente": { ca: "Història següent", en: "Next story" },
   "Visitar web": { ca: "Visitar web", en: "Visit site" },
   "Probar plataforma": { ca: "Provar plataforma", en: "Try the platform" },
   "Stock almacén": { ca: "Estoc magatzem", en: "Warehouse stock" },
