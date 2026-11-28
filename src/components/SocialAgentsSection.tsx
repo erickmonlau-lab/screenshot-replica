@@ -166,11 +166,11 @@ export function SocialAgentsSection() {
           </ol>
         </motion.div>
 
-        <div className="mx-auto mt-10 grid max-w-[980px] grid-cols-[minmax(0,1fr)] justify-items-center gap-10 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-[1040px] grid-cols-[minmax(0,1fr)] justify-items-center gap-10 md:grid-cols-2">
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className="w-full max-w-[440px] rounded-[34px] border-[3px] border-[#09090B] bg-[#09090B] p-3 text-white shadow-[10px_10px_0_#6D28D9]"
+              className="w-full max-w-[470px] rounded-[34px] border-[3px] border-[#09090B] bg-[#09090B] p-3 text-white shadow-[10px_10px_0_#6D28D9]"
             >
               <div className="flex items-center gap-3 px-1.5 pt-1.5 pb-3">
                 <span
@@ -188,14 +188,14 @@ export function SocialAgentsSection() {
                   </span>
                 </h3>
               </div>
-              <ul className="grid grid-cols-3 gap-1.5">
+              <ul className="grid grid-cols-3 gap-2.5 p-1 sm:gap-3.5 sm:p-1.5">
                 {Array.from({ length: TOTAL }, (_, i) => {
                   const current = i === state.piece;
                   return (
                     <li
                       key={`${brand.id}-${i}`}
                       className={`relative aspect-[3/4] overflow-hidden rounded-lg transition-all duration-300 ${
-                        current ? "z-10 scale-[1.06] ring-[3px] ring-[#A78BFA]" : ""
+                        current ? "z-10 scale-[1.04] ring-[3px] ring-[#A78BFA]" : ""
                       }`}
                     >
                       <img
