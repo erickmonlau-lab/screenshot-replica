@@ -8,8 +8,8 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 
 const steps = [
   { icon: CalendarDays, title: "Estrategia" },
-  { icon: PenTool, title: "Claude crea" },
-  { icon: ShieldCheck, title: "Revisión" },
+  { icon: PenTool, title: "Gemini y Claude crean" },
+  { icon: ShieldCheck, title: "Claude y yo revisamos" },
   { icon: CalendarClock, title: "Antigravity programa" },
 ];
 
@@ -71,7 +71,7 @@ export function SocialAgentsSection() {
           </div>
 
           {/* Los cuatro pasos en una sola línea ligera */}
-          <ol className="mt-5 grid grid-cols-2 gap-2.5 lg:flex lg:items-center lg:justify-between lg:gap-3">
+          <ol className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:flex lg:items-center lg:justify-between lg:gap-3">
             {steps.map((s, i) => {
               const on = step === i;
               const Icon = s.icon;
