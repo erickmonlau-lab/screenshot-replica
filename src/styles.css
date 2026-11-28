@@ -451,3 +451,49 @@ body {
     margin-left: 0.25em;
   }
 }
+
+/* Pantallas grandes: el contenido de cada sección crece en proporción. En portátil y móvil no cambia nada. */
+@media (min-width: 1700px) and (min-height: 880px) {
+  :root {
+    --escala: 1.1;
+  }
+}
+
+@media (min-width: 2200px) and (min-height: 1100px) {
+  :root {
+    --escala: 1.25;
+  }
+}
+
+@media (min-width: 1700px) and (min-height: 880px) {
+  [class*="max-w-[1340px]"],
+  [class*="max-w-[1380px]"],
+  [class*="max-w-[1400px]"],
+  [class*="max-w-[1680px]"],
+  [class*="max-w-[1720px]"] {
+    zoom: var(--escala);
+  }
+
+  /* Lienzos que calculan posiciones del puntero en píxeles reales */
+  .sin-escala {
+    zoom: calc(1 / var(--escala));
+  }
+}
+
+/* Redes: la altura de historias y publicaciones sale de la ventana para que la sección quepa entera */
+.redes-marcas {
+  --h: 420px;
+}
+
+@media (min-width: 1280px) {
+  .redes-marcas {
+    --h: clamp(
+      290px,
+      min(
+        calc(100svh / var(--escala, 1) - 372px),
+        calc((min(100vw / var(--escala, 1), 1380px) - 112px) / 2.725 - 12px)
+      ),
+      460px
+    );
+  }
+}

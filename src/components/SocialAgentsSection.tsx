@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, CalendarClock, CalendarDays, PenTool, ShieldCheck } from "lucide-react";
 import { useReducedMotion } from "./motion-pref";
@@ -7,58 +7,49 @@ import { useLanguage } from "@/context/LanguageContext";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const steps = [
-  { icon: CalendarDays, title: "Estrategia", text: "Un calendario de 30 días." },
-  { icon: PenTool, title: "Claude crea", text: "Diseños, textos y descripciones." },
-  { icon: ShieldCheck, title: "Revisión", text: "Cada dato, contrastado." },
-  { icon: CalendarClock, title: "Antigravity programa", text: "En Meta Business Suite." },
+  { icon: CalendarDays, title: "Estrategia" },
+  { icon: PenTool, title: "Claude crea" },
+  { icon: ShieldCheck, title: "Revisión" },
+  { icon: CalendarClock, title: "Antigravity programa" },
 ];
 
-/** Dos ejemplos con piezas reales: publicaciones, destacadas e historias. */
+/** Dos ejemplos con piezas reales: una historia grande y cuatro publicaciones por marca. */
 const brands = [
-  {
-    id: "oderalo",
-    name: "Oderalo · ERP para servicios",
-    handle: "oderalo.erp",
-    posts: "/social/post-0",
-    highlights: ["Demo", "Sectores", "Proceso", "Dudas"],
-  },
+  { id: "oderalo", handle: "oderalo.erp", name: "Mi ERP", posts: "/social/post-0" },
   {
     id: "diversplas",
-    name: "Diversplas · Extraescolares",
     handle: "diversplas_extraescolares",
+    name: "Empresa de extraescolares",
     posts: "/social/diversplas-0",
-    highlights: ["Actividades", "AFAs", "Casales", "Zonas"],
   },
 ];
 
-const TOTAL = 9;
+const POSTS = 4;
 const STORIES = 4;
 
-/** Cadena de agentes que prepara contenido para redes, con la vista de Instagram de dos marcas. */
+/** Cadena de agentes que prepara contenido para redes, con ejemplos de dos marcas. */
 export function SocialAgentsSection() {
   const reduce = useReducedMotion();
   const { tr } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-20% 0px" });
-  // Cada «tick» enciende un paso; cada cuatro cambia la publicación resaltada y la historia.
+  // Cada «tick» enciende un paso; cada cuatro cambia la historia.
   const [tick, setTick] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     if (!inView || paused || reduce) return;
-    const id = window.setInterval(() => setTick((t) => t + 1), 750);
+    const id = window.setInterval(() => setTick((t) => t + 1), 900);
     return () => window.clearInterval(id);
   }, [inView, paused, reduce]);
 
   const step = tick % steps.length;
-  const round = Math.floor(tick / steps.length);
-  const piece = TOTAL - 1 - (round % TOTAL);
-  const story = round % STORIES;
+  const story = Math.floor(tick / steps.length) % STORIES;
 
   return (
     <section
       id="redes"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[96px] xl:pb-10"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[calc(96px*var(--escala,1))] xl:pb-8"
     >
       <div ref={ref} className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <motion.div
@@ -67,144 +58,130 @@ export function SocialAgentsSection() {
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <div className="grid gap-4 lg:grid-cols-12 lg:items-center lg:gap-8">
+          <div className="grid gap-3 lg:grid-cols-12 lg:items-center lg:gap-8">
             <h2 className="font-display text-[clamp(2.1rem,2.7vw,2.6rem)] leading-[1.2] font-bold tracking-[-0.05em] [text-wrap:balance] lg:col-span-8">
               {tr("Mis agentes preparan las redes.")}{" "}
               <span className="rounded-lg bg-[#6D28D9] px-3 pb-1 whitespace-nowrap text-white">
                 {tr("Yo decido.")}
               </span>
             </h2>
-            <p className="max-w-[52ch] text-[18px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty] lg:col-span-4">
-              {tr(
-                "Contenido para redes de principio a fin. Dos ejemplos: mi ERP y una empresa de extraescolares.",
-              )}
+            <p className="max-w-[44ch] text-[17px] leading-snug font-semibold text-[#3F3F46] [text-wrap:pretty] lg:col-span-4">
+              {tr("Del calendario a la publicación programada. Dos ejemplos.")}
             </p>
           </div>
 
-          <ol className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-14">
+          {/* Los cuatro pasos en una sola línea ligera */}
+          <ol className="mt-5 grid grid-cols-2 gap-2.5 lg:flex lg:items-center lg:justify-between lg:gap-3">
             {steps.map((s, i) => {
               const on = step === i;
               const Icon = s.icon;
               return (
-                <li key={s.title} className="relative flex">
-                  <button
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => {
-                      setPaused(true);
-                      setTick((t) => t - (t % steps.length) + i);
-                    }}
-                    className={`flex w-full items-center gap-3 rounded-2xl border-[3px] border-[#09090B] px-3.5 py-2.5 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none ${
-                      on
-                        ? "bg-[#6D28D9] text-white shadow-[5px_5px_0_#09090B]"
-                        : "bg-white shadow-[4px_4px_0_#09090B]"
+                <Fragment key={s.title}>
+                  <li
+                    className={`flex items-center gap-2.5 rounded-full border-[3px] border-[#09090B] py-2 pr-4 pl-2.5 transition-colors duration-300 ${
+                      on ? "bg-[#6D28D9] text-white" : "bg-white"
                     }`}
                   >
                     <span
-                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] ${
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
                         on ? "bg-white text-[#6D28D9]" : "bg-[#09090B] text-white"
                       }`}
                     >
-                      <Icon size={22} strokeWidth={2.6} />
+                      <Icon size={17} strokeWidth={2.6} />
                     </span>
-                    <span className="min-w-0">
-                      <span className="font-display block text-[18px] leading-tight font-bold tracking-[-0.03em] [text-wrap:balance]">
-                        {tr(s.title)}
-                      </span>
-                      <span className="mt-0.5 block text-[15px] leading-snug font-semibold [text-wrap:balance]">
-                        {tr(s.text)}
-                      </span>
+                    <span className="text-[15px] leading-tight font-bold sm:text-[16px]">
+                      {tr(s.title)}
                     </span>
-                  </button>
+                  </li>
                   {i < steps.length - 1 ? (
-                    <span
-                      aria-hidden="true"
-                      className={`absolute top-1/2 -right-[44px] hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-[#09090B] transition-colors duration-300 xl:flex ${
-                        step > i ? "bg-[#6D28D9] text-white" : "bg-white text-[#09090B]"
-                      }`}
-                    >
-                      <ArrowRight size={14} strokeWidth={3.5} />
-                    </span>
+                    <li aria-hidden="true" className="hidden flex-1 items-center lg:flex">
+                      <span
+                        className={`h-[3px] flex-1 rounded-full transition-colors duration-300 ${
+                          step > i ? "bg-[#6D28D9]" : "bg-[#D4D4D8]"
+                        }`}
+                      />
+                      <ArrowRight
+                        size={18}
+                        strokeWidth={3}
+                        className={`-ml-1.5 shrink-0 ${step > i ? "text-[#6D28D9]" : "text-[#D4D4D8]"}`}
+                      />
+                    </li>
                   ) : null}
-                </li>
+                </Fragment>
               );
             })}
           </ol>
         </motion.div>
 
-        {/* Vista de Instagram de cada marca: perfil con publicaciones y, al lado, sus historias */}
-        <div className="mt-8 grid gap-12 [--w:clamp(280px,calc(80svh_-_392px),340px)] xl:grid-cols-2 xl:gap-12">
+        <div className="redes-marcas mt-7 grid gap-12 xl:grid-cols-2 xl:gap-12">
           {brands.map((brand) => (
-            <div
-              key={brand.id}
-              className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-5"
-            >
-              <div className="w-full max-w-[360px] rounded-[26px] border-[3px] border-[#09090B] bg-white p-3.5 shadow-[7px_7px_0_#6D28D9] md:w-[var(--w)] md:shrink-0">
-                <div className="flex items-center gap-3">
-                  <img
-                    src={`/social/ig/${brand.id}-avatar.webp`}
-                    alt=""
-                    width={112}
-                    height={112}
-                    loading="lazy"
-                    className="h-12 w-12 shrink-0 rounded-full border-2 border-[#09090B] object-cover"
-                  />
-                  <h3 className="min-w-0 leading-tight">
-                    <span className="block truncate text-[16px] font-bold">{brand.handle}</span>
-                    <span className="block truncate text-[15px] font-normal text-[#3F3F46]">
-                      {brand.name}
-                    </span>
-                  </h3>
-                </div>
+            <article key={brand.id} className="flex flex-col items-center">
+              <h3 className="mb-3 text-center leading-tight">
+                <span className="block text-[17px] font-bold">@{brand.handle}</span>
+                <span className="block text-[15px] font-semibold text-[#52525B]">
+                  {tr(brand.name)}
+                </span>
+              </h3>
 
-                <ul className="mt-2.5 grid grid-cols-4 gap-0.5">
-                  {brand.highlights.map((label, i) => (
-                    <li key={label} className="min-w-0">
-                      <button
-                        type="button"
-                        aria-pressed={story === i}
-                        aria-label={`${tr("Ver historia")}: ${tr(label)} · ${brand.handle}`}
-                        onClick={() => {
-                          setPaused(true);
-                          setTick(i * steps.length + steps.length - 1);
-                        }}
-                        className="flex w-full flex-col items-center gap-1 rounded-xl focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none"
+              <div className="flex w-full flex-col items-center gap-4 md:w-auto md:flex-row md:gap-3.5">
+                {/* Historia: grande y nítida; al tocarla pasa a la siguiente */}
+                <button
+                  type="button"
+                  aria-label={`${tr("Historia siguiente")} · ${brand.handle}`}
+                  onClick={() => {
+                    setPaused(true);
+                    const next = (story + 1) % STORIES;
+                    setTick(next * steps.length + steps.length - 1);
+                  }}
+                  className="relative aspect-[9/16] w-[250px] shrink-0 overflow-hidden rounded-[20px] border-[3px] border-[#09090B] bg-[#09090B] shadow-[7px_7px_0_#6D28D9] focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none md:h-[var(--h)] md:w-auto"
+                >
+                  {Array.from({ length: STORIES }, (_, i) => (
+                    <img
+                      key={i}
+                      src={`/social/ig/${brand.id}-historia-${i + 1}-540.webp`}
+                      srcSet={`/social/ig/${brand.id}-historia-${i + 1}-540.webp 540w, /social/ig/${brand.id}-historia-${i + 1}-1080.webp 1080w`}
+                      sizes="420px"
+                      alt={`${tr("Historia de Instagram")} ${i + 1} · ${brand.handle}`}
+                      aria-hidden={story !== i}
+                      width={1080}
+                      height={1920}
+                      loading="lazy"
+                      decoding="async"
+                      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+                        story === i ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  ))}
+                  <span aria-hidden="true" className="absolute inset-x-2 top-1.5 flex gap-1">
+                    {Array.from({ length: STORIES }, (_, i) => (
+                      <span
+                        key={i}
+                        className="h-1 flex-1 overflow-hidden rounded-full bg-[#A1A1AA]"
                       >
                         <span
-                          className={`rounded-full border-[3px] p-[2px] transition-colors duration-300 ${
-                            story === i ? "border-[#6D28D9]" : "border-[#D4D4D8]"
-                          }`}
-                        >
-                          <img
-                            src={`/social/ig/${brand.id}-destacada-${i + 1}.webp`}
-                            alt=""
-                            width={112}
-                            height={112}
-                            loading="lazy"
-                            className="block h-10 w-10 rounded-full object-cover"
-                          />
-                        </span>
-                        <span className="w-full truncate text-center text-[12px] leading-tight tracking-[-0.01em] font-semibold">
-                          {tr(label)}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                          className="block h-full bg-[#6D28D9] transition-[width] duration-700 ease-linear"
+                          style={{
+                            width: i < story ? "100%" : i === story ? `${(step + 1) * 25}%` : "0%",
+                          }}
+                        />
+                      </span>
+                    ))}
+                  </span>
+                </button>
 
-                <ul className="mt-2.5 grid grid-cols-3 gap-2 border-t-2 border-[#E4E4E7] pt-2.5">
-                  {Array.from({ length: TOTAL }, (_, i) => (
+                <ul className="grid w-full max-w-[340px] grid-cols-2 gap-2.5 md:w-auto md:max-w-none">
+                  {Array.from({ length: POSTS }, (_, i) => (
                     <li
-                      key={`${brand.id}-${i}`}
-                      className={`relative aspect-[4/5] overflow-hidden rounded-md transition-all duration-300 ${
-                        i === piece ? "ring-[3px] ring-[#6D28D9] ring-offset-1" : ""
-                      }`}
+                      key={i}
+                      className="relative aspect-[4/5] overflow-hidden rounded-xl border-2 border-[#09090B] md:h-[calc((var(--h)_-_10px)/2)]"
                     >
                       <img
                         src={`${brand.posts}${i + 1}.webp`}
+                        srcSet={`${brand.posts}${i + 1}.webp 432w, ${brand.posts}${i + 1}-864.webp 864w`}
+                        sizes="280px"
                         alt={`${tr("Publicación de Instagram")} ${i + 1} · ${brand.handle}`}
-                        width={432}
-                        height={540}
+                        width={864}
+                        height={1080}
                         loading="lazy"
                         decoding="async"
                         className="absolute inset-0 h-full w-full object-cover"
@@ -213,37 +190,7 @@ export function SocialAgentsSection() {
                   ))}
                 </ul>
               </div>
-
-              <figure className="relative aspect-[9/16] w-[230px] shrink-0 overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-[#09090B] shadow-[7px_7px_0_#09090B] md:w-[calc(var(--w)*0.68)]">
-                {Array.from({ length: STORIES }, (_, i) => (
-                  <img
-                    key={i}
-                    src={`/social/ig/${brand.id}-historia-${i + 1}.webp`}
-                    alt={`${tr("Historia de Instagram")} ${i + 1} · ${brand.handle}`}
-                    aria-hidden={story !== i}
-                    width={432}
-                    height={768}
-                    loading="lazy"
-                    decoding="async"
-                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
-                      story === i ? "opacity-100" : "opacity-0"
-                    }`}
-                  />
-                ))}
-                <span aria-hidden="true" className="absolute inset-x-2 top-1.5 flex gap-1">
-                  {Array.from({ length: STORIES }, (_, i) => (
-                    <span key={i} className="h-1 flex-1 overflow-hidden rounded-full bg-[#A1A1AA]">
-                      <span
-                        className="block h-full bg-[#6D28D9] transition-[width] duration-700 ease-linear"
-                        style={{
-                          width: i < story ? "100%" : i === story ? `${(step + 1) * 25}%` : "0%",
-                        }}
-                      />
-                    </span>
-                  ))}
-                </span>
-              </figure>
-            </div>
+            </article>
           ))}
         </div>
       </div>

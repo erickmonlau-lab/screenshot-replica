@@ -98,8 +98,11 @@ export function HangingCard({
   }, [areaW, areaH, cardH, width]);
 
   const local = (e: React.PointerEvent) => {
-    const r = boxRef.current!.getBoundingClientRect();
-    return { x: e.clientX - r.left, y: e.clientY - r.top };
+    const box = boxRef.current!;
+    const r = box.getBoundingClientRect();
+    // Con la escala de pantallas grandes, los píxeles de pantalla no coinciden con los de la caja
+    const k = r.width / box.offsetWidth || 1;
+    return { x: (e.clientX - r.left) / k, y: (e.clientY - r.top) / k };
   };
 
   return (
@@ -133,12 +136,13 @@ export function HangingCard({
           const card = cardRef.current!;
           const r = card.getBoundingClientRect();
           const b = boxRef.current!.getBoundingClientRect();
+          const k = b.width / boxRef.current!.offsetWidth || 1;
           ptr.current = {
             x: p.x,
             y: p.y,
             down: true,
-            gx: p.x - (r.left + r.width / 2 - b.left),
-            gy: p.y - (r.top + r.height / 2 - b.top),
+            gx: p.x - (r.left + r.width / 2 - b.left) / k,
+            gy: p.y - (r.top + r.height / 2 - b.top) / k,
           };
         }}
         onPointerMove={(e) => {
