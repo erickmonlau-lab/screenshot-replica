@@ -7,75 +7,58 @@ import { useLanguage } from "@/context/LanguageContext";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 const steps = [
-  {
-    icon: CalendarDays,
-    title: "Estrategia",
-    text: "Un calendario de 30 días.",
-  },
-  {
-    icon: PenTool,
-    title: "Claude crea",
-    text: "Diseños, textos y descripciones.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Revisión",
-    text: "Cada dato, contrastado.",
-  },
-  {
-    icon: CalendarClock,
-    title: "Antigravity programa",
-    text: "En Meta Business Suite.",
-  },
+  { icon: CalendarDays, title: "Estrategia", text: "Un calendario de 30 días." },
+  { icon: PenTool, title: "Claude crea", text: "Diseños, textos y descripciones." },
+  { icon: ShieldCheck, title: "Revisión", text: "Cada dato, contrastado." },
+  { icon: CalendarClock, title: "Antigravity programa", text: "En Meta Business Suite." },
 ];
 
-/** Dos ejemplos con piezas reales, en el orden en que quedan en la cuadrícula. */
+/** Dos ejemplos con piezas reales: publicaciones, destacadas e historias. */
 const brands = [
   {
     id: "oderalo",
-    name: "Oderalo",
+    name: "Oderalo · ERP para servicios",
     handle: "oderalo.erp",
-    prefix: "/social/post-0",
-    initial: "O",
-    avatar: "bg-[#6D28D9]",
+    posts: "/social/post-0",
+    highlights: ["Demo", "Sectores", "Proceso", "Dudas"],
   },
   {
     id: "diversplas",
-    name: "Diversplas",
+    name: "Diversplas · Extraescolares",
     handle: "diversplas_extraescolares",
-    prefix: "/social/diversplas-0",
-    initial: "D",
-    avatar: "bg-[#1D2F8C]",
+    posts: "/social/diversplas-0",
+    highlights: ["Actividades", "AFAs", "Casales", "Zonas"],
   },
 ];
 
 const TOTAL = 9;
+const STORIES = 4;
 
-/** Cadena de agentes que prepara contenido para redes: los pasos se encienden y se resalta la pieza en curso en las dos cuentas. */
+/** Cadena de agentes que prepara contenido para redes, con la vista de Instagram de dos marcas. */
 export function SocialAgentsSection() {
   const reduce = useReducedMotion();
   const { tr } = useLanguage();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-20% 0px" });
-  const [state, setState] = useState({ step: 0, piece: TOTAL - 1 });
-  const [picked, setPicked] = useState(false);
+  // Cada «tick» enciende un paso; cada cuatro cambia la publicación resaltada y la historia.
+  const [tick, setTick] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (!inView || picked || reduce) return;
-    const id = window.setInterval(() => {
-      setState(({ step, piece }) => {
-        const next = (step + 1) % steps.length;
-        // Al cerrar la vuelta se pasa a la pieza anterior: se suben de la 9 a la 1.
-        return { step: next, piece: next === 0 ? (piece + TOTAL - 1) % TOTAL : piece };
-      });
-    }, 750);
+    if (!inView || paused || reduce) return;
+    const id = window.setInterval(() => setTick((t) => t + 1), 750);
     return () => window.clearInterval(id);
-  }, [inView, picked, reduce]);
+  }, [inView, paused, reduce]);
+
+  const step = tick % steps.length;
+  const round = Math.floor(tick / steps.length);
+  const piece = TOTAL - 1 - (round % TOTAL);
+  const story = round % STORIES;
 
   return (
     <section
       id="redes"
-      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16"
+      className="scroll-mt-[62px] overflow-hidden border-t-[3px] border-[#09090B] bg-white py-14 text-[#09090B] sm:py-16 xl:pt-[96px] xl:pb-10"
     >
       <div ref={ref} className="mx-auto w-full max-w-[1380px] px-5 sm:px-8">
         <motion.div
@@ -84,58 +67,51 @@ export function SocialAgentsSection() {
           viewport={{ once: true, margin: "-10% 0px" }}
           transition={{ duration: 0.8, ease: EASE }}
         >
-          <div className="grid gap-4 lg:grid-cols-12 lg:items-end lg:gap-10">
-            <div className="lg:col-span-7">
-              <span className="inline-flex items-center rounded-full border-[3px] border-[#09090B] bg-[#09090B] px-4 py-1.5 text-[15px] font-bold tracking-[0.08em] text-white uppercase max-sm:tracking-normal">
-                {tr("Redes sociales con agentes")}
+          <div className="grid gap-4 lg:grid-cols-12 lg:items-center lg:gap-8">
+            <h2 className="font-display text-[clamp(2.1rem,2.7vw,2.6rem)] leading-[1.2] font-bold tracking-[-0.05em] [text-wrap:balance] lg:col-span-8">
+              {tr("Mis agentes preparan las redes.")}{" "}
+              <span className="rounded-lg bg-[#6D28D9] px-3 pb-1 whitespace-nowrap text-white">
+                {tr("Yo decido.")}
               </span>
-              <h2 className="font-display mt-5 text-[clamp(2.2rem,3.8vw,3.6rem)] leading-[1.06] font-bold tracking-[-0.05em] [text-wrap:balance]">
-                {tr("Mis agentes preparan las redes.")}
-                <span className="mt-3 block">
-                  <span className="rounded-lg bg-[#6D28D9] px-3 pt-1 pb-1.5 text-white">
-                    {tr("Yo decido.")}
-                  </span>
-                </span>
-              </h2>
-            </div>
-            <p className="max-w-[52ch] text-[19px] lg:col-span-5 lg:pb-1 leading-snug font-semibold text-[#27272A] [text-wrap:pretty]">
+            </h2>
+            <p className="max-w-[52ch] text-[18px] leading-snug font-semibold text-[#27272A] [text-wrap:pretty] lg:col-span-4">
               {tr(
                 "Contenido para redes de principio a fin. Dos ejemplos: mi ERP y una empresa de extraescolares.",
               )}
             </p>
           </div>
 
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-16">
+          <ol className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4 xl:gap-x-14">
             {steps.map((s, i) => {
-              const on = state.step === i;
+              const on = step === i;
               const Icon = s.icon;
               return (
-                <li key={s.title} className="relative flex flex-col">
+                <li key={s.title} className="relative flex">
                   <button
                     type="button"
                     aria-pressed={on}
                     onClick={() => {
-                      setPicked(true);
-                      setState((v) => ({ ...v, step: i }));
+                      setPaused(true);
+                      setTick((t) => t - (t % steps.length) + i);
                     }}
-                    className={`flex w-full flex-1 items-center gap-3.5 rounded-2xl border-[3px] border-[#09090B] p-4 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none ${
+                    className={`flex w-full items-center gap-3 rounded-2xl border-[3px] border-[#09090B] px-3.5 py-2.5 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none ${
                       on
-                        ? "bg-[#6D28D9] text-white shadow-[6px_6px_0_#09090B]"
+                        ? "bg-[#6D28D9] text-white shadow-[5px_5px_0_#09090B]"
                         : "bg-white shadow-[4px_4px_0_#09090B]"
                     }`}
                   >
                     <span
-                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] ${
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border-[3px] border-[#09090B] ${
                         on ? "bg-white text-[#6D28D9]" : "bg-[#09090B] text-white"
                       }`}
                     >
-                      <Icon size={23} strokeWidth={2.6} />
+                      <Icon size={22} strokeWidth={2.6} />
                     </span>
                     <span className="min-w-0">
-                      <span className="font-display block text-[21px] leading-tight font-bold tracking-[-0.03em] [text-wrap:balance]">
-                        {i + 1}. {tr(s.title)}
+                      <span className="font-display block text-[18px] leading-tight font-bold tracking-[-0.03em] [text-wrap:balance]">
+                        {tr(s.title)}
                       </span>
-                      <span className="mt-0.5 block text-[16px] leading-snug font-semibold [text-wrap:balance]">
+                      <span className="mt-0.5 block text-[15px] leading-snug font-semibold [text-wrap:balance]">
                         {tr(s.text)}
                       </span>
                     </span>
@@ -143,64 +119,90 @@ export function SocialAgentsSection() {
                   {i < steps.length - 1 ? (
                     <span
                       aria-hidden="true"
-                      className={`absolute top-[calc(50%-14px)] -right-[51px] z-10 hidden h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-[#09090B] transition-colors duration-300 xl:flex ${
-                        state.step > i ? "bg-[#6D28D9] text-white" : "bg-white text-[#09090B]"
+                      className={`absolute top-1/2 -right-[44px] hidden h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-[#09090B] transition-colors duration-300 xl:flex ${
+                        step > i ? "bg-[#6D28D9] text-white" : "bg-white text-[#09090B]"
                       }`}
                     >
-                      <ArrowRight size={17} strokeWidth={3} />
+                      <ArrowRight size={14} strokeWidth={3.5} />
                     </span>
                   ) : null}
-                  <span
-                    aria-hidden="true"
-                    className="mt-4 hidden h-3.5 overflow-hidden rounded-full border-[3px] border-[#09090B] bg-white xl:block"
-                  >
-                    <span
-                      className={`block h-full bg-[#6D28D9] transition-[width] ease-linear ${
-                        state.step >= i ? "w-full duration-700" : "w-0 duration-200"
-                      }`}
-                    />
-                  </span>
                 </li>
               );
             })}
           </ol>
         </motion.div>
 
-        <div className="mx-auto mt-10 grid max-w-[1040px] grid-cols-[minmax(0,1fr)] justify-items-center gap-10 md:grid-cols-2">
+        {/* Vista de Instagram de cada marca: perfil con publicaciones y, al lado, sus historias */}
+        <div className="mt-8 grid gap-12 [--w:clamp(280px,calc(80svh_-_392px),340px)] xl:grid-cols-2 xl:gap-12">
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className="w-full max-w-[470px] rounded-[34px] border-[3px] border-[#09090B] bg-[#09090B] p-3 text-white shadow-[10px_10px_0_#6D28D9]"
+              className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-5"
             >
-              <div className="flex items-center gap-3 px-1.5 pt-1.5 pb-3">
-                <span
-                  aria-hidden="true"
-                  className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-white font-bold max-[400px]:hidden md:max-lg:hidden ${brand.avatar}`}
-                >
-                  {brand.initial}
-                </span>
-                <h3 className="min-w-0 leading-tight">
-                  <span className="block truncate text-[15px] font-bold sm:text-[17px]">
-                    {brand.handle}
-                  </span>
-                  <span className="block text-[15px] font-normal text-[#D4D4D8]">
-                    {brand.name} · Instagram
-                  </span>
-                </h3>
-              </div>
-              <ul className="grid grid-cols-3 gap-2.5 p-1 sm:gap-3.5 sm:p-1.5">
-                {Array.from({ length: TOTAL }, (_, i) => {
-                  const current = i === state.piece;
-                  return (
+              <div className="w-full max-w-[360px] rounded-[26px] border-[3px] border-[#09090B] bg-white p-3.5 shadow-[7px_7px_0_#6D28D9] md:w-[var(--w)] md:shrink-0">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={`/social/ig/${brand.id}-avatar.webp`}
+                    alt=""
+                    width={112}
+                    height={112}
+                    loading="lazy"
+                    className="h-12 w-12 shrink-0 rounded-full border-2 border-[#09090B] object-cover"
+                  />
+                  <h3 className="min-w-0 leading-tight">
+                    <span className="block truncate text-[16px] font-bold">{brand.handle}</span>
+                    <span className="block truncate text-[15px] font-normal text-[#3F3F46]">
+                      {brand.name}
+                    </span>
+                  </h3>
+                </div>
+
+                <ul className="mt-2.5 grid grid-cols-4 gap-0.5">
+                  {brand.highlights.map((label, i) => (
+                    <li key={label} className="min-w-0">
+                      <button
+                        type="button"
+                        aria-pressed={story === i}
+                        aria-label={`${tr("Ver historia")}: ${tr(label)} · ${brand.handle}`}
+                        onClick={() => {
+                          setPaused(true);
+                          setTick(i * steps.length + steps.length - 1);
+                        }}
+                        className="flex w-full flex-col items-center gap-1 rounded-xl focus-visible:ring-[3px] focus-visible:ring-[#A78BFA] focus-visible:outline-none"
+                      >
+                        <span
+                          className={`rounded-full border-[3px] p-[2px] transition-colors duration-300 ${
+                            story === i ? "border-[#6D28D9]" : "border-[#D4D4D8]"
+                          }`}
+                        >
+                          <img
+                            src={`/social/ig/${brand.id}-destacada-${i + 1}.webp`}
+                            alt=""
+                            width={112}
+                            height={112}
+                            loading="lazy"
+                            className="block h-10 w-10 rounded-full object-cover"
+                          />
+                        </span>
+                        <span className="w-full truncate text-center text-[12px] leading-tight tracking-[-0.01em] font-semibold">
+                          {tr(label)}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+
+                <ul className="mt-2.5 grid grid-cols-3 gap-2 border-t-2 border-[#E4E4E7] pt-2.5">
+                  {Array.from({ length: TOTAL }, (_, i) => (
                     <li
                       key={`${brand.id}-${i}`}
-                      className={`relative aspect-[3/4] overflow-hidden rounded-lg transition-all duration-300 ${
-                        current ? "z-10 scale-[1.04] ring-[3px] ring-[#A78BFA]" : ""
+                      className={`relative aspect-[4/5] overflow-hidden rounded-md transition-all duration-300 ${
+                        i === piece ? "ring-[3px] ring-[#6D28D9] ring-offset-1" : ""
                       }`}
                     >
                       <img
-                        src={`${brand.prefix}${i + 1}.webp`}
-                        alt={`${tr("Publicación de Instagram")} ${i + 1} · ${brand.name}`}
+                        src={`${brand.posts}${i + 1}.webp`}
+                        alt={`${tr("Publicación de Instagram")} ${i + 1} · ${brand.handle}`}
                         width={432}
                         height={540}
                         loading="lazy"
@@ -208,9 +210,39 @@ export function SocialAgentsSection() {
                         className="absolute inset-0 h-full w-full object-cover"
                       />
                     </li>
-                  );
-                })}
-              </ul>
+                  ))}
+                </ul>
+              </div>
+
+              <figure className="relative aspect-[9/16] w-[230px] shrink-0 overflow-hidden rounded-[22px] border-[3px] border-[#09090B] bg-[#09090B] shadow-[7px_7px_0_#09090B] md:w-[calc(var(--w)*0.68)]">
+                {Array.from({ length: STORIES }, (_, i) => (
+                  <img
+                    key={i}
+                    src={`/social/ig/${brand.id}-historia-${i + 1}.webp`}
+                    alt={`${tr("Historia de Instagram")} ${i + 1} · ${brand.handle}`}
+                    aria-hidden={story !== i}
+                    width={432}
+                    height={768}
+                    loading="lazy"
+                    decoding="async"
+                    className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+                      story === i ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
+                ))}
+                <span aria-hidden="true" className="absolute inset-x-2 top-1.5 flex gap-1">
+                  {Array.from({ length: STORIES }, (_, i) => (
+                    <span key={i} className="h-1 flex-1 overflow-hidden rounded-full bg-[#A1A1AA]">
+                      <span
+                        className="block h-full bg-[#6D28D9] transition-[width] duration-700 ease-linear"
+                        style={{
+                          width: i < story ? "100%" : i === story ? `${(step + 1) * 25}%` : "0%",
+                        }}
+                      />
+                    </span>
+                  ))}
+                </span>
+              </figure>
             </div>
           ))}
         </div>
